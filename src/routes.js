@@ -5,14 +5,14 @@ const AuctionsItems = React.lazy(() => import('./Pages/Auctions/AuctionsItems/Au
 const AddAuctionItem = React.lazy(() => import('./Pages/Auctions/AddAuctions/AddAuctions'))
 
 // Categories Pages
-const CategoryList = React.lazy(() => import('./Pages/Categories/CategoryList/CategoryList'))
-const AddCategory = React.lazy(() => import('./Pages/Categories/AddCategory/AddCategory'))
+const CategoryList = React.lazy(() => import('./Pages/Categories/CategoryList'))
+const AddCategory = React.lazy(() => import('./Pages/Categories/AddCategory'))
 // Users Pages
-const UsersList = React.lazy(() => import('./Pages/Users/UsersList/UsersList'))
-const AddUser = React.lazy(() => import('./Pages/Users/AddUser/AddUser'))
+const UsersList = React.lazy(() => import('./Pages/Users/UsersList'))
+const AddUser = React.lazy(() => import('./Pages/Users/AddUser'))
 // Products Pages
-const ProductsList = React.lazy(() => import('./Pages/Products/ProductsList/ProductsList'))
-const AddProduct = React.lazy(() => import('./Pages/Products/AddProduct/AddProduct'))
+const ProductsList = React.lazy(() => import('./Pages/Products/ProductsList'))
+const AddProduct = React.lazy(() => import('./Pages/Products/AddProduct'))
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
