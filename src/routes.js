@@ -1,9 +1,10 @@
 import React from 'react'
 
 // Auctions Pages
-const AuctionsItems = React.lazy(() => import('./Pages/Auctions/AuctionsList'))
+const AuctionsList = React.lazy(() => import('./Pages/Auctions/AuctionsList'))
 const AddAuctionItem = React.lazy(() => import('./Pages/Auctions/AddAuction'))
 const EditAuction = React.lazy(() => import('./Pages/Auctions/EditAuction'))
+const AuctionDetails = React.lazy(() => import('./Pages/Auctions/AuctionDetails'))
 // Categories Pages
 const CategoryList = React.lazy(() => import('./Pages/Categories/CategoryList'))
 const AddCategory = React.lazy(() => import('./Pages/Categories/AddCategory'))
@@ -24,9 +25,10 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
 
   // Auctions
-  { path: '/auctions/items', exact: true, name: 'AuctionsItems', element: AuctionsItems },
-  { path: '/auctions/add-auction', name: 'AddAuctionItem', element: AddAuctionItem },
-  { path: '/auctions/edit-auction', name: 'EditAuctionItem', element: EditAuction },
+  { path: '/auctions', exact: true, name: 'AuctionsList', element: AuctionsList },
+  { path: '/auctions/add', name: 'AddAuctionItem', element: AddAuctionItem },
+  { path: '/auctions/edit/:auctionId', name: 'EditAuctionItem', element: EditAuction },
+  { path: '/auctions/details/:auctionId', name: 'AuctionDetails', element: AuctionDetails },
   // Categories
   { path: '/category/list', exact: true, name: 'CategoryList', element: CategoryList },
   { path: '/category/add-category', name: 'AddCategory', element: AddCategory },
