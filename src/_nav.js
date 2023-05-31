@@ -19,6 +19,10 @@ import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
   {
+    component: CNavTitle,
+    name: 'Components',
+  },
+  {
     component: CNavGroup,
     name: 'Reports',
     to: '/dashboard',
@@ -56,6 +60,11 @@ const _nav = [
         component: CNavItem,
         name: 'Add New Auction',
         to: '/auctions/add-auction',
+      },
+      {
+        component: CNavItem,
+        name: 'Edit Auction',
+        to: '/auctions/edit-auction',
       },
     ],
   },
@@ -128,34 +137,6 @@ const _nav = [
         component: CNavItem,
         name: 'Add New Bid',
         to: '/notifications/badges',
-      },
-    ],
-  },
-  {
-    component: CNavGroup,
-    name: 'Pages',
-    to: '/pages',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Login',
-        to: '/login',
-      },
-      {
-        component: CNavItem,
-        name: 'Register',
-        to: '/register',
-      },
-      {
-        component: CNavItem,
-        name: 'Error 404',
-        to: '/404',
-      },
-      {
-        component: CNavItem,
-        name: 'Error 500',
-        to: '/500',
       },
     ],
   },
