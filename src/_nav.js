@@ -27,12 +27,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Monthly',
-        to: '/dashboard',
+        to: '/charts',
       },
       {
         component: CNavItem,
         name: 'Yearly',
-        to: '/dashboard',
+        to: '/charts',
       },
       {
         component: CNavItem,
@@ -50,12 +50,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'auctions',
-        to: '/base/accordion',
+        to: '/base/tables',
       },
       {
         component: CNavItem,
         name: 'Add New Auction',
-        to: '/base/breadcrumbs',
+        to: '/forms/form-control',
       },
     ],
   },
@@ -68,12 +68,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Users',
-        to: '/buttons/buttons',
+        to: '/base/tables',
       },
       {
         component: CNavItem,
         name: 'Add New User',
-        to: '/buttons/dropdowns',
+        to: '/forms/form-control',
       },
     ],
   },
