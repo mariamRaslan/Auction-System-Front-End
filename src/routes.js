@@ -16,6 +16,10 @@ const AddProduct = React.lazy(() => import('./Pages/Products/AddProduct'))
 
 const Dashboard = React.lazy(() => import('./Pages/dashboard/Dashboard'))
 
+//Reports pages
+const MonthlyReports = React.lazy(() => import('./Pages/Reports/MonthlyReports/MonthlyReports'))
+const Calender = React.lazy(() => import('./Pages/Reports/Calender/Calender'))
+const YearlyReports = React.lazy(() => import('./Pages/Reports/YearlyReports/YearlyReports'))
 const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
 
@@ -32,6 +36,10 @@ const routes = [
   // Products
   { path: '/products/list', exact: true, name: 'ProductsList', element: ProductsList },
   { path: '/products/add-product', name: 'AddProduct', element: AddProduct },
+  // Reports
+  { path: '/reports/monthly-reports', name: 'MonthlyReports', element: MonthlyReports },
+  { path: '/reports/calender', name: 'Calender', element: Calender },
+  { path: '/reports/yearly-reports', name: 'YearlyReports', element: YearlyReports },
 ]
 
 export default routes
