@@ -31,12 +31,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Monthly',
-        to: '/Reports/MonthlyReports',
+        to: '/',
       },
       {
         component: CNavItem,
         name: 'Yearly',
-        to: '/Reports/YearlyReports',
+        to: '/',
       },
       {
         component: CNavItem,
@@ -101,6 +101,26 @@ const _nav = [
         component: CNavItem,
         name: 'Add New Product',
         to: '/products/add-product',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'ProductDetails',
+    to: '/',
+    //description icon
+    icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
+    items: [  
+      {
+        component: CNavItem,
+        name: 'ProductDetails',
+        to: '/productdetails/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Add New ProductDetails',
+        to: '/productdetails/add-productdetails',
+      
       },
     ],
   },
