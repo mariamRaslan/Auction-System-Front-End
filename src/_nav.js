@@ -44,18 +44,18 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Auctions',
-    to: '/base',
+    to: '/',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'auctions',
-        to: '/base/tables',
+        name: 'Auctions Items',
+        to: '/auctions/items',
       },
       {
         component: CNavItem,
         name: 'Add New Auction',
-        to: '/forms/form-control',
+        to: '/auctions/add-auction',
       },
     ],
   },
@@ -68,48 +68,48 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Users',
-        to: '/base/tables',
+        to: '/users/list',
       },
       {
         component: CNavItem,
         name: 'Add New User',
-        to: '/forms/form-control',
+        to: '/users/add-user',
       },
     ],
   },
   {
     component: CNavGroup,
     name: 'Products',
-    to: '/charts',
+    to: '/',
     icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Products',
-        to: '/charts',
+        to: '/products/list',
       },
       {
         component: CNavItem,
         name: 'Add New Product',
-        to: '/charts',
+        to: '/products/add-product',
       },
     ],
   },
   {
     component: CNavGroup,
     name: 'Categories',
-    to: '/icons',
+    to: '/',
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Categories',
-        to: '/icons/coreui-icons',
+        to: '/category/list',
       },
       {
         component: CNavItem,
         name: 'Add New Category',
-        to: '/icons/flags',
+        to: '/category/add-category',
       },
     ],
   },
