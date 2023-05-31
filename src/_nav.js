@@ -31,17 +31,17 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Monthly',
-        to: '/charts',
+        to: '/Reports/MonthlyReports',
       },
       {
         component: CNavItem,
         name: 'Yearly',
-        to: '/charts',
+        to: '/Reports/YearlyReports',
       },
       {
         component: CNavItem,
         name: 'Calender',
-        to: '/dashboard',
+        to: '/Reports/Calender',
       },
     ],
   },
@@ -53,18 +53,13 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Auctions Items',
-        to: '/auctions/items',
+        name: 'All Auctions',
+        to: '/auctions',
       },
       {
         component: CNavItem,
         name: 'Add New Auction',
-        to: '/auctions/add-auction',
-      },
-      {
-        component: CNavItem,
-        name: 'Edit Auction',
-        to: '/auctions/edit-auction',
+        to: '/auctions/add',
       },
     ],
   },
