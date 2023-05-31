@@ -27,17 +27,17 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Monthly',
-        to: '/charts',
+        to: '/Reports/MonthlyReports',
       },
       {
         component: CNavItem,
         name: 'Yearly',
-        to: '/charts',
+        to: '/Reports/YearlyReports',
       },
       {
         component: CNavItem,
         name: 'Calender',
-        to: '/dashboard',
+        to: '/Reports/Calender',
       },
     ],
   },
