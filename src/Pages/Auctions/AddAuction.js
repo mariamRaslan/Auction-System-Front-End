@@ -1,47 +1,71 @@
-import React from 'react'
-import { CFormInput, CFormLabel, CFormTextarea, CInputGroup, CInputGroupText } from '@coreui/react'
+import React, { useState } from 'react'
+import {
+  CButton,
+  CCol,
+  CForm,
+  CFormCheck,
+  CFormInput,
+  CFormFeedback,
+  CFormLabel,
+  CFormSelect,
+  CInputGroup,
+  CInputGroupText,
+} from '@coreui/react'
 
-const AddAuctions = () => {
+const AddAuction = () => {
+  const [validated, setValidated] = useState(false)
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget
+    if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+    setValidated(true)
+  }
+
   return (
-    <>
-      <CFormLabel htmlFor="basic-url">Your vanity URL</CFormLabel>
-      <CInputGroup className="mb-3">
-        <CInputGroupText id="basic-addon1">@</CInputGroupText>
-        <CFormInput placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
-      </CInputGroup>
-
-      <CInputGroup className="mb-3">
-        <CFormInput
-          placeholder="Recipient's username"
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
-        />
-        <CInputGroupText id="basic-addon2">@example.com</CInputGroupText>
-      </CInputGroup>
-
-      <CFormLabel htmlFor="basic-url">Your vanity URL</CFormLabel>
-      <CInputGroup className="mb-3">
-        <CInputGroupText id="basic-addon3">https://example.com/users/</CInputGroupText>
-        <CFormInput id="basic-url" aria-describedby="basic-addon3" />
-      </CInputGroup>
-
-      <CInputGroup className="mb-3">
-        <CInputGroupText>$</CInputGroupText>
-        <CFormInput aria-label="Amount (to the nearest dollar)" />
-        <CInputGroupText>.00</CInputGroupText>
-      </CInputGroup>
-
-      <CInputGroup className="mb-3">
-        <CFormInput placeholder="Username" aria-label="Username" />
-        <CInputGroupText>@</CInputGroupText>
-        <CFormInput placeholder="Server" aria-label="Server" />
-      </CInputGroup>
-
-      <CInputGroup>
-        <CInputGroupText>With textarea</CInputGroupText>
-        <CFormTextarea aria-label="With textarea"></CFormTextarea>
-      </CInputGroup>
-    </>
+    <CForm
+      className="row g-3 needs-validation"
+      noValidate
+      validated={validated}
+      onSubmit={handleSubmit}
+    >
+      <CCol md={12}>
+        <CFormLabel htmlFor="auctionName">Auction Name</CFormLabel>
+        <CFormInput type="text" id="auctionName" required />
+        <CFormFeedback invalid>Please provide an auction name.</CFormFeedback>
+      </CCol>
+      <CCol md={6}>
+        <CFormLabel htmlFor="startDate">Starting Date</CFormLabel>
+        <CFormInput type="date" id="startDate" required />
+        <CFormFeedback invalid>Please provide a valid start date.</CFormFeedback>
+      </CCol>
+      <CCol md={6}>
+        <CFormLabel htmlFor="endDate">Ending Date</CFormLabel>
+        <CFormInput type="date" id="endDate" required />
+        <CFormFeedback invalid>Please provide a valid end date.</CFormFeedback>
+      </CCol>
+      <CCol md={6}>
+        <CFormLabel htmlFor="time">Time</CFormLabel>
+        <CFormInput type="time" id="time" required />
+        <CFormFeedback invalid>Please provide a valid time.</CFormFeedback>
+      </CCol>
+      <CCol md={6}>
+        <CFormLabel htmlFor="fees">Fees</CFormLabel>
+        <CInputGroup className="has-validation">
+          <CInputGroupText>$</CInputGroupText>
+          <CFormInput type="number" id="fees" required min="0" step="0.01" />
+          <CFormFeedback invalid>Please provide a valid fee.</CFormFeedback>
+        </CInputGroup>
+      </CCol>
+      <CCol xs={12}>
+        <CButton color="primary" type="submit">
+          ADD New Auction
+        </CButton>
+      </CCol>
+    </CForm>
   )
 }
-export default AddAuctions
+
+export default AddAuction

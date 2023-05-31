@@ -53,18 +53,13 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Auctions Items',
-        to: '/auctions/items',
+        name: 'All Auctions',
+        to: '/auctions',
       },
       {
         component: CNavItem,
         name: 'Add New Auction',
-        to: '/auctions/add-auction',
-      },
-      {
-        component: CNavItem,
-        name: 'Edit Auction',
-        to: '/auctions/edit-auction',
+        to: '/auctions/add',
       },
     ],
   },

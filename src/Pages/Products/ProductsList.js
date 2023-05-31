@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from "react";
 import {
   CTable,
   CTableBody,
@@ -8,9 +8,24 @@ import {
   CTableRow,
   CCardHeader,
   CButton,
-} from '@coreui/react'
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
+} from "@coreui/react";
+
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
+  const [visible, setVisible] = useState(false);
+  const Navigate = useNavigate();
+  const handleEditButton = () => {
+    Navigate("/products/edit-product"); // Navigate to the edit page
+  };
+  const handleDetailsButton = () => {
+    Navigate("/products/product-details"); // Navigate to the details page
+  };
   return (
     <>
       <CCardHeader>
@@ -45,27 +60,56 @@ const Products = () => {
             <CTableDataCell>red</CTableDataCell>
             {/* button for details */}
             <CTableHeaderCell scope="col">
-              <CButton className="btntext" color="primary" variant="outline">
+              <CButton
+                onClick={handleDetailsButton}
+                className="btntext"
+                color="primary"
+                variant="outline"
+              >
                 Details
               </CButton>
             </CTableHeaderCell>
             {/* button for edit */}
             <CTableHeaderCell scope="col">
-              <CButton className="btntext" color="warning" variant="outline">
+              <CButton
+                onClick={handleEditButton}
+                className="btntext"
+                color="warning"
+                variant="outline"
+              >
                 Edit
               </CButton>
             </CTableHeaderCell>
             {/* button for delete */}
 
             <CTableHeaderCell scope="col">
-              <CButton className="btntext" color="danger" variant="outline">
+              <CButton
+                onClick={() => setVisible(!visible)}
+                className="btntext"
+                color="danger"
+                variant="outline"
+              >
                 Delete
               </CButton>
             </CTableHeaderCell>
           </CTableRow>
         </CTableBody>
       </CTable>
+      <CModal alignment="center" visible={visible} onClose={() => setVisible(false)}>
+        <CModalHeader>
+          <CModalTitle>Confirmation</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          Are you sure you want to delete this product?
+        </CModalBody>
+        <CModalFooter>
+          <CButton color="secondary" onClick={() => setVisible(false)}>
+            Close
+          </CButton>
+          <CButton color="danger">Delete</CButton>
+        </CModalFooter>
+      </CModal>
     </>
-  )
-}
-export default Products
+  );
+};
+export default Products;

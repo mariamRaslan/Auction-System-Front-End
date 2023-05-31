@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import {
   CButton,
-  CCard,
-  CCardBody,
-  CCardHeader,
   CCol,
   CForm,
   CFormCheck,
@@ -11,10 +8,8 @@ import {
   CFormFeedback,
   CFormLabel,
   CFormSelect,
-  CFormTextarea,
   CInputGroup,
   CInputGroupText,
-  CRow,
 } from '@coreui/react'
 
 const EditAuction = () => {
@@ -36,23 +31,18 @@ const EditAuction = () => {
       validated={validated}
       onSubmit={handleSubmit}
     >
-      <CCol md={6}>
+      <CCol md={12}>
         <CFormLabel htmlFor="auctionName">Auction Name</CFormLabel>
         <CFormInput type="text" id="auctionName" required />
         <CFormFeedback invalid>Please provide an auction name.</CFormFeedback>
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="referenceNumber">Reference Number</CFormLabel>
-        <CFormInput type="text" id="referenceNumber" required />
-        <CFormFeedback invalid>Please provide a reference number.</CFormFeedback>
-      </CCol>
-      <CCol md={6}>
-        <CFormLabel htmlFor="startDate">Start Date</CFormLabel>
+        <CFormLabel htmlFor="startDate">Starting Date</CFormLabel>
         <CFormInput type="date" id="startDate" required />
         <CFormFeedback invalid>Please provide a valid start date.</CFormFeedback>
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="endDate">End Date</CFormLabel>
+        <CFormLabel htmlFor="endDate">Ending Date</CFormLabel>
         <CFormInput type="date" id="endDate" required />
         <CFormFeedback invalid>Please provide a valid end date.</CFormFeedback>
       </CCol>
@@ -73,20 +63,11 @@ const EditAuction = () => {
         <CFormLabel htmlFor="status">Status</CFormLabel>
         <CFormSelect id="status" required>
           <option value="">Choose...</option>
-          <option value="upcoming">Upcoming</option>
-          <option value="ongoing">Ongoing</option>
-          <option value="completed">Completed</option>
+          <option value="started">Started</option>
+          <option value="ended">Ended</option>
+          <option value="not-started">Up Comming</option>
         </CFormSelect>
         <CFormFeedback invalid>Please select a status.</CFormFeedback>
-      </CCol>
-      <CCol xs={12}>
-        <CFormCheck
-          type="checkbox"
-          id="invalidCheck"
-          label="Agree to terms and conditions"
-          required
-        />
-        <CFormFeedback invalid>You must agree before submitting.</CFormFeedback>
       </CCol>
       <CCol xs={12}>
         <CButton color="primary" type="submit">
