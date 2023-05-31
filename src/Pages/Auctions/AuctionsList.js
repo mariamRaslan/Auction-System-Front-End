@@ -26,7 +26,7 @@ const AuctionsList = () => {
   return (
     <>
       <CCardHeader>
-        <strong>Auctions Items</strong> <small>Table</small>
+        <strong>All Auctions</strong>
       </CCardHeader>
       <CTable>
         <CTableHead color="dark">
