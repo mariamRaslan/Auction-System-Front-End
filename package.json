@@ -14,7 +14,11 @@
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
   "scripts": {
     "build": "react-scripts build",
-    "start": "react-scripts start"
+    "eject": "react-scripts eject",
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "test:cov": "npm test -- --coverage --watchAll=false",
+    "test:debug": "react-scripts --inspect-brk test --runInBand"
   },
   "dependencies": {
     "@coreui/chartjs": "^3.1.1",
@@ -43,7 +47,6 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "prettier": "2.8.4",
     "react-scripts": "5.0.1",
     "sass": "^1.58.3",
     "web-vitals": "^3.1.1"
