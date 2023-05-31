@@ -13,6 +13,8 @@ const AddUser = React.lazy(() => import('./Pages/Users/AddUser'))
 // Products Pages
 const ProductsList = React.lazy(() => import('./Pages/Products/ProductsList'))
 const AddProduct = React.lazy(() => import('./Pages/Products/AddProduct'))
+const EditProduct = React.lazy(() => import('./Pages/Products/EditProduct'))
+const ProductDetails = React.lazy(() => import('./Pages/Products/ProductDetails'))
 
 const Dashboard = React.lazy(() => import('./Pages/dashboard/Dashboard'))
 
@@ -32,6 +34,8 @@ const routes = [
   // Products
   { path: '/products/list', exact: true, name: 'ProductsList', element: ProductsList },
   { path: '/products/add-product', name: 'AddProduct', element: AddProduct },
+  { path: '/products/edit-product', name: 'EditProduct', element: EditProduct },
+  { path: '/products/product-details', name: 'ProductDetails', element: ProductDetails },
 ]
 
 export default routes

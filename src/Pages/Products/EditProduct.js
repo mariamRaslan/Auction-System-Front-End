@@ -10,7 +10,7 @@ import {
   CFormSelect,
 } from '@coreui/react'
 
-const AddProduct = () => {
+const UpdateProducts = () => {
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -23,7 +23,7 @@ const AddProduct = () => {
   return (
     <>
       <CCardHeader>
-        <strong>Add Product</strong>
+        <strong>Edit Product</strong>
       </CCardHeader>
       <CForm
         className="row g-3 needs-validation"
@@ -83,4 +83,4 @@ const AddProduct = () => {
     </>
   )
 }
-export default AddProduct
+export default UpdateProducts
