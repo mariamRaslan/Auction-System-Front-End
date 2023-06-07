@@ -19,9 +19,7 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 
 const Login = () => {
 
-  //satus error_message
   const [error_message, seterror_message] = useState('')
-
 
   const login_in = () => {
     if (document.getElementById("name").value === "admin" && document.getElementById("password").value === "admin@123") {
@@ -61,10 +59,7 @@ const Login = () => {
                         id='password'
                       />
                     </CInputGroup>
-                    {/**show error message */}
                     <p className="text-danger">{error_message}</p>
-                    
-
                     <CRow>
                       <CCol xs={6}>
                         <CButton color="primary"
