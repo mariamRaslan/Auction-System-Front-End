@@ -31,12 +31,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Monthly',
-        to: '/',
+        to: '/reports/monthly-reports',
       },
       {
         component: CNavItem,
         name: 'Yearly',
-        to: '/',
+        to: '/reports/yearly-reports',
       },
       {
         component: CNavItem,
