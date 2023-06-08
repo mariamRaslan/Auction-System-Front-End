@@ -20,137 +20,137 @@ import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 const _nav = [
   {
     component: CNavTitle,
-    name: 'Components',
+    name: 'العناصر',
   },
   {
     component: CNavGroup,
-    name: 'Reports',
+    name: 'التقارير',
     to: '/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Monthly',
+        name: 'شهري',
         to: '/',
       },
       {
         component: CNavItem,
-        name: 'Yearly',
+        name: 'سنوي',
         to: '/',
       },
       {
         component: CNavItem,
-        name: 'Calender',
+        name: 'تقويم',
         to: '/Reports/Calender',
       },
     ],
   },
   {
     component: CNavGroup,
-    name: 'Auctions',
+    name: 'المزادات',
     to: '/',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'All Auctions',
+        name: 'المزادات',
         to: '/auctions',
       },
       {
         component: CNavItem,
-        name: 'Add New Auction',
+        name: 'إضافة مزاد جديد',
         to: '/auctions/add',
       },
     ],
   },
   {
     component: CNavGroup,
-    name: 'Users',
+    name: 'المستخدمين',
     to: '/buttons',
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Users',
+        name: 'المستخدمين',
         to: '/users/list',
       },
       {
         component: CNavItem,
-        name: 'Add New User',
+        name: 'إضافة مستخدم جديد',
         to: '/users/add-user',
       },
     ],
   },
   {
     component: CNavGroup,
-    name: 'Products',
+    name: 'المنتجات',
     to: '/',
     icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Products',
+        name: 'المنتجات',
         to: '/products/list',
       },
       {
         component: CNavItem,
-        name: 'Add New Product',
+        name: 'إضافة منتج جديد',
         to: '/products/add-product',
       },
     ],
   },
   {
     component: CNavGroup,
-    name: 'ProductDetails',
+    name: 'تفاصيل المنتجات',
     to: '/',
     //description icon
     icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
-    items: [  
+    items: [
       {
         component: CNavItem,
-        name: 'ProductDetails',
-        to: '/productdetails/list',
+        name: 'تفاصيل المنتجات',
+        to: '/productsdetails/list',
       },
       {
         component: CNavItem,
-        name: 'Add New ProductDetails',
-        to: '/productdetails/add-productdetails',
-      
+        name: 'إضافة تفاصيل منتج جديد',
+        to: '/productsdetails/add-productdetails',
+
       },
     ],
   },
   {
     component: CNavGroup,
-    name: 'Categories',
+    name: 'الفئات',
     to: '/',
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Categories',
+        name: 'الفئات',
         to: '/category/list',
       },
       {
         component: CNavItem,
-        name: 'Add New Category',
+        name: 'إضافة فئة جديدة',
         to: '/category/add-category',
       },
     ],
   },
   {
     component: CNavGroup,
-    name: 'Bids',
+    name: 'المزايدات',
     to: '/notifications',
     icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Bids',
+        name: 'المزايدات',
         to: '/notifications/alerts',
       },
       {
         component: CNavItem,
-        name: 'Add New Bid',
+        name: 'إضافة مزايدة جديدة',
         to: '/notifications/badges',
       },
     ],

@@ -16,6 +16,9 @@ const ProductsList = React.lazy(() => import('./Pages/Products/ProductsList'))
 const AddProduct = React.lazy(() => import('./Pages/Products/AddProduct'))
 const EditProduct = React.lazy(() => import('./Pages/Products/EditProduct'))
 const ProductDetails = React.lazy(() => import('./Pages/Products/ProductDetails'))
+// ProductDetails Pages
+// const ProductsDetails = React.lazy(() => import('./Pages/ProductDetails/DetailsList'))
+// const EditDetails = React.lazy(() => import('./Pages/ProductDetails/DetailsList'))
 
 const Dashboard = React.lazy(() => import('./Pages/dashboard/Dashboard'))
 
@@ -40,8 +43,11 @@ const routes = [
   // Products
   { path: '/products/list', exact: true, name: 'ProductsList', element: ProductsList },
   { path: '/products/add-product', name: 'AddProduct', element: AddProduct },
-  { path: '/products/edit-product', name: 'EditProduct', element: EditProduct },
-  { path: '/products/product-details', name: 'ProductDetails', element: ProductDetails },
+  { path: '/products/edit-product/:id', name: 'EditProduct', element: EditProduct },
+  { path: '/products/product-details/:id', name: 'ProductDetails', element: ProductDetails },
+  // Products
+  // { path: '/productsdetails/list', exact: true, name: 'ProductsDetails', element: ProductsDetails },
+  // { path: '/productsdetails/edit-details/:id', name: 'EditDetails', element: EditDetails },
   // Reports
   { path: '/reports/monthly-reports', name: 'MonthlyReports', element: MonthlyReports },
   { path: '/reports/calender', name: 'Calender', element: Calender },
