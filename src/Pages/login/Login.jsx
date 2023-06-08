@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 //import axios
 import axios from '../../Axios'
+//import jwt-token
+import jwt_decode from 'jwt-decode'
+
 import {
   CButton,
   CCard,
@@ -40,10 +43,23 @@ const Login = () => {
           password: password,
         })
         .then((res) => {
+          //decode token
+          const decoded = jwt_decode(res.data.token)
+          //set user id in localstorage
+          
+          //check if decoded.role == admin 
+          if (decoded.role === 'admin') {
+            //log decoded.log
             window.location.href = '#/reports/yearly-reports'
             //set token
             localStorage.setItem('token', res.data.token)
-          
+          }
+          //if decoded.role != admin
+          else {
+            //show error message
+            setError_message('You are not admin')
+          }
+
         })
         .catch((err) => {
           //show error message

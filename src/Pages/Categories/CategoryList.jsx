@@ -64,7 +64,7 @@ const CategoryList = () => {
   return (
     //table to display id , name , button for edit and button for delete
     <div>
-      <CCardHeader>
+      <CCardHeader >
         <h1>Categories</h1>
       </CCardHeader>
       {/**error_message */}
@@ -74,7 +74,7 @@ const CategoryList = () => {
         </div>
       )}
       <CTable>
-        <CTableHead> 
+        <CTableHead color="dark"> 
           <CTableRow>
             <CTableHeaderCell scope="col">ID</CTableHeaderCell>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>
