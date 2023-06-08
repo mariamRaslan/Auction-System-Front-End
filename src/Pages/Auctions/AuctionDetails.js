@@ -1,4 +1,8 @@
 import React from 'react';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axiosInstance from "../../Axios";
+import { Link } from "react-router-dom";
 import {
   CCol,
   CRow,
@@ -11,26 +15,50 @@ import {
 } from '@coreui/react';
 
 const AuctionDetails = () => {
-  return (
+
+  const auctionId = useParams().auctionId;
+//  console.log("id", auctionId);
+//   console.log(useParams()); 
+
+  const [auctionDetails, setAuctionDetails] = useState(null);
+
+  useEffect(() => {
+    getAuctionDetails();
+  }, []);
+
+  const getAuctionDetails = async () => {
+    await axiosInstance
+      .get(`/auctions/${auctionId}`)
+      .then((res) => {
+        console.log(res.data);
+        setAuctionDetails(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+
+
+
+
+  return auctionDetails ? (
     <div className="container my-4">
-      <div className="row">
-        <div className="col-12">
-          <h1 className="text-center ">Auction Name</h1>
-          <p className="text-center mb-4">Status: Open</p>
-          <div className="d-flex justify-content-between ps-5 pe-5">
-            <div>
-              <p><strong>ID:</strong>  123456</p>
-              <p> <strong>Starting Date:</strong> 01/06/2023</p>
-              <p> <strong>Time:</strong> 10:00 AM</p> 
-            </div>
-            <div>
-            <p> <strong>Reference Number:</strong>  REF123</p>
-            <p><strong> Reference Number:</strong>  REF123</p>
-            <p> <strong>Fees:</strong> $10</p>
-            </div>
+    <div className="row">
+      <div className="col-12">
+        <h1 className="text-center ">{auctionDetails.name}</h1>
+        <p className="text-center mb-4">Status: {auctionDetails.status}</p>
+        <div className="d-flex justify-content-between ps-5 pe-5">
+          <div>
+            <p><strong>ID:</strong> {auctionDetails.reference_number}</p>
+            <p> <strong>Starting Date:</strong> {auctionDetails.start_date}</p>
+            <p> <strong>Time:</strong> {auctionDetails.time}</p> 
+          </div>
+          <div>
+            <p> <strong>Reference Number:</strong> {auctionDetails.reference_number}</p>
+            <p><strong> Fees:</strong> ${auctionDetails.fees}</p>
           </div>
         </div>
       </div>
+    </div>
       <div className='ms-5'>
               <CButton color="primary">Edit Auction</CButton>
             </div>
@@ -89,6 +117,8 @@ const AuctionDetails = () => {
         
       </div>
     </div>
+  ) : (
+    <p>loading</p>
   );
 };
 

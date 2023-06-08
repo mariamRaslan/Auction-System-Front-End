@@ -1,26 +1,65 @@
-import React from 'react';
-import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CCardHeader, CButton, CModal, CModalHeader, CModalBody, CModalFooter } from '@coreui/react';
+import React, { useEffect, useState } from 'react';
+import axiosInstance from '../../Axios';
+import {
+  CTable,
+  CTableBody,
+  CTableDataCell,
+  CTableHead,
+  CTableHeaderCell,
+  CTableRow,
+  CCardHeader,
+  CButton,
+  CModal,
+  CModalHeader,
+  CModalBody,
+  CModalFooter,
+} from '@coreui/react';
 import { useNavigate } from 'react-router-dom';
 
 const AuctionsList = () => {
   const navigate = useNavigate();
-  const [deleteModal, setDeleteModal] = React.useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [auctionsList, setAuctionsList] = useState([]);
+  const [auctionToDelete, setAuctionToDelete] = useState(null);
 
-  const handleDelete = () => {
-    // Implement your delete logic here
-    // You can use the deleteModal state to toggle the delete confirmation modal
+  useEffect(() => {
+    getAuctionsList();
+  }, []);
+
+  const getAuctionsList = async () => {
+    try {
+      const res = await axiosInstance.get('/auctions');
+      setAuctionsList(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const handleView = () => {
-    // Implement your view logic here
-    // Navigate to the view page
-    navigate('/auctions/details/1');
+  const handleDelete = async () => {
+    if (!auctionToDelete) {
+      return;
+    }
+  
+    try {
+      const res = await axiosInstance.delete(`/auctions/${auctionToDelete._id}`);
+      setAuctionsList(auctionsList.filter((auction) => auction._id !== auctionToDelete._id));
+      setDeleteModal(false);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const handleEdit = () => {
-    // Implement your edit logic here
-    // Navigate to the edit page
-    navigate('/auctions/edit/1');
+  const handleView = (auctionId) => {
+    navigate(`/auctions/details/${auctionId}`);
+  };
+
+  const handleEdit = (auctionId) => {
+    navigate(`/auctions/edit/${auctionId}`);
+  };
+
+  const handleDeleteButtonClick = (auction) => {
+    setDeleteModal(true);
+    setAuctionToDelete(auction);
   };
 
   return (
@@ -32,7 +71,7 @@ const AuctionsList = () => {
         <CTableHead color="dark">
           <CTableRow>
             <CTableHeaderCell scope="col">Reference Number</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Action Name</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Name</CTableHeaderCell>
             <CTableHeaderCell scope="col">Status</CTableHeaderCell>
             <CTableHeaderCell className="textcenter" scope="col" colSpan={3}>
               Actions
@@ -40,44 +79,41 @@ const AuctionsList = () => {
           </CTableRow>
         </CTableHead>
         <CTableBody>
-          {/* map on items */}
-          <CTableRow>
-            <CTableDataCell>1111</CTableDataCell>
-            <CTableDataCell>Otto</CTableDataCell>
-            <CTableDataCell>Started</CTableDataCell>
-            {/* button for details */}
-            <CTableHeaderCell scope="col">
-              <CButton className="btntext w-100" color="primary" variant="outline" onClick={handleView}>
-                View
-              </CButton>
-            </CTableHeaderCell>
-            {/* button for edit */}
-            <CTableHeaderCell scope="col">
-              <CButton className="btntext w-100" color="warning" variant="outline" onClick={handleEdit}>
-                Edit
-              </CButton>
-            </CTableHeaderCell>
-            {/* button for delete */}
-            <CTableHeaderCell scope="col">
-              <CButton className="btntext w-100" color="danger" variant="outline" onClick={() => setDeleteModal(true)}>
-                Delete
-              </CButton>
-            </CTableHeaderCell>
-          </CTableRow>
+          {auctionsList.map((auction) => (
+            <CTableRow key={auction.reference_number}>
+              <CTableDataCell>{auction.reference_number}</CTableDataCell>
+              <CTableDataCell>{auction.name}</CTableDataCell>
+              <CTableDataCell>{auction.status}</CTableDataCell>
+              <CTableHeaderCell scope="col">
+                <CButton className="btntext w-100" color="primary" variant="outline" onClick={() => handleView(auction._id)}>
+                  View
+                </CButton>
+              </CTableHeaderCell>
+              <CTableHeaderCell scope="col">
+                <CButton className="btntext w-100" color="warning" variant="outline" onClick={() => handleEdit(auction._id)}>
+                  Edit
+                </CButton>
+              </CTableHeaderCell>
+              <CTableHeaderCell scope="col">
+                <CButton className="btntext w-100" color="danger" variant="outline" onClick={() => handleDeleteButtonClick(auction)}>
+                  Delete
+                </CButton>
+              </CTableHeaderCell>
+            </CTableRow>
+          ))}
         </CTableBody>
       </CTable>
 
-      {/* Delete Confirmation Modal */}
-      <CModal show={deleteModal} onClose={() => setDeleteModal(false)}>
-        <CModalHeader closeButton>
-          Confirm Delete
-        </CModalHeader>
-        <CModalBody>
-          Are you sure you want to delete this item?
-        </CModalBody>
+      <CModal visible={deleteModal} onClose={() => setDeleteModal(false)}>
+        <CModalHeader closeButton>Confirm Delete</CModalHeader>
+        <CModalBody>Are you sure you want to delete this item?</CModalBody>
         <CModalFooter>
-          <CButton color="danger" onClick={handleDelete}>Delete</CButton>
-          <CButton color="secondary" onClick={() => setDeleteModal(false)}>Cancel</CButton>
+          <CButton color="danger" onClick={handleDelete}>
+            Delete
+          </CButton>
+          <CButton color="secondary" onClick={() => setDeleteModal(false)}>
+            Cancel
+          </CButton>
         </CModalFooter>
       </CModal>
     </>
