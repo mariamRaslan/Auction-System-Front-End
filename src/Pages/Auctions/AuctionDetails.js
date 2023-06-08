@@ -18,7 +18,7 @@ const AuctionDetails = () => {
 
   const auctionId = useParams().auctionId;
 //  console.log("id", auctionId);
-//   console.log(useParams()); 
+//   console.log(useParams());
 
   const [auctionDetails, setAuctionDetails] = useState(null);
 
@@ -45,25 +45,25 @@ const AuctionDetails = () => {
     <div className="row">
       <div className="col-12">
         <h1 className="text-center ">{auctionDetails.name}</h1>
-        <p className="text-center mb-4">Status: {auctionDetails.status}</p>
+        <p className="text-center mb-4">الحالة {auctionDetails.status}</p>
         <div className="d-flex justify-content-between ps-5 pe-5">
           <div>
-            <p><strong>ID:</strong> {auctionDetails.reference_number}</p>
-            <p> <strong>Starting Date:</strong> {auctionDetails.start_date}</p>
-            <p> <strong>Time:</strong> {auctionDetails.time}</p> 
+            <p><strong>الرقم التعريفي </strong> {auctionDetails.reference_number}</p>
+            <p> <strong>تاريخ البدء </strong> {auctionDetails.start_date}</p>
+            <p> <strong>الوقت </strong> {auctionDetails.time}</p>
           </div>
           <div>
-            <p> <strong>Reference Number:</strong> {auctionDetails.reference_number}</p>
-            <p><strong> Fees:</strong> ${auctionDetails.fees}</p>
+            <p> <strong>الرقم المرجعي </strong> {auctionDetails.reference_number}</p>
+            <p><strong> قيمه التأمين </strong> ${auctionDetails.fees}</p>
           </div>
         </div>
       </div>
     </div>
       <div className='ms-5'>
-              <CButton color="primary">Edit Auction</CButton>
+              <CButton color="primary">تعديل المزاد</CButton>
             </div>
       <div className="row mt-4 border-top">
-      <h3 className="text-center mb-4 mt-4">Auction Items</h3>
+      <h3 className="text-center mb-4 mt-4">منتجات المزاد</h3>
           <div className="col-md-4 mb-4">
             <CCard>
               <img
@@ -72,7 +72,7 @@ const AuctionDetails = () => {
                 alt="Auction Item"
               />
               <CCardBody>
-                <CCardTitle>Item Name</CCardTitle>
+                <CCardTitle>اسم المنتج</CCardTitle>
                 <div className="d-flex justify-content-between">
                   <p>Category: Art</p>
                   <CButton color="primary">View Details</CButton>
@@ -114,11 +114,11 @@ const AuctionDetails = () => {
               </CCardBody>
             </CCard>
           </div>
-        
+
       </div>
     </div>
   ) : (
-    <p>loading</p>
+    <p>تحميل..</p>
   );
 };
 

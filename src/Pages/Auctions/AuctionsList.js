@@ -39,7 +39,7 @@ const AuctionsList = () => {
     if (!auctionToDelete) {
       return;
     }
-  
+
     try {
       const res = await axiosInstance.delete(`/auctions/${auctionToDelete._id}`);
       setAuctionsList(auctionsList.filter((auction) => auction._id !== auctionToDelete._id));
@@ -65,16 +65,16 @@ const AuctionsList = () => {
   return (
     <>
       <CCardHeader>
-        <strong>All Auctions</strong>
+        <strong>المزادات</strong>
       </CCardHeader>
       <CTable>
         <CTableHead color="dark">
           <CTableRow>
-            <CTableHeaderCell scope="col">Reference Number</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Name</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Status</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الرقم المرجعي</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الاسم</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الحالة</CTableHeaderCell>
             <CTableHeaderCell className="textcenter" scope="col" colSpan={3}>
-              Actions
+              العمليات
             </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
@@ -86,17 +86,17 @@ const AuctionsList = () => {
               <CTableDataCell>{auction.status}</CTableDataCell>
               <CTableHeaderCell scope="col">
                 <CButton className="btntext w-100" color="primary" variant="outline" onClick={() => handleView(auction._id)}>
-                  View
+                  تفاصيل
                 </CButton>
               </CTableHeaderCell>
               <CTableHeaderCell scope="col">
                 <CButton className="btntext w-100" color="warning" variant="outline" onClick={() => handleEdit(auction._id)}>
-                  Edit
+                  تعديل
                 </CButton>
               </CTableHeaderCell>
               <CTableHeaderCell scope="col">
                 <CButton className="btntext w-100" color="danger" variant="outline" onClick={() => handleDeleteButtonClick(auction)}>
-                  Delete
+                  حذف
                 </CButton>
               </CTableHeaderCell>
             </CTableRow>
@@ -105,14 +105,14 @@ const AuctionsList = () => {
       </CTable>
 
       <CModal visible={deleteModal} onClose={() => setDeleteModal(false)}>
-        <CModalHeader closeButton>Confirm Delete</CModalHeader>
-        <CModalBody>Are you sure you want to delete this item?</CModalBody>
+        <CModalHeader closeButton>تأكيد</CModalHeader>
+        <CModalBody>هل أنت متأكد أنك تريد حذف هذا العنصر؟</CModalBody>
         <CModalFooter>
           <CButton color="danger" onClick={handleDelete}>
-            Delete
+            حذف
           </CButton>
           <CButton color="secondary" onClick={() => setDeleteModal(false)}>
-            Cancel
+            إلغاء
           </CButton>
         </CModalFooter>
       </CModal>
