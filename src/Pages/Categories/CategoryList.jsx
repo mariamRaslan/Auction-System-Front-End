@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
-import axios from "axios";
-  
+import axios from "../../Axios";
+
 import {
   CTable,
   CTableBody,
@@ -26,16 +26,15 @@ const CategoryList = () => {
   //set error_message
   const [error_message, setError_message] = useState("");
   //get token from localstorage
-  // const token = localStorage.getItem("token");
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODYxNzQ0MjksImV4cCI6MTY4NjE4NTIyOX0.VbVTT1E5YyZwtlt1Zj3VINrPkYRi9YlwMnOclocPqT4"
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
 
     //get token from localstorag  
 
     const fetchData = async () => {
-      //get data from http://localhost:8080/categories and token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODYxNzQ0MjksImV4cCI6MTY4NjE4NTIyOX0.VbVTT1E5YyZwtlt1Zj3VINrPkYRi9YlwMnOclocPqT4"
-      const result = await axios.get('http://localhost:8080/categories ', {
+      //get data from /categories and token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODYxNzQ0MjksImV4cCI6MTY4NjE4NTIyOX0.VbVTT1E5YyZwtlt1Zj3VINrPkYRi9YlwMnOclocPqT4"
+      const result = await axios.get('/categories ', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -53,7 +52,7 @@ const CategoryList = () => {
     //confirmation message
     if (window.confirm("Are you sure you want to delete this category?")) {
       //delete data from https://dummyjson.com/products/id
-    axios.delete(`http://localhost:8080/categories/${_id}`,
+    axios.delete(`/categories/${_id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

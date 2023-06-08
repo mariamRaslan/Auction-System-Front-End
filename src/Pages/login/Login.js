@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+//import axios
+import axios from '../../Axios'
 import {
   CButton,
   CCard,
@@ -24,14 +26,29 @@ const Login = () => {
 
   //login function to redirect to dashboard
   const log_in = () => {
-    const username = document.getElementById('username').value
+    //get email and password from inputs
+    const email = document.getElementById('email').value
     const password = document.getElementById('password').value
-    if (username === 'admin' && password === 'admin@123') {
-      //redirect to dashboard
-      window.location.href = '#/reports/yearly-reports'
+    //check if email and password are empty
+    if (email === '' || password === '') {
+      setError_message('Please enter email and password')
     } else {
-      //set error message
-      setError_message('Invalid username or password')
+      //send request to login
+      axios
+        .post('/login', {
+          email: email,
+          password: password,
+        })
+        .then((res) => {
+            window.location.href = '#/reports/yearly-reports'
+            //set token
+            localStorage.setItem('token', res.data.token)
+          
+        })
+        .catch((err) => {
+          //show error message
+          setError_message(err.message)
+        })
     }
   }
   return (
@@ -49,9 +66,10 @@ const Login = () => {
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput placeholder="Username" 
-                      id="username"
-                      autoComplete="username" />
+                      <CFormInput placeholder="Email" 
+                      type="email"
+                      id="email"
+                      autoComplete="email" />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -78,8 +96,8 @@ const Login = () => {
                 
                       {/**show username , password */}
                       <CCol xs={6} className="text-end">
-                        <p className="lead">username: admin</p>
-                        <p className="lead">password: admin@123</p>
+                        <p className="lead">email: mariamzayed91@gmail.com</p>
+                        <p className="lead">password: Admin@123</p>
                       </CCol>
                      
 
