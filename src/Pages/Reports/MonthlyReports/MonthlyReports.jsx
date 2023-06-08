@@ -8,7 +8,8 @@ import {
   CChartPolarArea,
   CChartRadar,
 } from '@coreui/react-chartjs'
-import { DocsCallout } from 'src/components'
+//import bootstrap 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const MonthlyReports = () => {
@@ -17,11 +18,15 @@ const MonthlyReports = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        <DocsCallout
-          name="Chart"
-          href="components/chart"
-          content="React wrapper component for Chart.js 3.0, the most popular charting library."
-        />
+        <div className="d-flex justify-content-end mb-5">
+          <select className="btn btn-primary mb-3 float-right" aria-label=".form-select-lg example">
+            <option selected disabled className='text-light'>Export As</option>
+            <option value="1">PDF</option>
+            <option value="2">Excel</option>
+            <option value="3">JSON</option>
+          </select>
+       </div>
+      
       </CCol>
       <CCol xs={6}>
         <CCard className="mb-4">
@@ -173,5 +178,7 @@ const MonthlyReports = () => {
     </CRow>
   )
 }
+
+
 
 export default MonthlyReports

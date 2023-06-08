@@ -12,7 +12,7 @@ import {
   CNavItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
+import { cilAccountLogout, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
@@ -21,6 +21,14 @@ import { logo } from 'src/assets/brand/logo'
 const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
+
+  //logout remove token & redirct to login
+   const logout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/login';
+  }
+
+
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -49,8 +57,13 @@ const AppHeader = () => {
         </CHeaderNav>
         <CHeaderNav>
           <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilBell} size="lg" />
+            <CNavLink
+            onClick={logout}
+            href="#">
+              {/**logout icon  */}              
+              <CIcon icon={cilAccountLogout} 
+              
+              size="lg" />
             </CNavLink>
           </CNavItem>
           <CNavItem>

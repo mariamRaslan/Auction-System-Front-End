@@ -96,8 +96,8 @@ const Login = () => {
                 
                       {/**show username , password */}
                       <CCol xs={6} className="text-end">
-                        <p className="lead">email: mariamzayed91@gmail.com</p>
-                        <p className="lead">password: Admin@123</p>
+                        <p className="lead">email: newAdmin@gmail.com</p>
+                        <p className="lead">password: Admin@12345</p>
                       </CCol>
                      
 
