@@ -34,8 +34,6 @@ const Login = () => {
       setError_message('Invalid username or password')
     }
   }
-
-
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -77,8 +75,7 @@ const Login = () => {
                           Login
                         </CButton>
                       </CCol>
-                      
-
+                
                       {/**show username , password */}
                       <CCol xs={6} className="text-end">
                         <p className="lead">username: admin</p>
