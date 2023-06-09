@@ -9,14 +9,14 @@ import {
   CFormLabel,
   CFormSelect,
 } from "@coreui/react";
-import axios from "axios";
+import axiosInstance from "../../Axios";
 
 const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   // function for get all categories
   async function fetchCategories() {
     try {
-      const response = await axios.get("http://localhost:8080/categories");
+      const response = await axiosInstance.get("/categories");
       console.log(response.data.data);
       setCategories(response.data.data);
     } catch (error) {
@@ -27,7 +27,6 @@ const AddProduct = () => {
     fetchCategories();
   }, []);
 
-  const [validated, setValidated] = useState(false);
   const [categoryIds, setCategoryIds] = useState([]);
   function handleInputChange(event) {
     const { options } = event.target;
@@ -43,7 +42,7 @@ const AddProduct = () => {
       console.log(categoryIds);
     }
   }
-
+  const [validated, setValidated] = useState(false);
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -68,18 +67,17 @@ const AddProduct = () => {
         formDataWithImage.append(key, productData[key]);
       }
       console.log(formDataWithImage);
-      const response = await axios.post(
-        "http://localhost:8080/items",
-        formDataWithImage
-      );
+      const response = await axiosInstance.post("/items", formDataWithImage);
       console.log(response.data);
+      window.location.href = "#/products/list";
     } catch (error) {
       console.error(error);
+      setValidated(true);
     }
   }
 
   return (
-    <>
+    <div dir="rtl">
       <CCardHeader>
         <strong>إضافه منتج</strong>
       </CCardHeader>
@@ -94,32 +92,27 @@ const AddProduct = () => {
         <CCol md={6}>
           <CFormLabel htmlFor="validationCustom01">الاسم</CFormLabel>
           <CFormInput type="text" name="name" id="name" required />
-          <CFormFeedback invalid>This field is Required</CFormFeedback>
-          <CFormFeedback valid>Looks good!</CFormFeedback>
+          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
         </CCol>
         <CCol md={6}>
           <CFormLabel htmlFor="validationCustom01">الخامه</CFormLabel>
           <CFormInput type="text" name="material" id="material" required />
-          <CFormFeedback invalid>This field is Required</CFormFeedback>
-          <CFormFeedback valid>Looks good!</CFormFeedback>
+          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
         </CCol>
         <CCol md={4}>
           <CFormLabel htmlFor="validationCustom01">المقاس</CFormLabel>
           <CFormInput type="text" name="size" id="size" required />
-          <CFormFeedback invalid>This field is Required</CFormFeedback>
-          <CFormFeedback valid>Looks good!</CFormFeedback>
+          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
         </CCol>
         <CCol md={4}>
-          <CFormLabel htmlFor="validationCustom01">اللون  </CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">اللون </CFormLabel>
           <CFormInput type="text" name="color" id="color" required />
-          <CFormFeedback invalid>This field is Required</CFormFeedback>
-          <CFormFeedback valid>Looks good!</CFormFeedback>
+          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
         </CCol>
         <CCol md={4}>
           <CFormLabel htmlFor="validationCustom02">الكمية</CFormLabel>
-          <CFormInput type="number" name="qty" id="qty" />
-          <CFormFeedback valid>Looks good!</CFormFeedback>
-          <CFormFeedback invalid>This field is Required</CFormFeedback>
+          <CFormInput type="number" name="qty" id="qty" required />
+          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
         </CCol>
         <CCol md={6}>
           <CFormLabel htmlFor="validationCustom04">الفئات</CFormLabel>
@@ -139,12 +132,20 @@ const AddProduct = () => {
               );
             })}
           </CFormSelect>
-          <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
+          <CFormFeedback invalid>
+            Please provide a valid category.
+          </CFormFeedback>
         </CCol>
         <CCol md={6}>
           <CFormLabel htmlFor="image">الصوره</CFormLabel>
-          <CFormInput type="file" name="image" aria-label="file example" />
-          <CFormFeedback invalid>Invalid image</CFormFeedback>
+          <CFormInput
+            type="file"
+            accept="image/*"
+            required
+            name="image"
+            aria-label="file example"
+          />
+          <CFormFeedback invalid>صورة غير صالحة</CFormFeedback>
         </CCol>
         <CCol xs={12}>
           <CButton color="primary" type="submit">
@@ -152,7 +153,7 @@ const AddProduct = () => {
           </CButton>
         </CCol>
       </CForm>
-    </>
+    </div>
   );
 };
 export default AddProduct;

@@ -109,12 +109,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'تفاصيل المنتجات',
-        to: '/productsdetails/list',
+        to: '/productsDetails/list',
       },
       {
         component: CNavItem,
         name: 'إضافة تفاصيل منتج جديد',
-        to: '/productsdetails/add-productdetails',
+        to: '/productsDetails/add-details',
 
       },
     ],

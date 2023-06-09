@@ -17,9 +17,11 @@ const AddProduct = React.lazy(() => import('./Pages/Products/AddProduct'))
 const EditProduct = React.lazy(() => import('./Pages/Products/EditProduct'))
 const ProductDetails = React.lazy(() => import('./Pages/Products/ProductDetails'))
 // ProductDetails Pages
-// const ProductsDetails = React.lazy(() => import('./Pages/ProductDetails/DetailsList'))
-// const EditDetails = React.lazy(() => import('./Pages/ProductDetails/DetailsList'))
-
+const ProductsDetailsList = React.lazy(() => import('./Pages/ProductsDetails/DetailsList'))
+const AddDetails = React.lazy(() => import('./Pages/ProductsDetails/AddDetails'))
+const EditDetails = React.lazy(() => import('./Pages/ProductsDetails/EditDetails'))
+const AuctionProductDetails = React.lazy(() => import('./Pages/ProductsDetails/AuctionProductDetails'))
+// Dashboard
 const Dashboard = React.lazy(() => import('./Pages/dashboard/Dashboard'))
 
 //Reports pages
@@ -45,9 +47,11 @@ const routes = [
   { path: '/products/add-product', name: 'AddProduct', element: AddProduct },
   { path: '/products/edit-product/:id', name: 'EditProduct', element: EditProduct },
   { path: '/products/product-details/:id', name: 'ProductDetails', element: ProductDetails },
-  // Products
-  // { path: '/productsdetails/list', exact: true, name: 'ProductsDetails', element: ProductsDetails },
-  // { path: '/productsdetails/edit-details/:id', name: 'EditDetails', element: EditDetails },
+  // Products Details
+  { path: '/productsDetails/list', exact: true, name: 'ProductsDetailsList', element: ProductsDetailsList },
+  { path: '/productsDetails/add-details', exact: true, name: 'AddDetails', element: AddDetails },
+  { path: '/productsDetails/edit-details/:id', name: 'EditDetails', element: EditDetails },
+  { path: '/productsDetails/product-details/:id', name: 'AuctionProductDetails', element: AuctionProductDetails},
   // Reports
   { path: '/reports/monthly-reports', name: 'MonthlyReports', element: MonthlyReports },
   { path: '/reports/calender', name: 'Calender', element: Calender },

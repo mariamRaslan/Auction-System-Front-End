@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { CRow, CCol } from "@coreui/react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../Axios";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  console.log(id);
   const [product, setProduct] = useState({});
   const [categories, setCategories] = useState([]);
   // function for get all categories
   async function fetchCategories() {
     try {
-      const response = await axios.get("http://localhost:8080/categories");
+      const response = await axiosInstance.get("/categories");
       console.log(response.data.data);
       setCategories(response.data.data);
     } catch (error) {
@@ -20,7 +19,7 @@ const ProductDetails = () => {
   }
   async function fetchProduct(id) {
     try {
-      const response = await axios.get(`http://localhost:8080/items/${id}`);
+      const response = await axiosInstance.get(`/items/${id}`);
       console.log(response.data);
       setProduct(response.data);
     } catch (error) {
@@ -43,7 +42,7 @@ const ProductDetails = () => {
   }
   return (
     // product.map((product) => {
-    <CRow className="detailsContainer">
+    <CRow dir="rtl" className="detailsContainer">
       <CCol sm={12} md={12} lg={12} className="card detailsContainer">
         <img
           className="product-img"

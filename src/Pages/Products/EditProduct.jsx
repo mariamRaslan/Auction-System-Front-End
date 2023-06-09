@@ -9,8 +9,8 @@ import {
   CFormLabel,
   CFormSelect,
 } from "@coreui/react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import axiosInstance from "../../Axios";
 
 const UpdateProducts = () => {
   const { id } = useParams();
@@ -21,7 +21,7 @@ const UpdateProducts = () => {
   // function for get all categories
   async function fetchCategories() {
     try {
-      const response = await axios.get("http://localhost:8080/categories");
+      const response = await axiosInstance.get("/categories");
       console.log(response.data.data);
       setCategories(response.data.data);
     } catch (error) {
@@ -30,7 +30,7 @@ const UpdateProducts = () => {
   }
   async function fetchProduct(id) {
     try {
-      const response = await axios.get(`http://localhost:8080/items/${id}`);
+      const response = await axiosInstance.get(`/items/${id}`);
       console.log(response.data);
       setProduct(response.data);
     } catch (error) {
@@ -81,17 +81,19 @@ const UpdateProducts = () => {
       }
     }
     try {
-      const response = await axios.patch(
-        `http://localhost:8080/items/${id}`,
+      const response = await axiosInstance.patch(
+        `/items/${id}`,
         formDataWithImage
       );
       console.log(response.data);
+      window.location.href = "#/products/list";
     } catch (error) {
       console.error(error);
+      setValidated(true);
     }
   }
   return (
-    <>
+    <div dir="rtl">
       <CCardHeader>
         <strong>تعديل المنتج</strong>
       </CCardHeader>
@@ -112,8 +114,6 @@ const UpdateProducts = () => {
             name="id"
             id="id"
           />
-          <CFormFeedback invalid>This field is Required</CFormFeedback>
-          <CFormFeedback valid>Looks good!</CFormFeedback>
         </CCol>
         <CCol md={6}>
           <CFormLabel htmlFor="validationCustom01">الاسم</CFormLabel>
@@ -125,8 +125,7 @@ const UpdateProducts = () => {
             id="name"
             required
           />
-          <CFormFeedback invalid>This field is Required</CFormFeedback>
-          <CFormFeedback valid>Looks good!</CFormFeedback>
+          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
         </CCol>
         <CCol md={6}>
           <CFormLabel htmlFor="validationCustom01">الخامه</CFormLabel>
@@ -138,8 +137,7 @@ const UpdateProducts = () => {
             id="material"
             required
           />
-          <CFormFeedback invalid>This field is Required</CFormFeedback>
-          <CFormFeedback valid>Looks good!</CFormFeedback>
+          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
         </CCol>
         <CCol md={6}>
           <CFormLabel htmlFor="validationCustom01">المقاس</CFormLabel>
@@ -151,8 +149,7 @@ const UpdateProducts = () => {
             id="size"
             required
           />
-          <CFormFeedback invalid>This field is Required</CFormFeedback>
-          <CFormFeedback valid>Looks good!</CFormFeedback>
+          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
         </CCol>
         <CCol md={6}>
           <CFormLabel htmlFor="validationCustom01">اللون </CFormLabel>
@@ -164,8 +161,7 @@ const UpdateProducts = () => {
             id="color"
             required
           />
-          <CFormFeedback invalid>This field is Required</CFormFeedback>
-          <CFormFeedback valid>Looks good!</CFormFeedback>
+          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
         </CCol>
         <CCol md={6}>
           <CFormLabel htmlFor="validationCustom02">الكمية</CFormLabel>
@@ -175,9 +171,9 @@ const UpdateProducts = () => {
             onInput={handleInputChange}
             name="qty"
             id="qty"
+            required
           />
-          <CFormFeedback valid>Looks good!</CFormFeedback>
-          <CFormFeedback invalid>This field is Required</CFormFeedback>
+          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
         </CCol>
         <CCol md={6}>
           <CFormLabel htmlFor="validationCustom04">فئه</CFormLabel>
@@ -210,7 +206,7 @@ const UpdateProducts = () => {
             name="image"
             aria-label="file example"
           />
-          <CFormFeedback invalid>Invalid image</CFormFeedback>
+          <CFormFeedback invalid>صورة غير صالحة</CFormFeedback>
         </CCol>
         <CCol xs={12}>
           <CButton color="primary" type="submit">
@@ -218,7 +214,7 @@ const UpdateProducts = () => {
           </CButton>
         </CCol>
       </CForm>
-    </>
+    </div>
   );
 };
 export default UpdateProducts;
