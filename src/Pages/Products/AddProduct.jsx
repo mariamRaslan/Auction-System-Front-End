@@ -9,14 +9,14 @@ import {
   CFormLabel,
   CFormSelect,
 } from "@coreui/react";
-import axios from "axios";
+import axiosInstance from "../../Axios";
 
 const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   // function for get all categories
   async function fetchCategories() {
     try {
-      const response = await axios.get("http://localhost:8080/categories");
+      const response = await axiosInstance.get("/categories");
       console.log(response.data.data);
       setCategories(response.data.data);
     } catch (error) {
@@ -68,18 +68,16 @@ const AddProduct = () => {
         formDataWithImage.append(key, productData[key]);
       }
       console.log(formDataWithImage);
-      const response = await axios.post(
-        "http://localhost:8080/items",
-        formDataWithImage
-      );
+      const response = await axiosInstance.post("/items", formDataWithImage);
       console.log(response.data);
+      window.location.href="#/products/list";
     } catch (error) {
       console.error(error);
     }
   }
 
   return (
-    <>
+    <div dir="rtl">
       <CCardHeader>
         <strong>إضافه منتج</strong>
       </CCardHeader>
@@ -110,7 +108,7 @@ const AddProduct = () => {
           <CFormFeedback valid>Looks good!</CFormFeedback>
         </CCol>
         <CCol md={4}>
-          <CFormLabel htmlFor="validationCustom01">اللون  </CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">اللون </CFormLabel>
           <CFormInput type="text" name="color" id="color" required />
           <CFormFeedback invalid>This field is Required</CFormFeedback>
           <CFormFeedback valid>Looks good!</CFormFeedback>
@@ -152,7 +150,7 @@ const AddProduct = () => {
           </CButton>
         </CCol>
       </CForm>
-    </>
+    </div>
   );
 };
 export default AddProduct;

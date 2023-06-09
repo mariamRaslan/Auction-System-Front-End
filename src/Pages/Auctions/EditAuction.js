@@ -70,7 +70,7 @@ const EditAuction = () => {
         onSubmit={handleSubmit}
       >
         <CCol md={12}>
-          <CFormLabel htmlFor="auctionName">Auction Name</CFormLabel>
+          <CFormLabel htmlFor="auctionName">اسم المزاد</CFormLabel>
           <CFormInput
             type="text"
             id="auctionName"
@@ -80,7 +80,7 @@ const EditAuction = () => {
           <CFormFeedback invalid>Please provide an auction name.</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="startDate">Starting Date</CFormLabel>
+          <CFormLabel htmlFor="startDate">تاريخ البدء</CFormLabel>
           <CFormInput
             type="date"
             id="startDate"
@@ -90,7 +90,7 @@ const EditAuction = () => {
           <CFormFeedback invalid>Please provide a valid start date.</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="endDate">Ending Date</CFormLabel>
+          <CFormLabel htmlFor="endDate">تاريخ الإنتهاء</CFormLabel>
           <CFormInput
             type="date"
             id="endDate"
@@ -100,7 +100,7 @@ const EditAuction = () => {
           <CFormFeedback invalid>Please provide a valid end date.</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="referenceNumber">Reference Number</CFormLabel>
+          <CFormLabel htmlFor="referenceNumber">الرقم المرجعي</CFormLabel>
           <CFormInput
             type="text"
             id="referenceNumber"
@@ -110,12 +110,12 @@ const EditAuction = () => {
           <CFormFeedback invalid>Please provide a valid reference number.</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="time">Time</CFormLabel>
+          <CFormLabel htmlFor="time">الوقت</CFormLabel>
           <CFormInput type="time" id="time" required defaultValue={auction.time} />
           <CFormFeedback invalid>Please provide a valid time.</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="fees">Fees</CFormLabel>
+          <CFormLabel htmlFor="fees">التأمين</CFormLabel>
           <CInputGroup className="has-validation">
             <CInputGroupText>$</CInputGroupText>
             <CFormInput
@@ -130,9 +130,9 @@ const EditAuction = () => {
           </CInputGroup>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="status">Status</CFormLabel>
+          <CFormLabel htmlFor="status">الحالة</CFormLabel>
           <CFormSelect id="status" required defaultValue={auction.status}>
-            <option value="">Choose...</option>
+            <option disabled>Choose...</option>
             <option value="started">Started</option>
             <option value="ended">Ended</option>
             <option value="not started">Not Started</option>
@@ -141,7 +141,7 @@ const EditAuction = () => {
         </CCol>
         <CCol xs={12}>
           <CButton color="primary" type="submit">
-            Edit Auction
+            حفظ التعديلات
           </CButton>
         </CCol>
       </CForm>

@@ -15,7 +15,8 @@ import {
   CModalFooter,
 } from "@coreui/react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../Axios";
+
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -23,7 +24,7 @@ const Products = () => {
 
   async function fetchProducts() {
     try {
-      const response = await axios.get("http://localhost:8080/items");
+      const response = await axiosInstance.get("/items");
       setProducts(response.data);
     } catch (error) {
       console.error(error);
@@ -32,7 +33,7 @@ const Products = () => {
   // function for get all categories
   async function fetchCategories() {
     try {
-      const response = await axios.get("http://localhost:8080/categories");
+      const response = await axiosInstance.get("/categories");
 
       setCategories(response.data.data);
     } catch (error) {
@@ -51,7 +52,7 @@ const Products = () => {
   async function deleteProduct(id) {
     try {
       if (id == null) return;
-      const response = await axios.delete(`http://localhost:8080/items/${id}`);
+      const response = await axiosInstance.delete(`/items/${id}`);
       setSelectedId(null);
     } catch (error) {
       console.error(error);
@@ -68,9 +69,9 @@ const Products = () => {
   };
 
   return (
-    <>
+    <div dir="rtl">
       <CCardHeader>
-      <small>جدول</small>  <strong>المنتجات</strong> 
+        <small>جدول</small> <strong>المنتجات</strong>
       </CCardHeader>
       <CTable>
         <CTableHead color="dark">
@@ -84,7 +85,7 @@ const Products = () => {
             <CTableHeaderCell scope="col">المقاس</CTableHeaderCell>
             <CTableHeaderCell scope="col">اللون</CTableHeaderCell>
             <CTableHeaderCell className="textcenter" scope="col" colSpan={3}>
-              Actions
+              العمليات
             </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
@@ -183,7 +184,7 @@ const Products = () => {
           </CButton>
         </CModalFooter>
       </CModal>
-    </>
+    </div>
   );
 };
 export default Products;

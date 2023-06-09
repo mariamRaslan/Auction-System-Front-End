@@ -9,8 +9,8 @@ import {
   CFormLabel,
   CFormSelect,
 } from "@coreui/react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import axiosInstance from "../../Axios";
 
 const UpdateProducts = () => {
   const { id } = useParams();
@@ -21,7 +21,7 @@ const UpdateProducts = () => {
   // function for get all categories
   async function fetchCategories() {
     try {
-      const response = await axios.get("http://localhost:8080/categories");
+      const response = await axiosInstance.get("/categories");
       console.log(response.data.data);
       setCategories(response.data.data);
     } catch (error) {
@@ -30,7 +30,7 @@ const UpdateProducts = () => {
   }
   async function fetchProduct(id) {
     try {
-      const response = await axios.get(`http://localhost:8080/items/${id}`);
+      const response = await axiosInstance.get(`/items/${id}`);
       console.log(response.data);
       setProduct(response.data);
     } catch (error) {
@@ -81,17 +81,18 @@ const UpdateProducts = () => {
       }
     }
     try {
-      const response = await axios.patch(
-        `http://localhost:8080/items/${id}`,
+      const response = await axiosInstance.patch(
+        `/items/${id}`,
         formDataWithImage
       );
       console.log(response.data);
+      window.location.href="#/products/list";
     } catch (error) {
       console.error(error);
     }
   }
   return (
-    <>
+    <div dir="rtl">
       <CCardHeader>
         <strong>تعديل المنتج</strong>
       </CCardHeader>
@@ -218,7 +219,7 @@ const UpdateProducts = () => {
           </CButton>
         </CCol>
       </CForm>
-    </>
+    </div>
   );
 };
 export default UpdateProducts;
