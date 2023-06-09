@@ -5,7 +5,6 @@ import axiosInstance from "../../Axios";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  console.log(id);
   const [product, setProduct] = useState({});
   const [categories, setCategories] = useState([]);
   // function for get all categories
