@@ -64,10 +64,10 @@ const AuctionsList = () => {
 
   return (
     <>
-      <CCardHeader>
-        <strong>المزادات</strong>
+      <CCardHeader dir='rtl'>
+        <h2>المزادات</h2>
       </CCardHeader>
-      <CTable>
+      <CTable dir='rtl'>
         <CTableHead color="dark">
           <CTableRow>
             <CTableHeaderCell scope="col">الرقم المرجعي</CTableHeaderCell>
