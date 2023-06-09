@@ -54,26 +54,28 @@ const UsersList = () => {
     });
     }
   };
-  //edit user
-  const editUser = (_id) => {
-    //get data from /user/id
-    axios.get(`/users/${_id}`)
-    .then((res) => {
-      console.log(res);
-    })
-    //catch error
-    .catch((error) => {
-      setError_message(error.message);  
-    });
-  };
-
+  
   return (
     <div>
       <h1>Users List</h1>
+       {/**error message */}
+       {error_message && (
+        <CModal show={true} onClose={() => setError_message("")}>
+          <CModalHeader closeButton>
+            <CModalTitle>Error</CModalTitle>
+          </CModalHeader>
+          <CModalBody>{error_message}</CModalBody>
+          <CModalFooter>
+            <CButton color="primary" onClick={() => setError_message("")}>
+              Ok
+            </CButton>
+          </CModalFooter>
+        </CModal>
+      )}
       <CCardHeader>
-        <CButton to="/users/add" color="primary">
-          Add User
-        </CButton>
+        <a className="btn btn-primary" href="/#/users/add-user">
+
+        </a>
       </CCardHeader>
       <CTable>
         <CTableHead>
@@ -86,7 +88,7 @@ const UsersList = () => {
             <CTableHeaderCell scope="col">Address(city)</CTableHeaderCell>
             <CTableHeaderCell scope="col">Address(street)</CTableHeaderCell>
             <CTableHeaderCell scope="col">Delete</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Edit</CTableHeaderCell>
+            <CTableHeaderCell scope="col">view</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>
@@ -126,7 +128,7 @@ const UsersList = () => {
                     color="primary"
                     onClick={() => editUser(item._id)}
                   >
-                    Edit
+                    view
                   </CButton>
                 </CTableDataCell>
               </CTableRow>
@@ -134,20 +136,7 @@ const UsersList = () => {
           )}
         </CTableBody>
       </CTable>
-      {/**error message */}
-      {error_message && (
-        <CModal show={true} onClose={() => setError_message("")}>
-          <CModalHeader closeButton>
-            <CModalTitle>Error</CModalTitle>
-          </CModalHeader>
-          <CModalBody>{error_message}</CModalBody>
-          <CModalFooter>
-            <CButton color="primary" onClick={() => setError_message("")}>
-              Ok
-            </CButton>
-          </CModalFooter>
-        </CModal>
-      )}
+     
     </div>
   )
 }

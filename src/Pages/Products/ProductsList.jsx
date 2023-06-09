@@ -14,8 +14,10 @@ import {
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
+
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
+import axios from "./../../Axios";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -23,7 +25,7 @@ const Products = () => {
 
   async function fetchProducts() {
     try {
-      const response = await axios.get("http://localhost:8080/items");
+      const response = await axios.get("/items");
       setProducts(response.data);
     } catch (error) {
       console.error(error);
@@ -32,7 +34,7 @@ const Products = () => {
   // function for get all categories
   async function fetchCategories() {
     try {
-      const response = await axios.get("http://localhost:8080/categories");
+      const response = await axios.get("/categories");
 
       setCategories(response.data.data);
     } catch (error) {
@@ -51,7 +53,7 @@ const Products = () => {
   async function deleteProduct(id) {
     try {
       if (id == null) return;
-      const response = await axios.delete(`http://localhost:8080/items/${id}`);
+      const response = await axios.delete(`/items/${id}`);
       setSelectedId(null);
     } catch (error) {
       console.error(error);
@@ -68,9 +70,11 @@ const Products = () => {
   };
 
   return (
-    <>
+    <div dir="rtl">
       <CCardHeader>
-      <small>جدول</small>  <strong>المنتجات</strong> 
+      <div className="h1 mb-3">
+      جدول المنتجات 
+      </div>
       </CCardHeader>
       <CTable>
         <CTableHead color="dark">
@@ -183,7 +187,7 @@ const Products = () => {
           </CButton>
         </CModalFooter>
       </CModal>
-    </>
+    </div>
   );
 };
 export default Products;

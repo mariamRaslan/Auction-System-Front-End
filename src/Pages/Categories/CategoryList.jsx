@@ -63,9 +63,9 @@ const CategoryList = () => {
     
   return (
     //table to display id , name , button for edit and button for delete
-    <div>
+    <div dir="rtl">
       <CCardHeader >
-        <h1>Categories</h1>
+        <h1>الفئات</h1>
       </CCardHeader>
       {/**error_message */}
       {error_message && (
