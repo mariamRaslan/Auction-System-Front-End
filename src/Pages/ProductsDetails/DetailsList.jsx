@@ -17,42 +17,31 @@ import {
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../Axios";
 
-const Products = () => {
+const ProductsDetails = () => {
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
   // function for get all products
 
-  async function fetchProducts() {
+  async function fetchProductsDetails() {
     try {
-      const response = await axiosInstance.get("/items");
+      const response = await axiosInstance.get("/itemDetails");
       setProducts(response.data);
     } catch (error) {
       console.error(error);
     }
   }
-  // function for get all categories
-  async function fetchCategories() {
-    try {
-      const response = await axiosInstance.get("/categories");
 
-      setCategories(response.data.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
   useEffect(() => {
-    fetchProducts();
-    fetchCategories();
+    fetchProductsDetails();
   }, []);
   useEffect(() => {
-    fetchProducts();
+    fetchProductsDetails();
   }, products);
   // function for delete product
   const [selectedId, setSelectedId] = useState();
   async function deleteProduct(id) {
     try {
       if (id == null) return;
-      const response = await axiosInstance.delete(`/items/${id}`);
+      const response = await axiosInstance.delete(`/itemDetails/${id}`);
       setSelectedId(null);
     } catch (error) {
       console.error(error);
@@ -62,10 +51,10 @@ const Products = () => {
   const [visible, setVisible] = useState(false);
   const Navigate = useNavigate();
   const handleEditButton = (id) => {
-    Navigate(`/products/edit-product/${id}`); // Navigate to the edit page
+    Navigate(`/productsDetails/edit-details/${id}`); // Navigate to the edit page
   };
   const handleDetailsButton = (id) => {
-    Navigate(`/products/product-details/${id}`); // Navigate to the details page
+    Navigate(`/productsDetails/product-details/${id}`); // Navigate to the details page
   };
 
   return (
@@ -77,13 +66,12 @@ const Products = () => {
         <CTableHead color="dark">
           <CTableRow>
             <CTableHeaderCell scope="col">#</CTableHeaderCell>
-            <CTableHeaderCell scope="col">الصور</CTableHeaderCell>
-            <CTableHeaderCell scope="col">الاسم</CTableHeaderCell>
-            <CTableHeaderCell scope="col">الكمية</CTableHeaderCell>
-            <CTableHeaderCell scope="col">الفئات</CTableHeaderCell>
-            <CTableHeaderCell scope="col">الخامه</CTableHeaderCell>
-            <CTableHeaderCell scope="col">المقاس</CTableHeaderCell>
-            <CTableHeaderCell scope="col">اللون</CTableHeaderCell>
+            <CTableHeaderCell scope="col">رقم المنتج</CTableHeaderCell>
+            <CTableHeaderCell scope="col">رقم المزاد</CTableHeaderCell>
+            <CTableHeaderCell scope="col">مقدار الزياده</CTableHeaderCell>
+            <CTableHeaderCell scope="col">سعر البدايه</CTableHeaderCell>
+            <CTableHeaderCell scope="col">أعلي سعر</CTableHeaderCell>
+            <CTableHeaderCell scope="col">نهايه المزاد</CTableHeaderCell>
             <CTableHeaderCell className="textcenter" scope="col" colSpan={3}>
               العمليات
             </CTableHeaderCell>
@@ -96,16 +84,11 @@ const Products = () => {
               return (
                 <CTableRow key={product._id}>
                   <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
-                  <CTableDataCell>
-                    <img
-                      className="small-img"
-                      alt="Product Image"
-                      src={product.image}
-                    ></img>
-                  </CTableDataCell>
-                  <CTableDataCell>{product.name}</CTableDataCell>
-                  <CTableDataCell>{product.qty}</CTableDataCell>
-                  <CTableDataCell>
+                  <CTableDataCell>{product.item_id}</CTableDataCell>
+                  <CTableDataCell>{product.auction_id}</CTableDataCell>
+                  <CTableDataCell>{product.bidding_gap}</CTableDataCell>
+                  <CTableDataCell>{product.start_bidding}</CTableDataCell>
+                  {/* <CTableDataCell>
                     {product.category
                       .map((categoryId) => {
                         const category = categories.find(
@@ -114,10 +97,9 @@ const Products = () => {
                         return category ? category.name : "";
                       })
                       .join(", ")}
-                  </CTableDataCell>
-                  <CTableDataCell>{product.material}</CTableDataCell>
-                  <CTableDataCell>{product.size}</CTableDataCell>
-                  <CTableDataCell>{product.color}</CTableDataCell>
+                  </CTableDataCell> */}
+                  <CTableDataCell>{product.max_price}</CTableDataCell>
+                  <CTableDataCell>{product.end_time}</CTableDataCell>
                   {/* button for details */}
                   <CTableHeaderCell scope="col">
                     <CButton
@@ -141,6 +123,7 @@ const Products = () => {
                     </CButton>
                   </CTableHeaderCell>
                   {/* button for delete */}
+
                   <CTableHeaderCell scope="col">
                     <CButton
                       onClick={() => {
@@ -186,4 +169,4 @@ const Products = () => {
     </div>
   );
 };
-export default Products;
+export default ProductsDetails;
