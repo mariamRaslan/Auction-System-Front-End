@@ -62,9 +62,11 @@ const Products = () => {
   const [visible, setVisible] = useState(false);
   const Navigate = useNavigate();
   const handleEditButton = (id) => {
+    parseInt(id);
     Navigate(`/products/edit-product/${id}`); // Navigate to the edit page
   };
   const handleDetailsButton = (id) => {
+    parseInt(id);
     Navigate(`/products/product-details/${id}`); // Navigate to the details page
   };
 
