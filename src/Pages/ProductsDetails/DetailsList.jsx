@@ -24,7 +24,8 @@ const ProductsDetails = () => {
   async function fetchProductsDetails() {
     try {
       const response = await axiosInstance.get("/itemDetails");
-      setProducts(response.data);
+      setProducts(response.data.data);
+      console.log(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -35,7 +36,7 @@ const ProductsDetails = () => {
   }, []);
   useEffect(() => {
     fetchProductsDetails();
-  }, products);
+  }, [products]);
   // function for delete product
   const [selectedId, setSelectedId] = useState();
   async function deleteProduct(id) {
@@ -66,8 +67,8 @@ const ProductsDetails = () => {
         <CTableHead color="dark">
           <CTableRow>
             <CTableHeaderCell scope="col">#</CTableHeaderCell>
-            <CTableHeaderCell scope="col">رقم المنتج</CTableHeaderCell>
-            <CTableHeaderCell scope="col">رقم المزاد</CTableHeaderCell>
+            <CTableHeaderCell scope="col">اسم المنتج</CTableHeaderCell>
+            <CTableHeaderCell scope="col">اسم المزاد</CTableHeaderCell>
             <CTableHeaderCell scope="col">مقدار الزياده</CTableHeaderCell>
             <CTableHeaderCell scope="col">سعر البدايه</CTableHeaderCell>
             <CTableHeaderCell scope="col">أعلي سعر</CTableHeaderCell>
@@ -84,20 +85,10 @@ const ProductsDetails = () => {
               return (
                 <CTableRow key={product._id}>
                   <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
-                  <CTableDataCell>{product.item_id}</CTableDataCell>
-                  <CTableDataCell>{product.auction_id}</CTableDataCell>
+                  <CTableDataCell>{product.item_id.name}</CTableDataCell>
+                  <CTableDataCell>{product.auction_id.name}</CTableDataCell>
                   <CTableDataCell>{product.bidding_gap}</CTableDataCell>
                   <CTableDataCell>{product.start_bidding}</CTableDataCell>
-                  {/* <CTableDataCell>
-                    {product.category
-                      .map((categoryId) => {
-                        const category = categories.find(
-                          (category) => category._id === categoryId
-                        );
-                        return category ? category.name : "";
-                      })
-                      .join(", ")}
-                  </CTableDataCell> */}
                   <CTableDataCell>{product.max_price}</CTableDataCell>
                   <CTableDataCell>{product.end_time}</CTableDataCell>
                   {/* button for details */}

@@ -31,11 +31,11 @@ const AddAuction = () => {
       try {
         const auctionData = {
           name,
-          reference_number:parseInt(referenceNumber) ,
+          reference_number:parseInt( referenceNumber),
           start_date: startDate,
           end_date: endDate,
           time,
-          fees,
+          fees: parseInt( fees),
         }
         console.log(auctionData)
         const response = await axiosInstance.post('/auctions', auctionData)
