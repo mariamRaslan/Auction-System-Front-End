@@ -44,15 +44,15 @@ const AddCategory = () => {
   };
   return (
     //caregory fields with fields id , name , button add
-    <div>
-      <h1>Add Category</h1>
+    <div dir="rtl">
+      <h1>اضافة فئة</h1>
 
       <form method="post" action="/categories"
       onSubmit={addCategory}
       >
         <div className="form-group">
-          <label for="name">Name</label>
-          <input type="text" className="form-control " id="name" placeholder="Enter Name" required/>
+          <label for="name">الاسم</label>
+          <input type="text" className="form-control " id="name" placeholder="ادخل الاسم" required/>
         </div>
         {/**if load true show preload */}
         {load && (
@@ -67,7 +67,7 @@ const AddCategory = () => {
           className={error_flag ? "text-danger" : "text-success"}>{result_message} </label>
         </div>
         <button type="submit"
-        className="btn btn-primary mt-5">Add</button>
+        className="btn btn-primary  mt-5">اضافة</button>
       </form>
     </div>
   )

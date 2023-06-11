@@ -36,7 +36,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'سنوي',
-        to: '/',
+        to: '/reports/yearly-reports',
       },
       {
         component: CNavItem,

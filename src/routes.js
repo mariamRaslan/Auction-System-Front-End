@@ -11,6 +11,7 @@ const AddCategory = React.lazy(() => import('./Pages/Categories/AddCategory'))
 // Users Pages
 const UsersList = React.lazy(() => import('./Pages/Users/UsersList'))
 const AddUser = React.lazy(() => import('./Pages/Users/AddUser'))
+const ViewUser = React.lazy(() => import('./Pages/Users/viewUser'))
 // Products Pages
 const ProductsList = React.lazy(() => import('./Pages/Products/ProductsList'))
 const AddProduct = React.lazy(() => import('./Pages/Products/AddProduct'))
@@ -42,6 +43,7 @@ const routes = [
   // Users
   { path: '/users/list', exact: true, name: 'UsersList', element: UsersList },
   { path: '/users/add-user', name: 'AddUser', element: AddUser },
+  { path: '/users/view-user/:id', name: 'ViewUser', element: ViewUser },
   // Products
   { path: '/products/list', exact: true, name: 'ProductsList', element: ProductsList },
   { path: '/products/add-product', name: 'AddProduct', element: AddProduct },

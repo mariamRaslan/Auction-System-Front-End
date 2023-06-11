@@ -1,4 +1,10 @@
 import React from 'react'
+
+//import state
+import { useState } from 'react'
+//import jwt-decode
+import jwt_decode from 'jwt-decode'
+
 import {
   CAvatar,
   CBadge,
@@ -22,13 +28,37 @@ import {
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 
-import avatar8 from './../../assets/images/avatars/8.jpg'
-
+//import axios
+import axios from './../../Axios'
 const AppHeaderDropdown = () => {
+
+  //get admin image
+  const [admin, setAdminImage] = useState({
+    image: '',
+  })
+
+  //get token 
+  const token = localStorage.getItem('token')
+  
+  //decode token
+  const decoded = jwt_decode(token)
+
+  // get id from token
+  const id = decoded.id
+
+  //call api /users/:id
+  axios.get(`/users/${id}`).then((res) => {
+    setAdminImage({
+      image: res.data.data.image,
+    })
+  })   
+
+
+
   return (
     <CDropdown variant="nav-item">
-      <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
-        <CAvatar src={avatar8} size="md" />
+      <CDropdownToggle placement="bottom-end" className="py-0" caret={false} style={{borderRadius:'50%'}} >
+        <CAvatar src={admin.image} size="md" />
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="bg-light fw-semibold py-2">Account</CDropdownHeader>
