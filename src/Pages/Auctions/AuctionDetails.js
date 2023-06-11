@@ -79,7 +79,9 @@ const AuctionDetails = () => {
                   <CCardTitle>{item.item_id?.name || "لا يوجد اسم"}</CCardTitle>
                   <div className="d-flex justify-content-between">
                     <p>القيمة المبدأية: {item.start_bidding +'$'|| "لا يوجد سعر"}</p>
+                    <Link to={`/products/product-details/${item.item_id._id}`}>
                     <CButton color="primary">التفاصيل</CButton>
+                    </Link>
                   </div>
                 </CCardBody>
               </CCard>

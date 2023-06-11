@@ -21,6 +21,8 @@ const AuctionsList = () => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [auctionsList, setAuctionsList] = useState([]);
   const [auctionToDelete, setAuctionToDelete] = useState(null);
+  const [activePage, setActivePage] = useState(1);
+  const pageSize = 10;
 
   useEffect(() => {
     getAuctionsList();
@@ -62,6 +64,37 @@ const AuctionsList = () => {
     setAuctionToDelete(auction);
   };
 
+  const handlePageChange = (pageNumber) => {
+    setActivePage(pageNumber);
+  };
+
+  const getPageData = () => {
+    const startIndex = (activePage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    return auctionsList.slice(startIndex, endIndex);
+  };
+
+  const pageData = getPageData();
+
+  const renderPagination = () => {
+    const pageCount = Math.ceil(auctionsList.length / pageSize);
+    const pages = [];
+    for (let i = 1; i <= pageCount; i++) {
+      pages.push(
+        <li key={i} className={`page-item ${activePage === i ? 'active' : ''}`}>
+          <button className="page-link" onClick={() => handlePageChange(i)}>
+            {i}
+          </button>
+        </li>
+      );
+    }
+    return (
+      <nav aria-label="Page navigation">
+        <ul className="pagination justify-content-center">{pages}</ul>
+      </nav>
+    );
+  };
+
   return (
     <>
       <CCardHeader dir='rtl'>
@@ -79,7 +112,7 @@ const AuctionsList = () => {
           </CTableRow>
         </CTableHead>
         <CTableBody>
-          {auctionsList.map((auction) => (
+          {pageData.map((auction) => (
             <CTableRow key={auction.reference_number}>
               <CTableDataCell>{auction.reference_number}</CTableDataCell>
               <CTableDataCell>{auction.name}</CTableDataCell>
@@ -103,9 +136,11 @@ const AuctionsList = () => {
           ))}
         </CTableBody>
       </CTable>
-
+      {renderPagination()}
       <CModal visible={deleteModal} onClose={() => setDeleteModal(false)}>
-        <CModalHeader closeButton>تأكيد</CModalHeader>
+        <CModalHeader closeButton>
+          تأكيد
+        </CModalHeader>
         <CModalBody>هل أنت متأكد أنك تريد حذف هذا العنصر؟</CModalBody>
         <CModalFooter>
           <CButton color="danger" onClick={handleDelete}>
