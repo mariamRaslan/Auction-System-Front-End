@@ -23,6 +23,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       localStorage.removeItem('token');
       // Update the isLoggedIn state to false
       setIsLoggedIn(false);
+      window.location.href = '/#/login'
     }, 3600000);
 
     // Clean up the timeout when the component unmounts or when isLoggedIn changes to false

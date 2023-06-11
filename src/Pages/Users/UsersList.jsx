@@ -54,7 +54,13 @@ const UsersList = () => {
     });
     }
   };
-  
+
+  //viewUser
+  const viewUser = (_id) => {
+    //view user
+    window.location.href = `/#/users/view-user/${_id}`;
+  };
+ 
   return (
     <div>
       <h1>Users List</h1>
@@ -74,7 +80,7 @@ const UsersList = () => {
       )}
       <CCardHeader>
         <a className="btn btn-primary" href="/#/users/add-user">
-
+          Add User
         </a>
       </CCardHeader>
       <CTable>
@@ -126,7 +132,7 @@ const UsersList = () => {
                 <CTableDataCell>
                   <CButton
                     color="primary"
-                    onClick={() => editUser(item._id)}
+                    onClick={() => viewUser(item._id)}
                   >
                     view
                   </CButton>
