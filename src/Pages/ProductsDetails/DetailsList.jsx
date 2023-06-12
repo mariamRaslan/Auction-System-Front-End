@@ -18,9 +18,14 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../Axios";
 
 const ProductsDetails = () => {
+  const Navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  // function for get all products
+  const [visible, setVisible] = useState(false);
+  const [selectedId, setSelectedId] = useState();
+  const [activePage, setActivePage] = useState(1);
+  const pageSize = 8;
 
+  // function for get all products
   async function fetchProductsDetails() {
     try {
       const response = await axiosInstance.get("/itemDetails");
@@ -31,14 +36,7 @@ const ProductsDetails = () => {
     }
   }
 
-  useEffect(() => {
-    fetchProductsDetails();
-  }, []);
-  useEffect(() => {
-    fetchProductsDetails();
-  }, [products]);
   // function for delete product
-  const [selectedId, setSelectedId] = useState();
   async function deleteProduct(id) {
     try {
       if (id == null) return;
@@ -49,15 +47,53 @@ const ProductsDetails = () => {
     }
   }
 
-  const [visible, setVisible] = useState(false);
-  const Navigate = useNavigate();
+  // Navigate to the edit page
   const handleEditButton = (id) => {
-    Navigate(`/productsDetails/edit-details/${id}`); // Navigate to the edit page
-  };
-  const handleDetailsButton = (id) => {
-    Navigate(`/productsDetails/product-details/${id}`); // Navigate to the details page
+    Navigate(`/productsDetails/edit-details/${id}`);
   };
 
+  // Navigate to the details page
+  const handleDetailsButton = (id) => {
+    Navigate(`/productsDetails/product-details/${id}`);
+  };
+
+  useEffect(() => {
+    fetchProductsDetails();
+  }, []);
+  useEffect(() => {
+    fetchProductsDetails();
+  }, [products]);
+
+  // Pagination
+  const getPageData = () => {
+    const startIndex = (activePage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    return products.slice(startIndex, endIndex);
+  };
+
+  const pageData = getPageData();
+
+  const handlePageChange = (page) => {
+    setActivePage(page);
+  };
+  const renderPagination = () => {
+    const pageCount = Math.ceil(products.length / pageSize);
+    const pages = [];
+    for (let i = 1; i <= pageCount; i++) {
+      pages.push(
+        <li key={i} className={`page-item ${activePage === i ? "active" : ""}`}>
+          <button className="page-link" onClick={() => handlePageChange(i)}>
+            {i}
+          </button>
+        </li>
+      );
+    }
+    return (
+      <nav aria-label="Page navigation">
+        <ul className="pagination justify-content-center">{pages}</ul>
+      </nav>
+    );
+  };
   return (
     <div dir="rtl">
       <CCardHeader>
@@ -81,12 +117,12 @@ const ProductsDetails = () => {
         <CTableBody>
           {/* map on Products */}
           {products &&
-            products.map((product, index) => {
+            pageData.map((product, index) => {
               return (
                 <CTableRow key={product._id}>
                   <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
-                  <CTableDataCell>{product.item_id.name}</CTableDataCell>
-                  <CTableDataCell>{product.auction_id.name}</CTableDataCell>
+                  <CTableDataCell>{product.item_id?.name}</CTableDataCell>
+                  <CTableDataCell>{product.auction_id?.name}</CTableDataCell>
                   <CTableDataCell>{product.bidding_gap}</CTableDataCell>
                   <CTableDataCell>{product.start_bidding}</CTableDataCell>
                   <CTableDataCell>{product.max_price}</CTableDataCell>
@@ -133,6 +169,7 @@ const ProductsDetails = () => {
             })}
         </CTableBody>
       </CTable>
+      {renderPagination()}
       <CModal
         alignment="center"
         visible={visible}
