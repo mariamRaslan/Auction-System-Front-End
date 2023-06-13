@@ -18,7 +18,7 @@ const UpdateProducts = () => {
   const [product, setProduct] = useState({});
 
   const [categories, setCategories] = useState([]);
-  // function for get all categories
+  // function to get all categories
   async function fetchCategories() {
     try {
       const response = await axiosInstance.get("/categories");
@@ -93,9 +93,9 @@ const UpdateProducts = () => {
     }
   }
   return (
-    <div dir="rtl">
+    <div>
       <CCardHeader>
-        <strong>تعديل المنتج</strong>
+        <strong>Edit Product</strong>
       </CCardHeader>
       <CForm
         className="row g-3 needs-validation"
@@ -106,7 +106,7 @@ const UpdateProducts = () => {
         method="post"
       >
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">رقم التعريف</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">ID</CFormLabel>
           <CFormInput
             disabled
             type="text"
@@ -116,7 +116,7 @@ const UpdateProducts = () => {
           />
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">الاسم</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">Name</CFormLabel>
           <CFormInput
             type="text"
             value={product.name}
@@ -125,10 +125,10 @@ const UpdateProducts = () => {
             id="name"
             required
           />
-          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
+          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">الخامه</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">Material</CFormLabel>
           <CFormInput
             type="text"
             value={product.material}
@@ -137,10 +137,10 @@ const UpdateProducts = () => {
             id="material"
             required
           />
-          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
+          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">المقاس</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">Size</CFormLabel>
           <CFormInput
             type="text"
             value={product.size}
@@ -149,10 +149,10 @@ const UpdateProducts = () => {
             id="size"
             required
           />
-          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
+          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">اللون </CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">Color</CFormLabel>
           <CFormInput
             type="text"
             value={product.color}
@@ -161,60 +161,56 @@ const UpdateProducts = () => {
             id="color"
             required
           />
-          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
+          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom02">الكمية</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">Price</CFormLabel>
           <CFormInput
             type="number"
-            value={product.qty}
+            value={product.price}
             onInput={handleInputChange}
-            name="qty"
-            id="qty"
+            name="price"
+            id="price"
             required
           />
-          <CFormFeedback invalid>من فضلك أدخل هذا الحقل!</CFormFeedback>
+          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom04">فئه</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">Category</CFormLabel>
           <CFormSelect
             multiple
-            className="form-control default-select"
-            onInput={handleInputChange}
+            onChange={handleInputChange}
             name="category"
             id="category"
+            required
+            defaultValue={product.category}
           >
-            <option disabled>اختر أكثر من فئه بالضغط علي زر ctrl </option>
-            {categories.map((category) => {
-              return (
-                <option
-                  selected={product.category == category._id}
-                  value={category._id}
-                >
-                  {category.name}
-                </option>
-              );
-            })}
+            {categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.name}
+              </option>
+            ))}
           </CFormSelect>
+          <CFormFeedback invalid>Please select a category.</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="image">الصوره</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">Image</CFormLabel>
           <CFormInput
             type="file"
             accept="image/*"
-            onInput={handleImageChange}
+            onChange={handleImageChange}
             name="image"
-            aria-label="file example"
+            id="image"
           />
-          <CFormFeedback invalid>صورة غير صالحة</CFormFeedback>
         </CCol>
-        <CCol xs={12}>
-          <CButton color="primary" type="submit">
-            حفظ التعديلات
+        <CCol md={12}>
+          <CButton type="submit" color="primary">
+            Save
           </CButton>
         </CCol>
       </CForm>
     </div>
   );
 };
+
 export default UpdateProducts;

@@ -21,23 +21,23 @@ const AuctionProductDetails = () => {
   }, []);
 
   return (
-    <CRow dir="rtl" className="detailsContainer">
+    <CRow  className="detailsContainer">
       <CCol sm={12} md={12} lg={12} className="card detailsContainer">
         <img
           className="product-img"
-          alt="صوره المنتج"
+          alt="Product Image"
           src={productDetails.item_id?.image}
         ></img>
         <div className="d-flex m-auto justify-content-center">
           <div className="details col-12">
             <p>
-              <span>المنتج</span> <br></br>
+              <span>Product</span> <br></br>
               {productDetails.item_id?.name}
             </p>
           </div>
           <div className="details col-12">
             <p>
-              <span>المزاد</span> <br></br>
+              <span>Auction</span> <br></br>
               {productDetails.auction_id?.name}
             </p>
           </div>
@@ -46,25 +46,25 @@ const AuctionProductDetails = () => {
         <div className="d-flex m-2 justify-content-center">
           <div className="details col-8">
             <p>
-              <span>مقدار الزياده</span> <br></br>
+              <span>Bidding Gap</span> <br></br>
               {productDetails.bidding_gap}
             </p>
           </div>
           <div className="details col-8">
             <p>
-              <span>سعر البدايه</span> <br></br>
+              <span>Starting Bid</span> <br></br>
               {productDetails.start_bidding}
             </p>
           </div>
           <div className="details col-8">
             <p>
-              <span>أعلي سعر</span> <br></br>
+              <span>Maximum Price</span> <br></br>
               {productDetails.max_price}
             </p>
           </div>
           <div className="details col-8">
             <p>
-              <span>نهايه المزاد</span> <br></br>
+              <span>Auction End Time</span> <br></br>
               {productDetails.end_time}
             </p>
           </div>

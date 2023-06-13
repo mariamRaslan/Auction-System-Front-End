@@ -20,7 +20,7 @@ function EditDetails() {
   const [selectedItemId, setSelectedItemId] = useState('');
   const [selectedAuctionId, setSelectedAuctionId] = useState('');
   const [initialBidValue, setInitialBidValue] = useState('');
-  const [minimumBidValue, setMinimumBidValue] = useState('');
+  const [minimumBidValue,setMinimumBidValue] = useState('');
   const [endTime, setEndTime] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [items, setItems] = useState([]);
@@ -138,9 +138,9 @@ function EditDetails() {
   }
 
   return (
-    <CForm className="row g-3" onSubmit={handleSubmit} dir='rtl'>
+    <CForm className="row g-3" onSubmit={handleSubmit} >
       <CCol md={6}>
-        <CFormLabel htmlFor="itemSelect">المنتج</CFormLabel>
+        <CFormLabel htmlFor="itemSelect">Item</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>
           <i className="cil-calendar"></i>
@@ -150,7 +150,7 @@ function EditDetails() {
             value={selectedItemId}
             onChange={handleSelectedItemIdChange}
           >
-            <option value="">اختر منتج</option>
+            <option value="">Select an item</option>
             {items.map((item) => (
               <option key={item._id} value={item._id}>
                 {item.name}
@@ -160,7 +160,7 @@ function EditDetails() {
         </CInputGroup>
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="auctionSelect">المزاد</CFormLabel>
+        <CFormLabel htmlFor="auctionSelect">Auction</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>
             <i className="cil-calendar"></i>
@@ -170,7 +170,7 @@ function EditDetails() {
             value={selectedAuctionId}
             onChange={handleSelectedAuctionIdChange}
           >
-            <option value="">اختر مزاد</option>
+            <option value="">Select an auction</option>
             {auctions.map((auction) => (
               <option key={auction._id} value={auction._id}>
                 {auction.name}
@@ -180,73 +180,71 @@ function EditDetails() {
         </CInputGroup>
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="initialBidInput">  قيمة العرض الأولي   </CFormLabel>
+        <CFormLabel htmlFor="initialBidInput">Initial BidValue</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>$</CInputGroupText>
           <CFormInput
-            id="initialBidInput"
             type="number"
-            min="1"
-            step="1"
+            id="initialBidInput"
+            placeholder="Enter initial bid value"
             value={initialBidValue}
             onChange={handleInitialBidValueChange}
             required
           />
-          <CFormFeedback invalid>من فضلك أدخل قيمة العرض الأولي</CFormFeedback>
+          <CFormFeedback invalid>Please enter a valid bid value</CFormFeedback>
         </CInputGroup>
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="minimumBidInput">الحد الأدنى للمزايدة</CFormLabel>
+        <CFormLabel htmlFor="minimumBidInput">Minimum Bid Gap</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>$</CInputGroupText>
           <CFormInput
-            id="minimumBidInput"
             type="number"
-            min="1"
-            step="1"
+            id="minimumBidInput"
+            placeholder="Enter minimum bid gap"
             value={minimumBidValue}
             onChange={handleMinimumBidValueChange}
             required
           />
-          <CFormFeedback invalid>من فضلك أدخل الحد الأدنى للمزايدة</CFormFeedback>
+          <CFormFeedback invalid>Please enter a valid bid gap value</CFormFeedback>
         </CInputGroup>
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="endTimeInput">موعد انتهاء المزاد</CFormLabel>
+        <CFormLabel htmlFor="endTimeInput">End Time</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>
             <i className="cil-calendar"></i>
           </CInputGroupText>
           <CFormInput
+            type="datetime-local"
             id="endTimeInput"
-            type="time"
+            placeholder="Choose end time"
             value={endTime}
             onChange={handleEndTimeChange}
             required
           />
-          <CFormFeedback invalid>من فضلك أدخل موعد انتهاء المزاد</CFormFeedback>
+          <CFormFeedback invalid>Please choose a valid end time</CFormFeedback>
         </CInputGroup>
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="maxPriceInput">الحد الأقصى للسعر</CFormLabel>
+        <CFormLabel htmlFor="maxPriceInput">Max Price</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>$</CInputGroupText>
           <CFormInput
-            id="maxPriceInput"
             type="number"
-            min="1"
-            step="1"
+            id="maxPriceInput"
+            placeholder="Enter max price"
             value={maxPrice}
             onChange={handleMaxPriceChange}
             required
           />
-          <CFormFeedback invalid>من فضلك أدخل الحد الأقصى للسعر</CFormFeedback>
+          <CFormFeedback invalid>Please enter a valid max price value</CFormFeedback>
         </CInputGroup>
       </CCol>
-      <CCol md={12}>
-      <CButton type="submit" disabled={!formValid}>
-        حفظ التغييرات
-      </CButton>
+      <CCol xs={12}>
+        <CButton type="submit" color="primary" disabled={!formValid}>
+          Update Details
+        </CButton>
       </CCol>
     </CForm>
   );

@@ -58,7 +58,7 @@ const UsersList = () => {
   //viewUser
   const viewUser = (_id) => {
     //view user
-    window.location.href = `/#/users/view-user/${_id}`;
+    window.location.href = `#/dashboard/dashboard/users/view-user/${_id}`;
   };
  
   return (
@@ -72,7 +72,7 @@ const UsersList = () => {
           </CModalHeader>
           <CModalBody>{error_message}</CModalBody>
           <CModalFooter>
-            <CButton color="primary" onClick={() => setError_message("")}>
+            <CButton color="primary"  onClick={() => setError_message("")}>
               Ok
             </CButton>
           </CModalFooter>
@@ -124,6 +124,7 @@ const UsersList = () => {
                 <CTableDataCell>
                   <CButton
                     color="danger"
+                    variant="outline"
                     onClick={() => deleteUser(item._id)}
                   >
                     Delete
@@ -132,6 +133,7 @@ const UsersList = () => {
                 <CTableDataCell>
                   <CButton
                     color="primary"
+                    variant="outline"
                     onClick={() => viewUser(item._id)}
                   >
                     view

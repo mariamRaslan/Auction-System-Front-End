@@ -63,9 +63,9 @@ const CategoryList = () => {
     
   return (
     //table to display id , name , button for edit and button for delete
-    <div dir="rtl">
+    <div >
       <CCardHeader >
-        <h1>الفئات</h1>
+        <h1>Categories</h1>
       </CCardHeader>
       {/**error_message */}
       {error_message && (
@@ -99,6 +99,7 @@ const CategoryList = () => {
                 <CTableDataCell>
                   <CButton 
                   color="danger"
+                  variant="outline"
                   onClick={() => deleteCategory(item._id)}
                   >Delete</CButton>
                 </CTableDataCell>

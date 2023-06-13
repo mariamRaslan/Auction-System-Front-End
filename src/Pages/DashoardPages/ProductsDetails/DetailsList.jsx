@@ -23,9 +23,9 @@ const ProductsDetails = () => {
   const [visible, setVisible] = useState(false);
   const [selectedId, setSelectedId] = useState();
   const [activePage, setActivePage] = useState(1);
-  const pageSize = 8;
+  const pageSize = 7;
 
-  // function for get all products
+  // Function to get all products
   async function fetchProductsDetails() {
     try {
       const response = await axiosInstance.get("/itemDetails");
@@ -36,7 +36,7 @@ const ProductsDetails = () => {
     }
   }
 
-  // function for delete product
+  // Function to delete a product
   async function deleteProduct(id) {
     try {
       if (id == null) return;
@@ -49,17 +49,18 @@ const ProductsDetails = () => {
 
   // Navigate to the edit page
   const handleEditButton = (id) => {
-    Navigate(`/productsDetails/edit-details/${id}`);
+    Navigate(`/dashboard/dashboard/productsDetails/edit-details/${id}`);
   };
 
   // Navigate to the details page
   const handleDetailsButton = (id) => {
-    Navigate(`/productsDetails/product-details/${id}`);
+    Navigate(`/dashboard/dashboard/productsDetails/product-details/${id}`);
   };
 
   useEffect(() => {
     fetchProductsDetails();
   }, []);
+
   useEffect(() => {
     fetchProductsDetails();
   }, [products]);
@@ -76,6 +77,7 @@ const ProductsDetails = () => {
   const handlePageChange = (page) => {
     setActivePage(page);
   };
+
   const renderPagination = () => {
     const pageCount = Math.ceil(products.length / pageSize);
     const pages = [];
@@ -94,28 +96,29 @@ const ProductsDetails = () => {
       </nav>
     );
   };
+
   return (
-    <div dir="rtl">
+    <div>
       <CCardHeader>
-        <small>جدول</small> <strong>المنتجات</strong>
+        <strong>Products</strong> Table
       </CCardHeader>
       <CTable>
         <CTableHead color="dark">
           <CTableRow>
             <CTableHeaderCell scope="col">#</CTableHeaderCell>
-            <CTableHeaderCell scope="col">اسم المنتج</CTableHeaderCell>
-            <CTableHeaderCell scope="col">اسم المزاد</CTableHeaderCell>
-            <CTableHeaderCell scope="col">مقدار الزياده</CTableHeaderCell>
-            <CTableHeaderCell scope="col">سعر البدايه</CTableHeaderCell>
-            <CTableHeaderCell scope="col">أعلي سعر</CTableHeaderCell>
-            <CTableHeaderCell scope="col">نهايه المزاد</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Product Name</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Auction Name</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Bidding Gap</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Starting Bid</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Maximum Price</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Auction End Time</CTableHeaderCell>
             <CTableHeaderCell className="textcenter" scope="col" colSpan={3}>
-              العمليات
+              Actions
             </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>
-          {/* map on Products */}
+          {/* Map over products */}
           {products &&
             pageData.map((product, index) => {
               return (
@@ -127,7 +130,7 @@ const ProductsDetails = () => {
                   <CTableDataCell>{product.start_bidding}</CTableDataCell>
                   <CTableDataCell>{product.max_price}</CTableDataCell>
                   <CTableDataCell>{product.end_time}</CTableDataCell>
-                  {/* button for details */}
+                  {/* Button for details */}
                   <CTableHeaderCell scope="col">
                     <CButton
                       onClick={() => handleDetailsButton(product._id)}
@@ -135,10 +138,10 @@ const ProductsDetails = () => {
                       color="primary"
                       variant="outline"
                     >
-                      تفاصيل
+                      Details
                     </CButton>
                   </CTableHeaderCell>
-                  {/* button for edit */}
+                  {/* Button for editing */}
                   <CTableHeaderCell scope="col">
                     <CButton
                       onClick={() => handleEditButton(product._id)}
@@ -146,22 +149,21 @@ const ProductsDetails = () => {
                       color="warning"
                       variant="outline"
                     >
-                      تعديل
+                      Edit
                     </CButton>
                   </CTableHeaderCell>
-                  {/* button for delete */}
-
+                  {/* Button for deleting */}
                   <CTableHeaderCell scope="col">
                     <CButton
                       onClick={() => {
-                        setVisible(!visible);
                         setSelectedId(product._id);
+                        setVisible(!visible);
                       }}
                       className="btntext"
                       color="danger"
                       variant="outline"
                     >
-                      حذف
+                      Delete
                     </CButton>
                   </CTableHeaderCell>
                 </CTableRow>
@@ -169,32 +171,39 @@ const ProductsDetails = () => {
             })}
         </CTableBody>
       </CTable>
-      {renderPagination()}
+
+      {/* Modal for deleting */}
       <CModal
-        alignment="center"
-        visible={visible}
-        onClose={() => setVisible(false)}
+        show={visible}
+        onClose={() => setVisible(!visible)}
+        color="danger"
       >
-        <CModalHeader>
-          <CModalTitle>تأكيد</CModalTitle>
+        <CModalHeader closeButton>
+          <CModalTitle>Are you sure?</CModalTitle>
         </CModalHeader>
-        <CModalBody>هل أنت متأكد أنك تريد حذف هذا العنصر؟</CModalBody>
+        <CModalBody>
+         Are you sure you want to delete this product?
+        </CModalBody>
         <CModalFooter>
-          <CButton color="secondary" onClick={() => setVisible(false)}>
-            إلغاء
-          </CButton>
           <CButton
+            color="danger"
             onClick={() => {
               deleteProduct(selectedId);
-              setVisible(false);
+              setVisible(!visible);
             }}
-            color="danger"
           >
-            حذف
+            Delete
+          </CButton>{" "}
+          <CButton color="secondary" onClick={() => setVisible(!visible)}>
+            Cancel
           </CButton>
         </CModalFooter>
       </CModal>
+
+      {/* Pagination */}
+      {renderPagination()}
     </div>
   );
 };
+
 export default ProductsDetails;

@@ -7,7 +7,8 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [categories, setCategories] = useState([]);
-  // function for get all categories
+  
+  // function for getting all categories
   async function fetchCategories() {
     try {
       const response = await axiosInstance.get("/categories");
@@ -17,6 +18,7 @@ const ProductDetails = () => {
       console.error(error);
     }
   }
+  
   async function fetchProduct(id) {
     try {
       const response = await axiosInstance.get(`/items/${id}`);
@@ -26,10 +28,12 @@ const ProductDetails = () => {
       console.error(error);
     }
   }
+  
   useEffect(() => {
     fetchProduct(id);
     fetchCategories();
   }, []);
+  
   function getProductCategory() {
     product.category
       .map((categoryId) => {
@@ -40,25 +44,25 @@ const ProductDetails = () => {
       })
       .join(", ");
   }
+  
   return (
-    // product.map((product) => {
-    <CRow dir="rtl" className="detailsContainer">
+    <CRow dir="ltr" className="detailsContainer">
       <CCol sm={12} md={12} lg={12} className="card detailsContainer">
         <img
           className="product-img"
-          alt="صوره المنتج"
+          alt="Product image"
           src={product.image}
         ></img>
         <div className="d-flex m-auto justify-content-center">
           <div className="details col-12">
             <p>
-              <span>الاسم</span> <br></br>
+              <span>Name:</span> <br></br>
               {product.name}
             </p>
           </div>
           <div className="details col-12">
             <p>
-              <span>الفئات</span> <br></br>
+              <span>Category:</span> <br></br>
               {product.category &&
                 product.category
                   .map((categoryId) => {
@@ -75,26 +79,25 @@ const ProductDetails = () => {
         <div className="d-flex m-auto justify-content-center">
           <div className="details col-12">
             <p>
-              <span>الخامه</span> <br></br>
+              <span>Material:</span> <br></br>
               {product.material}
             </p>
           </div>
           <div className="details col-12">
             <p>
-              <span>المقاس</span> <br></br>
+              <span>Size:</span> <br></br>
               {product.size}
             </p>
           </div>
           <div className="details col-12">
             <p>
-              <span>اللون</span> <br></br>
+              <span>Color:</span> <br></br>
               {product.color}
             </p>
           </div>
         </div>
       </CCol>
     </CRow>
-    // }
   );
 };
 

@@ -79,14 +79,14 @@ const AddDetails = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
-      item_id:parseInt( selectedItemId),
-      auction_id:parseInt(selectedAuctionId),
-      start_bidding:parseInt( initialBidValue),
-      bidding_gap:parseInt( minimumBidValue),
+      item_id: parseInt(selectedItemId),
+      auction_id: parseInt(selectedAuctionId),
+      start_bidding: parseInt(initialBidValue),
+      bidding_gap: parseInt(minimumBidValue),
       end_time: endTime,
-      max_price:parseInt( maxPrice),
+      max_price: parseInt(maxPrice),
     };
-    console.log(data)
+    console.log(data);
     
     try {
       // perform validation
@@ -100,9 +100,9 @@ const AddDetails = () => {
   };
 
   return (
-    <CForm className="row g-3" dir="rtl" onSubmit={handleSubmit}>
+    <CForm className="row g-3" onSubmit={handleSubmit}>
       <CCol md={6}>
-        <CFormLabel htmlFor="selectedItemId">اختر منتج</CFormLabel>
+        <CFormLabel htmlFor="selectedItemId">Select an item</CFormLabel>
         <CFormSelect
           custom
           id="selectedItemId"
@@ -111,7 +111,7 @@ const AddDetails = () => {
           required
         >
           <option value="" disabled>
-            اختر منتجًا
+            Select an item
           </option>
           {items.map((item) => (
             <option key={item._id} value={item._id}>
@@ -119,10 +119,10 @@ const AddDetails = () => {
             </option>
           ))}
         </CFormSelect>
-        {!selectedItemId && <CFormFeedback invalid>من فضلك اختر منتج</CFormFeedback>}
+        {!selectedItemId && <CFormFeedback invalid>Please select an item</CFormFeedback>}
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="selectedAuctionId">اختر مزاد</CFormLabel>
+        <CFormLabel htmlFor="selectedAuctionId">Select an auction</CFormLabel>
         <CFormSelect
           custom
           id="selectedAuctionId"
@@ -131,7 +131,7 @@ const AddDetails = () => {
           required
         >
           <option value="" disabled>
-            اختر مزادًا
+            Select an auction
           </option>
           {auctions.map((auction) => (
             <option key={auction._id} value={auction._id}>
@@ -139,77 +139,64 @@ const AddDetails = () => {
             </option>
           ))}
         </CFormSelect>
-        {!selectedAuctionId && <CFormFeedback invalid>من فضلك اختر مزاد</CFormFeedback>}
+        {!selectedAuctionId && <CFormFeedback invalid>Please select an auction</CFormFeedback>}
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="initialBidValue">قيمة العرض الأولي</CFormLabel>
+        <CFormLabel htmlFor="initialBidValue">Initial bid value</CFormLabel>
         <CInputGroup>
           <CFormInput
             type="number"
             id="initialBidValue"
-            min="1"
-            step="1"
             value={initialBidValue}
             onChange={handleInitialBidValueChange}
             required
           />
-          <CInputGroupText>جنيه</CInputGroupText>
-          {!initialBidValue && (
-            <CFormFeedback invalid>من فضلك أدخل قيمة العرض الأولي</CFormFeedback>
-          )}
+          <CInputGroupText>ETH</CInputGroupText>
+          {!initialBidValue && <CFormFeedback invalid>Please enter an initial bid value</CFormFeedback>}
         </CInputGroup>
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="minimumBidValue">الحد الأدنى للمزايدة</CFormLabel>
+        <CFormLabel htmlFor="minimumBidValue">Minimum bid value</CFormLabel>
         <CInputGroup>
           <CFormInput
             type="number"
             id="minimumBidValue"
-            min="1"
-            step="1"
             value={minimumBidValue}
             onChange={handleMinimumBidValueChange}
             required
           />
-          <CInputGroupText>جنيه</CInputGroupText>
-          {!minimumBidValue && (
-            <CFormFeedback invalid>من فضلك أدخل الحد الأدنى للمزايدة</CFormFeedback>
-          )}
+          <CInputGroupText>ETH</CInputGroupText>
+          {!minimumBidValue && <CFormFeedback invalid>Please enter a minimum bid value</CFormFeedback>}
         </CInputGroup>
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="endTime">موعد انتهاء المزاد</CFormLabel>
+        <CFormLabel htmlFor="endTime">End time</CFormLabel>
         <CFormInput
-          type="time"
+          type="datetime-local"
           id="endTime"
-          placeholder="ادخل موعد انتهاء المزاد"
           value={endTime}
           onChange={handleEndTimeChange}
           required
         />
-        {!endTime && <CFormFeedback invalid>من فضلك أدخل موعد انتهاء المزاد</CFormFeedback>}
+        {!endTime && <CFormFeedback invalid>Please enter an end time</CFormFeedback>}
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="maxPrice">الحد الأقصى للسعر</CFormLabel>
+        <CFormLabel htmlFor="maxPrice">Max price</CFormLabel>
         <CInputGroup>
           <CFormInput
             type="number"
             id="maxPrice"
-            min="1"
-            step="1"
             value={maxPrice}
             onChange={handleMaxPriceChange}
             required
           />
-          <CInputGroupText>جنيه</CInputGroupText>
-          {!maxPrice && (
-            <CFormFeedback invalid>من فضلك أدخل الحد الأقصى للسعر</CFormFeedback>
-          )}
+          <CInputGroupText>ETH</CInputGroupText>
+          {!maxPrice && <CFormFeedback invalid>Please enter a max price</CFormFeedback>}
         </CInputGroup>
       </CCol>
       <CCol md={12}>
         <CButton type="submit" color="primary" disabled={!formValid}>
-          اضافة
+          Add details
         </CButton>
       </CCol>
     </CForm>

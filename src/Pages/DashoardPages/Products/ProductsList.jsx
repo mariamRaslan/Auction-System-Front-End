@@ -61,13 +61,13 @@ const Products = () => {
   // Navigate to the edit page
   const handleEditButton = (id) => {
     parseInt(id);
-    Navigate(`/products/edit-product/${id}`);
+    Navigate(`/dashboard/dashboard/products/edit-product/${id}`);
   };
 
   // Navigate to the details page
   const handleDetailsButton = (id) => {
     parseInt(id);
-    Navigate(`/products/product-details/${id}`);
+    Navigate(`/dashboard/dashboard/products/product-details/${id}`);
   };
 
   useEffect(() => {
@@ -109,23 +109,23 @@ const Products = () => {
     );
   };
   return (
-    <div dir="rtl">
+    <div >
       <CCardHeader>
-        <small>جدول</small> <strong>المنتجات</strong>
+         <strong>Products</strong>
       </CCardHeader>
       <CTable>
         <CTableHead color="dark">
           <CTableRow>
             <CTableHeaderCell scope="col">#</CTableHeaderCell>
-            <CTableHeaderCell scope="col">الصور</CTableHeaderCell>
-            <CTableHeaderCell scope="col">الاسم</CTableHeaderCell>
-            <CTableHeaderCell scope="col">الكمية</CTableHeaderCell>
-            <CTableHeaderCell scope="col">الفئات</CTableHeaderCell>
-            <CTableHeaderCell scope="col">الخامه</CTableHeaderCell>
-            <CTableHeaderCell scope="col">المقاس</CTableHeaderCell>
-            <CTableHeaderCell scope="col">اللون</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Image</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Name</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Quantity</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Category</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Material</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Size</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Color</CTableHeaderCell>
             <CTableHeaderCell className="textcenter" scope="col" colSpan={3}>
-              العمليات
+              Actions
             </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
@@ -166,7 +166,7 @@ const Products = () => {
                       color="primary"
                       variant="outline"
                     >
-                      تفاصيل
+                      Details
                     </CButton>
                   </CTableHeaderCell>
                   {/* button for edit */}
@@ -177,7 +177,7 @@ const Products = () => {
                       color="warning"
                       variant="outline"
                     >
-                      تعديل
+                      Edit
                     </CButton>
                   </CTableHeaderCell>
                   {/* button for delete */}
@@ -191,7 +191,7 @@ const Products = () => {
                       color="danger"
                       variant="outline"
                     >
-                      حذف
+                      Delete
                     </CButton>
                   </CTableHeaderCell>
                 </CTableRow>
@@ -206,22 +206,23 @@ const Products = () => {
         onClose={() => setVisible(false)}
       >
         <CModalHeader>
-          <CModalTitle>تأكيد</CModalTitle>
+          <CModalTitle>Confirm</CModalTitle>
         </CModalHeader>
-        <CModalBody>هل أنت متأكد أنك تريد حذف هذا العنصر؟</CModalBody>
+        <CModalBody>Are you sure you want to delete this item?</CModalBody>
         <CModalFooter>
-          <CButton color="secondary" onClick={() => setVisible(false)}>
-            إلغاء
-          </CButton>
-          <CButton
+        <CButton
             onClick={() => {
               deleteProduct(selectedId);
               setVisible(false);
             }}
             color="danger"
           >
-            حذف
+            Delete
           </CButton>
+          <CButton color="secondary" onClick={() => setVisible(false)}>
+            Cancel
+          </CButton>
+       
         </CModalFooter>
       </CModal>
     </div>
