@@ -1,63 +1,77 @@
 import React from 'react'
 
 // Auctions Pages
-const AuctionsList = React.lazy(() => import('./Pages/Auctions/AuctionsList'))
-const AddAuctionItem = React.lazy(() => import('./Pages/Auctions/AddAuction'))
-const EditAuction = React.lazy(() => import('./Pages/Auctions/EditAuction'))
-const AuctionDetails = React.lazy(() => import('./Pages/Auctions/AuctionDetails'))
+const AuctionsList = React.lazy(() => import('./Pages/DashoardPages/Auctions/AuctionsList'))
+const AddAuctionItem = React.lazy(() => import('./Pages/DashoardPages/Auctions/AddAuction'))
+const EditAuction = React.lazy(() => import('./Pages/DashoardPages/Auctions/EditAuction'))
+const AuctionDetails = React.lazy(() => import('./Pages/DashoardPages/Auctions/AuctionDetails'))
 // Categories Pages
-const CategoryList = React.lazy(() => import('./Pages/Categories/CategoryList'))
-const AddCategory = React.lazy(() => import('./Pages/Categories/AddCategory'))
+const CategoryList = React.lazy(() => import('./Pages/DashoardPages/Categories/CategoryList'))
+const AddCategory = React.lazy(() => import('./Pages/DashoardPages/Categories/AddCategory'))
 // Users Pages
-const UsersList = React.lazy(() => import('./Pages/Users/UsersList'))
-const AddUser = React.lazy(() => import('./Pages/Users/AddUser'))
-const ViewUser = React.lazy(() => import('./Pages/Users/viewUser'))
+const UsersList = React.lazy(() => import('./Pages/DashoardPages/Users/UsersList'))
+const AddUser = React.lazy(() => import('./Pages/DashoardPages/Users/AddUser'))
+const ViewUser = React.lazy(() => import('./Pages/DashoardPages/Users/viewUser'))
 // Products Pages
-const ProductsList = React.lazy(() => import('./Pages/Products/ProductsList'))
-const AddProduct = React.lazy(() => import('./Pages/Products/AddProduct'))
-const EditProduct = React.lazy(() => import('./Pages/Products/EditProduct'))
-const ProductDetails = React.lazy(() => import('./Pages/Products/ProductDetails'))
+const ProductsList = React.lazy(() => import('./Pages/DashoardPages/Products/ProductsList'))
+const AddProduct = React.lazy(() => import('./Pages/DashoardPages/Products/AddProduct'))
+const EditProduct = React.lazy(() => import('./Pages/DashoardPages/Products/EditProduct'))
+const ProductDetails = React.lazy(() => import('./Pages/DashoardPages/Products/ProductDetails'))
 // ProductDetails Pages
-const ProductsDetailsList = React.lazy(() => import('./Pages/ProductsDetails/DetailsList'))
-const AddDetails = React.lazy(() => import('./Pages/ProductsDetails/AddDetails'))
-const EditDetails = React.lazy(() => import('./Pages/ProductsDetails/EditDetails'))
-const AuctionProductDetails = React.lazy(() => import('./Pages/ProductsDetails/AuctionProductDetails'))
+const ProductsDetailsList = React.lazy(() => import('./Pages/DashoardPages/ProductsDetails/DetailsList'))
+const AddDetails = React.lazy(() => import('./Pages/DashoardPages/ProductsDetails/AddDetails'))
+const EditDetails = React.lazy(() => import('./Pages/DashoardPages/ProductsDetails/EditDetails'))
+const AuctionProductDetails = React.lazy(() => import('./Pages/DashoardPages/ProductsDetails/AuctionProductDetails'))
 // Dashboard
-const Dashboard = React.lazy(() => import('./Pages/dashboard/Dashboard'))
+const Dashboard = React.lazy(() => import('./Pages/DashoardPages/dashboard/Dashboard'))
 
 //Reports pages
 const MonthlyReports = React.lazy(() => import('./Pages/Reports/MonthlyReports/MonthlyReports'))
 const Calender = React.lazy(() => import('./Pages/Reports/Calender/Calender'))
 const YearlyReports = React.lazy(() => import('./Pages/Reports/YearlyReports/YearlyReports'))
+// Home
+const Home=React.lazy(()=>import('./Pages/WebsitePages/Home/Home'))
+//sign up
+const Signup=React.lazy(()=>import('./Pages/UserAccount/SignUp'))
+
+
+
+//Routes
 const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
 
   // Auctions
-  { path: '/auctions', exact: true, name: 'AuctionsList', element: AuctionsList },
-  { path: '/auctions/add', name: 'AddAuctionItem', element: AddAuctionItem },
-  { path: '/auctions/edit/:auctionId', name: 'EditAuctionItem', element: EditAuction },
-  { path: '/auctions/details/:auctionId', name: 'AuctionDetails', element: AuctionDetails },
+  { path: '/dashboard/auctions', exact: true, name: 'AuctionsList', element: AuctionsList },
+  { path: '/dashboard/auctions/add', name: 'AddAuctionItem', element: AddAuctionItem },
+  { path: '/dashboard/auctions/edit/:auctionId', name: 'EditAuctionItem', element: EditAuction },
+  { path: '/dashboard/auctions/details/:auctionId', name: 'AuctionDetails', element: AuctionDetails },
   // Categories
-  { path: '/category/list', exact: true, name: 'CategoryList', element: CategoryList },
-  { path: '/category/add-category', name: 'AddCategory', element: AddCategory },
+  { path: '/dashboard/category/list', exact: true, name: 'CategoryList', element: CategoryList },
+  { path: '/dashboard/category/add-category', name: 'AddCategory', element: AddCategory },
   // Users
-  { path: '/users/list', exact: true, name: 'UsersList', element: UsersList },
-  { path: '/users/add-user', name: 'AddUser', element: AddUser },
-  { path: '/users/view-user/:id', name: 'ViewUser', element: ViewUser },
+  { path: '/dashboard/users/list', exact: true, name: 'UsersList', element: UsersList },
+  { path: '/dashboard/users/add-user', name: 'AddUser', element: AddUser },
+  { path: '/dashboard/users/view-user/:id', name: 'ViewUser', element: ViewUser },
   // Products
-  { path: '/products/list', exact: true, name: 'ProductsList', element: ProductsList },
-  { path: '/products/add-product', name: 'AddProduct', element: AddProduct },
-  { path: '/products/edit-product/:id', name: 'EditProduct', element: EditProduct },
-  { path: '/products/product-details/:id', name: 'ProductDetails', element: ProductDetails },
+  { path: '/dashboard/products/list', exact: true, name: 'ProductsList', element: ProductsList },
+  { path: '/dashboard/products/add-product', name: 'AddProduct', element: AddProduct },
+  { path: '/dashboard/products/edit-product/:id', name: 'EditProduct', element: EditProduct },
+  { path: '/dashboard/products/product-details/:id', name: 'ProductDetails', element: ProductDetails },
   // Products Details
-  { path: '/productsDetails/list', exact: true, name: 'ProductsDetailsList', element: ProductsDetailsList },
-  { path: '/productsDetails/add-details', exact: true, name: 'AddDetails', element: AddDetails },
-  { path: '/productsDetails/edit-details/:id', name: 'EditDetails', element: EditDetails },
-  { path: '/productsDetails/product-details/:id', name: 'AuctionProductDetails', element: AuctionProductDetails},
+  { path: '/dashboard/productsDetails/list', exact: true, name: 'ProductsDetailsList', element: ProductsDetailsList },
+  { path: '/dashboard/productsDetails/add-details', exact: true, name: 'AddDetails', element: AddDetails },
+  { path: '/dashboard/productsDetails/edit-details/:id', name: 'EditDetails', element: EditDetails },
+  { path: '/dashboard/productsDetails/product-details/:id', name: 'AuctionProductDetails', element: AuctionProductDetails},
   // Reports
-  { path: '/reports/monthly-reports', name: 'MonthlyReports', element: MonthlyReports },
-  { path: '/reports/calender', name: 'Calender', element: Calender },
-  { path: '/reports/yearly-reports', name: 'YearlyReports', element: YearlyReports },
+  { path: '/dashboard/reports/monthly-reports', name: 'MonthlyReports', element: MonthlyReports },
+  { path: '/dashboard/reports/calender', name: 'Calender', element: Calender },
+  { path: '/dashboard/reports/yearly-reports', name: 'YearlyReports', element: YearlyReports },
+
+  //Home
+  { path: '/home', name: 'Home', element: Home },
+
+  //sing up 
+  { path: '/signup', name: 'Signup', element: Signup },
 ]
 
 export default routes

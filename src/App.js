@@ -2,6 +2,7 @@ import React, { Component, Suspense, useEffect, useState } from 'react'
 import { HashRouter, Route, Routes, Navigate } from 'react-router-dom'
 import './scss/style.scss'
 
+
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -10,6 +11,7 @@ const loading = (
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
+const WebsiteLayout=React.lazy(() => import('./layout/WebsiteLayout'))
 const Login = React.lazy(() => import('./Pages/login/Login'))
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -39,7 +41,8 @@ const App = () => {
       <Suspense fallback={loading}>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="*" element={<PrivateRoute component={DefaultLayout} />} />
+          <Route path="/dashboard/*" element={<PrivateRoute component={DefaultLayout} />} />
+          <Route path="*" element={<PrivateRoute component={WebsiteLayout} />} />
         </Routes>
       </Suspense>
     </HashRouter>

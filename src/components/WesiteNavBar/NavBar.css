@@ -1,0 +1,35 @@
+.nav {
+  background-color: #4f89b0;
+}
+.btn-text,
+.nav-item a {
+  color: white;
+}
+.drop-item{
+  color: #484848 !important;
+  font-size: 15px !important; 
+}
+.nav-item {
+  padding: 2px;
+  border-radius: 10px;
+  color: white;
+}
+.nav-item:hover {
+  background-color: white;
+  border-radius: 10px;
+}
+.nav-item:hover .nav-link {
+  color: #4f89b0;
+}
+.logo-img {
+  width: 50px;
+  height: 50px;
+}
+.navbar-brand {
+  font-size: 30px !important;
+  font-weight: bold;
+}
+.btn:hover {
+  background-color: transparent;
+}
+
