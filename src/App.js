@@ -12,7 +12,14 @@ const loading = (
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 const WebsiteLayout=React.lazy(() => import('./layout/WebsiteLayout'))
-const Login = React.lazy(() => import('./Pages/login/Login'))
+const Login = React.lazy(() => import('./Pages/UserAccount/Login'))
+//sign up
+const Signup=React.lazy(()=>import('./Pages/UserAccount/SignUp'))
+
+//Reset Password
+const EmailForm=React.lazy(()=>import('./Pages/UserAccount/EmailForm'))
+const CodeForm=React.lazy(()=>import('./Pages/UserAccount/CodeForm'))
+const NewPasswordForm=React.lazy(()=>import('./Pages/UserAccount/NewPasswordForm'))
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const token = localStorage.getItem('token');
@@ -41,6 +48,10 @@ const App = () => {
       <Suspense fallback={loading}>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
+          <Route path="/reset-password/email" element={<EmailForm />} />
+          <Route path="/reset-password/code" element={<CodeForm />} />
+          <Route path="/new-password" element={<NewPasswordForm />} />
           <Route path="/dashboard/*" element={<PrivateRoute component={DefaultLayout} />} />
           <Route path="*" element={<PrivateRoute component={WebsiteLayout} />} />
         </Routes>

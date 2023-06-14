@@ -79,7 +79,7 @@ const UsersList = () => {
         </CModal>
       )}
       <CCardHeader>
-        <a className="btn btn-primary" href="/#/users/add-user">
+        <a className="btn btn-primary" href="/#/dashboard/dashboard/users/add-user">
           Add User
         </a>
       </CCardHeader>
