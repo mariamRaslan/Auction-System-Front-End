@@ -32,10 +32,13 @@ const Calender = React.lazy(() => import('./Pages/Reports/Calender/Calender'))
 const YearlyReports = React.lazy(() => import('./Pages/Reports/YearlyReports/YearlyReports'))
 // Home
 const Home=React.lazy(()=>import('./Pages/WebsitePages/Home/Home'))
-//sign up
-const Signup=React.lazy(()=>import('./Pages/UserAccount/SignUp'))
 
 
+
+
+//User Profile 
+const UserProfile=React.lazy(()=>import('./Pages/WebsitePages/UserProfile/UserProfile'))
+const UserProfileEdit=React.lazy(()=>import('./Pages/WebsitePages/UserProfile/UserProfileEdit'))
 
 //Routes
 const routes = [
@@ -72,8 +75,10 @@ const routes = [
   //Home
   { path: '/home', name: 'Home', element: Home },
 
-  //sing up 
-  { path: '/signup', name: 'Signup', element: Signup },
+  //User Profile
+  { path: '/profile', name: 'UserProfile', element: UserProfile },
+  { path: '/edit-profile', name: 'UserProfileEdit', element: UserProfileEdit },
+
 ]
 
 export default routes

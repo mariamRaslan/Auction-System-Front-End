@@ -1,12 +1,15 @@
 import React from 'react'
-import NavBar from '../components/WesiteNavBar/NavBar'
-import Home from '../Pages/WebsitePages/Home/Home'
+import NavBar from '../components/Website/NavBar'
+import Home from '../Pages/WebsitePages/UserProfile/UserProfile'
+import  AppContent from '../components/Website/WebsiteAppContent'
 
 const DefaultLayout = () => {
   return (
-    <div>
+    <div >
       <NavBar />
-       <Home />
+      <div >
+          <AppContent />
+        </div>
      </div>
   )
 }
