@@ -60,6 +60,16 @@ const UsersList = () => {
     //view user
     window.location.href = `#/dashboard/dashboard/users/view-user/${_id}`;
   };
+  //add user
+  const addUser = () => {
+    //add user
+    window.location.href = `#/dashboard/dashboard/users/add-user`;
+  };
+  //set permission
+  const setPermission = (_id) => {
+    //set permission
+    window.location.href = `#/dashboard/dashboard/users/set-permission/${_id}`;
+  };
  
   return (
     <div>
@@ -79,9 +89,11 @@ const UsersList = () => {
         </CModal>
       )}
       <CCardHeader>
-        <a className="btn btn-primary" href="/#/users/add-user">
+        <button className="btn btn-primary" 
+        onClick={() => addUser()}
+        >
           Add User
-        </a>
+        </button>
       </CCardHeader>
       <CTable>
         <CTableHead>
@@ -95,6 +107,8 @@ const UsersList = () => {
             <CTableHeaderCell scope="col">Address(street)</CTableHeaderCell>
             <CTableHeaderCell scope="col">Delete</CTableHeaderCell>
             <CTableHeaderCell scope="col">view</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Set Permission</CTableHeaderCell>
+            
           </CTableRow>
         </CTableHead>
         <CTableBody>
@@ -137,6 +151,15 @@ const UsersList = () => {
                     onClick={() => viewUser(item._id)}
                   >
                     view
+                  </CButton>
+                </CTableDataCell>
+                <CTableDataCell>
+                  <CButton
+                    color="primary"
+                    variant="outline"
+                    onClick={() => setPermission(item._id)}
+                  >
+                    Set Permission
                   </CButton>
                 </CTableDataCell>
               </CTableRow>
