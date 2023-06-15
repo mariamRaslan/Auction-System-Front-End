@@ -1,17 +1,19 @@
-import React from 'react'
-import NavBar from '../components/Website/NavBar'
-import Home from '../Pages/WebsitePages/UserProfile/UserProfile'
-import  AppContent from '../components/Website/WebsiteAppContent'
+import React from "react";
+import NavBar from "../components/Website/NavBar/NavBar";
+import Footer from "../components/Website/Footer/Footer";
+import Home from "../Pages/WebsitePages/UserProfile/UserProfile";
+import AppContent from "../components/Website/WebsiteAppContent";
 
 const DefaultLayout = () => {
   return (
-    <div >
+    <div>
       <NavBar />
-      <div >
-          <AppContent />
-        </div>
-     </div>
-  )
-}
+      <div>
+        <AppContent />
+      </div>
+      <Footer />
+    </div>
+  );
+};
 
-export default DefaultLayout
+export default DefaultLayout;
