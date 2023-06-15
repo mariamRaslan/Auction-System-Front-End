@@ -32,10 +32,33 @@ const YearlyReports = React.lazy(() => import('./Pages/Reports/YearlyReports/Yea
 // Home
 const Home=React.lazy(()=>import('./Pages/WebsitePages/Home/Home'))
 
+// Website Bidding
+const Bidding = React.lazy(() =>
+  import("./Pages/WebsitePages/Bidding/Bidding")
+);
+
+// Website AddCredit
+const CreditCardForm = React.lazy(() =>
+  import("./Pages/WebsitePages/CreditCardForm/CreditCardForm")
+);
+
+// Website Payment
+const Payment = React.lazy(() =>
+  import("./Pages/WebsitePages/Payment/Payment")
+);
+
+// Website VerificationCode
+const VerificationCode = React.lazy(() =>
+  import("./Pages/WebsitePages/VerificationCode/VerificationCode")
+);
+
+// Website NotFound
+const NotFound = React.lazy(() =>
+  import("./Pages/WebsitePages/NotFound/NotFound")
+);
 
 
-
-//User Profile 
+//User Profile
 const UserProfile=React.lazy(()=>import('./Pages/WebsitePages/UserProfile/UserProfile'))
 const UserProfileEdit=React.lazy(()=>import('./Pages/WebsitePages/UserProfile/UserProfileEdit'))
 
@@ -76,6 +99,23 @@ const routes = [
   //User Profile
   { path: '/profile', name: 'UserProfile', element: UserProfile },
   { path: '/edit-profile', name: 'UserProfileEdit', element: UserProfileEdit },
+
+  //Website Bidding
+  { path: "/bidding", name: "Bidding", element: Bidding },
+
+  //Website AddCredit
+  { path: "/credit-card-form", name: "CreditCardForm", element: CreditCardForm },
+
+  //Website Payment
+  { path: "/payment", name: "Payment", element: Payment },
+
+  //Website VerificationCode
+  { path: "/verification-code", name: "VerificationCode", element: VerificationCode },
+
+  //Website NotFound
+  { path: "/not-found", name: "NotFound", element: NotFound },
+
+  
 
 ]
 

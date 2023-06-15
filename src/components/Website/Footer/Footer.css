@@ -1,0 +1,95 @@
+.footer {
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
+  text-align: center;
+  font-size: 15px;
+  font-family: "Roboto", sans-serif;
+  margin-top: 20px;
+  background-color: #0a0a0f;
+}
+.footer-top {
+  background-image: url("file:///C:/Users/Habiba/Downloads/ref/web_template_Auction_system/bidout-wp.b-cdn.net/wp-content/themes/bidout-wp/includes/theme-options/images/others/footer-map.png") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #0a0a0f;
+  position: relative;
+  padding-top: 10px;
+  width: 100vh;
+
+}
+.footer-top ul li {
+  margin-right: 20px;
+  margin-bottom: 15px;
+}
+.widget-title,
+.widget-title h5 {
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  color: #d2d2d2;
+}
+.post-date{
+    color: #d2d2d2;
+    font-size: 13px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: #d2d2d2;
+}
+.post-image {
+  width: 75px;
+  height: 75px;
+  max-width: 75px;
+  max-height: 75px;
+}
+.alignleft {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.post-title {
+  text-decoration: none;
+  color: #ffffff;
+}
+.footer-bottom {
+  background-color: #0a0a0a !important;
+}
+.menu-item a {
+  color: #ffffff !important;
+  text-decoration: none;
+  color: #d2d2d2;
+  font-size: 16px;
+  font-weight: 500;
+}
+.footer-bottom p {
+  margin: 0;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.footer-bottom a {
+  color: #ffffff;
+}
+.menu-item a:hover,
+.footer-bottom a:hover,
+.post-title a:hover {
+  color: #4f89b0 !important;
+}
+.footer-logo-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-logo-list li {
+  margin: 0 10px;
+}
+
+.footer-logo-list img {
+  max-height: 30px;
+  max-width: 100%;
+}

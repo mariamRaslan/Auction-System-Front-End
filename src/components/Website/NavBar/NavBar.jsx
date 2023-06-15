@@ -18,7 +18,7 @@ import {
   CDropdownDivider,
 } from "@coreui/react";
 import "./NavBar.css";
-import logo from "../../assets/images/logo.svg";
+import logo from "../../../assets/images/logo.svg";
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -33,7 +33,7 @@ const NavBar = () => {
 
   return (
     <>
-      <CNavbar expand="lg" colorScheme="light" className="nav">
+      <CNavbar expand="lg" colorScheme="light" className="nav mb-4">
         <CContainer fluid>
           <CNavbarBrand href="#">
             <img className="logo-img" alt="logo" src={logo} />
