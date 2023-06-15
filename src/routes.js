@@ -32,30 +32,30 @@ const YearlyReports = React.lazy(() => import('./Pages/Reports/YearlyReports/Yea
 // Home
 const Home=React.lazy(()=>import('./Pages/WebsitePages/Home/Home'))
 
-// // Website Bidding
-// const Bidding = React.lazy(() =>
-//   import("./Pages/WebsitePages/Bidding/Bidding")
-// );
+// Website Bidding
+const Bidding = React.lazy(() =>
+  import("./Pages/WebsitePages/Bidding/Bidding")
+);
 
-// // Website AddCredit
-// const CreditCardForm = React.lazy(() =>
-//   import("./Pages/WebsitePages/CreditCardForm/CreditCardForm")
-// );
+// Website AddCredit
+const CreditCardForm = React.lazy(() =>
+  import("./Pages/WebsitePages/CreditCardForm/CreditCardForm")
+);
 
-// // Website Payment
-// const Payment = React.lazy(() =>
-//   import("./Pages/WebsitePages/Payment/Payment")
-// );
+// Website Payment
+const Payment = React.lazy(() =>
+  import("./Pages/WebsitePages/Payment/Payment")
+);
 
-// // Website VerificationCode
-// const VerificationCode = React.lazy(() =>
-//   import("./Pages/WebsitePages/VerificationCode/VerificationCode")
-// );
+// Website VerificationCode
+const VerificationCode = React.lazy(() =>
+  import("./Pages/WebsitePages/VerificationCode/VerificationCode")
+);
 
-// // Website NotFound
-// const NotFound = React.lazy(() =>
-//   import("./Pages/WebsitePages/NotFound/NotFound")
-// );
+// Website NotFound
+const NotFound = React.lazy(() =>
+  import("./Pages/WebsitePages/NotFound/NotFound")
+);
 
 
 //User Profile
@@ -100,20 +100,20 @@ const routes = [
   { path: '/profile', name: 'UserProfile', element: UserProfile },
   { path: '/edit-profile', name: 'UserProfileEdit', element: UserProfileEdit },
 
-  // //Website Bidding
-  // { path: "/bidding", name: "Bidding", element: Bidding },
+  //Website Bidding
+  { path: "/bidding", name: "Bidding", element: Bidding },
 
-  // //Website AddCredit
-  // { path: "/credit-card-form", name: "CreditCardForm", element: CreditCardForm },
+  //Website AddCredit
+  { path: "/credit-card-form", name: "CreditCardForm", element: CreditCardForm },
 
-  // //Website Payment
-  // { path: "/payment", name: "Payment", element: Payment },
+  //Website Payment
+  { path: "/payment", name: "Payment", element: Payment },
 
-  // //Website VerificationCode
-  // { path: "/verification-code", name: "VerificationCode", element: VerificationCode },
+  //Website VerificationCode
+  { path: "/verification-code", name: "VerificationCode", element: VerificationCode },
 
-  // //Website NotFound
-  // { path: "/not-found", name: "NotFound", element: NotFound },
+  //Website NotFound
+  { path: "/not-found", name: "NotFound", element: NotFound },
 
 
 
