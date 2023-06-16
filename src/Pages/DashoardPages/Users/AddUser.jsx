@@ -27,17 +27,20 @@ function AddUserPage() {
 
     // Send form data to API
     const response = await axios.post('/users', formData);
-    
 
-    //set message
-    setMessage(response.data);
     
+    setMessage('added succesfully');
+    
+    //redirct to user-list
+  
+    window.location.href = '/dashboard/users/list';
+   
     
   };
 
 
   return (
-    <div>
+    <div >
       <h2>Add User</h2>
       <form  onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="mb-3">
@@ -129,7 +132,9 @@ function AddUserPage() {
           />
         </div>
         <button type="submit" className="btn btn-primary">Add User</button>
-        <p>{message}</p>
+        <div className="alert alert-success" role="alert">
+          {message}
+        </div>
 
       </form>
     </div>

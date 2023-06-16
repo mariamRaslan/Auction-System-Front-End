@@ -175,6 +175,12 @@ const ViewUser = () => {
             </div>
           </div>
         </div>
+        {/** display all permission to select from it to assign to user */}
+        <div className="container">
+                    
+        </div>
+
+
                         
 
       </section>
