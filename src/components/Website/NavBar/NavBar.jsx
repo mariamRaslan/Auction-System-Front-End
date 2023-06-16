@@ -18,22 +18,13 @@ import {
   CDropdownDivider,
 } from "@coreui/react";
 import "./NavBar.css";
-import logo from "../../assets/images/logo.svg";
+import logo from "../../../assets/images/logo.svg";
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  function handleHover() {
-    setIsDropdownOpen(true);
-  }
-
-  function handleMouseLeave() {
-    setIsDropdownOpen(false);
-  }
 
   return (
     <>
-      <CNavbar expand="lg" colorScheme="light" className="nav">
+      <CNavbar expand="lg" colorScheme="light" className="nav mb-4">
         <CContainer fluid>
           <CNavbarBrand href="#">
             <img className="logo-img" alt="logo" src={logo} />
@@ -49,16 +40,16 @@ const NavBar = () => {
               <CForm className="d-flex col-3">
                 <CFormInput
                   type="search"
-                  className="me-2"
-                  placeholder="Search"
+                  className="mx-2"
+                  placeholder="بحث"
                 />
                 <CButton type="submit" color="secondary" variant="outline">
-                  <p className="btn-text d-inline">Search</p>
+                  <p className="btn-text d-inline">بحث</p>
                 </CButton>
               </CForm>
-              <div className="col-4 d-flex justify-content-around">
+              <div className="col-6 d-flex justify-content-around">
                 <CNavItem className="nav-item">
-                  <CNavLink href="#">Home</CNavLink>
+                  <CNavLink href="#">الرئيسية</CNavLink>
                 </CNavItem>
                 <CNavItem className="nav-item">
                   <CNavLink href="#">Link</CNavLink>
@@ -75,31 +66,32 @@ const NavBar = () => {
                 <CNavItem className="nav-item">
                   <CNavLink href="#">Link</CNavLink>
                 </CNavItem>
-              </div>
+                <CDropdown
 
-              <CDropdown
-                className="col-2"
                 variant="nav-item"
-                onMouseEnter={() => handleHover}
-                onMouseLeave={() => handleMouseLeave}
               >
-                <CDropdownToggle color="secondary">Account</CDropdownToggle>
-                <CDropdownMenu style={{ width: "100%", marginTop: "17px" }}>
+                <CDropdownToggle>
+                  المزيد
+                </CDropdownToggle>
+                <CDropdownMenu style={{ marginTop: "17px" }}>
                   <CDropdownItem className="drop-item" href="#">
-                    Login
+                    تسجيل الدخول
                   </CDropdownItem>
                   <CDropdownItem className="drop-item" href="#">
-                    Register
+                    تسجيل جديد
                   </CDropdownItem>
                   <CDropdownItem className="drop-item" href="#">
-                    Profile
+                    حسابي
                   </CDropdownItem>
                   <CDropdownDivider />
                   <CDropdownItem className="drop-item" href="#">
-                    Logout
+                    تسجيل الخروج
                   </CDropdownItem>
                 </CDropdownMenu>
               </CDropdown>
+              </div>
+
+
             </CNavbarNav>
           </CCollapse>
         </CContainer>

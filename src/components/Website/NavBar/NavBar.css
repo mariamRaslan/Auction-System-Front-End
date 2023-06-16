@@ -1,13 +1,15 @@
 .nav {
   background-color: #4f89b0;
+  direction: rtl;
 }
 .btn-text,
 .nav-item a {
   color: white;
+  font-size: 18px;
 }
 .drop-item{
   color: #484848 !important;
-  font-size: 15px !important; 
+  font-size: 15px !important;
 }
 .nav-item {
   padding: 2px;
@@ -32,4 +34,9 @@
 .btn:hover {
   background-color: transparent;
 }
-
+.dropdown-menu{
+  width: fit-content;
+  margin-left: 50px;
+  position: relative;
+  left: -66%;
+}
