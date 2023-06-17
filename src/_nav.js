@@ -138,18 +138,17 @@ const _nav = [
     ],
   },
   {
-    component: CNavGroup,
+    component: CNavItem,
     name: 'المزايدات',
-    to: 'dashboard/notifications',
+    to: '/dashboard/dashboard/biddings',
     icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'المزايدات',
-        to: '/dashboard/dashboard/notifications/alerts',
-      },
-   
-    ],
+    // items: [
+    //   {
+    //     component: CNavItem,
+    //     name: 'المزايدات',
+    //     to: '/dashboard/dashboard/',
+    //   },
+    // ],
   },
 ]
 

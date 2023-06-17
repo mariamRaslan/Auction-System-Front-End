@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import img from "./../../../assets/images/stop-watch-.jpg";
 import "./Bidding.css";
+import axiosInstance from "../../../Axios";
 
 const Bidding = () => {
+  const [biddingData, setBidding] = useState([]);
+  // function to get didding product
+  async function fetchBiddingProduct() {
+    try {
+      const response = await axiosInstance.get("/biddings/");
+      console.log(response.data.data);
+      setBidding(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  useEffect(() => {
+    fetchBiddingProduct();
+  }, []);
+
+
+
   return (
     <div className="bidding">
       <div className="container">
