@@ -61,13 +61,13 @@ const Products = () => {
   // Navigate to the edit page
   const handleEditButton = (id) => {
     parseInt(id);
-    Navigate(`/dashboard/dashboard/products/edit-product/${id}`);
+    Navigate(`/dashboard/products/edit-product/${id}`);
   };
 
   // Navigate to the details page
   const handleDetailsButton = (id) => {
     parseInt(id);
-    Navigate(`/dashboard/dashboard/products/product-details/${id}`);
+    Navigate(`/dashboard/products/product-details/${id}`);
   };
 
   useEffect(() => {

@@ -28,7 +28,7 @@ const ViewUser = () => {
     //set permission
   const setPermission = (_id) => {
     //set permission
-    window.location.href = `#/dashboard/dashboard/users/set-permission/${_id}`;
+    window.location.href = `/dashboard/users/set-permission/${_id}`;
   };
     
 

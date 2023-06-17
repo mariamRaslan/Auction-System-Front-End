@@ -20,7 +20,7 @@ const Login = () => {
       const decoded = jwt_decode(res.data.token);
       localStorage.setItem('token', res.data.token);
       if (decoded.role === 'admin') {
-        window.location.href = '/dashboard/dashboard/reports/yearly-reports';
+        window.location.href = '/dashboard/reports/yearly-reports';
       } else if (decoded.role === 'user') {
         window.location.href = '/';
       } else {
