@@ -12,7 +12,7 @@ import {
   CNavItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilAccountLogout, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
+import { cilAccountLogout, cilEnvelopeOpen, cilMenu,cilHome  } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
@@ -26,6 +26,10 @@ const AppHeader = () => {
    const logout = () => {
     localStorage.removeItem('token');
     window.location.href = '/login';
+  }
+  //view website
+  const viewWebsite = () => {
+    window.location.href = '/home';
   }
 
 
@@ -57,19 +61,16 @@ const AppHeader = () => {
             onClick={logout}
             href="#">
               {/**logout icon  */}              
-              <CIcon icon={cilAccountLogout} 
-              
+              <CIcon icon={cilAccountLogout}  
               size="lg" />
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilList} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilEnvelopeOpen} size="lg" />
+            <CNavLink
+            onClick={viewWebsite}
+            href="#">
+              {/**hoem icon  */}
+              <CIcon icon={cilHome} size="lg" />
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
