@@ -96,7 +96,7 @@ const UsersList = () => {
         </button>
       </CCardHeader>
       <CTable>
-        <CTableHead>
+        <CTableHead style={{ backgroundColor: '#4f5d73' , color:"#fff"}}>
           <CTableRow>
             <CTableHeaderCell scope="col">image</CTableHeaderCell>
             <CTableHeaderCell scope="col">ID</CTableHeaderCell>
@@ -120,7 +120,7 @@ const UsersList = () => {
               </div>
             </div>
           ) : (
-            data.map((item) => (
+            data.map((item,index) => (
               <CTableRow key={item._id}>
                 <CTableDataCell>
                   <img
@@ -129,12 +129,18 @@ const UsersList = () => {
                     style={{ width: "50px", height: "50px" }}
                   />
                 </CTableDataCell>
-                <CTableDataCell>{item._id}</CTableDataCell>
-                <CTableDataCell>{item.name}</CTableDataCell>
-                <CTableDataCell>{item.email}</CTableDataCell>
-                <CTableDataCell>{item.phone}</CTableDataCell>
-                <CTableDataCell>{item.address.city}</CTableDataCell>
-                <CTableDataCell>{item.address.street}</CTableDataCell>
+                <CTableDataCell>{index+1}</CTableDataCell>
+                <CTableDataCell>{item.name ? item.name:'--'}</CTableDataCell>
+                <CTableDataCell>{item.email ? item.email:'--'}</CTableDataCell>
+                <CTableDataCell>
+                  {item.phone ? item.phone : '--'}
+                  </CTableDataCell>
+                <CTableDataCell>
+                  {item.address ? item.address.city : '--'}
+                </CTableDataCell>
+                <CTableDataCell>
+                  {item.address ? item.address.street : '--'}
+                </CTableDataCell>
                 <CTableDataCell>
                   <CButton
                     color="danger"

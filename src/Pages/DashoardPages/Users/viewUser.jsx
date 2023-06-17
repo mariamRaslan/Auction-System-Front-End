@@ -72,7 +72,7 @@ const ViewUser = () => {
                       <p className="mb-0">Full Name</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.name}</p>
+                      <p className="text-muted mb-0">{user.name?user.name:'not exist'}</p>
                     </div>
                   </div>
                   <hr />
@@ -81,7 +81,7 @@ const ViewUser = () => {
                       <p className="mb-0">Email</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.email}</p>
+                      <p className="text-muted mb-0">{user.email?user.email:'not exist'}</p>
                     </div>
                   </div>
                   <hr />
@@ -90,7 +90,7 @@ const ViewUser = () => {
                       <p className="mb-0">Phone</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.phone}</p>
+                      <p className="text-muted mb-0">{user.phone?user.phone:'not exist'}</p>
                     </div>
                   </div>
                   <hr />
@@ -99,7 +99,7 @@ const ViewUser = () => {
                       <p className="mb-0">Role</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.role}</p>
+                      <p className="text-muted mb-0">{user.role?user.role:'not exist'}</p>
                     </div>
                   </div>
                   <hr />
@@ -108,7 +108,7 @@ const ViewUser = () => {
                       <p className="mb-0">Address</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0"><span>{user.address.city}</span>,<span>{user.address.street}</span>, <span>{user.address.building_number}</span></p>
+                      <p className="text-muted mb-0"><span>{user.address?user.address.city:'not exist'}</span>,<span>{user.address?user.address.street:''}</span>, <span>{user.address?user.address.building_number:''}</span></p>
                     </div>
                   </div>
                 </div>

@@ -140,7 +140,6 @@
 // ) !default;
 // scss-docs-end theme-colors-map
 
-// The contrast ratio to reach against white, to determine if color changes from "light" to "dark". Acceptable values for WCAG 2.0 are 3, 4.5 and 7.
 // See https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast
 // $min-contrast-ratio:   4.5 !default;
 
@@ -598,60 +597,7 @@
 // $icon-size-xl:    $icon-size-base * 1.5 !default;
 
 
-// Tables
-//
-// Customizes the `.table` component with basic values, each used across all table variations.
 
-// scss-docs-start table-variables
-// $table-cell-padding-y:        .5rem !default;
-// $table-cell-padding-x:        .5rem !default;
-// $table-cell-padding-y-sm:     .25rem !default;
-// $table-cell-padding-x-sm:     .25rem !default;
-
-// $table-cell-vertical-align:   top !default;
-
-// $table-color:                 $body-color !default;
-// $table-bg:                    transparent !default;
-
-// $table-th-font-weight:        600 !default;
-
-// $table-striped-color:         $table-color !default;
-// $table-striped-bg-factor:     .05 !default;
-// $table-striped-bg:            rgba($black, $table-striped-bg-factor) !default;
-
-// $table-active-color:          $table-color !default;
-// $table-active-bg-factor:      .1 !default;
-// $table-active-bg:             rgba($black, $table-active-bg-factor) !default;
-
-// $table-hover-color:           $table-color !default;
-// $table-hover-bg-factor:       .075 !default;
-// $table-hover-bg:              rgba($black, $table-hover-bg-factor) !default;
-
-// $table-border-factor:         .1 !default;
-// $table-border-width:          $border-width !default;
-// $table-border-color:          $border-color !default;
-
-// $table-striped-order:         odd !default;
-
-// $table-group-separator-color: currentColor !default;
-
-// $table-caption-color:         $text-muted !default;
-
-// $table-bg-scale:              -80% !default;
-// scss-docs-end table-variables
-
-// scss-docs-start table-loop
-// $table-variants: (
-//   "primary":    table-color-map(shift-color($primary, $table-bg-scale)),
-//   "secondary":  table-color-map(shift-color($secondary, $table-bg-scale)),
-//   "success":    table-color-map(shift-color($success, $table-bg-scale)),
-//   "danger":     table-color-map(shift-color($danger, $table-bg-scale)),
-//   "warning":    table-color-map(shift-color($warning, $table-bg-scale)),
-//   "info":       table-color-map(shift-color($info, $table-bg-scale)),
-//   "light":      table-color-map(shift-color($light, $table-bg-scale)),
-//   "dark":       table-color-map(shift-color($dark, $table-bg-scale))
-// ) !default;
-// scss-docs-end table-loop
 
 
 // Buttons + Forms
