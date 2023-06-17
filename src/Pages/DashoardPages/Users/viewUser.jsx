@@ -25,6 +25,13 @@ const ViewUser = () => {
         fetchUser();
     },[]);
 
+    //set permission
+  const setPermission = (_id) => {
+    //set permission
+    window.location.href = `#/dashboard/dashboard/users/set-permission/${_id}`;
+  };
+    
+
     return (
 
       <>
@@ -65,7 +72,7 @@ const ViewUser = () => {
                       <p className="mb-0">Full Name</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.name}</p>
+                      <p className="text-muted mb-0">{user.name?user.name:'not exist'}</p>
                     </div>
                   </div>
                   <hr />
@@ -74,7 +81,7 @@ const ViewUser = () => {
                       <p className="mb-0">Email</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.email}</p>
+                      <p className="text-muted mb-0">{user.email?user.email:'not exist'}</p>
                     </div>
                   </div>
                   <hr />
@@ -83,7 +90,7 @@ const ViewUser = () => {
                       <p className="mb-0">Phone</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.phone}</p>
+                      <p className="text-muted mb-0">{user.phone?user.phone:'not exist'}</p>
                     </div>
                   </div>
                   <hr />
@@ -92,7 +99,7 @@ const ViewUser = () => {
                       <p className="mb-0">Role</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.role}</p>
+                      <p className="text-muted mb-0">{user.role?user.role:'not exist'}</p>
                     </div>
                   </div>
                   <hr />
@@ -101,7 +108,7 @@ const ViewUser = () => {
                       <p className="mb-0">Address</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0"><span>{user.address.city}</span>,<span>{user.address.street}</span>, <span>{user.address.building_number}</span></p>
+                      <p className="text-muted mb-0"><span>{user.address?user.address.city:'not exist'}</span>,<span>{user.address?user.address.street:''}</span>, <span>{user.address?user.address.building_number:''}</span></p>
                     </div>
                   </div>
                 </div>
@@ -109,6 +116,73 @@ const ViewUser = () => {
             </div>
           </div>
         </div>
+        {/** table to display permissions with static data now  */}
+        <div className="container">
+        
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="card mb-4">
+                <div className="card-header d-flex justify-content-between">
+                  <h6 className="text-uppercase mb-0">Permissions</h6>
+                  
+                    <button className="btn btn-primary btn-sm" onClick={() => setPermission(user._id)}>
+                      Assign new Permission
+                    </button>
+                   
+                </div>
+                <div className="card-body">
+                  <div className="table-responsive">
+                    <table className="table table-bordered">
+                      <thead className="thead-dark">
+                        <tr>
+                          <th scope="col">Permission</th>
+                          <th scope="col">assign at</th> 
+                          <th scope="col">delete</th> 
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Permission 1</td>
+                          <td>2020-10-10</td>
+                          <td><button className="btn btn-danger btn-sm">Delete</button></td>
+                        </tr>
+                        <tr>
+                          <td>Permission 2</td>
+                          <td>2020-10-10</td>
+                          <td><button className="btn btn-danger btn-sm">Delete</button></td>
+                        </tr>
+                        <tr>
+                          <td>Permission 3</td>
+                          <td>2020-10-10</td>
+                          <td><button className="btn btn-danger btn-sm">Delete</button></td>
+                        </tr>
+                        <tr>
+                          <td>Permission 4</td>
+                          <td>2020-10-10</td>
+                          <td><button className="btn btn-danger btn-sm">Delete</button></td>
+                        </tr>
+                        <tr>
+                          <td>Permission 5</td>
+                          <td>2020-10-10</td>
+                          <td><button className="btn btn-danger btn-sm">Delete</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/** display all permission to select from it to assign to user */}
+        <div className="container">
+                    
+        </div>
+
+
+                        
+
       </section>
       )
       }

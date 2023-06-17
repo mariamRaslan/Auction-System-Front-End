@@ -101,7 +101,7 @@ const AuctionsList = () => {
         <h2>Auctions</h2>
       </CCardHeader>
       <CTable >
-        <CTableHead color="dark">
+        <CTableHead style={{ backgroundColor: '#4f5d73' , color:"#fff"}}>
           <CTableRow>
             <CTableHeaderCell scope="col">Reference Number</CTableHeaderCell>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>

@@ -103,7 +103,7 @@ const ProductsDetails = () => {
         <strong>Products</strong> Table
       </CCardHeader>
       <CTable>
-        <CTableHead color="dark">
+        <CTableHead style={{ backgroundColor: '#4f5d73' , color:"#fff"}}>
           <CTableRow>
             <CTableHeaderCell scope="col">#</CTableHeaderCell>
             <CTableHeaderCell scope="col">Product Name</CTableHeaderCell>

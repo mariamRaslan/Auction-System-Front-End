@@ -1,11 +1,12 @@
 import React from "react";
 import logo from "../../../assets/images/logo.svg";
 import "./Footer.css";
+
 const Footer = () => {
   return (
     <>
       <div className="footer container-fluid w-100">
-        <div className="footer-top row w-100">
+        <div className="w-100 d-flex footer-top">
           <div className="col-lg-3 col-md-6 justify-content-lg-start">
             <div className="footer-logo widget-title">
               <img src={logo} alt="logo" className="logo-img" />
@@ -14,8 +15,8 @@ const Footer = () => {
             <br></br>
             <div className="footer-left-text d-block">
               <p>
-                Lorem ipsum dolor sit amet consecte tur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore.
+                لوريم إيبسوم دولور سيت أميت، كونسيكتيور أدفيبايسينغ إليت، سيد دو
+                إيوسمود تيمبور إنكيديدونت أوت لابوري.
               </p>
             </div>
           </div>
@@ -23,21 +24,21 @@ const Footer = () => {
             <div className="footer-item">
               <div id="nav_menu-3" className="footer-widget widget_nav_menu">
                 <div className="widget-title">
-                  <h5>Navigation</h5>
+                  <h5>التنقل</h5>
                 </div>
                 <div className="menu-navigation-container">
                   <ul id="menu-navigation" className="menu">
                     <li id="menu-item" className="menu-item">
-                      <a href="#">All Products</a>
+                      <a href="#">جميع المنتجات</a>
                     </li>
                     <li id="menu-item" className="menu-item ">
-                      <a href="#">How It Works</a>
+                      <a href="#">كيف يعمل الموقع</a>
                     </li>
                     <li id="menu-item-" className="menu-item">
-                      <a href="#">About Company</a>
+                      <a href="#">عن الشركة</a>
                     </li>
                     <li id="menu-item" className="menu-item">
-                      <a href="#">Our News Feed</a>
+                      <a href="#">أخبارنا</a>
                     </li>
                   </ul>
                 </div>
@@ -48,34 +49,34 @@ const Footer = () => {
             <div className="footer-item">
               <div id="nav_menu-3" className="footer-widget widget_nav_menu">
                 <div className="widget-title">
-                  <h5>Help & FAQs</h5>
+                  <h5>المساعدة والأسئلة الشائعة</h5>
                 </div>
                 <div className="menu-navigation-container">
                   <ul id="menu-navigation" className="menu">
                     <li id="menu-item" className="menu-item">
-                      <a href="#">Help Center</a>
+                      <a href="#">مركز المساعدة</a>
                     </li>
                     <li id="menu-item" className="menu-item ">
-                      <a href="#">Customer FAQs</a>
+                      <a href="#">الأسئلة الشائعة للعملاء</a>
                     </li>
                     <li id="menu-item-" className="menu-item">
-                      <a href="">Terms and Conditions</a>
+                      <a href="">الشروط والأحكام</a>
                     </li>
                     <li id="menu-item" className="menu-item">
-                      <a href="#">Security Information</a>
+                      <a href="#">معلومات الأمان</a>
                     </li>
                     <li id="menu-item" className="menu-item">
-                      <a href="#">Merchant Add Policy</a>
+                      <a href="#">سياسة إضافة التجار</a>
                     </li>
                   </ul>
                 </div>
               </div>{" "}
             </div>
           </div>
-          <div className="col-lg-3 col-md-6 d-flex justify-content-lg-end">
+          <div className="col-lg-3 col-md-6 d-flex justify-content-lg-center">
             <div className="footer-item">
               <div className="widget-title">
-                <h5>Latest Feed</h5>
+                <h5>أحدث المقالات</h5>
               </div>
               <div
                 id="block-26"
@@ -83,89 +84,53 @@ const Footer = () => {
               >
                 <ul>
                   <li>
-                    <div className="alignleft">
-                      <img
-                        width="150"
-                        height="150"
-                        className="post-image"
-                        alt=""
-                        decoding="async"
-                        loading="lazy"
-                        srcSet="https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-150x150.jpg 150w, https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-600x600.jpg 600w, https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-100x100.jpg 100w"
-                        // sizes="(max-width: 150px) 100vw, 150px"
-                      />
+                    <img
+                      width="150"
+                      height="150"
+                      className="post-image"
+                      alt=""
+                      decoding="async"
+                      loading="lazy"
+                      srcSet="https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-150x150.jpg 150w, https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-600x600.jpg 600w, https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-300x300.jpg 300w, https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-1024x1024.jpg 1024w"
+                      sizes="(max-width: 150px) 100vw, 150px"
+                      src="https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-150x150.jpg"
+                    />
+                    <div className="d-inline-block px-3">
+                      <p className="post-title">عنوان المقال الأحدث</p>
+
+                      <span className="post-date">21 يونيو، 2023</span>
                     </div>
-                    <p className="mb-0">
-                      10 Productivity Strategies Backed By Science .
-                    </p>
-                    <time
-                      dateTime="2022-10-29T05:43:06+00:00"
-                      className="post-date"
-                    >
-                      October 29, 2022
-                    </time>
-                    <div className="clearfix"></div>
                   </li>
                   <li>
-                    <div className="alignleft">
-                      <img
-                        width="150"
-                        height="150"
-                        className="post-image"
-                        alt=""
-                        decoding="async"
-                        loading="lazy"
-                        srcSet="https://bidout-wp.b-cdn.net/wp-content/uploads/2022/09/aaron-burden-AXqMy8MSSdk-unsplash-1-150x150.jpg 150w, https://bidout-wp.b-cdn.net/wp-content/uploads/2022/09/aaron-burden-AXqMy8MSSdk-unsplash-1-600x600.jpg 600w, https://bidout-wp.b-cdn.net/wp-content/uploads/2022/09/aaron-burden-AXqMy8MSSdk-unsplash-1-100x100.jpg 100w"
-                      />
+                    <img
+                      width="150"
+                      height="150"
+                      className="post-image"
+                      alt=""
+                      decoding="async"
+                      loading="lazy"
+                      srcSet="https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-150x150.jpg 150w, https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-600x600.jpg 600w, https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-300x300.jpg 300w, https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-1024x1024.jpg 1024w"
+                      sizes="(max-width: 150px) 100vw, 150px"
+                      src="https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-22-1-150x150.jpg"
+                    />
+                    <div className="d-inline-block px-3">
+                      <p className="post-title">عنوان المقال الثاني</p>
+                      <br />
+                      <span className="post-date">20 يونيو، 2023</span>
                     </div>
-                    <p className="mb-0">
-                      A brand for a company is like for a person.
-                    </p>
-                    <time
-                      dateTime="2022-09-21T05:22:59+00:00"
-                      className="post-date"
-                    >
-                      November 11, 2023
-                    </time>
-                    <div className="clearfix"></div>
-                  </li>
-                  <li>
-                    <div className="alignleft">
-                      <img
-                        width="150"
-                        height="150"
-                        className="post-image"
-                        alt=""
-                        decoding="async"
-                        loading="lazy"
-                        srcSet="https://bidout-wp.b-cdn.net/wp-content/uploads/2022/11/scott-webb-GQD3Av_9A88-unsplash-1-150x150.jpg 150w, https://bidout-wp.b-cdn.net/wp-content/uploads/2022/11/scott-webb-GQD3Av_9A88-unsplash-1-600x600.jpg 600w, https://bidout-wp.b-cdn.net/wp-content/uploads/2022/11/scott-webb-GQD3Av_9A88-unsplash-1-100x100.jpg 100w"
-                      />
-                    </div>
-                    <p className="mb-0">
-                      An Introvert’s Guide to Be Successful at Work
-                    </p>
-                    <time
-                      dateTime="2022-11-03T04:40:57+00:00"
-                      className="post-date"
-                    >
-                      November 5, 2023
-                    </time>
-                    <div className="clearfix"></div>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
+        <hr className="m-0" />
         <div className="footer-bottom row w-100 d-flex align-items-center p-3 pb-0">
           <div className="col-lg-6 d-flex justify-content-center justify-content-lg-start">
-            <p>
-              Copyright 2022 iBid | Design By
-              {"ITI-OS-MANS-43"} | All Rights Reserved.
-            </p>
+            <p>جميع الحقوق محفوظة © 2023 </p>
           </div>
           <div className="col-lg-6  d-flex justify-content-lg-end justify-content-md-end justify-content-center align-items-center flex-sm-nowrap flex-wrap">
-            <p className="d-sm-flex d-none">We Accepts:</p>
+            <p className="d-sm-flex d-none">الدفع عن طريق:</p>
             <ul className="footer-logo-list">
               <li>
                 <img

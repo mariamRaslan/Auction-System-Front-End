@@ -1,41 +1,44 @@
 .footer {
-  background-color: #0a0a0a !important;
   color: #ffffff !important;
-  text-align: center;
+  /* text-align: center; */
   font-size: 15px;
   font-family: "Roboto", sans-serif;
   margin-top: 20px;
-  background-color: #0a0a0f;
+  direction: rtl;
 }
 .footer-top {
+  width: 100%;
   background-image: url("../../../assets/images/footer-map.png") !important;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #0a0a0f;
-  position: relative;
-  padding-top: 10px;
-  width: 100vh;
-
+  padding: 0;
+  margin: 0;
 }
 .footer-top ul li {
   margin-right: 20px;
   margin-bottom: 15px;
 }
+.footer-top ul li a,
+.footer-top ul li p {
+  margin-right: 20px;
+  margin-bottom: 15px;
+}
 .widget-title,
 .widget-title h5 {
+  padding-top: 10px;
   font-size: 30px;
   font-weight: 500;
   margin-bottom: 20px;
-  text-transform: uppercase;
+  text-align: center;
   color: #d2d2d2;
 }
-.post-date{
-    color: #d2d2d2;
-    font-size: 13px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    color: #d2d2d2;
+.post-date {
+  color: #d2d2d2;
+  font-size: 13px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: #d2d2d2;
 }
 .post-image {
   width: 75px;
@@ -43,17 +46,14 @@
   max-width: 75px;
   max-height: 75px;
 }
-.alignleft {
-  float: left;
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
 .post-title {
+  margin: 0 !important;
   text-decoration: none;
   color: #ffffff;
 }
-.footer-bottom {
-  background-color: #0a0a0a !important;
+
+.footer-item {
+  width: 100%;
 }
 .menu-item a {
   color: #ffffff !important;

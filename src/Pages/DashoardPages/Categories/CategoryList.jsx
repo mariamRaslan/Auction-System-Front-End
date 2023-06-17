@@ -74,7 +74,7 @@ const CategoryList = () => {
         </div>
       )}
       <CTable>
-        <CTableHead color="dark"> 
+        <CTableHead style={{ backgroundColor: '#4f5d73' , color:"#fff"}}> 
           <CTableRow>
             <CTableHeaderCell scope="col">ID</CTableHeaderCell>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>

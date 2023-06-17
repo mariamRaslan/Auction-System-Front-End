@@ -60,6 +60,16 @@ const UsersList = () => {
     //view user
     window.location.href = `#/dashboard/dashboard/users/view-user/${_id}`;
   };
+  //add user
+  const addUser = () => {
+    //add user
+    window.location.href = `#/dashboard/dashboard/users/add-user`;
+  };
+  //set permission
+  const setPermission = (_id) => {
+    //set permission
+    window.location.href = `#/dashboard/dashboard/users/set-permission/${_id}`;
+  };
  
   return (
     <div>
@@ -79,12 +89,14 @@ const UsersList = () => {
         </CModal>
       )}
       <CCardHeader>
-        <a className="btn btn-primary" href="/#/dashboard/dashboard/users/add-user">
+        <button className="btn btn-primary" 
+        onClick={() => addUser()}
+        >
           Add User
-        </a>
+        </button>
       </CCardHeader>
       <CTable>
-        <CTableHead>
+        <CTableHead style={{ backgroundColor: '#4f5d73' , color:"#fff"}}>
           <CTableRow>
             <CTableHeaderCell scope="col">image</CTableHeaderCell>
             <CTableHeaderCell scope="col">ID</CTableHeaderCell>
@@ -95,6 +107,8 @@ const UsersList = () => {
             <CTableHeaderCell scope="col">Address(street)</CTableHeaderCell>
             <CTableHeaderCell scope="col">Delete</CTableHeaderCell>
             <CTableHeaderCell scope="col">view</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Set Permission</CTableHeaderCell>
+            
           </CTableRow>
         </CTableHead>
         <CTableBody>
@@ -106,7 +120,7 @@ const UsersList = () => {
               </div>
             </div>
           ) : (
-            data.map((item) => (
+            data.map((item,index) => (
               <CTableRow key={item._id}>
                 <CTableDataCell>
                   <img
@@ -115,12 +129,18 @@ const UsersList = () => {
                     style={{ width: "50px", height: "50px" }}
                   />
                 </CTableDataCell>
-                <CTableDataCell>{item._id}</CTableDataCell>
-                <CTableDataCell>{item.name}</CTableDataCell>
-                <CTableDataCell>{item.email}</CTableDataCell>
-                <CTableDataCell>{item.phone}</CTableDataCell>
-                <CTableDataCell>{item.address.city}</CTableDataCell>
-                <CTableDataCell>{item.address.street}</CTableDataCell>
+                <CTableDataCell>{index+1}</CTableDataCell>
+                <CTableDataCell>{item.name ? item.name:'--'}</CTableDataCell>
+                <CTableDataCell>{item.email ? item.email:'--'}</CTableDataCell>
+                <CTableDataCell>
+                  {item.phone ? item.phone : '--'}
+                  </CTableDataCell>
+                <CTableDataCell>
+                  {item.address ? item.address.city : '--'}
+                </CTableDataCell>
+                <CTableDataCell>
+                  {item.address ? item.address.street : '--'}
+                </CTableDataCell>
                 <CTableDataCell>
                   <CButton
                     color="danger"
@@ -137,6 +157,15 @@ const UsersList = () => {
                     onClick={() => viewUser(item._id)}
                   >
                     view
+                  </CButton>
+                </CTableDataCell>
+                <CTableDataCell>
+                  <CButton
+                    color="primary"
+                    variant="outline"
+                    onClick={() => setPermission(item._id)}
+                  >
+                    Set Permission
                   </CButton>
                 </CTableDataCell>
               </CTableRow>

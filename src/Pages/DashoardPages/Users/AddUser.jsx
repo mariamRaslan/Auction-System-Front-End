@@ -10,29 +10,37 @@ function AddUserPage() {
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Send a POST request to the API endpoint
-    const response = await axios.post('/users',
-    {
-      name: e.target.name.value,
-      email: e.target.email.value,
-      password: e.target.password.value,
-      phone: e.target.phone.value,
-      city: e.target.city.value,
-      building: e.target.building_number.value,
-      street: e.target.street.value,
-      role: 'user',
-      image: e.target.image.file,
-    }
-    );
-    //set message
-    setMessage(response.data);
+
+    // Create formdata object
+    const formData = new FormData();
     
+    // Add form data to formdata object
+    formData.append('name', e.target.name.value);
+    formData.append('email', e.target.email.value);
+    formData.append('password', e.target.password.value);
+    formData.append('phone', e.target.phone.value);
+    formData.append('city', e.target.city.value);
+    formData.append('street', e.target.street.value);
+    formData.append('building', e.target.building_number.value);
+    formData.append('image', e.target.image.files[0]);
+    formData.append('role', 'user');
+
+    // Send form data to API
+    const response = await axios.post('/users', formData);
+
+    
+    setMessage('added succesfully');
+    
+    //redirct to user-list
+  
+    window.location.href = '/dashboard/users/list';
+   
     
   };
 
 
   return (
-    <div>
+    <div >
       <h2>Add User</h2>
       <form  onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="mb-3">
@@ -124,7 +132,9 @@ function AddUserPage() {
           />
         </div>
         <button type="submit" className="btn btn-primary">Add User</button>
-        <p>{message}</p>
+        <div className="alert alert-success" role="alert">
+          {message}
+        </div>
 
       </form>
     </div>

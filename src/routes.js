@@ -12,6 +12,7 @@ const AddCategory = React.lazy(() => import('./Pages/DashoardPages/Categories/Ad
 const UsersList = React.lazy(() => import('./Pages/DashoardPages/Users/UsersList'))
 const AddUser = React.lazy(() => import('./Pages/DashoardPages/Users/AddUser'))
 const ViewUser = React.lazy(() => import('./Pages/DashoardPages/Users/viewUser'))
+const AssignPermission = React.lazy(()=> import('./Pages/DashoardPages/Users/AssignPermissions'))
 // Products Pages
 const ProductsList = React.lazy(() => import('./Pages/DashoardPages/Products/ProductsList'))
 const AddProduct = React.lazy(() => import('./Pages/DashoardPages/Products/AddProduct'))
@@ -78,6 +79,7 @@ const routes = [
   { path: '/dashboard/users/list', exact: true, name: 'UsersList', element: UsersList },
   { path: '/dashboard/users/add-user', name: 'AddUser', element: AddUser },
   { path: '/dashboard/users/view-user/:id', name: 'ViewUser', element: ViewUser },
+  { path: '/dashboard/users/assign-permission/:id', name: 'AssignPermission', element: AssignPermission },
   // Products
   { path: '/dashboard/products/list', exact: true, name: 'ProductsList', element: ProductsList },
   { path: '/dashboard/products/add-product', name: 'AddProduct', element: AddProduct },

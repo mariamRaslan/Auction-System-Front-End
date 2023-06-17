@@ -114,7 +114,7 @@ const Products = () => {
          <strong>Products</strong>
       </CCardHeader>
       <CTable>
-        <CTableHead color="dark">
+        <CTableHead style={{ backgroundColor: '#4f5d73' , color:"#fff"}}>
           <CTableRow>
             <CTableHeaderCell scope="col">#</CTableHeaderCell>
             <CTableHeaderCell scope="col">Image</CTableHeaderCell>
