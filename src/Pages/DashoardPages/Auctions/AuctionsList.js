@@ -52,11 +52,11 @@ const AuctionsList = () => {
   };
 
   const handleView = (auctionId) => {
-    navigate(`/dashboard/dashboard/auctions/details/${auctionId}`);
+    navigate(`/dashboard/auctions/details/${auctionId}`);
   };
 
   const handleEdit = (auctionId) => {
-    navigate(`/dashboard/dashboard/auctions/edit/${auctionId}`);
+    navigate(`/dashboard/auctions/edit/${auctionId}`);
   };
 
   const handleDeleteButtonClick = (auction) => {

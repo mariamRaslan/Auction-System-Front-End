@@ -49,12 +49,12 @@ const ProductsDetails = () => {
 
   // Navigate to the edit page
   const handleEditButton = (id) => {
-    Navigate(`/dashboard/dashboard/productsDetails/edit-details/${id}`);
+    Navigate(`/dashboard/productsDetails/edit-details/${id}`);
   };
 
   // Navigate to the details page
   const handleDetailsButton = (id) => {
-    Navigate(`/dashboard/dashboard/productsDetails/product-details/${id}`);
+    Navigate(`/dashboard/productsDetails/product-details/${id}`);
   };
 
   useEffect(() => {
