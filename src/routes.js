@@ -100,7 +100,7 @@ const routes = [
 
   //User Profile
   { path: '/profile', name: 'UserProfile', element: UserProfile },
-  { path: '/edit-profile', name: 'UserProfileEdit', element: UserProfileEdit },
+  { path: '/edit-profile/:id', name: 'UserProfileEdit', element: UserProfileEdit },
 
   //Website Bidding
   { path: "/bidding", name: "Bidding", element: Bidding },
