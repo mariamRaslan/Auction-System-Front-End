@@ -1,25 +1,23 @@
-import React, { Component, Suspense, useEffect, useState } from 'react'
-import { HashRouter, Route, Routes, Navigate } from 'react-router-dom'
-import './scss/style.scss'
-
+import React, { Suspense, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import './scss/style.scss';
 
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
   </div>
-)
+);
 
 // Containers
-const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
-const WebsiteLayout=React.lazy(() => import('./layout/WebsiteLayout'))
-const Login = React.lazy(() => import('./Pages/UserAccount/Login'))
-//sign up
-const Signup=React.lazy(()=>import('./Pages/UserAccount/SignUp'))
+const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'));
+const WebsiteLayout = React.lazy(() => import('./layout/WebsiteLayout'));
+const Login = React.lazy(() => import('./Pages/UserAccount/Login'));
+const Signup = React.lazy(() => import('./Pages/UserAccount/SignUp'));
 
-//Reset Password
-const EmailForm=React.lazy(()=>import('./Pages/UserAccount/EmailForm'))
-const CodeForm=React.lazy(()=>import('./Pages/UserAccount/CodeForm'))
-const NewPasswordForm=React.lazy(()=>import('./Pages/UserAccount/NewPasswordForm'))
+// Reset Password
+const EmailForm = React.lazy(() => import('./Pages/UserAccount/EmailForm'));
+const CodeForm = React.lazy(() => import('./Pages/UserAccount/CodeForm'));
+const NewPasswordForm = React.lazy(() => import('./Pages/UserAccount/NewPasswordForm'));
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const token = localStorage.getItem('token');
@@ -32,7 +30,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       localStorage.removeItem('token');
       // Update the isLoggedIn state to false
       setIsLoggedIn(false);
-      window.location.href = '/#/login'
+      window.location.href = '/login';
     }, 3600000);
 
     // Clean up the timeout when the component unmounts or when isLoggedIn changes to false
@@ -44,7 +42,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
 const App = () => {
   return (
-    <HashRouter>
+    <Router>
       <Suspense fallback={loading}>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -53,11 +51,11 @@ const App = () => {
           <Route path="/reset-password/code" element={<CodeForm />} />
           <Route path="/new-password" element={<NewPasswordForm />} />
           <Route path="/dashboard/*" element={<PrivateRoute component={DefaultLayout} />} />
-          <Route path="*" element={<PrivateRoute component={WebsiteLayout} />} />
+          <Route path="/*" element={<PrivateRoute component={WebsiteLayout} />} />
         </Routes>
       </Suspense>
-    </HashRouter>
-  )
-}
+    </Router>
+  );
+};
 
-export default App
+export default App;
