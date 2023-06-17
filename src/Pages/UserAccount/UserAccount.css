@@ -107,6 +107,12 @@
     background: whitesmoke;
     color: black;
   }
+  .form-field-small {
+    font-size: 1rem;
+    height: 2rem;
+    width: 2rem;
+    text-align: center;
+  }
   
   @media (max-width: 950px){
     .card-login{
