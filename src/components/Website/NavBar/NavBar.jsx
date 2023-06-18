@@ -19,15 +19,15 @@ import {
 } from "@coreui/react";
 import "./NavBar.css";
 import logo from "../../../assets/images/logo.svg";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
-  
-    //logout remove token & redirct to login
-    const logout = () => {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
-    }
+
+  //logout remove token & redirct to login
+  const logout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
 
   return (
     <>
@@ -43,62 +43,57 @@ const NavBar = () => {
             style={{ marginRight: "30px" }}
             visible={visible}
           >
-            <CNavbarNav className="col justify-content-end">
-              <CForm className="d-flex col-3">
-                <CFormInput
-                  type="search"
-                  className="mx-2"
-                  placeholder="بحث"
-                />
-                <CButton type="submit" color="secondary" variant="outline">
-                  <p className="btn-text d-inline">بحث</p>
-                </CButton>
-              </CForm>
-              <div className="col-6 d-flex justify-content-around">
+            <CNavbarNav className="col justify-content-md-right justify-content-sm-center">
+              <div className="col-md-6 col-sm-12 d-flex justify-content-around">
                 <CNavItem className="nav-item">
-                  <CNavLink href="#">الرئيسية</CNavLink>
+                  <CNavLink href="/home">الرئيسية</CNavLink>
                 </CNavItem>
                 <CNavItem className="nav-item">
-                  <CNavLink href="#">Link</CNavLink>
+                  <CNavLink href="/auctions">المزادات</CNavLink>
                 </CNavItem>
                 <CNavItem className="nav-item">
-                  <CNavLink href="#">Link</CNavLink>
+                  <CNavLink href="/products">المنتجات</CNavLink>
                 </CNavItem>
                 <CNavItem className="nav-item">
-                  <CNavLink href="#">Link</CNavLink>
+                  <CNavLink href="/bidding">المزايدات </CNavLink>
                 </CNavItem>
                 <CNavItem className="nav-item">
-                  <CNavLink href="#">Link</CNavLink>
+                  <CNavLink href="/payment">الشراء</CNavLink>
                 </CNavItem>
-                <CNavItem className="nav-item">
-                  <CNavLink href="#">Link</CNavLink>
-                </CNavItem>
-                <CDropdown
-
-                variant="nav-item"
-              >
-                <CDropdownToggle>
-                  المزيد
-                </CDropdownToggle>
-                <CDropdownMenu style={{ marginTop: "17px" }}>
-                  <CDropdownItem className="drop-item" href="#">
-                    تسجيل الدخول
-                  </CDropdownItem>
-                  <CDropdownItem className="drop-item" href="#">
-                    تسجيل جديد
-                  </CDropdownItem>
-                  <CDropdownItem className="drop-item ">
-                     <Link to="/profile" className="text-dark text-decoration-none" >حسابي</Link>
-                  </CDropdownItem>
-                  <CDropdownDivider />
-                  <CDropdownItem className="drop-item" href="#" onClick={logout}>
-                    تسجيل الخروج
-                  </CDropdownItem>
-                </CDropdownMenu>
-              </CDropdown>
               </div>
-
-
+              <div className="col-md-6 col-sm-12 d-flex justify-content-around">
+                <CForm className="d-flex col-5">
+                  <CFormInput
+                    type="search"
+                    className="search-input mx-2"
+                    placeholder="بحث"
+                  />
+                  <CButton type="submit" className="search-submit" color="secondary" variant="outline">
+                    <p className=" d-inline">بحث</p>
+                  </CButton>
+                </CForm>
+                <CDropdown variant="nav-item" className="col-1">
+                  <CDropdownToggle>المزيد</CDropdownToggle>
+                  <CDropdownMenu style={{ marginTop: "17px" }}>
+                    <CDropdownItem className="drop-item ">
+                      <Link
+                        to="/profile"
+                        className="text-dark text-decoration-none"
+                      >
+                        حسابي
+                      </Link>
+                    </CDropdownItem>
+                    <CDropdownDivider />
+                    <CDropdownItem
+                      className="drop-item"
+                      href="#"
+                      onClick={logout}
+                    >
+                      تسجيل الخروج
+                    </CDropdownItem>
+                  </CDropdownMenu>
+                </CDropdown>
+              </div>
             </CNavbarNav>
           </CCollapse>
         </CContainer>

@@ -116,11 +116,11 @@ const routes = [
   //Website VerificationCode
   { path: "/verification-code", name: "VerificationCode", element: VerificationCode },
 
-  //Website NotFound
-  { path: "/not-found", name: "NotFound", element: NotFound },
-
  //Biddings
   { path: '/dashboard/biddings', exact: true, name: 'BiddingsList', element: BiddingsList },
+
+   //Website NotFound
+   { path: "*", name: "NotFound", element: NotFound },
 
 ]
 
