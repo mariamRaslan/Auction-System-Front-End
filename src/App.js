@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router,Switch, Route, Routes, Navigate } from 'react-router-dom';
 import './scss/style.scss';
+import withAdminAuth from './components/IsAdmin';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -44,18 +45,17 @@ const App = () => {
   return (
     <Router>
       <Suspense fallback={loading}>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/Signup" element={<Signup />} />
-          <Route path="/reset-password/email" element={<EmailForm />} />
-          <Route path="/reset-password/code/:token/:verifycode" element={<CodeForm />} />
-          <Route path="/new-password/:token" element={<NewPasswordForm />} />
-          <Route path="/dashboard/*" element={<PrivateRoute component={DefaultLayout} />} />
-          <Route path="/*" element={<PrivateRoute component={WebsiteLayout} />} />
-        </Routes>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/Signup" element={<Signup />} />
+            <Route path="/reset-password/email" element={<EmailForm />} />
+            <Route path="/reset-password/code/:token/:verifycode" element={<CodeForm />} />
+            <Route path="/new-password/:token" element={<NewPasswordForm />} />
+            <Route path="/dashboard/*" element={<PrivateRoute component={withAdminAuth(DefaultLayout)} />} />
+            <Route path="/*" element={<PrivateRoute component={WebsiteLayout} />} />
+          </Routes>
       </Suspense>
     </Router>
   );
 };
-
 export default App;
