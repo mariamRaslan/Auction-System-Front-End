@@ -103,11 +103,9 @@ const NavBar = () => {
                   </CButton>
                 </CForm>
                 <CNavItem className="user-item">
-                  <CNavLink href="/profile" title="حسابي">
+                <CNavLink href="/profile" className="ms-3" title="حسابي">
                     <img className="user-img" alt="صوره المستخدم" src={user.image} />
                   </CNavLink>
-                </CNavItem>
-                <CNavItem className="user-item">
                   <CNavLink onClick={logout} href="#" title="تسجيل الخروج">
                     {/**logout icon  */}
                     <CIcon icon={cilAccountLogout} size="lg" />
