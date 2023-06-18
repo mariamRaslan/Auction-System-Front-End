@@ -55,7 +55,7 @@ const EditAuction = () => {
         status: form.elements.status.value,
       };
       await axiosInstance.patch(`/auctions/${auctionId}`, updatedAuction);
-      navigate('/auctions');
+      navigate('/dashboard/auctions');
     } catch (error) {
       console.log(error);
     }
@@ -70,52 +70,52 @@ const EditAuction = () => {
         onSubmit={handleSubmit}
       >
         <CCol md={12}>
-          <CFormLabel htmlFor="auctionName">Auction name</CFormLabel>
+          <CFormLabel htmlFor="auctionName">اسم المزاد</CFormLabel>
           <CFormInput
             type="text"
             id="auctionName"
             required
             defaultValue={auction.name}
           />
-          <CFormFeedback invalid>Please enter a name for the auction</CFormFeedback>
+          <CFormFeedback invalid>يرجى إدخال اسم للمزاد</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="startDate">Start date</CFormLabel>
+          <CFormLabel htmlFor="startDate">تاريخ البدء</CFormLabel>
           <CFormInput
             type="date"
             id="startDate"
             required
             defaultValue={auction.start_date && format(new Date(auction.start_date), 'yyyy-MM-dd')}
           />
-          <CFormFeedback invalid>Please enter a valid start date</CFormFeedback>
+          <CFormFeedback invalid>يرجى إدخال تاريخ صحيح للبدء</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="endDate">End date</CFormLabel>
+          <CFormLabel htmlFor="endDate">تاريخ الانتهاء</CFormLabel>
           <CFormInput
             type="date"
             id="endDate"
             required
             defaultValue={auction.end_date && format(new Date(auction.end_date), 'yyyy-MM-dd')}
           />
-          <CFormFeedback invalid>Please enter a valid end date</CFormFeedback>
+          <CFormFeedback invalid>يرجى إدخال تاريخ صحيح للانتهاء</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="referenceNumber">Reference number</CFormLabel>
+          <CFormLabel htmlFor="referenceNumber">رقم المرجع</CFormLabel>
           <CFormInput
             type="text"
             id="referenceNumber"
             required
             defaultValue={auction.reference_number}
           />
-          <CFormFeedback invalid>Please enter a valid reference number</CFormFeedback>
+          <CFormFeedback invalid>يرجى إدخال رقم مرجع صحيح</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="time">Time</CFormLabel>
+          <CFormLabel htmlFor="time">الوقت</CFormLabel>
           <CFormInput type="time" id="time" required defaultValue={auction.time} />
-          <CFormFeedback invalid>Please enter a valid time</CFormFeedback>
+          <CFormFeedback invalid>يرجى إدخال وقت صحيح</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="fees">Insurance value</CFormLabel>
+          <CFormLabel htmlFor="fees">قيمة التأمين</CFormLabel>
           <CInputGroup className="has-validation">
             <CInputGroupText>$</CInputGroupText>
             <CFormInput
@@ -123,25 +123,25 @@ const EditAuction = () => {
               id="fees"
               required
               min="0"
-              step="0.01"
+              step="01"
               defaultValue={auction.fees}
             />
-            <CFormFeedback invalid>Please enter a valid insurance value</CFormFeedback>
+            <CFormFeedback invalid>يرجى إدخال قيمة تأمين صحيحة</CFormFeedback>
           </CInputGroup>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="status">Status</CFormLabel>
+          <CFormLabel htmlFor="status">الحالة</CFormLabel>
           <CFormSelect id="status" required defaultValue={auction.status}>
-            <option disabled>Choose...</option>
-            <option value="started">Started</option>
-            <option value="ended">Ended</option>
-            <option value="not started">Not Started</option>
+            <option disabled>يرجى الاختيار...</option>
+            <option value="started">بدأ</option>
+            <option value="ended">انتهى</option>
+            <option value="not started">لم يبدأ</option>
           </CFormSelect>
-          <CFormFeedback invalid>Please select the auction status</CFormFeedback>
+          <CFormFeedback invalid>يرجى تحديد حالة المزاد</CFormFeedback>
         </CCol>
         <CCol xs={12}>
           <CButton color="primary" type="submit">
-            Save changes
+            حفظ التغييرات
           </CButton>
         </CCol>
       </CForm>

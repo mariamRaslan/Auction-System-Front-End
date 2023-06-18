@@ -30,7 +30,7 @@ const ProductsDetails = () => {
     try {
       const response = await axiosInstance.get("/itemDetails");
       setProducts(response.data.data);
-      console.log(response.data.data);
+      // console.log(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -100,26 +100,34 @@ const ProductsDetails = () => {
   return (
     <div>
       <CCardHeader>
-        <strong>Products</strong> Table
+        <strong>تفاصيل المنتجات</strong>
       </CCardHeader>
       <CTable>
-        <CTableHead style={{ backgroundColor: '#4f5d73' , color:"#fff"}}>
+        <CTableHead style={{ backgroundColor: "#4f5d73", color: "#fff" }}>
           <CTableRow>
             <CTableHeaderCell scope="col">#</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Product Name</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Auction Name</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Bidding Gap</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Starting Bid</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Maximum Price</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Auction End Time</CTableHeaderCell>
+            <CTableHeaderCell scope="col">اسم المنتج</CTableHeaderCell>
+            <CTableHeaderCell scope="col">اسم المزاد</CTableHeaderCell>
+            <CTableHeaderCell scope="col">قيمه الزياده</CTableHeaderCell>
+            <CTableHeaderCell scope="col">سعر بداية المزاد</CTableHeaderCell>
+            <CTableHeaderCell scope="col">
+              السعر الاقصى للمزايدة
+            </CTableHeaderCell>
+            <CTableHeaderCell scope="col">وقت انتهاء المزاد</CTableHeaderCell>
             <CTableHeaderCell className="textcenter" scope="col" colSpan={3}>
-              Actions
+              العمليات
             </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>
           {/* Map over products */}
-          {products &&
+          {pageData.length === 0 ? (
+            <div className="d-flex justify-content-center">
+              <div className="spinner-border" role="status">
+                <span className="sr-only"></span>
+              </div>
+            </div>
+          ) : (
             pageData.map((product, index) => {
               return (
                 <CTableRow key={product._id}>
@@ -168,40 +176,38 @@ const ProductsDetails = () => {
                   </CTableHeaderCell>
                 </CTableRow>
               );
-            })}
+            })
+          )}
         </CTableBody>
       </CTable>
 
+      {/* Pagination */}
+      {renderPagination()}
       {/* Modal for deleting */}
       <CModal
-        show={visible}
-        onClose={() => setVisible(!visible)}
-        color="danger"
+        alignment="center"
+        visible={visible}
+        onClose={() => setVisible(false)}
       >
-        <CModalHeader closeButton>
-          <CModalTitle>Are you sure?</CModalTitle>
+        <CModalHeader>
+          <CModalTitle>Confirm</CModalTitle>
         </CModalHeader>
-        <CModalBody>
-         Are you sure you want to delete this product?
-        </CModalBody>
+        <CModalBody>Are you sure you want to delete this item?</CModalBody>
         <CModalFooter>
           <CButton
-            color="danger"
             onClick={() => {
               deleteProduct(selectedId);
-              setVisible(!visible);
+              setVisible(false);
             }}
+            color="danger"
           >
             Delete
-          </CButton>{" "}
-          <CButton color="secondary" onClick={() => setVisible(!visible)}>
+          </CButton>
+          <CButton color="secondary" onClick={() => setVisible(false)}>
             Cancel
           </CButton>
         </CModalFooter>
       </CModal>
-
-      {/* Pagination */}
-      {renderPagination()}
     </div>
   );
 };

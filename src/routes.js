@@ -63,6 +63,8 @@ const NotFound = React.lazy(() =>
 const UserProfile=React.lazy(()=>import('./Pages/WebsitePages/UserProfile/UserProfile'))
 const UserProfileEdit=React.lazy(()=>import('./Pages/WebsitePages/UserProfile/UserProfileEdit'))
 
+// Biddings
+const BiddingsList = React.lazy(() => import('./Pages/DashoardPages/Biddings/BiddingsList'))
 //Routes
 const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
@@ -117,7 +119,8 @@ const routes = [
   //Website NotFound
   { path: "/not-found", name: "NotFound", element: NotFound },
 
-
+ //Biddings
+  { path: '/dashboard/biddings', exact: true, name: 'BiddingsList', element: BiddingsList },
 
 ]
 

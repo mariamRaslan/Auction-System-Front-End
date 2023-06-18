@@ -98,16 +98,16 @@ const AuctionsList = () => {
   return (
     <>
       <CCardHeader >
-        <h2>Auctions</h2>
+        <h2>المزادات</h2>
       </CCardHeader>
       <CTable >
         <CTableHead style={{ backgroundColor: '#4f5d73' , color:"#fff"}}>
           <CTableRow>
-            <CTableHeaderCell scope="col">Reference Number</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Name</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Status</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الرقم المرجعي </CTableHeaderCell>
+            <CTableHeaderCell scope="col">الاسم</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الحالة</CTableHeaderCell>
             <CTableHeaderCell className="textcenter" scope="col" colSpan={3}>
-              Actions
+              العمليات
             </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
@@ -119,17 +119,17 @@ const AuctionsList = () => {
               <CTableDataCell>{auction.status}</CTableDataCell>
               <CTableHeaderCell scope="col">
                 <CButton className="btntext w-100" color="primary" variant="outline" onClick={() => handleView(auction._id)}>
-                  View
+                  تفاصيل
                 </CButton>
               </CTableHeaderCell>
               <CTableHeaderCell scope="col">
                 <CButton className="btntext w-100" color="warning" variant="outline" onClick={() => handleEdit(auction._id)}>
-                  Edit
+                  تعديل
                 </CButton>
               </CTableHeaderCell>
               <CTableHeaderCell scope="col">
                 <CButton className="btntext w-100" color="danger" variant="outline" onClick={() => handleDeleteButtonClick(auction)}>
-                  Delete
+                  حذف
                 </CButton>
               </CTableHeaderCell>
             </CTableRow>

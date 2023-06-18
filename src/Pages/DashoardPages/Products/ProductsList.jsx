@@ -13,6 +13,7 @@ import {
   CModalTitle,
   CModalBody,
   CModalFooter,
+  CAlert,
 } from "@coreui/react";
 
 import { useNavigate } from "react-router-dom";
@@ -24,6 +25,8 @@ const Products = () => {
   const [categories, setCategories] = useState([]);
   const [selectedId, setSelectedId] = useState();
   const [visible, setVisible] = useState(false);
+  const [error, setError] = useState("");
+  const [alert, setAlert] = useState(false);
   const [activePage, setActivePage] = useState(1);
   const pageSize = 4;
 
@@ -50,11 +53,13 @@ const Products = () => {
   // function for delete product
   async function deleteProduct(id) {
     try {
-      if (id == null) return;
+      console.log(id);
       const response = await axiosInstance.delete(`/items/${id}`);
       setSelectedId(null);
     } catch (error) {
       console.error(error);
+      // setError(error);
+      setAlert(true);
     }
   }
 
@@ -109,33 +114,39 @@ const Products = () => {
     );
   };
   return (
-    <div >
+    <div>
       <CCardHeader>
-         <strong>Products</strong>
+        <strong>المنتجات</strong>
       </CCardHeader>
       <CTable>
-        <CTableHead style={{ backgroundColor: '#4f5d73' , color:"#fff"}}>
+        <CTableHead style={{ backgroundColor: "#4f5d73", color: "#fff" }}>
           <CTableRow>
             <CTableHeaderCell scope="col">#</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Image</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Name</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Quantity</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Category</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Material</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Size</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Color</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الصورة</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الاسم</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الكمية</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الفئات</CTableHeaderCell>
+            <CTableHeaderCell scope="col">المادة الخام</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الحجم</CTableHeaderCell>
+            <CTableHeaderCell scope="col">اللون</CTableHeaderCell>
             <CTableHeaderCell className="textcenter" scope="col" colSpan={3}>
-              Actions
+              العمليات
             </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>
           {/* map on Products */}
-          {products &&
+          {pageData.length === 0 ? (
+            <div className="d-flex justify-content-center">
+              <div className="spinner-border" role="status">
+                <span className="sr-only"></span>
+              </div>
+            </div>
+          ) : (
             pageData.map((product, index) => {
               return (
                 <CTableRow key={product._id}>
-                  <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
+                  <CTableHeaderCell scope="row">{product._id}</CTableHeaderCell>
                   <CTableDataCell>
                     <img
                       className="small-img"
@@ -196,7 +207,8 @@ const Products = () => {
                   </CTableHeaderCell>
                 </CTableRow>
               );
-            })}
+            })
+          )}
         </CTableBody>
       </CTable>
       {renderPagination()}
@@ -210,7 +222,7 @@ const Products = () => {
         </CModalHeader>
         <CModalBody>Are you sure you want to delete this item?</CModalBody>
         <CModalFooter>
-        <CButton
+          <CButton
             onClick={() => {
               deleteProduct(selectedId);
               setVisible(false);
@@ -222,9 +234,21 @@ const Products = () => {
           <CButton color="secondary" onClick={() => setVisible(false)}>
             Cancel
           </CButton>
-       
         </CModalFooter>
       </CModal>
+      <CAlert
+        visible={alert}
+        color="warning"
+        dismissible
+        alignment="center"
+        onClose={() => {
+          setAlert(false);
+        }}
+      >
+        {/* <strong>Sorry! </strong> {error} */}
+        <strong> عذرا..! </strong> هذا العنصر مرتبط بعناصر اخرى
+      </CAlert>
+      ;
     </div>
   );
 };
