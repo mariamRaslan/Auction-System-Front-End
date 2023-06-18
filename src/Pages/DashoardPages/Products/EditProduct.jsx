@@ -95,7 +95,9 @@ const UpdateProducts = () => {
   return (
     <div>
       <CCardHeader>
-        <strong>Edit Product</strong>
+        <strong>
+          تعديل منتج <span className="text-danger">{product.name}</span>
+        </strong>
       </CCardHeader>
       <CForm
         className="row g-3 needs-validation"
@@ -106,7 +108,9 @@ const UpdateProducts = () => {
         method="post"
       >
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">ID</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">
+            الرقم المعرف للمنتج
+          </CFormLabel>
           <CFormInput
             disabled
             type="text"
@@ -116,7 +120,7 @@ const UpdateProducts = () => {
           />
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">Name</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">اسم المنتج</CFormLabel>
           <CFormInput
             type="text"
             value={product.name}
@@ -125,10 +129,10 @@ const UpdateProducts = () => {
             id="name"
             required
           />
-          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
+          <CFormFeedback invalid>من فضلك ادخل اسم المنتج</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">Material</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">المادة الخام</CFormLabel>
           <CFormInput
             type="text"
             value={product.material}
@@ -137,10 +141,12 @@ const UpdateProducts = () => {
             id="material"
             required
           />
-          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
+          <CFormFeedback invalid>
+            من فضلك ادخل المادة الخام للمنتج
+          </CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">Size</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">الحجم</CFormLabel>
           <CFormInput
             type="text"
             value={product.size}
@@ -149,10 +155,10 @@ const UpdateProducts = () => {
             id="size"
             required
           />
-          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
+          <CFormFeedback invalid>من فضلك ادخل الحجم للمنتج</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">Color</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">اللون</CFormLabel>
           <CFormInput
             type="text"
             value={product.color}
@@ -161,10 +167,10 @@ const UpdateProducts = () => {
             id="color"
             required
           />
-          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
+          <CFormFeedback invalid>من فضلك ادخل اللون للمنتج</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">Price</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">السعر</CFormLabel>
           <CFormInput
             type="number"
             value={product.price}
@@ -173,10 +179,14 @@ const UpdateProducts = () => {
             id="price"
             required
           />
-          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
+          <CFormFeedback invalid>
+            من فضلك ادخل السعر للمنتج بالارقام فقط
+          </CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">Category</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">
+            الفئات المتاحة للمنتج
+          </CFormLabel>
           <CFormSelect
             multiple
             onChange={handleInputChange}
@@ -191,10 +201,14 @@ const UpdateProducts = () => {
               </option>
             ))}
           </CFormSelect>
-          <CFormFeedback invalid>Please select a category.</CFormFeedback>
+          <CFormFeedback invalid>
+            من فضلك اختر الفئات المتاحة للمنتج
+          </CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">Image</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">
+            صورة المنتج الحالية
+          </CFormLabel>
           <CFormInput
             type="file"
             accept="image/*"
@@ -205,7 +219,7 @@ const UpdateProducts = () => {
         </CCol>
         <CCol md={12}>
           <CButton type="submit" color="primary">
-            Save
+            حفظ
           </CButton>
         </CCol>
       </CForm>

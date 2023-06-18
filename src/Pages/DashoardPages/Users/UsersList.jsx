@@ -58,17 +58,17 @@ const UsersList = () => {
   //viewUser
   const viewUser = (_id) => {
     //view user
-    window.location.href = `#/dashboard/dashboard/users/view-user/${_id}`;
+    window.location.href = `/dashboard/users/view-user/${_id}`;
   };
   //add user
   const addUser = () => {
     //add user
-    window.location.href = `#/dashboard/dashboard/users/add-user`;
+    window.location.href = `/dashboard/users/add-user`;
   };
   //set permission
   const setPermission = (_id) => {
     //set permission
-    window.location.href = `#/dashboard/dashboard/users/set-permission/${_id}`;
+    window.location.href = `/dashboard/users/set-permission/${_id}`;
   };
  
   return (

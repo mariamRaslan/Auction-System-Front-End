@@ -84,7 +84,7 @@ const AddProduct = () => {
   return (
     <div>
       <CCardHeader>
-        <strong>Add Product</strong>
+        <strong>اضافة منتج</strong>
       </CCardHeader>
       <CForm
         className="row g-3 needs-validation"
@@ -95,32 +95,32 @@ const AddProduct = () => {
         method="post"
       >
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">Name</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">الاسم</CFormLabel>
           <CFormInput type="text" name="name" id="name" required />
-          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
+          <CFormFeedback invalid>من فضلك ادخل الاسم</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">Material</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">المادة الخام</CFormLabel>
           <CFormInput type="text" name="material" id="material" required />
-          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
+          <CFormFeedback invalid>من فضلك ادخل المادة الخام</CFormFeedback>
         </CCol>
         <CCol md={4}>
-          <CFormLabel htmlFor="validationCustom01">Size</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">الحجم</CFormLabel>
           <CFormInput type="text" name="size" id="size" required />
-          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
+          <CFormFeedback invalid>من فضلك ادخل الحجم</CFormFeedback>
         </CCol>
         <CCol md={4}>
-          <CFormLabel htmlFor="validationCustom01">Color</CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">اللون</CFormLabel>
           <CFormInput type="text" name="color" id="color" required />
-          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
+          <CFormFeedback invalid>من فضلك ادخل اللون</CFormFeedback>
         </CCol>
         <CCol md={4}>
-          <CFormLabel htmlFor="validationCustom02">Quantity</CFormLabel>
+          <CFormLabel htmlFor="validationCustom02">الكمية</CFormLabel>
           <CFormInput type="number" name="qty" id="qty" required />
-          <CFormFeedback invalid>Please enter a value.</CFormFeedback>
+          <CFormFeedback invalid>من فضلك ادخل الكمية</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom04">Categories</CFormLabel>
+          <CFormLabel htmlFor="validationCustom04">الفئات</CFormLabel>
           <CFormSelect
             multiple
             className="form-control default-select"
@@ -128,7 +128,7 @@ const AddProduct = () => {
             name="category"
             id="category"
           >
-            <option disabled>Select more than one category by pressing ctrl</option>
+            <option disabled>اختر اكثر من فئة بالضغط على ctrl</option>
             {categories.map((category) => {
               return (
                 <option name="category[]" value={category._id}>
@@ -137,10 +137,12 @@ const AddProduct = () => {
               );
             })}
           </CFormSelect>
-          <CFormFeedback invalid>Please provide a valid category.</CFormFeedback>
+          <CFormFeedback invalid>
+            من فضلك اختر فئة واحدة على الاقل
+          </CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="image">Image</CFormLabel>
+          <CFormLabel htmlFor="image">صورة المنتج</CFormLabel>
           <CFormInput
             type="file"
             accept="image/*"
@@ -148,11 +150,11 @@ const AddProduct = () => {
             name="image"
             aria-label="file example"
           />
-          <CFormFeedback invalid>Invalid image.</CFormFeedback>
+          <CFormFeedback invalid>من فضلك ادخل صورة المنتج</CFormFeedback>
         </CCol>
         <CCol xs={12}>
           <CButton color="primary" type="submit">
-            Add Product
+            اضافة
           </CButton>
         </CCol>
       </CForm>

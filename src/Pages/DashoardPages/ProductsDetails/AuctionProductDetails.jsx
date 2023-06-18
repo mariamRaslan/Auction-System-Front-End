@@ -21,23 +21,23 @@ const AuctionProductDetails = () => {
   }, []);
 
   return (
-    <CRow  className="detailsContainer">
+    <CRow className="detailsContainer" dir="rtl">
       <CCol sm={12} md={12} lg={12} className="card detailsContainer">
         <img
           className="product-img"
-          alt="Product Image"
+          alt="صورة المنتج"
           src={productDetails.item_id?.image}
         ></img>
         <div className="d-flex m-auto justify-content-center">
           <div className="details col-12">
             <p>
-              <span>Product</span> <br></br>
+              <span>المنتج</span> <br></br>
               {productDetails.item_id?.name}
             </p>
           </div>
           <div className="details col-12">
             <p>
-              <span>Auction</span> <br></br>
+              <span>المزاد</span> <br></br>
               {productDetails.auction_id?.name}
             </p>
           </div>
@@ -46,25 +46,25 @@ const AuctionProductDetails = () => {
         <div className="d-flex m-2 justify-content-center">
           <div className="details col-8">
             <p>
-              <span>Bidding Gap</span> <br></br>
+              <span>فارق المزايدة</span> <br></br>
               {productDetails.bidding_gap}
             </p>
           </div>
           <div className="details col-8">
             <p>
-              <span>Starting Bid</span> <br></br>
+              <span>المزايدة الأولى</span> <br></br>
               {productDetails.start_bidding}
             </p>
           </div>
           <div className="details col-8">
             <p>
-              <span>Maximum Price</span> <br></br>
+              <span>السعر الأقصى</span> <br></br>
               {productDetails.max_price}
             </p>
           </div>
           <div className="details col-8">
             <p>
-              <span>Auction End Time</span> <br></br>
+              <span>وقت انتهاء المزاد</span> <br></br>
               {productDetails.end_time}
             </p>
           </div>
