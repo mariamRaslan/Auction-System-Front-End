@@ -5,6 +5,7 @@ import './UserAccount.css';
 import axiosInstance from "../../Axios";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import logo from "../../assets/images/logo2.png";
 
 const CodeForm = () => {
   const token = useParams().token;
@@ -57,7 +58,8 @@ const CodeForm = () => {
         <div className="right-login" dir="rtl">
           <div className="card-login">
             <div className="d-flex justify-content-center mb-4">
-              <h1>.iBid</h1>
+            <img className="logo-img" alt="logo" src={logo} />
+              <h1>iBid</h1>
             </div>
 
             <h3 className="text-center text-white">قم بإدخال الرمز المرسل إليك</h3>

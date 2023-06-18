@@ -18,7 +18,7 @@ import {
   CDropdownDivider,
 } from "@coreui/react";
 import "./NavBar.css";
-import logo from "../../../assets/images/logo.svg";
+import logo from "../../../assets/images/logo2.png";
 import { Link } from "react-router-dom";
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
@@ -33,7 +33,8 @@ const NavBar = () => {
     <>
       <CNavbar expand="lg" colorScheme="light" className="nav mb-4">
         <CContainer fluid>
-          <CNavbarBrand href="#">
+          <CNavbarBrand href="#" className="text-light">
+             
             <img className="logo-img" alt="logo" src={logo} />
             iBid
           </CNavbarBrand>

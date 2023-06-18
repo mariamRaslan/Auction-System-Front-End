@@ -14,6 +14,7 @@ import {
   cilStar,
   cilUser,
   cilUserPlus,
+  cilMediaPlay
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -149,6 +150,14 @@ const _nav = [
     //     to: '/dashboard/dashboard/',
     //   },
     // ],
+  },
+
+  {
+    component: CNavItem,
+    name: 'إنشاء بث مباشر',
+    to: '/dashboard/live-stream/create',
+    icon: <CIcon icon={cilMediaPlay} customClassName="nav-icon" />,
+ 
   },
 ]
 

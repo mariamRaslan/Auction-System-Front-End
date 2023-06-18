@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../assets/images/logo.svg";
+import logo from "../../../assets/images/logo2.png";
 import "./Footer.css";
 
 const Footer = () => {
@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="col-lg-3 col-md-6 col-sm-12 justify-content-lg-start">
             <div className="footer-logo widget-title">
               <img src={logo} alt="logo" className="logo-img" />
-              iBid
+              .iBid
             </div>
             <br></br>
             <div className="footer-left-text d-block">
