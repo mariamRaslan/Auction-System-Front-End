@@ -129,8 +129,8 @@ const Login = () => {
                     <Link to="/reset-password/email" className="text-white">
                       نسيت كلمة المرور
                     </Link>
-                    <p className="lead">email: newAdmin@gmail.com</p>
-                     <p className="lead">password: Admin@12345</p>
+                    {/* <p className="lead">email: newAdmin@gmail.com</p>
+                     <p className="lead">password: Admin@12345</p> */}
                   </div>
                 </Form>
               )}
