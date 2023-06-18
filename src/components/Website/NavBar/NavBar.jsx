@@ -17,9 +17,13 @@ import {
   CFormInput,
   CDropdownDivider,
 } from "@coreui/react";
+import CIcon from "@coreui/icons-react";
+import { cilAccountLogout } from "@coreui/icons";
 import "./NavBar.css";
 import logo from "../../../assets/images/logo2.png";
 import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import axios from "../../../Axios";
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
 
@@ -29,9 +33,29 @@ const NavBar = () => {
     window.location.href = "/login";
   };
 
+  //get user image
+  const [user, setUserImage] = useState({
+    image: "",
+  });
+
+  //get token
+  const token = localStorage.getItem("token");
+
+  //decode token
+  const decoded = jwt_decode(token);
+
+  // get id from token
+  const id = decoded.id;
+
+  //call api /users/:id
+  axios.get(`/users/${id}`).then((res) => {
+    setUserImage({
+      image: res.data.data.image,
+    });
+  });
   return (
     <>
-      <CNavbar expand="lg" colorScheme="light" className="nav mb-4">
+      <CNavbar expand="lg" colorScheme="light" className="nav mb-0">
         <CContainer fluid>
           <CNavbarBrand href="#" className="text-light">
              
@@ -69,13 +93,30 @@ const NavBar = () => {
                     className="search-input mx-2"
                     placeholder="بحث"
                   />
-                  <CButton type="submit" className="search-submit" color="secondary" variant="outline">
+                  <CButton
+                    type="submit"
+                    className="search-submit"
+                    color="secondary"
+                    variant="outline"
+                  >
                     <p className=" d-inline">بحث</p>
                   </CButton>
                 </CForm>
-                <CDropdown variant="nav-item" className="col-1">
+                <CNavItem className="user-item">
+                  <CNavLink href="/profile" title="حسابي">
+                    <img className="user-img" alt="صوره المستخدم" src={user.image} />
+                  </CNavLink>
+                </CNavItem>
+                <CNavItem className="user-item">
+                  <CNavLink onClick={logout} href="#" title="تسجيل الخروج">
+                    {/**logout icon  */}
+                    <CIcon icon={cilAccountLogout} size="lg" />
+                  </CNavLink>
+                </CNavItem>
+
+                {/* <CDropdown variant="nav-item" className="col-1">
                   <CDropdownToggle>المزيد</CDropdownToggle>
-                  <CDropdownMenu style={{ marginTop: "17px" }}>
+                   <CDropdownMenu style={{ marginTop: "17px" }}>
                     <CDropdownItem className="drop-item ">
                       <Link
                         to="/profile"
@@ -93,7 +134,7 @@ const NavBar = () => {
                       تسجيل الخروج
                     </CDropdownItem>
                   </CDropdownMenu>
-                </CDropdown>
+                </CDropdown> */}
               </div>
             </CNavbarNav>
           </CCollapse>
