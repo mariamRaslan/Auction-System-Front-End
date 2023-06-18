@@ -6,8 +6,8 @@ const Footer = () => {
   return (
     <>
       <div className="footer container-fluid w-100">
-        <div className="w-100 d-flex footer-top">
-          <div className="col-lg-3 col-md-6 justify-content-lg-start">
+        <div className="w-100 d-flex row footer-top">
+          <div className="col-lg-3 col-md-6 col-sm-12 justify-content-lg-start">
             <div className="footer-logo widget-title">
               <img src={logo} alt="logo" className="logo-img" />
               iBid
@@ -20,7 +20,7 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <div className="col-lg-3 col-md-6 d-flex justify-content-lg-center">
+          <div className="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-lg-center">
             <div className="footer-item">
               <div id="nav_menu-3" className="footer-widget widget_nav_menu">
                 <div className="widget-title">
@@ -45,7 +45,7 @@ const Footer = () => {
               </div>{" "}
             </div>
           </div>
-          <div className="col-lg-3 col-md-6 d-flex justify-content-lg-center">
+          <div className="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-lg-center">
             <div className="footer-item">
               <div id="nav_menu-3" className="footer-widget widget_nav_menu">
                 <div className="widget-title">
@@ -73,7 +73,7 @@ const Footer = () => {
               </div>{" "}
             </div>
           </div>
-          <div className="col-lg-3 col-md-6 d-flex justify-content-lg-center">
+          <div className="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-lg-center">
             <div className="footer-item">
               <div className="widget-title">
                 <h5>أحدث المقالات</h5>
