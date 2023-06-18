@@ -6,7 +6,8 @@ import jwt_decode from 'jwt-decode';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './UserAccount.css';
 import Img from '../../assets/images/13015.jpg';
-import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
+import { FaGoogle, FaFacebook } from 'react-icons/fa';
+import logo from "../../assets/images/logo2.png";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -61,7 +62,8 @@ const Login = () => {
         <div className="right-login" dir="rtl">
           <div className="card-login">
             <div className="d-flex justify-content-center mb-4">
-              <h1>.iBid</h1>
+            <img className="logo-img" alt="logo" src={logo} />
+              <h1>iBid</h1>
             </div>
             <h3 className="text-center text-white">تسجيل الدخول</h3>
             <Formik initialValues={{}} onSubmit={handleLogin}>
@@ -119,9 +121,6 @@ const Login = () => {
                       <button className="btn btn-outline-light mx-2" onClick={handleFacebookLogin}>
                         <FaFacebook size={24} />
                       </button>
-                      <a href="/" className="btn btn-outline-light mx-2">
-                        <FaApple size={24} />
-                      </a>
                     </div>
                   </div>
 
@@ -129,8 +128,8 @@ const Login = () => {
                     <Link to="/reset-password/email" className="text-white">
                       نسيت كلمة المرور
                     </Link>
-                    <p className="lead">email: newAdmin@gmail.com</p>
-                     <p className="lead">password: Admin@12345</p>
+                    {/* <p className="lead">email: newAdmin@gmail.com</p>
+                     <p className="lead">password: Admin@12345</p> */}
                   </div>
                 </Form>
               )}

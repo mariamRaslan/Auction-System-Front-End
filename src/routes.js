@@ -65,6 +65,10 @@ const UserProfileEdit=React.lazy(()=>import('./Pages/WebsitePages/UserProfile/Us
 
 // Biddings
 const BiddingsList = React.lazy(() => import('./Pages/DashoardPages/Biddings/BiddingsList'))
+//website live stream
+const ShowLiveStream=React.lazy(() => import('./Pages/WebsitePages/LiveStream/LiveStream'))
+//dashboard live stream
+const CreateLiveStream=React.lazy(() => import('./Pages/DashoardPages/LiveStream/LiveStream'))
 //Routes
 const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
@@ -96,6 +100,8 @@ const routes = [
   { path: '/reports/monthly-reports', name: 'MonthlyReports', element: MonthlyReports },
   { path: '/reports/calender', name: 'Calender', element: Calender },
   { path: '/reports/yearly-reports', name: 'YearlyReports', element: YearlyReports },
+  //dashboard live stream
+  {path:'/live-stream/create',exact:true,name:'CreateLiveStream',element:CreateLiveStream},
 
   //Home
   { path: '/home', name: 'Home', element: Home },
@@ -116,11 +122,14 @@ const routes = [
   //Website VerificationCode
   { path: "/verification-code", name: "VerificationCode", element: VerificationCode },
 
-  //Website NotFound
-  { path: "/not-found", name: "NotFound", element: NotFound },
-
  //Biddings
   { path: '/dashboard/biddings', exact: true, name: 'BiddingsList', element: BiddingsList },
+
+  //website live stream
+  {path:'/live-stream/show',exact:true,name:'ShowLiveStream',element:ShowLiveStream},
+  
+   //Website NotFound
+   { path: "*", name: "NotFound", element: NotFound },
 
 ]
 

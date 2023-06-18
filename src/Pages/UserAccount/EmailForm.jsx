@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Img from "../../assets/images/13015.jpg"
 import './UserAccount.css';
 import axiosInstance from "../../Axios";
+import logo from "../../assets/images/logo2.png";
 
 const validateEmail = (value) => {
   let errorMessage;
@@ -44,7 +45,8 @@ const EmailForm = () => {
         <div className="right-login" dir="rtl">
           <div className="card-login">
             <div className="d-flex justify-content-center mb-4">
-              <h1>.iBid</h1>
+            <img className="logo-img" alt="logo" src={logo} />
+              <h1>iBid</h1>
             </div>
 
             <h3 className="text-center text-white">إعادة ضبط كلمة المرور</h3>
