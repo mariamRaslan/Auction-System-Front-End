@@ -42,45 +42,45 @@ const AuctionDetails = () => {
       <div className="row">
         <div className="col-12">
           <h1 className="text-center ">{auctionDetails.name}</h1>
-          <p className="text-center mb-4">Status: {auctionDetails.status}</p>
+          <p className="text-center mb-4">الحالة: {auctionDetails.status}</p>
           <div className="d-flex justify-content-between ps-5 pe-5">
             <div>
               <p>
-                <strong>Reference Number: </strong>{" "}
+                <strong>رقم المرجع: </strong>{" "}
                 {auctionDetails.reference_number}
               </p>
-              <p> <strong>Start Date: </strong> {auctionDetails.start_date}</p>
-              <p> <strong>Time: </strong> {auctionDetails.time}</p>
+              <p> <strong>تاريخ البدء: </strong> {auctionDetails.start_date}</p>
+              <p> <strong>الوقت: </strong> {auctionDetails.time}</p>
             </div>
             <div>
               <p>
                 {" "}
-                <strong>Reference Number: </strong>{" "}
+                <strong>رقم المرجع: </strong>{" "}
                 {auctionDetails.reference_number}
               </p>
               <p>
-                <strong>Insurance Value: </strong> ${auctionDetails.fees}
+                <strong>قيمة التأمين: </strong> ${auctionDetails.fees}
               </p>
             </div>
           </div>
         </div>
       </div>
-      <Link to={`/auctions/edit/${auctionDetails._id}`}>
-        <CButton color="primary me-5">Edit Auction</CButton>
+      <Link to={`/dashboard/auctions/edit/${auctionDetails._id}`}>
+        <CButton color="primary me-5">تعديل المزاد</CButton>
       </Link>
       <div className="row mt-4 border-top">
-        <h3 className="text-center mb-4 mt-4">Auction Items</h3>
+        <h3 className="text-center mb-4 mt-4"> المنتجات</h3>
         {auctionItems.length > 0 ? (
           auctionItems.map((item) => (
             <div className="col-md-4 mb-4" key={item._id}>
               <CCard>
                 <img src={item.item_id?.image || "https://via.placeholder.com/150"} alt="Auction Item" style={{ height: "200px" }} />
                 <CCardBody>
-                  <CCardTitle>{item.item_id?.name || "No Name"}</CCardTitle>
+                  <CCardTitle>{item.item_id?.name || "لايوجد اسم"}</CCardTitle>
                   <div className="d-flex justify-content-between">
-                    <p>Starting Bid: {item.start_bidding +'$'|| "No Price"}</p>
+                    <p>السعر الابتدائي: {item.start_bidding +'$'|| "لايوجد سعر"}</p>
                     <Link to={`/products/product-details/${item.item_id._id}`}>
-                      <CButton color="primary">Details</CButton>
+                      <CButton color="primary">تفاصيل</CButton>
                     </Link>
                   </div>
                 </CCardBody>
@@ -88,12 +88,12 @@ const AuctionDetails = () => {
             </div>
           ))
         ) : (
-          <p className="text-center">No items have been added yet</p>
+          <p className="text-center">لم يتم إضافة أي منتج حتى الآن</p>
         )}
       </div>
     </div>
   ) : (
-    <p>Loading...</p>
+    <p>جاري التحميل ...</p>
   );
 };
 

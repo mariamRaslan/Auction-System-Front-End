@@ -87,7 +87,7 @@ const AddDetails = () => {
       max_price: parseInt(maxPrice),
     };
     console.log(data);
-    
+
     try {
       // perform validation
       const response = await axiosInstance.post('/itemDetails', data); // Updated URL
@@ -102,7 +102,7 @@ const AddDetails = () => {
   return (
     <CForm className="row g-3" onSubmit={handleSubmit}>
       <CCol md={6}>
-        <CFormLabel htmlFor="selectedItemId">Select an item</CFormLabel>
+        <CFormLabel htmlFor="selectedItemId">اختر منتج</CFormLabel>
         <CFormSelect
           custom
           id="selectedItemId"
@@ -111,7 +111,7 @@ const AddDetails = () => {
           required
         >
           <option value="" disabled>
-            Select an item
+            اختر منتج
           </option>
           {items.map((item) => (
             <option key={item._id} value={item._id}>
@@ -119,10 +119,10 @@ const AddDetails = () => {
             </option>
           ))}
         </CFormSelect>
-        {!selectedItemId && <CFormFeedback invalid>Please select an item</CFormFeedback>}
+        {!selectedItemId && <CFormFeedback invalid>يرجى اختيار منتج</CFormFeedback>}
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="selectedAuctionId">Select an auction</CFormLabel>
+        <CFormLabel htmlFor="selectedAuctionId">اختر مزادًا</CFormLabel>
         <CFormSelect
           custom
           id="selectedAuctionId"
@@ -131,7 +131,7 @@ const AddDetails = () => {
           required
         >
           <option value="" disabled>
-            Select an auction
+            اختر مزادًا
           </option>
           {auctions.map((auction) => (
             <option key={auction._id} value={auction._id}>
@@ -139,11 +139,12 @@ const AddDetails = () => {
             </option>
           ))}
         </CFormSelect>
-        {!selectedAuctionId && <CFormFeedback invalid>Please select an auction</CFormFeedback>}
+        {!selectedAuctionId && <CFormFeedback invalid>يرجى اختيار مزاد</CFormFeedback>}
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="initialBidValue">Initial bid value</CFormLabel>
+        <CFormLabel htmlFor="initialBidValue">قيمة العرض الأولي</CFormLabel>
         <CInputGroup>
+          <CInputGroupText>$</CInputGroupText>
           <CFormInput
             type="number"
             id="initialBidValue"
@@ -151,13 +152,13 @@ const AddDetails = () => {
             onChange={handleInitialBidValueChange}
             required
           />
-          <CInputGroupText>ETH</CInputGroupText>
-          {!initialBidValue && <CFormFeedback invalid>Please enter an initial bid value</CFormFeedback>}
         </CInputGroup>
+        {!initialBidValue && <CFormFeedback invalid>يرجى إدخال قيمة العرض الأولي</CFormFeedback>}
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="minimumBidValue">Minimum bid value</CFormLabel>
+        <CFormLabel htmlFor="minimumBidValue">أدنى قيمة للعرض</CFormLabel>
         <CInputGroup>
+          <CInputGroupText>$</CInputGroupText>
           <CFormInput
             type="number"
             id="minimumBidValue"
@@ -165,24 +166,31 @@ const AddDetails = () => {
             onChange={handleMinimumBidValueChange}
             required
           />
-          <CInputGroupText>ETH</CInputGroupText>
-          {!minimumBidValue && <CFormFeedback invalid>Please enter a minimum bid value</CFormFeedback>}
         </CInputGroup>
+        {!minimumBidValue && (
+          <CFormFeedback invalid>يرجى إدخال أدنى قيمة للعرض</CFormFeedback>
+        )}
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="endTime">End time</CFormLabel>
-        <CFormInput
-          type="datetime-local"
-          id="endTime"
-          value={endTime}
-          onChange={handleEndTimeChange}
-          required
-        />
-        {!endTime && <CFormFeedback invalid>Please enter an end time</CFormFeedback>}
-      </CCol>
-      <CCol md={6}>
-        <CFormLabel htmlFor="maxPrice">Max price</CFormLabel>
+        <CFormLabel htmlFor="endTime">وقت الانتهاء</CFormLabel>
         <CInputGroup>
+          <CInputGroupText>
+            <i className="cil-calendar"></i>
+          </CInputGroupText>
+          <CFormInput
+            type="datetime-local"
+            id="endTime"
+            value={endTime}
+            onChange={handleEndTimeChange}
+            required
+          />
+        </CInputGroup>
+        {!endTime && <CFormFeedback invalid>يرجى إدخال وقت الانتهاء</CFormFeedback>}
+      </CCol>
+      <CCol md={6}>
+        <CFormLabel htmlFor="maxPrice">الحد الأقصى للسعر</CFormLabel>
+        <CInputGroup>
+          <CInputGroupText>$</CInputGroupText>
           <CFormInput
             type="number"
             id="maxPrice"
@@ -190,13 +198,12 @@ const AddDetails = () => {
             onChange={handleMaxPriceChange}
             required
           />
-          <CInputGroupText>ETH</CInputGroupText>
-          {!maxPrice && <CFormFeedback invalid>Please enter a max price</CFormFeedback>}
         </CInputGroup>
+        {!maxPrice && <CFormFeedback invalid>يرجى إدخال الحد الأقصى للسعر</CFormFeedback>}
       </CCol>
       <CCol md={12}>
         <CButton type="submit" color="primary" disabled={!formValid}>
-          Add details
+          أضف التفاصيل
         </CButton>
       </CCol>
     </CForm>
