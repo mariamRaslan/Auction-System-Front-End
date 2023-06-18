@@ -127,7 +127,7 @@ function EditDetails() {
         max_price: parseInt(maxPrice),
       };
       await axiosInstance.patch(`/itemDetails/${id}`, data);
-     // navigate('/auctions');
+      navigate('/dashboard/auctions');
     } catch (error) {
       console.log('Error updating item details:', error);
     }
@@ -221,7 +221,7 @@ function EditDetails() {
           </CInputGroupText>
           <CFormInput
             id="endTime"
-            type="datetime-local"
+            type="time"
             value={endTime}
             onChange={handleEndTimeChange}
             required

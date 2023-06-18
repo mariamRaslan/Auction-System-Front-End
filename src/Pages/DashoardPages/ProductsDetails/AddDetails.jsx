@@ -92,7 +92,7 @@ const AddDetails = () => {
       // perform validation
       const response = await axiosInstance.post('/itemDetails', data); // Updated URL
       if (response.status === 201) {
-        navigate(`/auctions/${response.data.data._id}`);
+        navigate(`/dashboard/auctions/${response.data.data._id}`);
       }
     } catch (error) {
       console.log(error);
@@ -178,7 +178,7 @@ const AddDetails = () => {
             <i className="cil-calendar"></i>
           </CInputGroupText>
           <CFormInput
-            type="datetime-local"
+            type="time"
             id="endTime"
             value={endTime}
             onChange={handleEndTimeChange}
