@@ -15,18 +15,17 @@ import {
   CModalFooter,
   CAlert,
 } from "@coreui/react";
-
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../Axios";
-
+import Alert from "../../../SharedUi/Alert/Alert";
+import ConfirmationModal from "../../../SharedUi/Modal/Modal";
 const Products = () => {
   const Navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedId, setSelectedId] = useState();
-  const [visible, setVisible] = useState(false);
-  const [error, setError] = useState("");
-  const [alert, setAlert] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [activePage, setActivePage] = useState(1);
   const pageSize = 4;
 
@@ -49,7 +48,10 @@ const Products = () => {
       console.error(error);
     }
   }
-
+  const handleDelete = (id) => {
+    setSelectedId(id);
+    setShowConfirmationModal(true);
+  };
   // function for delete product
   async function deleteProduct(id) {
     try {
@@ -58,8 +60,7 @@ const Products = () => {
       setSelectedId(null);
     } catch (error) {
       console.error(error);
-      // setError(error);
-      setAlert(true);
+      setAlertVisible(true);
     }
   }
 
@@ -195,7 +196,7 @@ const Products = () => {
                   <CTableHeaderCell scope="col">
                     <CButton
                       onClick={() => {
-                        setVisible(!visible);
+                        setShowConfirmationModal(true);
                         setSelectedId(product._id);
                       }}
                       className="btntext"
@@ -212,42 +213,28 @@ const Products = () => {
         </CTableBody>
       </CTable>
       {renderPagination()}
-      <CModal
-        alignment="center"
-        visible={visible}
-        onClose={() => setVisible(false)}
-      >
-        <CModalHeader>
-          <CModalTitle>Confirm</CModalTitle>
-        </CModalHeader>
-        <CModalBody>Are you sure you want to delete this item?</CModalBody>
-        <CModalFooter>
-          <CButton
-            onClick={() => {
-              deleteProduct(selectedId);
-              setVisible(false);
-            }}
-            color="danger"
-          >
-            Delete
-          </CButton>
-          <CButton color="secondary" onClick={() => setVisible(false)}>
-            Cancel
-          </CButton>
-        </CModalFooter>
-      </CModal>
-      <CAlert
-        visible={alert}
+      <ConfirmationModal
+        title="تأكيد الحذف"
+        message="هل انت متأكد من حذف هذا العنصر؟"
+        confirmButtonText="حذف"
+        cancelButtonText="الغاء"
+        onConfirm={() => {
+          deleteProduct(selectedId);
+          setShowConfirmationModal(false);
+        }}
+        onCancel={() => setShowConfirmationModal(false)}
+        visible={showConfirmationModal}
+        setVisible={setShowConfirmationModal}
+      />
+      <Alert
+        type="error-alert"
+        visible={alertVisible}
         color="warning"
+        message="هذا العنصر مرتبط بعناصر اخرى لا يمكن حذفه"
         dismissible
         alignment="center"
-        onClose={() => {
-          setAlert(false);
-        }}
-      >
-        {/* <strong>Sorry! </strong> {error} */}
-        <strong> عذرا..! </strong> هذا العنصر مرتبط بعناصر اخرى
-      </CAlert>
+        setVisible={setAlertVisible}
+      />
       ;
     </div>
   );

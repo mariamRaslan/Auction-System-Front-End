@@ -16,11 +16,14 @@ import {
 } from "@coreui/react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../Axios";
+import Alert from "../../../SharedUi/Alert/Alert";
+import ConfirmationModal from "../../../SharedUi/Modal/Modal";
 
 const ProductsDetails = () => {
   const Navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [visible, setVisible] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
   const [selectedId, setSelectedId] = useState();
   const [activePage, setActivePage] = useState(1);
   const pageSize = 7;
@@ -44,6 +47,7 @@ const ProductsDetails = () => {
       setSelectedId(null);
     } catch (error) {
       console.error(error);
+      setAlertVisible(true);
     }
   }
 
@@ -165,7 +169,7 @@ const ProductsDetails = () => {
                     <CButton
                       onClick={() => {
                         setSelectedId(product._id);
-                        setVisible(!visible);
+                        setShowConfirmationModal(true);
                       }}
                       className="btntext"
                       color="danger"
@@ -184,30 +188,28 @@ const ProductsDetails = () => {
       {/* Pagination */}
       {renderPagination()}
       {/* Modal for deleting */}
-      <CModal
+      <ConfirmationModal
+        title="تأكيد الحذف"
+        message="هل انت متأكد من حذف هذا العنصر؟"
+        confirmButtonText="حذف"
+        cancelButtonText="الغاء"
+        onConfirm={() => {
+          deleteProduct(selectedId);
+          setShowConfirmationModal(false);
+        }}
+        onCancel={() => setShowConfirmationModal(false)}
+        visible={showConfirmationModal}
+        setVisible={setShowConfirmationModal}
+      />
+      <Alert
+        type="error-alert"
+        visible={alertVisible}
+        color="warning"
+        message="هذا العنصر مرتبط بعناصر اخرى لا يمكن حذفه"
+        dismissible
         alignment="center"
-        visible={visible}
-        onClose={() => setVisible(false)}
-      >
-        <CModalHeader>
-          <CModalTitle>Confirm</CModalTitle>
-        </CModalHeader>
-        <CModalBody>Are you sure you want to delete this item?</CModalBody>
-        <CModalFooter>
-          <CButton
-            onClick={() => {
-              deleteProduct(selectedId);
-              setVisible(false);
-            }}
-            color="danger"
-          >
-            Delete
-          </CButton>
-          <CButton color="secondary" onClick={() => setVisible(false)}>
-            Cancel
-          </CButton>
-        </CModalFooter>
-      </CModal>
+        setVisible={setAlertVisible}
+      />
     </div>
   );
 };
