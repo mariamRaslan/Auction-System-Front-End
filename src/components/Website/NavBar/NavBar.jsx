@@ -19,8 +19,15 @@ import {
 } from "@coreui/react";
 import "./NavBar.css";
 import logo from "../../../assets/images/logo.svg";
+import { Link } from 'react-router-dom';
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
+  
+    //logout remove token & redirct to login
+    const logout = () => {
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
 
   return (
     <>
@@ -80,11 +87,11 @@ const NavBar = () => {
                   <CDropdownItem className="drop-item" href="#">
                     تسجيل جديد
                   </CDropdownItem>
-                  <CDropdownItem className="drop-item" href="#">
-                    حسابي
+                  <CDropdownItem className="drop-item ">
+                     <Link to="/profile" className="text-dark text-decoration-none" >حسابي</Link>
                   </CDropdownItem>
                   <CDropdownDivider />
-                  <CDropdownItem className="drop-item" href="#">
+                  <CDropdownItem className="drop-item" href="#" onClick={logout}>
                     تسجيل الخروج
                   </CDropdownItem>
                 </CDropdownMenu>

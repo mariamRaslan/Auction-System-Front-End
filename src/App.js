@@ -48,8 +48,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/reset-password/email" element={<EmailForm />} />
-          <Route path="/reset-password/code" element={<CodeForm />} />
-          <Route path="/new-password" element={<NewPasswordForm />} />
+          <Route path="/reset-password/code/:token/:verifycode" element={<CodeForm />} />
+          <Route path="/new-password/:token" element={<NewPasswordForm />} />
           <Route path="/dashboard/*" element={<PrivateRoute component={DefaultLayout} />} />
           <Route path="/*" element={<PrivateRoute component={WebsiteLayout} />} />
         </Routes>

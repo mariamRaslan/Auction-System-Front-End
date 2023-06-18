@@ -2,56 +2,151 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Img from "../../assets/images/13015.jpg"
 import './UserAccount.css';
-
+import axiosInstance from "../../Axios";
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const CodeForm = () => {
+  const token = useParams().token;
+  const verifycode = useParams().verifycode;
+  const navigate = useNavigate();
+
+  const validateCode = (value) => {
+    if (!value) {
+      return "يرجى إدخال الرمز";
+    } else if (!/^\d{1}$/i.test(value)) {
+      return "يرجى إدخال الرمز بشكل صحيح";
+    }
+  };
+
+  const handleSubmit = (values, { setSubmitting }) => {
+    const { code1, code2, code3, code4, code5 } = values;
+    const verificationCode = `${code1}${code2}${code3}${code4}${code5}`;
+
+    axiosInstance
+      .post(`/reset-password/${token}/${verifycode}`, {
+        numberOne:code1,
+        numberTwo:code2,
+        numberThree:code3,
+        numberFour:code4,
+        numberFive:code5
+      })
+      .then((response) => {
+        console.log(response);
+        navigate(`/new-password/${token}`);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
+  };
+
   return (
-    < >
+    <>
       {/* <div className="websiteLogo body">
     <img src="<logo-url>" alt="logo" className="logo" />
     <h1>iBid.</h1>
   </div> */}
-    <div className="body">
-  <div className="left-login">
-    <img src={Img} alt="auction image" className="chart" />
-  </div>
+      <div className="body">
+        <div className="left-login">
+          <img src={Img} alt="auction image" className="chart" />
+        </div>
 
-  <div className="right-login" dir="rtl">
-    <div className="card-login">
-      <div className="d-flex justify-content-center mb-4">
-        <h1>.iBid</h1>
-      </div>
-
-      <h3 className="text-center text-white">إعادة ضبط كلمةالمرور</h3>
-
-      <Formik initialValues={{}}>
-        {({ setFieldValue }) => (
-          <Form className="login-form">
-            <div className="row">
-              <div className="col-md-12">
-                <div className="form-group">
-                  <label htmlFor="code">قم بإدخال الرمز المرسل في بريدك الالكتروني</label>
-                  <Field name="code" type="text" className="form-field" placeHolder="ادخل الرمز" />
-                  <ErrorMessage
-                    component="span"
-                    name="code"
-                    className="form-error"
-                  />
-                </div>
-              </div>  
+        <div className="right-login" dir="rtl">
+          <div className="card-login">
+            <div className="d-flex justify-content-center mb-4">
+              <h1>.iBid</h1>
             </div>
 
-            <button className="button" type="submit">
-              التالي
-            </button>
-          </Form>
-        )}
-      </Formik>
-    </div>
-  </div>
-</div>
-      </>
+            <h3 className="text-center text-white">قم بإدخال الرمز المرسل إليك</h3>
+
+            <Formik
+              initialValues={{
+                code1: "",
+                code2: "",
+                code3: "",
+                code4: "",
+                code5: "",
+              }}
+              onSubmit={handleSubmit}
+            >
+              {({ isSubmitting }) => (
+                <Form className="login-form">
+                  <div className="form-group d-flex justify-content-center align-items-center">
+                    <div className="d-flex justify-content-center">
+                      <Field
+                        name="code5"
+                        type="text"
+                        className="form-field-small mx-2"
+                        validate={validateCode}
+                      />
+                      <Field
+                        name="code4"
+                        type="text"
+                        className="form-field-small mx-2"
+                        validate={validateCode}
+                      />
+                      <Field
+                        name="code3"
+                        type="text"
+                        className="form-field-small mx-2"
+                        validate={validateCode}
+                      />
+                      <Field
+                        name="code2"
+                        type="text"
+                        className="form-field-small mx-2"
+                        validate={validateCode}
+                      />
+                      <Field
+                        name="code1"
+                        type="text"
+                        className="form-field-small mx-2"
+                        validate={validateCode}
+                      />
+                    </div>
+                    <div className="d-flex justify-content-center">
+                      <ErrorMessage
+                        component="span"
+                        name="code5"
+                        className="form-error"
+                      />
+                      <ErrorMessage
+                        component="span"
+                        name="code4"
+                        className="form-error"
+                      />
+                      <ErrorMessage
+                        component="span"
+                        name="code3"
+                        className="form-error"
+                      />
+                      <ErrorMessage
+                        component="span"
+                        name="code2"
+                        className="form-error"
+                      />
+                      <ErrorMessage
+                        component="span"
+                        name="code1"
+                        className="form-error"
+                      />
+                    </div>
+                  </div>
+
+                  <button className="button" type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "جاري الإرسال..." : "تأكيد"}
+                  </button>
+                </Form>
+              )}
+            </Formik>
+          </div>
+        </div>
+      </div>
+    </>
   );
-}
+};
 
 export default CodeForm;
