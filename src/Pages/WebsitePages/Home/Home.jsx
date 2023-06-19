@@ -1,4 +1,7 @@
 import React from "react";
+//import card
+import Card from "../../../SharedUi/Card/card";
+
 
 const products = [
   {
@@ -65,57 +68,26 @@ const Home = () => {
     <div className="container mt-5">
 
       <div className="row">
-        {products.map((product) => (
-          <div key={product.id} className="col-md-3">
-            <div className="card">
-              <div className="image-container">
-                
-                <img
-                  src={product.image}
-                  className="img-fluid rounded thumbnail-image"
-                  alt="product"
-                />
-              </div>
-              <div className="product-detail-container p-2">
-                <div className="d-flex justify-content-between align-items-center">
-                  <h5 className="dress-name">{product.title}</h5>
-                  <div className="d-flex flex-column mb-2">
-                    <span className="new-price">${product.price}</span>
-                    
-                  </div>
+      {products.length > 0 ? (
+            products.map((product) => (
+                <div key={product.id} className="col-md-3">
+                  <Card
+                    image={product.image}
+                    title={product.title}
+                    startdate={product.startdate}
+                    //href = /product/:id
+                    href={`/product/${product.id}`}
+                  />
                 </div>
-                <div className="d-flex justify-content-between align-items-center pt-1">
-                  <div className="color-select d-flex ">
-                    <input type="button" name="grey" className="btn creme" />
-                    {product.id === 2 && (
-                      <input type="button" name="darkblue" className="btn darkblue ml-2" />
-                    )}
-                  </div>
-                  <div className="d-flex">
-                    <span className="item-size mr-2 btn" type="button">
-                      S
-                    </span>
-                    <span className="item-size mr-2 btn" type="button">
-                      M
-                    </span>
-                    <span className="item-size btn" type="button">
-                      L
-                    </span>
-                  </div>
+                ))
+        ) : (
+            <div className="col-md-12">
+                <div className="d-flex justify-content-center align-items-center">
+                    <div className="spinner-border text-primary" role="status">
+                    </div>
                 </div>
-                <div className="d-flex justify-content-center align-items-center pt-1">
-                  
-                  <button className="btn btn-primary add-to-cart">read more</button>
-                </div>
-                {product.isNew && (
-                  <div className="new-badge">
-                    <span className="badge badge-primary">New</span>
-                  </div>
-                )}
-              </div>
             </div>
-          </div>
-        ))}
+        )}
       </div>
     </div>
 
