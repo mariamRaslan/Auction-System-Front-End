@@ -8,6 +8,8 @@ import './UserAccount.css';
 import Img from '../../assets/images/13015.jpg';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import logo from "../../assets/images/logo2.png";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -28,7 +30,8 @@ const Login = () => {
         setErrorMessage('البريد الإلكتروني أو كلمة المرور التي أدخلتها غير صحيحة. حاول مرة اخرى');
       }
     } catch (err) {
-      setErrorMessage(err.message);
+      setErrorMessage('عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى');
+      toast.error('عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى');
     }
   };
 
@@ -54,12 +57,13 @@ const Login = () => {
     <>
       
       <div className="body">
-    
+      
         <div className="left-login">
           <img src={Img} alt="auction image" className="chart" />
         </div>
 
         <div className="right-login" dir="rtl">
+          <ToastContainer />
           <div className="card-login">
             <div className="d-flex justify-content-center mb-4">
             <img className="logo-img" alt="logo" src={logo} />
