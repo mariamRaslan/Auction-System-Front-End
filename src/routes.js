@@ -36,6 +36,8 @@ const Home=React.lazy(()=>import('./Pages/WebsitePages/Home/Home'))
 const Product=React.lazy(()=>import('./Pages/WebsitePages/product/product'))
 //auction
 const Auction=React.lazy(()=>import('./Pages/WebsitePages/Auction/auction'))
+//auction items
+const AuctionItems=React.lazy(()=>import('./Pages/WebsitePages/Auctionitems/Auctionitems'))
 // Website Bidding
 const Bidding = React.lazy(() =>
   import("./Pages/WebsitePages/Bidding/Bidding")
@@ -112,6 +114,9 @@ const routes = [
   { path: '/products', name: 'Product', element: Product },
   //auction
   { path: '/auctions', name: 'Auction', element: Auction },
+  //AuctionItems
+  { path: '/auction/:id/items', name: 'AuctionItems', element: AuctionItems },
+  
 
   //User Profile
   { path: '/profile', name: 'UserProfile', element: UserProfile },

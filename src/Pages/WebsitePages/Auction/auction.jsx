@@ -5,7 +5,7 @@ import Axios from "./../../../Axios";
 const Auctions = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(1);
+  const [itemsPerPage] = useState(8);
 
   useEffect(() => {
     getProducts();
@@ -76,7 +76,7 @@ const Auctions = () => {
                   image={null}
                   title={product.name}
                   startdate={formatStartDate(product.start_date)}
-                  href={`/product/${product.id}/items`}
+                  href={`/auction/${product._id}/items`}
                 />
               </div>
             ))
@@ -135,7 +135,7 @@ const Auctions = () => {
             </ul>
 
             <p className="text-center mt-2">
-              Showing {currentPage} of {products.length}
+              Showing {currentPage} of {Math.ceil(products.length/8)}
             </p>
           </nav>
         )}
