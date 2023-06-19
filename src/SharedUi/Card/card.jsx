@@ -16,7 +16,7 @@ const Card = ({ image, title, startdate, href }) => {
        />
       ) : (
         <img
-        src="https://i.imgur.com/8JIWpnw.jpg"
+        src="./Auction-logo.jpg"
         className="img-fluid rounded thumbnail-image"
         alt="product"
         //style to set width , hieght

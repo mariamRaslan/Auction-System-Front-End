@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "../../../SharedUi/Card/card";
 import Axios from "./../../../Axios";
 
-const Product = () => {
+const AuctionItems = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(1);
@@ -11,9 +11,15 @@ const Product = () => {
     getProducts();
   }, [currentPage]);
 
-  const getProducts = async () => {
+  //get id from url
+    const url = window.location.href;
+  //the url look like host/auction/id/items
+    //so we split the url by / and get id 
+    const id = url.split("/")[4];
+    
+    const getProducts = async () => {
     try {
-      const response = await Axios.get("/items");
+      const response = await Axios.get(`/auctions/${id}/items`);
       console.log(response.data);
       setProducts(response.data);
     } catch (error) {
@@ -50,7 +56,7 @@ const Product = () => {
       >
         <div className="d-flex justify-content-center align-items-center h-100">
           <div className="text-white">
-            <h1 className="mb-3">Products page</h1>
+            <h1 className="mb-3">items page</h1>
           </div>
         </div>
       </div>
@@ -61,10 +67,9 @@ const Product = () => {
             currentItems.map((product) => (
               <div key={product.id} className="col-md-3">
                 <Card
-                  image={product.image}
-                  title={product.name}
-                  startdate={product.category[0].name}
-                  href={`/product/${product._id}`}
+                  image={product.item_id.image}
+                  title={product.item_id.name}
+                  href={`/product/${product.id}`}
                 />
               </div>
             ))
@@ -72,6 +77,10 @@ const Product = () => {
             <div className="col-md-12">
               <div className="d-flex justify-content-center align-items-center">
                 <div className="spinner-border text-primary" role="status"></div>
+                <h2 className="mt-5 mb-5">No thing exist yet</h2>
+                
+                
+
               </div>
             </div>
           )}
@@ -132,4 +141,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default AuctionItems;

@@ -127,7 +127,7 @@ function EditDetails() {
         max_price: parseInt(maxPrice),
       };
       await axiosInstance.patch(`/itemDetails/${id}`, data);
-      navigate('/dashboard/auctions');
+      navigate('/dashboard/dashboard/auctions');
     } catch (error) {
       console.log('Error updating item details:', error);
     }
