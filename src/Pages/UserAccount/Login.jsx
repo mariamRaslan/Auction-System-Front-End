@@ -28,7 +28,12 @@ const Login = () => {
         setErrorMessage('البريد الإلكتروني أو كلمة المرور التي أدخلتها غير صحيحة. حاول مرة اخرى');
       }
     } catch (err) {
-      setErrorMessage(err.message);
+      setErrorMessage(err.response.data.message);
+      //set input = ''
+      values.email = "";
+      values.password = "";
+      //log err
+      console.log(err);
     }
   };
 
@@ -76,6 +81,8 @@ const Login = () => {
                       id="email"
                       type="email"
                       className="form-field text-dark"
+                      required
+                      
                     />
                     <ErrorMessage
                       component="span"
@@ -91,6 +98,7 @@ const Login = () => {
                       id="password"
                       type="password"
                       className="form-field text-dark"
+                      required
                     />
                     <ErrorMessage
                       component="span"
@@ -98,7 +106,11 @@ const Login = () => {
                       className="form-error"
                     />
                   </div>
-
+                  {errorMessage && (
+                    <div className="text-center mt-3">
+                      <span className="form-error text-warning h1 fw-bold">{errorMessage}</span>
+                    </div>
+                  )}
                   <button className="button" type="submit">
                     تسجيل الدخول
                   </button>
@@ -134,11 +146,7 @@ const Login = () => {
                 </Form>
               )}
             </Formik>
-            {errorMessage && (
-              <div className="text-center mt-3">
-                <span className="form-error text-danger fw-bold">{errorMessage}</span>
-              </div>
-            )}
+            
           </div>
         </div>
       </div>
