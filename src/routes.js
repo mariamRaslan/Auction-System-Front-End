@@ -34,7 +34,8 @@ const YearlyReports = React.lazy(() => import('./Pages/Reports/YearlyReports/Yea
 const Home=React.lazy(()=>import('./Pages/WebsitePages/Home/Home'))
 //product
 const Product=React.lazy(()=>import('./Pages/WebsitePages/product/product'))
-
+//auction
+const Auction=React.lazy(()=>import('./Pages/WebsitePages/Auction/auction'))
 // Website Bidding
 const Bidding = React.lazy(() =>
   import("./Pages/WebsitePages/Bidding/Bidding")
@@ -109,6 +110,8 @@ const routes = [
   { path: '/home', name: 'Home', element: Home },
   //product
   { path: '/products', name: 'Product', element: Product },
+  //auction
+  { path: '/auctions', name: 'Auction', element: Auction },
 
   //User Profile
   { path: '/profile', name: 'UserProfile', element: UserProfile },

@@ -65,7 +65,7 @@ const AuctionDetails = () => {
           </div>
         </div>
       </div>
-      <Link to={`/dashboard/auctions/edit/${auctionDetails._id}`}>
+      <Link to={`/dashboard/dashboard/auctions/edit/${auctionDetails._id}`}>
         <CButton color="primary me-5">تعديل المزاد</CButton>
       </Link>
       <div className="row mt-4 border-top">

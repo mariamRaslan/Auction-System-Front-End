@@ -92,7 +92,7 @@ const AddDetails = () => {
       // perform validation
       const response = await axiosInstance.post('/itemDetails', data); // Updated URL
       if (response.status === 201) {
-        navigate(`/dashboard/auctions/${response.data.data._id}`);
+        navigate(`/dashboard/dashboard/auctions/${response.data.data._id}`);
       }
     } catch (error) {
       console.log(error);
