@@ -60,7 +60,7 @@ function EditDetails() {
   useEffect(() => {
     async function fetchAuctions() {
       try {
-        const response = await axiosInstance.get('/auctions?status=not started');
+        const response = await axiosInstance.get('/auctions?status=not%20started');
         setAuctions(response.data.data);
       } catch (error) {
         console.log(error);

@@ -153,10 +153,23 @@ const _nav = [
   },
 
   {
-    component: CNavItem,
-    name: 'إنشاء بث مباشر',
-    to: '/dashboard/dashboard/live-stream/create',
+    component: CNavGroup,
+    name: ' بث مباشر',
+    to: '/',
     icon: <CIcon icon={cilMediaPlay} customClassName="nav-icon" />,
+        items: [
+          {
+            component: CNavItem,
+            name: ' بث مباشر',
+            to: '/dashboard/dashboard/live-stream/list',
+          },
+      {
+        component: CNavItem,
+        name: 'إنشاء بث مباشر',
+        to: '/dashboard/dashboard/live-stream/create',
+      },
+    
+    ],
  
   },
 ]
