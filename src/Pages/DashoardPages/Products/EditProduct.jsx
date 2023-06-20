@@ -22,7 +22,7 @@ const UpdateProducts = () => {
   async function fetchCategories() {
     try {
       const response = await axiosInstance.get("/categories");
-      console.log(response.data.data);
+      // console.log(response.data.data);
       setCategories(response.data.data);
     } catch (error) {
       console.error(error);
@@ -46,22 +46,24 @@ const UpdateProducts = () => {
 
   function handleInputChange(event) {
     const { name, value } = event.target;
+    let categoryIds = [];
     if (name === "category") {
-      // Create an array of category IDs
-      const categoryIds = Array.from(event.target.selectedOptions, (option) =>
-        parseInt(option.value, 10)
+      categoryIds = Array.from(
+        event.target.selectedOptions,
+        (option) => option.value
       );
-      setProduct((prevFormData) => ({
-        ...prevFormData,
-        category: categoryIds,
-      }));
     } else {
       setProduct((prevFormData) => ({
         ...prevFormData,
         [name]: value,
       }));
     }
-    console.log(setProduct);
+    setProduct((prevFormData) => ({
+      ...prevFormData,
+      category: categoryIds,
+    }));
+    console.log(product);
+    console.log(categoryIds);
   }
   function handleImageChange(event) {
     const file = event.target.files[0];
@@ -80,13 +82,16 @@ const UpdateProducts = () => {
         formDataWithImage.append(key, product[key]);
       }
     }
+    for (const [key, value] of formDataWithImage.entries()) {
+      console.log(`${key}: ${value}`);
+    }
     try {
       const response = await axiosInstance.patch(
         `/items/${id}`,
         formDataWithImage
       );
       console.log(response.data);
-      window.location.href = "#/products/list";
+      // window.location.href = "http://localhost:3000/dashboard/products/list";
     } catch (error) {
       console.error(error);
       setValidated(true);
@@ -168,20 +173,6 @@ const UpdateProducts = () => {
             required
           />
           <CFormFeedback invalid>من فضلك ادخل اللون للمنتج</CFormFeedback>
-        </CCol>
-        <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">السعر</CFormLabel>
-          <CFormInput
-            type="number"
-            value={product.price}
-            onInput={handleInputChange}
-            name="price"
-            id="price"
-            required
-          />
-          <CFormFeedback invalid>
-            من فضلك ادخل السعر للمنتج بالارقام فقط
-          </CFormFeedback>
         </CCol>
         <CCol md={6}>
           <CFormLabel htmlFor="validationCustom01">

@@ -178,7 +178,7 @@ const Products = () => {
                       color="primary"
                       variant="outline"
                     >
-                      Details
+                      تفاصيل
                     </CButton>
                   </CTableHeaderCell>
                   {/* button for edit */}
@@ -189,7 +189,7 @@ const Products = () => {
                       color="warning"
                       variant="outline"
                     >
-                      Edit
+                      تعديل
                     </CButton>
                   </CTableHeaderCell>
                   {/* button for delete */}
@@ -203,7 +203,7 @@ const Products = () => {
                       color="danger"
                       variant="outline"
                     >
-                      Delete
+                      حذف
                     </CButton>
                   </CTableHeaderCell>
                 </CTableRow>
