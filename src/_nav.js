@@ -32,17 +32,17 @@ const _nav = [
       {
         component: CNavItem,
         name: 'شهري',
-        to: '/dashboard/reports/monthly-reports',
+        to: '/dashboard/dashboard/reports/monthly-reports',
       },
       {
         component: CNavItem,
         name: 'سنوي',
-        to: '/dashboard/reports/yearly-reports',
+        to: '/dashboard/dashboard/reports/yearly-reports',
       },
       {
         component: CNavItem,
         name: 'تقويم',
-        to: '/dashboard/Reports/Calender',
+        to: '/dashboard/dashboard/Reports/Calender',
       },
     ],
   },
@@ -55,12 +55,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'مزادات',
-        to: '/dashboard/auctions',
+        to: '/dashboard/dashboard/auctions',
       },
       {
         component: CNavItem,
         name: 'اضافة مزاد',
-        to: '/dashboard/auctions/add',
+        to: '/dashboard/dashboard/auctions/add',
       },
     ],
   },
@@ -73,12 +73,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'المستخدمين',
-        to: '/dashboard/users/list',
+        to: '/dashboard/dashboard/users/list',
       },
       {
         component: CNavItem,
         name: 'اضافة مستخدم',
-        to: '/dashboard/users/add-user',
+        to: '/dashboard/dashboard/users/add-user',
       },
     ],
   },
@@ -91,12 +91,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'منتجات',
-        to: '/dashboard/products/list',
+        to: '/dashboard/dashboard/products/list',
       },
       {
         component: CNavItem,
         name: 'اضافة منتج',
-        to: '/dashboard/products/add-product',
+        to: '/dashboard/dashboard/products/add-product',
       },
     ],
   },
@@ -110,12 +110,12 @@ const _nav = [
       {
         component: CNavItem,
         name: ' تفاصيل المنتجات',
-        to: '/dashboard/productsDetails/list',
+        to: '/dashboard/dashboard/productsDetails/list',
       },
       {
         component: CNavItem,
         name: 'اضافة تفاصيل منتج جديد ',
-        to: '/dashboard/productsDetails/add-details',
+        to: '/dashboard/dashboard/productsDetails/add-details',
 
       },
     ],
@@ -129,12 +129,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'التصنيف',
-        to: '/dashboard/category/list',
+        to: '/dashboard/dashboard/category/list',
       },
       {
         component: CNavItem,
         name: '  اضافة تصنيف ',
-        to: '/dashboard/category/add-category',
+        to: '/dashboard/dashboard/category/add-category',
       },
     ],
   },
@@ -153,10 +153,23 @@ const _nav = [
   },
 
   {
-    component: CNavItem,
-    name: 'إنشاء بث مباشر',
-    to: '/dashboard/live-stream/create',
+    component: CNavGroup,
+    name: ' بث مباشر',
+    to: '/',
     icon: <CIcon icon={cilMediaPlay} customClassName="nav-icon" />,
+        items: [
+          {
+            component: CNavItem,
+            name: ' بث مباشر',
+            to: '/dashboard/dashboard/live-stream/list',
+          },
+      {
+        component: CNavItem,
+        name: 'إنشاء بث مباشر',
+        to: '/dashboard/dashboard/live-stream/create',
+      },
+    
+    ],
  
   },
 ]

@@ -6,6 +6,8 @@ import axiosInstance from "../../Axios";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import logo from "../../assets/images/logo2.png";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const NewPasswordForm = () => {
@@ -43,11 +45,12 @@ const NewPasswordForm = () => {
         confirmPassword: confirmPassword,
       })
       .then((response) => {
-        console.log(response);
+       // console.log(response);
         navigate("/login");
       })
       .catch((error) => {
-        console.log(error);
+       // console.log(error);
+       toast.error('عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى');
       })
       .finally(() => {
         setSubmitting(false);
@@ -56,11 +59,8 @@ const NewPasswordForm = () => {
 
   return (
     <>
-      {/* <div className="websiteLogo body">
-    <img src="<logo-url>" alt="logo" className="logo" />
-    <h1>iBid.</h1>
-  </div> */}
       <div className="body">
+      <ToastContainer />
         <div className="left-login">
           <img src={Img} alt="auction image" className="chart" />
         </div>

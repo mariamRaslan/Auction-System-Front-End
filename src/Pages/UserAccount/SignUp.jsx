@@ -5,6 +5,8 @@ import Img from "../../assets/images/13015.jpg"
 import './UserAccount.css';
 import axiosInstance from "../../Axios";
 import logo from "../../assets/images/logo2.png";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -12,25 +14,36 @@ const Signup = () => {
   const handleSubmit = async (values) => {
     try {
       console.log(values)
-      const response = await axiosInstance.post('/signup', values);
+      const formData = new FormData();
+      formData.append('email', values.email);
+      formData.append('password', values.password);
+      formData.append('name', values.name);
+      formData.append('phone', values.phone);
+      formData.append('city', values.city);
+      formData.append('building', values.building);
+      formData.append('street', values.street);
+      if (values.image) {
+        formData.append('image', values.image);
+      }
+  
+      const response = await axiosInstance.post('/signup', formData);
       console.log(response.data);
+      window.location.href = '/login';
     } catch (error) {
       if (error.response) {
         const message = error.response.data.message;
         setErrorMessage(message);
       } else {
-        console.error(error);
+        //console.error(error);
+        toast.error('عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى');
       }
     }
   };
 
   return (
     <>
-      {/* <div className="websiteLogo body">
-    <img src="<logo-url>" alt="logo" className="logo" />
-    <h1>iBid.</h1>
-  </div> */}
       <div className="body">
+      <ToastContainer />
         <div className="left-login">
           <img src={Img} alt="auction image" className="chart" />
         </div>
@@ -167,7 +180,6 @@ const Signup = () => {
                         <input
                           name="image"
                           type="file"
-                          accept=".jpg,.jpeg,.png"
                           className="form-field text-dark"
                           onChange={(event) => {
                             setFieldValue(

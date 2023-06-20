@@ -4,6 +4,8 @@ import Img from "../../assets/images/13015.jpg"
 import './UserAccount.css';
 import axiosInstance from "../../Axios";
 import logo from "../../assets/images/logo2.png";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const validateEmail = (value) => {
   let errorMessage;
@@ -21,10 +23,16 @@ const EmailForm = () => {
     axiosInstance
       .post("/reset-password", { email: values.email })
       .then((response) => {
-        console.log(response);
+       // console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response) {
+          toast.error('البريد الإلكترونى غير صحيح');
+        } else {
+          //console.error(error);
+          toast.error('عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى');
+        }
+       
       })
       .finally(() => {
         setSubmitting(false);
@@ -33,11 +41,8 @@ const EmailForm = () => {
 
   return (
     <>
-      {/* <div className="websiteLogo body">
-    <img src="<logo-url>" alt="logo" className="logo" />
-    <h1>iBid.</h1>
-  </div> */}
       <div className="body">
+      <ToastContainer />
         <div className="left-login">
           <img src={Img} alt="auction image" className="chart" />
         </div>
@@ -74,7 +79,7 @@ const EmailForm = () => {
                         <ErrorMessage
                           component="span"
                           name="email"
-                          className="form-error"
+                          className="form-error text-danger"
                         />
                       </div>
                     </div>

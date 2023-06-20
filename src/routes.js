@@ -32,7 +32,12 @@ const Calender = React.lazy(() => import('./Pages/Reports/Calender/Calender'))
 const YearlyReports = React.lazy(() => import('./Pages/Reports/YearlyReports/YearlyReports'))
 // Home
 const Home=React.lazy(()=>import('./Pages/WebsitePages/Home/Home'))
-
+//product
+const Product=React.lazy(()=>import('./Pages/WebsitePages/product/product'))
+//auction
+const Auction=React.lazy(()=>import('./Pages/WebsitePages/Auction/auction'))
+//auction items
+const AuctionItems=React.lazy(()=>import('./Pages/WebsitePages/Auctionitems/Auctionitems'))
 // Website Bidding
 const Bidding = React.lazy(() =>
   import("./Pages/WebsitePages/Bidding/Bidding")
@@ -68,43 +73,51 @@ const BiddingsList = React.lazy(() => import('./Pages/DashoardPages/Biddings/Bid
 //website live stream
 const ShowLiveStream=React.lazy(() => import('./Pages/WebsitePages/LiveStream/LiveStream'))
 //dashboard live stream
-const CreateLiveStream=React.lazy(() => import('./Pages/DashoardPages/LiveStream/LiveStream'))
+const CreateLiveStream=React.lazy(() => import('./Pages/DashoardPages/LiveStream/CreateLiveStream'))
+const LiveStreamList=React.lazy(() => import('./Pages/DashoardPages/LiveStream/LiveStreamList'))
 //Routes
 const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
 
   // Auctions
-  { path: '/auctions', exact: true, name: 'AuctionsList', element: AuctionsList },
-  { path: '/auctions/add', name: 'AddAuctionItem', element: AddAuctionItem },
-  { path: '/auctions/edit/:auctionId', name: 'EditAuctionItem', element: EditAuction },
-  { path: '/auctions/details/:auctionId', name: 'AuctionDetails', element: AuctionDetails },
-  // Categories
-  { path: '/category/list', exact: true, name: 'CategoryList', element: CategoryList },
-  { path: '/category/add-category', name: 'AddCategory', element: AddCategory },
-  // Users
-  { path: '/users/list', exact: true, name: 'UsersList', element: UsersList },
-  { path: '/users/add-user', name: 'AddUser', element: AddUser },
-  { path: '/users/view-user/:id', name: 'ViewUser', element: ViewUser },
-  { path: '/users/assign-permission/:id', name: 'AssignPermission', element: AssignPermission },
-  // Products
-  { path: '/products/list', exact: true, name: 'ProductsList', element: ProductsList },
-  { path: '/products/add-product', name: 'AddProduct', element: AddProduct },
-  { path: '/products/edit-product/:id', name: 'EditProduct', element: EditProduct },
-  { path: '/products/product-details/:id', name: 'ProductDetails', element: ProductDetails },
-  // Products Details
-  { path: '/productsDetails/list', exact: true, name: 'ProductsDetailsList', element: ProductsDetailsList },
-  { path: '/productsDetails/add-details', exact: true, name: 'AddDetails', element: AddDetails },
-  { path: '/productsDetails/edit-details/:id', name: 'EditDetails', element: EditDetails },
-  { path: '/productsDetails/product-details/:id', name: 'AuctionProductDetails', element: AuctionProductDetails},
-  // Reports
-  { path: '/reports/monthly-reports', name: 'MonthlyReports', element: MonthlyReports },
-  { path: '/reports/calender', name: 'Calender', element: Calender },
-  { path: '/reports/yearly-reports', name: 'YearlyReports', element: YearlyReports },
+  { path: 'dashboard/auctions', exact: true, name: 'AuctionsList', element: AuctionsList },
+  { path: 'dashboard/auctions/add', name: 'AddAuctionItem', element: AddAuctionItem },
+  { path: 'dashboard/auctions/edit/:auctionId', name: 'EditAuctionItem', element: EditAuction },
+  { path: 'dashboard/auctions/details/:auctionId', name: 'AuctionDetails', element: AuctionDetails },
+  // Categodashboardries
+  { path: 'dashboard/category/list', exact: true, name: 'CategoryList', element: CategoryList },
+  { path: 'dashboard/category/add-category', name: 'AddCategory', element: AddCategory },
+  // Usersdashboard
+  { path: 'dashboard/users/list', exact: true, name: 'UsersList', element: UsersList },
+  { path: 'dashboard/users/add-user', name: 'AddUser', element: AddUser },
+  { path: 'dashboard/users/view-user/:id', name: 'ViewUser', element: ViewUser },
+  { path: 'dashboard/users/assign-permission/:id', name: 'AssignPermission', element: AssignPermission },
+  // Producdashboardts
+  { path: 'dashboard/products/list', exact: true, name: 'ProductsList', element: ProductsList },
+  { path: 'dashboard/products/add-product', name: 'AddProduct', element: AddProduct },
+  { path: 'dashboard/products/edit-product/:id', name: 'EditProduct', element: EditProduct },
+  { path: 'dashboard/products/product-details/:id', name: 'ProductDetails', element: ProductDetails },
+  // Producdashboardts Details
+  { path: 'dashboard/productsDetails/list', exact: true, name: 'ProductsDetailsList', element: ProductsDetailsList },
+  { path: 'dashboard/productsDetails/add-details', exact: true, name: 'AddDetails', element: AddDetails },
+  { path: 'dashboard/productsDetails/edit-details/:id', name: 'EditDetails', element: EditDetails },
+  { path: 'dashboard/productsDetails/product-details/:id', name: 'AuctionProductDetails', element: AuctionProductDetails},
+  // Reportdashboards
+  { path: 'dashboard/reports/monthly-reports', name: 'MonthlyReports', element: MonthlyReports },
+  { path: 'dashboard/reports/calender', name: 'Calender', element: Calender },
+  { path: 'dashboard/reports/yearly-reports', name: 'YearlyReports', element: YearlyReports },
   //dashboard live stream
-  {path:'/live-stream/create',exact:true,name:'CreateLiveStream',element:CreateLiveStream},
-
+  {path:'dashboard/live-stream/create',exact:true,name:'CreateLiveStream',element:CreateLiveStream},
+  {path:'dashboard/live-stream/list',exact:true,name:'LiveStreamList',element:LiveStreamList},
   //Home
   { path: '/home', name: 'Home', element: Home },
+  //product
+  { path: '/products', name: 'Product', element: Product },
+  //auction
+  { path: '/auctions', name: 'Auction', element: Auction },
+  //AuctionItems
+  { path: '/auction/:id/items', name: 'AuctionItems', element: AuctionItems },
+  
 
   //User Profile
   { path: '/profile', name: 'UserProfile', element: UserProfile },
@@ -126,7 +139,8 @@ const routes = [
   { path: '/dashboard/biddings', exact: true, name: 'BiddingsList', element: BiddingsList },
 
   //website live stream
-  {path:'/live-stream/show',exact:true,name:'ShowLiveStream',element:ShowLiveStream},
+  {path:'/live-stream/show/:auctionId',exact:true,name:'ShowLiveStream',element:ShowLiveStream},
+
   
    //Website NotFound
    { path: "*", name: "NotFound", element: NotFound },

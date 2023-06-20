@@ -60,7 +60,7 @@ function EditDetails() {
   useEffect(() => {
     async function fetchAuctions() {
       try {
-        const response = await axiosInstance.get('/auctions?status=not started');
+        const response = await axiosInstance.get('/auctions?status=not%20started');
         setAuctions(response.data.data);
       } catch (error) {
         console.log(error);
@@ -127,7 +127,7 @@ function EditDetails() {
         max_price: parseInt(maxPrice),
       };
       await axiosInstance.patch(`/itemDetails/${id}`, data);
-      navigate('/dashboard/auctions');
+      navigate('/dashboard/dashboard/auctions');
     } catch (error) {
       console.log('Error updating item details:', error);
     }

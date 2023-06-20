@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../Axios";
-import jwt_decode from 'jwt-decode';
+import jwt_decode from "jwt-decode";
 import { Link } from "react-router-dom";
 import "./UserProfile.css";
+import Card from "../../../SharedUi/Card/card";
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
-  const decoded = jwt_decode(localStorage.getItem('token'));
+  const [auctions, setAuctions] = useState([]);
+  const decoded = jwt_decode(localStorage.getItem("token"));
   const id = decoded.id;
 
   useEffect(() => {
@@ -14,44 +16,49 @@ const UserProfile = () => {
       try {
         const response = await axiosInstance.get(`/users/${id}`);
         setUser(response.data.data);
-        console.log(response.data.data);
+        //console.log(response.data.data);
       } catch (error) {
         console.error(error);
       }
     };
     fetchUser();
+
+    const fetchAuctions = async () => {
+      try {
+        const response = await axiosInstance.get("/joinAuction");
+        if (response.data.success) {
+          setAuctions(response.data.data);
+         // console.log(response.data.data)
+        } else {
+          console.log(response.data.message);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchAuctions();
   }, [id]);
 
-  const fakeAuctions = [
-    {
-      id: 1,
-      image: "https://picsum.photos/id/237/200/300",
-      name: "Auction 1",
-      date: "2023-06-20",
-      details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget faucibus ex."
-    },
-    {
-      id: 2,
-      image: "https://picsum.photos/id/238/200/300",
-      name: "Auction 2",
-      date: "2023-06-25",
-      details: "Sed quis sapien euismod, fermentum metus vel, efficitur velit."
-    },
-    {
-      id: 3,
-      image: "https://picsum.photos/id/239/200/300",
-      name: "Auction 3",
-      date: "2023-06-30",
-      details: "Fusce vehicula nisl ac lacinia commodo. Nam sit amet semper nisi."
-    }
-  ];
+  const formatStartDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString("en-US", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    });
+  };
 
   return (
     <div className="container" dir="rtl">
       {user && (
-        <section className="mt-3" >
+        <section className="mt-3">
           <div className="container mt-5">
-            <div className="row d-flex align-items-center p-5" style={{ backgroundColor: "#eee" }}>
+            <div
+              className="row d-flex align-items-center p-5"
+              style={{ backgroundColor: "#eee" }}
+            >
               <div className="col-lg-4">
                 <div className="card mb-4">
                   <div className="card-body text-center">
@@ -63,7 +70,12 @@ const UserProfile = () => {
                       alt="avatar"
                     />
                     <h5 className="my-3">{user.name}</h5>
-                    <Link to={`/edit-profile/${id}`} className="btn btn-dark submit-button">Edit</Link>
+                    <Link
+                      to={`/edit-profile/${id}`}
+                      className="btn btn-dark submit-button"
+                    >
+                      Edit
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -119,25 +131,28 @@ const UserProfile = () => {
               </div>
             </div>
             <div className="row p-5 mt-5" style={{ backgroundColor: "#eee" }}>
-              {fakeAuctions.map((auction) => (
-                <div className="col-lg-4 mb-4" key={auction.id}>
-                  <div className="card text-center" style={{ height: "450px" }} >
-<img className="card-img-top" src={auction.image} alt="Auction" style={{ height: "200px" }} />
-<div className="card-body">
-<h4 className="card-title">{auction.name}</h4>
-<p className="card-text">{auction.date}</p>
-<p className="card-text">{auction.details}</p>
-<button className="btn btn-primary submit-button">تفاصيل</button>
-</div>
-</div>
-</div>
-))}
-</div>
-</div>
-</section>
-)}
-</div>
-);
+              {auctions.length > 0 ? (
+                auctions.map((auction) => (
+                  <div className="col-lg-4 mb-4" key={auction._id}>
+                    <Card
+                      image={null}
+                      title={auction.auction_id.name}
+                      startdate={formatStartDate(auction.auction_id.start_date)}
+                      href={`/auction/${auction.auction_id._id}/items`}
+                    />
+                  </div>
+                ))
+              ) : (
+                <div className="col-lg-12">
+                  <h5>لم تشارك في أي مزاد حتى الآن.</h5>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+    </div>
+  );
 };
 
 export default UserProfile;

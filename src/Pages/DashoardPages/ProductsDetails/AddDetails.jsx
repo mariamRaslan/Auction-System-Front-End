@@ -35,7 +35,7 @@ const AddDetails = () => {
 
   useEffect(() => {
     const getAuctions = async () => {
-      const response = await axiosInstance.get('/auctions?status=not started');
+      const response = await axiosInstance.get('/auctions?status=not%20started');
       setAuctions(response.data.data);
     };
     getAuctions();
@@ -92,7 +92,7 @@ const AddDetails = () => {
       // perform validation
       const response = await axiosInstance.post('/itemDetails', data); // Updated URL
       if (response.status === 201) {
-        navigate(`/dashboard/auctions/${response.data.data._id}`);
+        navigate(`/dashboard/dashboard/productsDetails/list`);
       }
     } catch (error) {
       console.log(error);
