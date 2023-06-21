@@ -21,7 +21,7 @@ function EditDetails() {
   const [selectedAuctionId, setSelectedAuctionId] = useState('');
   const [initialBidValue, setInitialBidValue] = useState('');
   const [minimumBidValue,setMinimumBidValue] = useState('');
-  const [endTime, setEndTime] = useState('');
+  const [duration, setDuration] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [items, setItems] = useState([]);
   const [auctions, setAuctions] = useState([]);
@@ -36,7 +36,7 @@ function EditDetails() {
         setSelectedAuctionId(response.data.auction_id._id);
         setInitialBidValue(response.data.start_bidding.toString());
         setMinimumBidValue(response.data.bidding_gap.toString());
-        setEndTime(response.data.end_time);
+        setDuration(response.data.duration);
         setMaxPrice(response.data.max_price.toString());
       } catch (error) {
         console.log(error);
@@ -75,10 +75,10 @@ function EditDetails() {
       selectedAuctionId !== '' &&
       initialBidValue !== '' &&
       minimumBidValue !== '' &&
-      endTime !== '' &&
+      duration !== '' &&
       maxPrice !== ''
     );
-  }, [selectedItemId, selectedAuctionId, initialBidValue, minimumBidValue, endTime, maxPrice]);
+  }, [selectedItemId, selectedAuctionId, initialBidValue, minimumBidValue, duration, maxPrice]);
 
   function handleSelectedItemIdChange(event) {
     setSelectedItemId(event.target.value);
@@ -99,8 +99,8 @@ function EditDetails() {
     setMinimumBidValue(event.target.value);
   }
 
-  function handleEndTimeChange(event) {
-    setEndTime(event.target.value);
+  function handleDurationChange(event) {
+    setDuration(event.target.value);
   }
 
   function handleMaxPriceChange(event) {
@@ -123,7 +123,7 @@ function EditDetails() {
         auction_id: parseInt(selectedAuctionId),
         start_bidding: parseInt(initialBidValue),
         bidding_gap: parseInt(minimumBidValue),
-        end_time: endTime,
+        duration: duration,
         max_price: parseInt(maxPrice),
       };
       await axiosInstance.patch(`/itemDetails/${id}`, data);
@@ -214,21 +214,22 @@ function EditDetails() {
         </CInputGroup>
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="endTime">وقت انتهاء المزاد</CFormLabel>
+        <CFormLabel htmlFor="duration">وقت انتهاء المزاد</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>
           <i className="cil-clock"></i>
           </CInputGroupText>
           <CFormInput
-            id="endTime"
-            type="time"
-            value={endTime}
-            onChange={handleEndTimeChange}
+            id="duration"
+            type="number"
+            value={duration}
+            min={1}
+            onChange={handleDurationChange}
             required
           />
           <CFormFeedback invalid>يرجى إدخال وقت انتهاء المزاد</CFormFeedback>
         </CInputGroup>
-      </CCol> 
+      </CCol>
       <CCol md={6}>
         <CFormLabel htmlFor="maxPrice">الحد الأقصى للمزايدة</CFormLabel>
         <CInputGroup className="mb-3">

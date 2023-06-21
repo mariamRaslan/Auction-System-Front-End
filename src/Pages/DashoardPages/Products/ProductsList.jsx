@@ -158,14 +158,7 @@ const Products = () => {
                   <CTableDataCell>{product.name}</CTableDataCell>
                   <CTableDataCell>{product.qty}</CTableDataCell>
                   <CTableDataCell>
-                    {product.category
-                      .map((categoryId) => {
-                        const category = categories.find(
-                          (category) => category._id === categoryId
-                        );
-                        return category ? category.name : "";
-                      })
-                      .join(", ")}
+                    {product.category?.name}
                   </CTableDataCell>
                   <CTableDataCell>{product.material}</CTableDataCell>
                   <CTableDataCell>{product.size}</CTableDataCell>

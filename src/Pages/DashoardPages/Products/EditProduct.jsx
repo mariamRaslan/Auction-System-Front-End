@@ -46,25 +46,28 @@ const UpdateProducts = () => {
 
   function handleInputChange(event) {
     const { name, value } = event.target;
-    let categoryIds = [];
-    if (name === "category") {
-      categoryIds = Array.from(
-        event.target.selectedOptions,
-        (option) => option.value
-      );
-    } else {
+    // let categoryIds = [];
+    // if (name === "category") {
+    //   categoryIds = Array.from(
+    //     event.target.selectedOptions,
+    //     (option) => option.value
+    //   );
+    // } else {
       setProduct((prevFormData) => ({
-        ...prevFormData,
+        // ...prevFormData,
         [name]: value,
-      }));
+      }
+      ));
     }
-    setProduct((prevFormData) => ({
-      ...prevFormData,
-      category: categoryIds,
-    }));
-    console.log(product);
-    console.log(categoryIds);
-  }
+    // setProduct((prevFormData) => ({
+    //   ...prevFormData,
+    //   category: categoryIds,
+    // }
+    // ));
+    // console.log(product);
+    // console.log(categoryIds);
+    // console.log(typeof categoryIds);
+  // }
   function handleImageChange(event) {
     const file = event.target.files[0];
     setProduct((prevFormData) => ({
@@ -84,6 +87,7 @@ const UpdateProducts = () => {
     }
     for (const [key, value] of formDataWithImage.entries()) {
       console.log(`${key}: ${value}`);
+      console.log(typeof value);
     }
     try {
       const response = await axiosInstance.patch(
@@ -179,22 +183,24 @@ const UpdateProducts = () => {
             الفئات المتاحة للمنتج
           </CFormLabel>
           <CFormSelect
-            multiple
+            // multiple
             onChange={handleInputChange}
             name="category"
             id="category"
-            required
-            defaultValue={product.category}
+            // required
+            defaultValue={product.category?._id}
           >
             {categories.map((category) => (
-              <option key={category._id} value={category._id}>
+              <option
+                key={category._id}
+                value={category._id}
+                selected={product.category?._id == category._id}
+              >
                 {category.name}
               </option>
             ))}
           </CFormSelect>
-          <CFormFeedback invalid>
-            من فضلك اختر الفئات المتاحة للمنتج
-          </CFormFeedback>
+          <CFormFeedback invalid>من فضلك اختر فئة للمنتج</CFormFeedback>
         </CCol>
         <CCol md={6}>
           <CFormLabel htmlFor="validationCustom01">

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../../Axios';
+import React, { useEffect, useState } from "react";
+import axiosInstance from "../../../Axios";
 import {
   CTable,
   CTableBody,
@@ -13,8 +13,8 @@ import {
   CModalHeader,
   CModalBody,
   CModalFooter,
-} from '@coreui/react';
-import { useNavigate } from 'react-router-dom';
+} from "@coreui/react";
+import { useNavigate } from "react-router-dom";
 
 const AuctionsList = () => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const AuctionsList = () => {
 
   const getAuctionsList = async () => {
     try {
-      const res = await axiosInstance.get('/auctions');
+      const res = await axiosInstance.get("/auctions");
       setAuctionsList(res.data.data);
     } catch (err) {
       console.log(err);
@@ -43,8 +43,12 @@ const AuctionsList = () => {
     }
 
     try {
-      const res = await axiosInstance.delete(`/auctions/${auctionToDelete._id}`);
-      setAuctionsList(auctionsList.filter((auction) => auction._id !== auctionToDelete._id));
+      const res = await axiosInstance.delete(
+        `/auctions/${auctionToDelete._id}`
+      );
+      setAuctionsList(
+        auctionsList.filter((auction) => auction._id !== auctionToDelete._id)
+      );
       setDeleteModal(false);
     } catch (err) {
       console.log(err);
@@ -81,7 +85,7 @@ const AuctionsList = () => {
     const pages = [];
     for (let i = 1; i <= pageCount; i++) {
       pages.push(
-        <li key={i} className={`page-item ${activePage === i ? 'active' : ''}`}>
+        <li key={i} className={`page-item ${activePage === i ? "active" : ""}`}>
           <button className="page-link" onClick={() => handlePageChange(i)}>
             {i}
           </button>
@@ -97,11 +101,11 @@ const AuctionsList = () => {
 
   return (
     <>
-      <CCardHeader >
+      <CCardHeader>
         <h2>المزادات</h2>
       </CCardHeader>
-      <CTable >
-        <CTableHead style={{ backgroundColor: '#4f5d73' , color:"#fff"}}>
+      <CTable>
+        <CTableHead style={{ backgroundColor: "#4f5d73", color: "#fff" }}>
           <CTableRow>
             <CTableHeaderCell scope="col">الرقم المرجعي </CTableHeaderCell>
             <CTableHeaderCell scope="col">الاسم</CTableHeaderCell>
@@ -116,19 +120,44 @@ const AuctionsList = () => {
             <CTableRow key={auction.reference_number}>
               <CTableDataCell>{auction.reference_number}</CTableDataCell>
               <CTableDataCell>{auction.name}</CTableDataCell>
-              <CTableDataCell>{auction.status}</CTableDataCell>
+              {/* <CTableDataCell>{auction.status}</CTableDataCell> */}
+              <CTableDataCell>
+                {auction.status === "not started"
+                  ? "قيد الانتظار"
+                  : auction.status === "started"
+                  ? "نشط"
+                  : auction.status === "ended"
+                  ? "انتهى"
+                  : auction.status}
+              </CTableDataCell>
+
               <CTableHeaderCell scope="col">
-                <CButton className="btntext w-100" color="primary" variant="outline" onClick={() => handleView(auction._id)}>
+                <CButton
+                  className="btntext w-100"
+                  color="primary"
+                  variant="outline"
+                  onClick={() => handleView(auction._id)}
+                >
                   تفاصيل
                 </CButton>
               </CTableHeaderCell>
               <CTableHeaderCell scope="col">
-                <CButton className="btntext w-100" color="warning" variant="outline" onClick={() => handleEdit(auction._id)}>
+                <CButton
+                  className="btntext w-100"
+                  color="warning"
+                  variant="outline"
+                  onClick={() => handleEdit(auction._id)}
+                >
                   تعديل
                 </CButton>
               </CTableHeaderCell>
               <CTableHeaderCell scope="col">
-                <CButton className="btntext w-100" color="danger" variant="outline" onClick={() => handleDeleteButtonClick(auction)}>
+                <CButton
+                  className="btntext w-100"
+                  color="danger"
+                  variant="outline"
+                  onClick={() => handleDeleteButtonClick(auction)}
+                >
                   حذف
                 </CButton>
               </CTableHeaderCell>
@@ -138,9 +167,7 @@ const AuctionsList = () => {
       </CTable>
       {renderPagination()}
       <CModal visible={deleteModal} onClose={() => setDeleteModal(false)}>
-        <CModalHeader closeButton>
-          Confirm
-        </CModalHeader>
+        <CModalHeader closeButton>Confirm</CModalHeader>
         <CModalBody>Are you sure you want to delete this item?</CModalBody>
         <CModalFooter>
           <CButton color="danger" onClick={handleDelete}>
