@@ -1,13 +1,14 @@
 import React from "react";
 import img from "./../../../assets/images/stop-watch-.jpg";
 import "./Payment.css";
+import FizzyButton from '../../../SharedUi/FizzyButton/FizzyButton';
 
 const Payment = () => {
   return (
     <div className="App ">
     <div className="">
-      <div className="container mt-5 mb-5 p-5">
-        <table className="table ">
+      <div className="container mt-5 mb-5 p-5 flex display-content-center ">
+        <table className="table">
           <tbody>
             <tr>
               <td>
@@ -16,7 +17,7 @@ const Payment = () => {
               <td>Item Name</td>
               <td>$10.00</td>
               <td>
-                <a href="#" className="btn btn-primary">قم بالشراء الأن</a>
+              <FizzyButton text={"تأكيد عملية الشراء"}  href={'#'}  />
               </td>
             </tr>
             <tr>
@@ -26,7 +27,7 @@ const Payment = () => {
               <td>Item Name</td>
               <td>$15.00</td>
               <td>
-                <a href="#" className="btn btn-primary">قم بالشراء الأن</a>
+                <FizzyButton text={"تأكيد عملية الشراء"}  href={'#'}  />
               </td>
             </tr>
             <tr>
@@ -36,7 +37,7 @@ const Payment = () => {
               <td>Item Name</td>
               <td>$20.00</td>
               <td>
-                <a href="#" className="btn btn-primary">قم بالشراء الأن</a>
+              <FizzyButton text={"تأكيد عملية الشراء"}  href={'#'}  />
               </td>
             </tr>
           </tbody>

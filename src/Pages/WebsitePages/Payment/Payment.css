@@ -13,7 +13,9 @@ body{
 .table tbody tr:last-child {
   border-bottom: none;
 }
-
+.table td{
+  width: 25%;
+}
 .table td,
 .table th {
   vertical-align: middle;
