@@ -38,6 +38,13 @@ const Product=React.lazy(()=>import('./Pages/WebsitePages/product/product'))
 const Auction=React.lazy(()=>import('./Pages/WebsitePages/Auction/auction'))
 //auction items
 const AuctionItems=React.lazy(()=>import('./Pages/WebsitePages/Auctionitems/Auctionitems'))
+//items details
+const ItemsDetails=React.lazy(()=>import('./Pages/WebsitePages/productdetials/productdetails'))
+//contact
+const Contact=React.lazy(()=>import('./Pages/WebsitePages/Contact/contact'))
+//about
+const About=React.lazy(()=>import('./Pages/WebsitePages/About/About'))
+
 // Website Bidding
 const Bidding = React.lazy(() =>
   import("./Pages/WebsitePages/Bidding/Bidding")
@@ -116,6 +123,12 @@ const routes = [
   { path: '/auctions', name: 'Auction', element: Auction },
   //AuctionItems
   { path: '/auction/:id/items', name: 'AuctionItems', element: AuctionItems },
+  //itemdetials
+  { path: '/itemdetails/:id', name: 'ItemsDetails', element: ItemsDetails },
+  //contact
+  { path: '/contact', name: 'Contact', element: Contact },
+  //about
+  { path: '/about', name: 'About', element: About },
   
 
   //User Profile
