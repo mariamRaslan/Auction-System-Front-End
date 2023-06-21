@@ -8,6 +8,8 @@ import Axios from "./../../../Axios";
 import { useState,useEffect } from "react";
 //card
 
+//use home.css
+import "./Home.css";
 
 const Home = () => {
 
@@ -88,12 +90,12 @@ const Home = () => {
                 setmessage("حدث خطأ ما")
             });
     };
-    
+  
 
   return (
 
-
     <>
+
       <div className="text-center bg-image" style={{backgroundImage: 'url(https://mdbcdn.b-cdn.net/img/new/slides/041.webp)', width: '100%' , height: '80vh', backgroundSize: 'cover'}}>
         <div className="d-flex justify-content-center align-items-center h-100">
           <div className="text-white">
@@ -104,19 +106,95 @@ const Home = () => {
         </div>
       </div>
 
-      {/** product section header  */}
-      <div className="container" >
-        <div className="row">
-          <div className="col-md-12">
-            <div className="d-flex justify-content-center align-items-center mt-4">
-              <h3 className="section-title"> احدث المذادات</h3>
-              
+
+
+
+
+      {/* how it work section  */}
+      <div className="section-bg-white" >
+        <div className="container">
+          <div className="row mb-5">
+            <div className="col-md-12">
+              <div className="d-flex justify-content-center align-items-center mt-4">
+                <h1 className="text-center"> خطوات الشراء</h1> 
+              </div>
             </div>
           </div>
-        </div> 
+          <div className="lg-hr"></div>
+          <div className="row">
+          
+                <div className="col-3 text-center">
+                  <div className="circle" >
+                    <h1>01</h1>
+                  </div>
+                  <div className="sm-hr"></div>
+                  <h1>اشترك</h1>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. A molestias doloribus voluptates ea, perspiciatis quia ullam quam atque iste reiciendis corporis distinctio, assumenda eum illo! Provident a id reiciendis facilis?
+                    </p>
+                </div>
+               
+                <div className="col-3 text-center">
+                  <div className="circle" >
+                    <h1>02</h1>
+                  </div>
+                  <div className="sm-hr"></div>
+
+                  <h1>انضم</h1>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. A molestias doloribus voluptates ea, perspiciatis quia ullam quam atque iste reiciendis corporis distinctio, assumenda eum illo! Provident a id reiciendis facilis?
+                    </p>
+                </div>
+                <div className="col-3 text-center">
+                  <div className="circle" >
+                    <h1>03</h1>
+                  </div>
+                  <div className="sm-hr"></div>
+
+                  <h1>زايد</h1>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. A molestias doloribus voluptates ea, perspiciatis quia ullam quam atque iste reiciendis corporis distinctio, assumenda eum illo! Provident a id reiciendis facilis?
+                    </p>
+                </div>
+                <div className="col-3 text-center">
+                  <div className="circle" >
+                    <h1>04</h1>
+                  </div>
+                  <div className="sm-hr"></div>
+
+                  <h1>اكسب</h1>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. A molestias doloribus voluptates ea, perspiciatis quia ullam quam atque iste reiciendis corporis distinctio, assumenda eum illo! Provident a id reiciendis facilis?
+                    </p>
+                </div>
+              </div>
+   
+        </div>
+        
       </div>
 
-    <div className="container mt-5">
+
+
+
+
+
+
+
+     
+
+      {/** product section header  */}
+  <div className="section-bg-grey">
+        <div className="container" >
+          <div className="row">
+            <div className="col-md-12">
+              <div className="d-flex justify-content-center align-items-center mt-4">
+                <h3 className="section-title"> احدث المذادات</h3>
+              </div>
+            </div>
+          </div> 
+        </div>
+
+    <div className="container">
 
       <div className="row mb-5">
       {newArrival.length > 0 ? (
@@ -139,6 +217,7 @@ const Home = () => {
             </div>
         )}
       </div>
+    </div>
     </div>
 
     {/** product section header  */}
