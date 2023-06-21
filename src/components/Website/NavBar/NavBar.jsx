@@ -85,6 +85,12 @@ const NavBar = () => {
                 <CNavItem className="nav-item">
                   <CNavLink href="/payment">الشراء</CNavLink>
                 </CNavItem>
+                <CNavItem className="nav-item">
+                  <CNavLink href="/about">عن الموقع</CNavLink>
+                </CNavItem>
+                <CNavItem className="nav-item">
+                  <CNavLink href="/contact">تواصل معنا</CNavLink>
+                </CNavItem>
               </div>
               <div className="col-md-6 col-sm-12 d-flex justify-content-around">
                 <CForm className="d-flex col-5">

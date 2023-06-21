@@ -5,7 +5,7 @@ import Axios from "./../../../Axios";
 const AuctionItems = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(1);
+  const [itemsPerPage] = useState(8);
 
   useEffect(() => {
     getProducts();
@@ -69,7 +69,7 @@ const AuctionItems = () => {
                 <Card
                   image={product.item_id.image}
                   title={product.item_id.name}
-                  href={`/product/${product.id}`}
+                  href={`/itemdetails/${product._id}`}
                 />
               </div>
             ))
