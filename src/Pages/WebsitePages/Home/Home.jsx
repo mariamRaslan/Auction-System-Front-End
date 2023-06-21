@@ -2,43 +2,94 @@ import React from "react";
 //import card
 import Card from "../../../SharedUi/Card/card";
 
+//import axios
+import Axios from "./../../../Axios";
+//usesate
+import { useState,useEffect } from "react";
+//card
 
-const products = [
-  {
-    id: 1,
-    title: "White traditional long dress",
-    oldPrice: 5.99,
-    price: 3.99,
-    isNew: false,
-    image: "https://i.imgur.com/8JIWpnw.jpg",
-  },
-  {
-    id: 2,
-    title: "Long sleeve denim jacket",
-    oldPrice: 5.99,
-    price: 3.99,
-    isNew: false,
-    image: "https://i.imgur.com/PtepOpe.jpg",
-  },
-  {
-    id: 3,
-    title: "Hush Puppies",
-    oldPrice: 5.99,
-    price: 3.99,
-    isNew: false,
-    image: "https://i.imgur.com/ePJKs8Q.jpg",
-  },
-  {
-    id: 4,
-    title: "Athens skirt",
-    oldPrice: null,
-    price: 19.99,
-    isNew: true,
-    image: "https://i.imgur.com/snffLH3.jpg",
-  },
-];
 
 const Home = () => {
+
+
+  //get new arival
+  const [newArrival, setNewArrival] = useState([]);
+  const [newArrivalitems, setnewArrivalitems] = useState([]);
+
+  useEffect(() => {
+    Axios.get("/newArrivalAuction")
+      .then((res) => {
+        setNewArrival(res.data.data);
+        //log   
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  //get new arival items
+  useEffect(() => {
+    Axios.get("/newArrivalItem")
+      .then((res) => {
+        setnewArrivalitems(res.data);
+        //log
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+
+
+
+ const [message, setmessage] = useState("");
+
+    // handel submit
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    
+        // validate email
+        const email = e.target.email.value;
+        if (!email.includes("@")) {
+            alert("please enter a valid email");
+            return;
+        }
+
+        // validate phone 12 number 
+        const phone = e.target.phone.value;
+        if ( phone.length !== 11 ) {
+            alert("please enter a valid phone number");
+            return;
+        }
+        //get data from form
+        const data = {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            phone: e.target.phone.value,
+            subject:e.target.phone.value,
+            message: e.target.message.value,
+        };
+        //post data to /contact
+        Axios.post("/contact", data)
+            .then((res) => {
+                setmessage("تم الارسال بنجاح")
+                e.target.name.value = "";
+                e.target.email.value = "";
+                e.target.phone.value = "";
+                e.target.subject.value = "";
+                e.target.message.value = "";
+
+            })
+            .catch((error) => {
+                console.log(error);
+                // set message 
+                setmessage("حدث خطأ ما")
+            });
+    };
+    
+
   return (
 
 
@@ -58,7 +109,7 @@ const Home = () => {
         <div className="row">
           <div className="col-md-12">
             <div className="d-flex justify-content-center align-items-center mt-4">
-              <h3 className="section-title">New Arrivals</h3>
+              <h3 className="section-title"> احدث المذادات</h3>
               
             </div>
           </div>
@@ -67,16 +118,15 @@ const Home = () => {
 
     <div className="container mt-5">
 
-      <div className="row">
-      {products.length > 0 ? (
-            products.map((product) => (
-                <div key={product.id} className="col-md-3">
+      <div className="row mb-5">
+      {newArrival.length > 0 ? (
+            newArrival.map((product) => (
+                <div key={product.id} className="col-md-4">
                   <Card
-                    image={product.image}
-                    title={product.title}
+                    title={product.name}
                     startdate={product.startdate}
                     //href = /product/:id
-                    href={`/product/${product.id}`}
+                    href={`/auction/${product._id}/items`}
                   />
                 </div>
                 ))
@@ -90,6 +140,47 @@ const Home = () => {
         )}
       </div>
     </div>
+
+    {/** product section header  */}
+    <div className="container" >
+        <div className="row mt-5">
+          <div className="col-md-12">
+            <div className="d-flex justify-content-center align-items-center mt-4">
+              <h3 className="section-title"> احدث المنتجات</h3>
+              
+            </div>
+          </div>
+        </div> 
+      </div>
+
+    <div className="container mt-5">
+
+      <div className="row">
+      {newArrivalitems.length > 0 ? (
+            newArrivalitems.map((product) => (
+                <div key={product.id} className="col-md-4">
+                  <Card
+                    title={product.name}
+                    startdate={product.startdate}
+                    image={product.image}
+                    //href = /product/:id
+                    href={`/itemdetails/${product._id}`}
+                  />
+                </div>
+                ))
+        ) : (
+            <div className="col-md-12">
+                <div className="d-flex justify-content-center align-items-center">
+                    <div className="spinner-border text-primary" role="status">
+                    </div>
+                </div>
+            </div>
+        )}
+      </div>
+    </div>  
+
+          
+    
 
     {/** about us   */}
     <div className="container" >
@@ -231,66 +322,59 @@ const Home = () => {
         </div>
     </div>
     
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-md-6 text-center d-flex align-items-center">
-            {/** contact form with fields name , email , subject , message */}  
-            <form className="w-100">
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  name="name"
-                  placeholder="Your Name"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="email"
-                  className="form-control"
-                  name="email"
-                  placeholder="Your Email"
-
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  name="subject"
-                  placeholder="Subject"
-
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <textarea
-                  className="form-control"
-                  name="message"
-                  placeholder="Your Message"
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </form>
-        </div>
-        <div className="col-md-6">
-          <div className="card">
-            <div className="image">
-              <img
-                src="https://i.imgur.com/8JIWpnw.jpg"
-                className="img rounded thumbnail-image"
-                alt="product"
-                width={'100%'}/>
+   {/* form name , email , phone , subject , message  */}
+   <div className="container">
+        <div className="row mt-5">
+            <div className="col-md-12">
+                {/* show message */}
+                <div className="text-center">
+                {message && (
+                    <div className="alert alert-success" role="alert">
+                        {message}
+                    </div>
+                )}
+                <h1 className="mb-3">تواصل معنا </h1>
+                <p>
+                    يمكنك التواصل معنا عن طريق ملئ النموذج ادناه وسوف نقوم بالرد عليك في اقرب وقت ممكن
+                </p>
+                </div>
+                <form
+                    onSubmit={handleSubmit}
+                >
+                    <div className="form-group">
+                        <label htmlFor="exampleFormControlInput1">الاسم</label>
+                        <input type="text" 
+                        name="name"
+                        className="form-control" id="exampleFormControlInput1" placeholder="الاسم" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="exampleFormControlInput1">البريد الالكتروني</label> 
+                        <input type="email"
+                        name="email"
+                        className="form-control" id="exampleFormControlInput1" placeholder="البريد الالكتروني" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="exampleFormControlInput1">رقم الهاتف</label>
+                        <input type="text" 
+                        name="phone"
+                        className="form-control" id="exampleFormControlInput1" placeholder="رقم الهاتف" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="exampleFormControlInput1">الموضوع</label>
+                        <input type="text"
+                        name="subject"
+                        className="form-control" id="exampleFormControlInput1" placeholder="الموضوع" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="exampleFormControlTextarea1">الرسالة</label>
+                        <textarea 
+                        name="message"
+                        className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <button type="submit" className="btn btn-primary btn-lg mt-5 align-self-center">ارسال</button>
+                </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
   
          

@@ -64,7 +64,7 @@ const Product = () => {
                   image={product.image}
                   title={product.name}
                   startdate={product.category[0].name}
-                  href={`/product/${product._id}`}
+                  href={`/itemdetails/${product._id}`}
                 />
               </div>
             ))

@@ -80,7 +80,7 @@ const Login = () => {
                       id="email"
                       type="email"
                       className="form-field text-dark"
-                      required
+                      
                       
                     />
                     <ErrorMessage
@@ -97,7 +97,7 @@ const Login = () => {
                       id="password"
                       type="password"
                       className="form-field text-dark"
-                      required
+                      
                     />
                     <ErrorMessage
                       component="span"

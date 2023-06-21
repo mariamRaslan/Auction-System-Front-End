@@ -1,38 +1,50 @@
 import React from "react";
 import img from "./../../../assets/images/stop-watch-.jpg";
 import "./Payment.css";
+import FizzyButton from '../../../SharedUi/FizzyButton/FizzyButton';
 
 const Payment = () => {
   return (
-    <div className="payment">
-      <div className="container">
-        <div className="row d-flex justify-content-center">
-          <div className="payment-card d-flex col-md-6 col-sm-12 ">
-            <div className="row w-100 p-0 m-0">
-              <div className="payment-left col-md-6 col-sm-12">
-                <div>
-                  <img src={img} className="payment-image" alt="product" />
-                </div>
-              </div>
-              <div className="payment-right d-flex justify-content-center col-md-6 col-sm-12">
-                <div className="payment-content">
-                  <h1>prodName</h1>
-                  <p>prodDesc</p>
-                  <div className="payment-price d-flex justify-content-around my-3">
-                    <div>Price $</div>
-                  </div>
-                  <div className="payment-button">
-                    <form>
-                      <button className="btn btn-success">Confirm</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="App ">
+    <div className="">
+      <div className="container mt-5 mb-5 p-5 flex display-content-center ">
+        <table className="table">
+          <tbody>
+            <tr>
+              <td>
+                <img src="https://via.placeholder.com/100" alt="Item" />
+              </td>
+              <td>Item Name</td>
+              <td>$10.00</td>
+              <td>
+              <FizzyButton text={"تأكيد عملية الشراء"}  href={'#'}  />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="https://via.placeholder.com/100" alt="Item" />
+              </td>
+              <td>Item Name</td>
+              <td>$15.00</td>
+              <td>
+                <FizzyButton text={"تأكيد عملية الشراء"}  href={'#'}  />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="https://via.placeholder.com/100" alt="Item" />
+              </td>
+              <td>Item Name</td>
+              <td>$20.00</td>
+              <td>
+              <FizzyButton text={"تأكيد عملية الشراء"}  href={'#'}  />
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
   );
 };
 export default Payment;

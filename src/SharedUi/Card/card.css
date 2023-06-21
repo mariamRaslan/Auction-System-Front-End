@@ -1,0 +1,44 @@
+.card {
+    height: 350px; /* Set a fixed height for all cards */
+    transition: box-shadow 0.3s ease-in-out;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .image-container {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .thumbnail-image {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .thumbnail-image:hover {
+    transform: scale(1.06);
+  }
+  
+  .dress-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 0;
+  }
+  
+  .new-price {
+    font-size: 16px;
+    color: #888;
+  }
+  
+  .product-detail-container {
+    background-color: #fff;
+  }
+  
+  @media (min-width: 768px) {
+    .card {
+      margin: 0 auto;
+      max-width: 300px;
+    }
+  }
