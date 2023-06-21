@@ -122,7 +122,7 @@ const AddProduct = () => {
         <CCol md={6}>
           <CFormLabel htmlFor="validationCustom04">الفئات</CFormLabel>
           <CFormSelect
-            multiple
+            // multiple
             className="form-control default-select"
             onChange={handleInputChange}
             name="category"
@@ -131,7 +131,7 @@ const AddProduct = () => {
             <option disabled>اختر اكثر من فئة بالضغط على ctrl</option>
             {categories.map((category) => {
               return (
-                <option name="category[]" value={category._id}>
+                <option name="category" value={category._id}>
                   {category.name}
                 </option>
               );

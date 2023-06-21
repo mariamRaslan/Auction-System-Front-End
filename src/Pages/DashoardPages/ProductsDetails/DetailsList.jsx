@@ -150,7 +150,7 @@ const ProductsDetails = () => {
                       color="primary"
                       variant="outline"
                     >
-                      Details
+                      تفاصيل
                     </CButton>
                   </CTableHeaderCell>
                   {/* Button for editing */}
@@ -161,7 +161,7 @@ const ProductsDetails = () => {
                       color="warning"
                       variant="outline"
                     >
-                      Edit
+                      تعديل
                     </CButton>
                   </CTableHeaderCell>
                   {/* Button for deleting */}
@@ -175,7 +175,7 @@ const ProductsDetails = () => {
                       color="danger"
                       variant="outline"
                     >
-                      Delete
+                      حذف
                     </CButton>
                   </CTableHeaderCell>
                 </CTableRow>
