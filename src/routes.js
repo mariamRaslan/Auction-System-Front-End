@@ -80,7 +80,8 @@ const BiddingsList = React.lazy(() => import('./Pages/DashoardPages/Biddings/Bid
 //website live stream
 const ShowLiveStream=React.lazy(() => import('./Pages/WebsitePages/LiveStream/LiveStream'))
 //dashboard live stream
-const CreateLiveStream=React.lazy(() => import('./Pages/DashoardPages/LiveStream/LiveStream'))
+const CreateLiveStream=React.lazy(() => import('./Pages/DashoardPages/LiveStream/CreateLiveStream'))
+const LiveStreamList=React.lazy(() => import('./Pages/DashoardPages/LiveStream/LiveStreamList'))
 //Routes
 const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
@@ -114,7 +115,7 @@ const routes = [
   { path: 'dashboard/reports/yearly-reports', name: 'YearlyReports', element: YearlyReports },
   //dashboard live stream
   {path:'dashboard/live-stream/create',exact:true,name:'CreateLiveStream',element:CreateLiveStream},
-
+  {path:'dashboard/live-stream/list',exact:true,name:'LiveStreamList',element:LiveStreamList},
   //Home
   { path: '/home', name: 'Home', element: Home },
   //product
@@ -151,7 +152,7 @@ const routes = [
   { path: '/dashboard/biddings', exact: true, name: 'BiddingsList', element: BiddingsList },
 
   //website live stream
-  {path:'/live-stream/show',exact:true,name:'ShowLiveStream',element:ShowLiveStream},
+  {path:'/live-stream/show/:auctionId',exact:true,name:'ShowLiveStream',element:ShowLiveStream},
 
   
    //Website NotFound
