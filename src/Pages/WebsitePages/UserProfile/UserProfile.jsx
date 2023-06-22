@@ -56,7 +56,7 @@ const UserProfile = () => {
         <section className="mt-3">
           <div className="container mt-5">
             <div
-              className="row d-flex align-items-center p-5"
+              className="row d-flex align-items-center p-5 "
               style={{ backgroundColor: "#eee" }}
             >
               <div className="col-lg-4">

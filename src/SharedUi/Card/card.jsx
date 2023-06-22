@@ -27,7 +27,7 @@ const Card = ({ image, title, startdate, href }) => {
   });
 
   return (
-    <div className="card mt-5"
+    <div className="item-card mt-5"
       style={{
         boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.3)',
         textAlign: 'right', // Set the text direction to right-to-left

@@ -1,4 +1,4 @@
-.card {
+.item-card {
     height: 350px; /* Set a fixed height for all cards */
     transition: box-shadow 0.3s ease-in-out;
     border: none;
@@ -37,7 +37,7 @@
   }
   
   @media (min-width: 768px) {
-    .card {
+    .item-card {
       margin: 0 auto;
       max-width: 300px;
     }

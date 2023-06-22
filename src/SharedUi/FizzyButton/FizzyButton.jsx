@@ -1,7 +1,7 @@
 import React from 'react';
 import './FizzyButton.scss';
 
-const FizzyButton = ({ text, href }) => {
+const FizzyButton = ({ text,href}) => {
   return (
     <a href={href} className="button">
       <input id="button" type="checkbox" />
