@@ -36,6 +36,9 @@ const AddCategory = () => {
         document.getElementById('name').value = '';
         setLoad(false);
         setError_flag(false);
+
+      navigate("/dashboard/dashboard/category/list");
+
       })
       // Catch error
       .catch((error) => {
@@ -47,16 +50,20 @@ const AddCategory = () => {
 
   return (
     <div >
-      <h1>Add Category</h1>
+      <h1>
+        إضافه فئة
+      </h1>
 
       <form method="post" action="/categories" onSubmit={addCategory}>
         <div className="form-group">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">
+            الاسم
+          </label>
           <input
             type="text"
             className="form-control"
             id="name"
-            placeholder="Enter name"
+            placeholder="الاسم"
             required
           />
         </div>
@@ -76,7 +83,7 @@ const AddCategory = () => {
           </label>
         </div>
         <button type="submit" className="btn btn-primary mt-5">
-          Add
+          إضافه
         </button>
       </form>
     </div>

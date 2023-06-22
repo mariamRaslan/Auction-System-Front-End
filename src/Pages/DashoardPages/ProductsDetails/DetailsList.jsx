@@ -117,7 +117,7 @@ const ProductsDetails = () => {
             <CTableHeaderCell scope="col">
               السعر الاقصى للمزايدة
             </CTableHeaderCell>
-            <CTableHeaderCell scope="col">وقت انتهاء المزاد</CTableHeaderCell>
+            <CTableHeaderCell scope="col">مده عرض المنتج</CTableHeaderCell>
             <CTableHeaderCell className="textcenter" scope="col" colSpan={3}>
               العمليات
             </CTableHeaderCell>
@@ -141,12 +141,12 @@ const ProductsDetails = () => {
                   <CTableDataCell>{product.bidding_gap}</CTableDataCell>
                   <CTableDataCell>{product.start_bidding}</CTableDataCell>
                   <CTableDataCell>{product.max_price}</CTableDataCell>
-                  <CTableDataCell>{product.end_time}</CTableDataCell>
+                  <CTableDataCell>{product.duration}</CTableDataCell>
                   {/* Button for details */}
                   <CTableHeaderCell scope="col">
                     <CButton
                       onClick={() => handleDetailsButton(product._id)}
-                      className="btntext"
+                      className="btntext w-100"
                       color="primary"
                       variant="outline"
                     >
@@ -157,7 +157,7 @@ const ProductsDetails = () => {
                   <CTableHeaderCell scope="col">
                     <CButton
                       onClick={() => handleEditButton(product._id)}
-                      className="btntext"
+                      className="btntext w-100"
                       color="warning"
                       variant="outline"
                     >
@@ -171,7 +171,7 @@ const ProductsDetails = () => {
                         setSelectedId(product._id);
                         setShowConfirmationModal(true);
                       }}
-                      className="btntext"
+                      className="btntext w-100"
                       color="danger"
                       variant="outline"
                     >
@@ -189,7 +189,6 @@ const ProductsDetails = () => {
       {renderPagination()}
       {/* Modal for deleting */}
       <ConfirmationModal
-        title="تأكيد الحذف"
         message="هل انت متأكد من حذف هذا العنصر؟"
         confirmButtonText="حذف"
         cancelButtonText="الغاء"

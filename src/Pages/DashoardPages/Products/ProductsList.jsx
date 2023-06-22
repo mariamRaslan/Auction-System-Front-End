@@ -167,7 +167,7 @@ const Products = () => {
                   <CTableHeaderCell scope="col">
                     <CButton
                       onClick={() => handleDetailsButton(product._id)}
-                      className="btntext"
+                      className="btntext w-100"
                       color="primary"
                       variant="outline"
                     >
@@ -178,7 +178,7 @@ const Products = () => {
                   <CTableHeaderCell scope="col">
                     <CButton
                       onClick={() => handleEditButton(product._id)}
-                      className="btntext"
+                      className="btntext w-100"
                       color="warning"
                       variant="outline"
                     >
@@ -192,7 +192,7 @@ const Products = () => {
                         setShowConfirmationModal(true);
                         setSelectedId(product._id);
                       }}
-                      className="btntext"
+                      className="btntext w-100"
                       color="danger"
                       variant="outline"
                     >

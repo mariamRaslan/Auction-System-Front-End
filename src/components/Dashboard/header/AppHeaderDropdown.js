@@ -37,9 +37,9 @@ const AppHeaderDropdown = () => {
     image: '',
   })
 
-  //get token 
+  //get token
   const token = localStorage.getItem('token')
-  
+
   //decode token
   const decoded = jwt_decode(token)
 
@@ -51,7 +51,7 @@ const AppHeaderDropdown = () => {
     setAdminImage({
       image: res.data.data.image,
     })
-  })   
+  })
 
 
 
@@ -60,7 +60,7 @@ const AppHeaderDropdown = () => {
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false} style={{borderRadius:'50%'}} >
         <CAvatar src={admin.image} size="md" />
       </CDropdownToggle>
-      <CDropdownMenu className="pt-0" placement="bottom-end">
+      {/* <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="bg-light fw-semibold py-2">Account</CDropdownHeader>
         <CDropdownItem href="#">
           <CIcon icon={cilBell} className="me-2" />
@@ -118,7 +118,7 @@ const AppHeaderDropdown = () => {
           <CIcon icon={cilLockLocked} className="me-2" />
           Lock Account
         </CDropdownItem>
-      </CDropdownMenu>
+      </CDropdownMenu> */}
     </CDropdown>
   )
 }
