@@ -15,6 +15,7 @@ import {
   CModalFooter,
 } from "@coreui/react";
 import { useNavigate } from "react-router-dom";
+import Alert from "src/SharedUi/Alert/Alert";
 
 const AuctionsList = () => {
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ const AuctionsList = () => {
   const [auctionToDelete, setAuctionToDelete] = useState(null);
   const [activePage, setActivePage] = useState(1);
   const pageSize = 7;
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     getAuctionsList();
@@ -52,6 +55,8 @@ const AuctionsList = () => {
       setDeleteModal(false);
     } catch (err) {
       console.log(err);
+      setError(err.response.data.message);
+      setAlertVisible(true);
     }
   };
 
@@ -170,7 +175,7 @@ const AuctionsList = () => {
         <CModalHeader closeButton>Confirm</CModalHeader>
         <CModalBody>Are you sure you want to delete this item?</CModalBody>
         <CModalFooter>
-          <CButton color="danger" onClick={handleDelete}>
+          <CButton color="danger" onClick={()=>{handleDelete(); setDeleteModal(false)}}>
             Delete
           </CButton>
           <CButton color="secondary" onClick={() => setDeleteModal(false)}>
@@ -178,6 +183,15 @@ const AuctionsList = () => {
           </CButton>
         </CModalFooter>
       </CModal>
+      <Alert
+        type="error-alert"
+        visible={alertVisible}
+        color="warning"
+        message={error}
+        dismissible
+        alignment="center"
+        setVisible={setAlertVisible}
+      />
     </>
   );
 };

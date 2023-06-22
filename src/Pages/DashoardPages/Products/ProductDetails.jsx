@@ -6,18 +6,6 @@ import axiosInstance from "../../../Axios";
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  // const [categories, setCategories] = useState([]);
-
-  // function for getting all categories
-  // async function fetchCategories() {
-  //   try {
-  //     const response = await axiosInstance.get("/categories");
-  //     console.log(response.data.data);
-  //     setCategories(response.data.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
 
   async function fetchProduct(id) {
     try {
@@ -31,7 +19,6 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetchProduct(id);
-    // fetchCategories();
   }, []);
 
   return (
@@ -45,13 +32,13 @@ const ProductDetails = () => {
         <div className="d-flex m-auto justify-content-center">
           <div className="details col-12">
             <p>
-              <span>الاسم:</span> <br></br>
+              <span>الاسم</span> <br></br>
               {product.name}
             </p>
           </div>
           <div className="details col-12">
             <p>
-              <span>الفئة:</span> <br></br>
+              <span>الفئة</span> <br></br>
               {product.category?.name}
             </p>
           </div>
@@ -60,19 +47,19 @@ const ProductDetails = () => {
         <div className="d-flex m-auto justify-content-center">
           <div className="details col-12">
             <p>
-              <span>المادة:</span> <br></br>
+              <span>المادة</span> <br></br>
               {product.material}
             </p>
           </div>
           <div className="details col-12">
             <p>
-              <span>الحجم:</span> <br></br>
+              <span>الحجم</span> <br></br>
               {product.size}
             </p>
           </div>
           <div className="details col-12">
             <p>
-              <span>اللون:</span> <br></br>
+              <span>اللون</span> <br></br>
               {product.color}
             </p>
           </div>

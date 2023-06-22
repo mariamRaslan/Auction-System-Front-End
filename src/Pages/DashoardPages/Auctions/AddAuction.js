@@ -63,7 +63,7 @@ if (form.checkValidity() === false) {
       const response = await axiosInstance.post('/auctions', auctionData);
       console.log(response.data);
 
-      navigate('/auctions');
+      navigate('/dashboard/dashboard/auctions');
       toast.success('تمت إضافة المزاد بنجاح');
     } catch (error) {
       console.error('Error:', error);
@@ -92,7 +92,7 @@ return (
     noValidate
     validated={validated}
     onSubmit={handleSubmit}
-    
+
   >
     <CCol md={6}>
       <CFormLabel htmlFor="auctionName">اسم المزاد</CFormLabel>
