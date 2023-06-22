@@ -97,7 +97,7 @@ const NavBar = () => {
                   <CFormInput
                     type="search"
                     className="search-input mx-2"
-                    placeholder="بحث"
+                    placeholder="البحث عن المنتجات"
                   />
                   <CButton
                     type="submit"

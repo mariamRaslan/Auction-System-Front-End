@@ -1,6 +1,8 @@
 import React from "react";
 //import card
 import Card from "../../../SharedUi/Card/card";
+//import blobbutton
+import BlobButton from "../../../SharedUi/BlobButton/BlobButton";
 
 //import axios
 import Axios from "./../../../Axios";
@@ -8,6 +10,8 @@ import Axios from "./../../../Axios";
 import { useState,useEffect } from "react";
 //card
 
+//use home.css
+import "./Home.css";
 
 const Home = () => {
 
@@ -88,35 +92,122 @@ const Home = () => {
                 setmessage("حدث خطأ ما")
             });
     };
-    
+  
 
   return (
 
-
     <>
-      <div className="text-center bg-image" style={{backgroundImage: 'url(https://mdbcdn.b-cdn.net/img/new/slides/041.webp)', width: '100%' , height: '80vh', backgroundSize: 'cover'}}>
-        <div className="d-flex justify-content-center align-items-center h-100">
-          <div className="text-white">
-          <h1 className="mb-3">Welcome to the Auction Platform</h1>
-          <h4 className="mb-3">Bid, Win, and Experience the Thrill of Auctions</h4>
-            <a className="btn btn-outline-light btn-lg" href="#!" role="button">Read more details abut us</a>
+
+      <div className="text-center bg-image" style={{backgroundColor:'#5492bb96', width: '100%' , height: '80vh', backgroundSize: 'cover'}}>
+        <div className="h-100">
+          <div className="row d-flex   justify-content-center align-items-center">
+            <div className="col-sm-12 col-md-7  d-flex  justify-content-center align-items-center ">
+             <div className="text-white ">
+              <h1 className="mb-3">اهلا بيك في موقعنا </h1>
+              <h4 className="mb-3">زايد واربح افضل المنتجات التي تحلم بها </h4>
+                {/* button */}
+                <BlobButton buttonText=" تعرف اكثر عن خدماتنا" href="/about" />
+             </div>
+            </div>
+            <div className="col-5 mt-5 text-center">
+              <img src="./home-img.png" className="home-bg" alt="" />
+            </div>
           </div>
+         
         </div>
       </div>
 
-      {/** product section header  */}
-      <div className="container" >
-        <div className="row">
-          <div className="col-md-12">
-            <div className="d-flex justify-content-center align-items-center mt-4">
-              <h3 className="section-title"> احدث المذادات</h3>
-              
+
+
+
+
+      {/* how it work section  */}
+      <div className="section-bg-white" >
+        <div className="container">
+          <div className="row mb-5">
+            <div className="col-md-12">
+              <div className="d-flex justify-content-center align-items-center mt-4">
+                <h1 className="text-center"> خطوات الشراء</h1> 
+              </div>
             </div>
           </div>
-        </div> 
+          <div className="lg-hr"></div>
+          <div className="row">
+          
+                <div className="col-3 text-center">
+                  <div className="circle" >
+                    <h1>01</h1>
+                  </div>
+                  <h1>اشترك</h1>
+                  <div className="sm-hr"></div>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. A molestias doloribus voluptates ea, perspiciatis quia ullam quam atque iste reiciendis corporis distinctio, assumenda eum illo! Provident a id reiciendis facilis?
+                    </p>
+                </div>
+               
+                <div className="col-3 text-center">
+                  <div className="circle" >
+                    <h1>02</h1>
+                  </div>
+
+                  <h1>انضم</h1>
+                  <div className="sm-hr"></div>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. A molestias doloribus voluptates ea, perspiciatis quia ullam quam atque iste reiciendis corporis distinctio, assumenda eum illo! Provident a id reiciendis facilis?
+                    </p>
+                </div>
+                <div className="col-3 text-center">
+                  <div className="circle" >
+                    <h1>03</h1>
+                  </div>
+
+                  <h1>زايد</h1>
+                  <div className="sm-hr"></div>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. A molestias doloribus voluptates ea, perspiciatis quia ullam quam atque iste reiciendis corporis distinctio, assumenda eum illo! Provident a id reiciendis facilis?
+                    </p>
+                </div>
+                <div className="col-3 text-center">
+                  <div className="circle" >
+                    <h1>04</h1>
+                  </div>
+
+                  <h1>اكسب</h1>
+                  <div className="sm-hr"></div>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. A molestias doloribus voluptates ea, perspiciatis quia ullam quam atque iste reiciendis corporis distinctio, assumenda eum illo! Provident a id reiciendis facilis?
+                    </p>
+                </div>
+              </div>
+   
+        </div>
+        
       </div>
 
-    <div className="container mt-5">
+
+
+
+
+
+
+
+     
+
+      {/** product section header  */}
+  <div className="section-bg-grey">
+        <div className="container" >
+          <div className="row mb-5">
+            <div className="col-md-12">
+              <div className="d-flex justify-content-center align-items-center mt-4 mb-5">
+                <h3 className="section-title"> احدث المذادات</h3>
+              </div>
+            <div className="lg-hr"></div>
+
+            </div>
+          </div> 
+        </div>
+
+    <div className="container">
 
       <div className="row mb-5">
       {newArrival.length > 0 ? (
@@ -140,20 +231,24 @@ const Home = () => {
         )}
       </div>
     </div>
+    </div>
 
     {/** product section header  */}
     <div className="container" >
         <div className="row mt-5">
           <div className="col-md-12">
-            <div className="d-flex justify-content-center align-items-center mt-4">
-              <h3 className="section-title"> احدث المنتجات</h3>
+            <div className="d-flex justify-content-center align-items-center mt-4 mb-5">
+              <h3 className="section-title "> احدث المنتجات</h3>
+              {/* hr */}
               
             </div>
+            <div className="lg-hr"></div>
+
           </div>
         </div> 
       </div>
 
-    <div className="container mt-5">
+    <div className="container mt-5 mb-5">
 
       <div className="row">
       {newArrivalitems.length > 0 ? (
@@ -183,11 +278,13 @@ const Home = () => {
     
 
     {/** about us   */}
+    <div className="section-bg-grey">
+      
     <div className="container" >
         <div className="row"> 
           <div className="col-md-12">
             <div className="d-flex justify-content-center align-items-center mt-4">
-              <h3 className="section-title">About Us</h3>
+              <h3 className="section-title"> عن الموقع  </h3>
             </div>
           </div>
         </div>
@@ -196,11 +293,11 @@ const Home = () => {
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-6">
-          <div className="card">
+          <div className="">
             <div className="image">
               <img
-                src="https://i.imgur.com/8JIWpnw.jpg"
-                className="img rounded thumbnail-image"
+                src="./aboutus.png"
+                className=""
                 alt="product"
                 width={'100%'}
                 
@@ -211,98 +308,86 @@ const Home = () => {
         </div>
         <div className="col-md-6 text-center d-flex align-items-center">
           
-          <p className="text-justify align-items-center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            voluptatum, quibusdam, quia, quae voluptate voluptas quod
-            reprehenderit quos voluptatibus quas dolorum. Quisquam voluptatum,
-            quibusdam, quia, quae voluptate voluptas quod reprehenderit quos
-            voluptatibus quas dolorum. Quisquam voluptatum, quibusdam, quia,
-            quae voluptate voluptas quod reprehenderit quos voluptatibus quas
-            dolorum. Quisquam voluptatum, quibusdam, quia, quae voluptate
-            voluptas quod reprehenderit quos voluptatibus quas dolorum.
+          <p className="text-justify align-items-center lead">
+            {/* about Auction system description by arabic */}
+             نقوم ببيع السلع والخدمات القيمة لأعلى سعر معين، ويتم ذلك عن طريق المزايدة، وهي عملية تتم من خلال المزايدين الذين يقدمون عروضهم للحصول على السلعة أو الخدمة المطلوبة، ويتم البيع لأعلى سعر معين، ويتم ذلك عن طريق المزايدة، وهي عملية تتم من خلال المزايدين الذين يقدمون عروضهم للحصول على السلعة أو الخدمة المطلوبة، ويتم البيع لأعلى سعر معين، ويتم ذلك عن طريق المزايدة، وهي عملية تتم من خلال المزايدين الذين يقدمون عروضهم للحصول على السلعة أو الخدمة المطلوبة، ويتم البيع لأعلى سعر معين، ويتم ذلك عن طريق المزايدة، وهي عملية تتم من خلال المزايدين الذين يقدمون عروضهم للحصول على السلعة أو الخدمة المطلوبة، ويتم البيع لأعلى سعر معين، ويتم ذلك عن طريق المزايدة، وهي عملية تتم من خلال المزايدين 
+
           </p>
         </div>
       </div>
     </div>
-{/** fixed background section  */}
-    <div className="fixed-background">
+  </div>
+    <div className="mt-5">
       <div className="container">
         <div className="row">
           <div className="col-md-12">
             <div className="d-flex justify-content-center align-items-center mt-4">
-              <h3 className="section-title">Our Services</h3>
+              <h3 className="section-title">خدماتنا</h3>
             </div>
           </div>
+    <div className="lg-hr"></div>
+
         </div>
       </div>
     </div>
+    {/* hr */}
       
     {/** services section  */}
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-4">
-          <div className="card">
+          <div className="">
             <div className="image">
               <img
-                src="https://i.imgur.com/8JIWpnw.jpg"
-                className="img rounded thumbnail-image"
+                src="./products.png"
+                className="service-img  thumbnail-image"
                 alt="product"
                 width={'100%'}
                 />
             </div>
             <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="text-justify">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-                voluptatum, quibusdam, quia, quae voluptate voluptas quod
-                </p>
-              <a href="#" className="btn btn-primary">
-                Go somewhere
-                </a>
+              <h5 className="card-title text-center">افضل المنتجات</h5>
+              <p className="text-center text-center ">
+                  نوفر لك افضل المنتجات حول العالم 
+               </p>
+            </div>
+
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="">
+            <div className="image">
+              <img
+                src="./payment.png"
+                className="service-img  thumbnail-image"
+                alt="product"
+                width={'100%'}
+                />
+            </div>
+            <div className="card-body">
+              <h5 className="card-title text-center"> الدفع بامان </h5>
+              <p className="text-justify text-center">
+                نوفر لك طرق سهله وامنة للدفع
+              </p>
             </div>
           </div>
         </div>
         <div className="col-md-4">
-          <div className="card">
+          <div className="">
             <div className="image">
               <img
-                src="https://i.imgur.com/8JIWpnw.jpg"
-                className="img rounded thumbnail-image"
+                src="./support.png"
+                className="service-img  thumbnail-image"
                 alt="product"
                 width={'100%'}
                 />
             </div>
             <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="text-justify">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-                voluptatum, quibusdam, quia, quae voluptate voluptas quod
+              <h5 className="card-title text-center">الدعم </h5>
+              <p className="text-justify text-center">
+                  نوفر لك فريق مسئول عن الدعم لمساعدتك والرد علي استفساراتك
                 </p>
-              <a href="#" className="btn btn-primary">
-                Go somewhere
-                </a>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card">
-            <div className="image">
-              <img
-                src="https://i.imgur.com/8JIWpnw.jpg"
-                className="img rounded thumbnail-image"
-                alt="product"
-                width={'100%'}
-                />
-            </div>
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="text-justify">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-                voluptatum, quibusdam, quia, quae voluptate voluptas quod
-                </p>
-              <a href="#" className="btn btn-primary">
-                Go somewhere
-                </a>
+             
             </div>
           </div>
         </div>
@@ -312,69 +397,84 @@ const Home = () => {
                   
             
     {/** contact us   */}
-    <div className="container" >
-        <div className="row">
-          <div className="col-md-12">
-            <div className="d-flex justify-content-center align-items-center mt-4">
-              <h3 className="section-title">Contact Us</h3>
-            </div>
-          </div>
-        </div>
-    </div>
-    
-   {/* form name , email , phone , subject , message  */}
-   <div className="container">
-        <div className="row mt-5">
-            <div className="col-md-12">
-                {/* show message */}
-                <div className="text-center">
-                {message && (
-                    <div className="alert alert-success" role="alert">
-                        {message}
-                    </div>
-                )}
-                <h1 className="mb-3">تواصل معنا </h1>
-                <p>
-                    يمكنك التواصل معنا عن طريق ملئ النموذج ادناه وسوف نقوم بالرد عليك في اقرب وقت ممكن
-                </p>
+    <div className="section-bg-grey">
+          <div className="container" >
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="d-flex justify-content-center align-items-center mt-4">
+                    <h3 className="section-title">تواصل معنا</h3>
+                  </div>
                 </div>
-                <form
-                    onSubmit={handleSubmit}
-                >
-                    <div className="form-group">
-                        <label htmlFor="exampleFormControlInput1">الاسم</label>
-                        <input type="text" 
-                        name="name"
-                        className="form-control" id="exampleFormControlInput1" placeholder="الاسم" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleFormControlInput1">البريد الالكتروني</label> 
-                        <input type="email"
-                        name="email"
-                        className="form-control" id="exampleFormControlInput1" placeholder="البريد الالكتروني" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleFormControlInput1">رقم الهاتف</label>
-                        <input type="text" 
-                        name="phone"
-                        className="form-control" id="exampleFormControlInput1" placeholder="رقم الهاتف" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleFormControlInput1">الموضوع</label>
-                        <input type="text"
-                        name="subject"
-                        className="form-control" id="exampleFormControlInput1" placeholder="الموضوع" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleFormControlTextarea1">الرسالة</label>
-                        <textarea 
-                        name="message"
-                        className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    <button type="submit" className="btn btn-primary btn-lg mt-5 align-self-center">ارسال</button>
-                </form>
-            </div>
-        </div>
+                {/* hr */}
+                <div className="lg-hr">
+                  </div>
+                  
+              </div>
+          </div>
+          
+        {/* form name , email , phone , subject , message  */}
+        <div className="container">
+              <div className="row mt-5">
+                  <div className="col-md-12">
+                      {/* show message */}
+                      <div className="text-center">
+                      {message && (
+                          <div className="alert alert-success" role="alert">
+                              {message}
+                          </div>
+                      )}
+                      
+                      <p>
+                          يمكنك التواصل معنا عن طريق ملئ النموذج ادناه وسوف نقوم بالرد عليك في اقرب وقت ممكن
+                      </p>
+                      </div>
+                      <div className="form-shadow">
+                      <form
+                          
+
+                          
+                          onSubmit={handleSubmit}
+                      >
+                          <div className="form-group">
+                              <label htmlFor="exampleFormControlInput1">الاسم</label>
+                              <input type="text" 
+                              name="name"
+                              className="form-control" id="exampleFormControlInput1" placeholder="الاسم" />
+                          </div>
+                          <div className="form-group">
+                              <label htmlFor="exampleFormControlInput1">البريد الالكتروني</label>
+                              <input type="email" 
+                              name="email"
+                              className="form-control" id="exampleFormControlInput1" placeholder="البريد الالكتروني" />
+                          </div>
+                          
+                          <div className="form-group">
+                              <label htmlFor="exampleFormControlInput1">رقم الهاتف</label>
+                              <input type="text" 
+                              name="phone"
+                              className="form-control" id="exampleFormControlInput1" placeholder="رقم الهاتف" />
+                          </div>
+                          <div className="form-group">
+                              <label htmlFor="exampleFormControlInput1">الموضوع</label>
+                              <input type="text"
+                              name="subject"
+                              className="form-control" id="exampleFormControlInput1" placeholder="الموضوع" />
+                          </div>
+                          <div className="form-group">
+                              <label htmlFor="exampleFormControlTextarea1">الرسالة</label>
+                              <textarea 
+                              name="message"
+                              className="form-control-text-area" id="exampleFormControlTextarea1" rows="10"></textarea>
+                          </div>
+                          <div className="text-center">
+                          <button type="submit" className="btn btn-custom btn-lg mt-5 align-self-center">ارسال</button>
+
+                          </div>
+                      </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
     </div>
   
          

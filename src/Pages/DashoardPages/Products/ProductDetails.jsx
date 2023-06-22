@@ -6,18 +6,18 @@ import axiosInstance from "../../../Axios";
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
   // function for getting all categories
-  async function fetchCategories() {
-    try {
-      const response = await axiosInstance.get("/categories");
-      console.log(response.data.data);
-      setCategories(response.data.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // async function fetchCategories() {
+  //   try {
+  //     const response = await axiosInstance.get("/categories");
+  //     console.log(response.data.data);
+  //     setCategories(response.data.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   async function fetchProduct(id) {
     try {
@@ -31,19 +31,8 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetchProduct(id);
-    fetchCategories();
+    // fetchCategories();
   }, []);
-
-  function getProductCategory() {
-    product.category
-      .map((categoryId) => {
-        const category = categories.find(
-          (category) => category._id === categoryId
-        );
-        return category ? category.name : "";
-      })
-      .join(", ");
-  }
 
   return (
     <CRow dir="rtl" className="detailsContainer">
@@ -63,15 +52,7 @@ const ProductDetails = () => {
           <div className="details col-12">
             <p>
               <span>الفئة:</span> <br></br>
-              {product.category &&
-                product.category
-                  .map((categoryId) => {
-                    const category = categories.find(
-                      (category) => category._id === categoryId
-                    );
-                    return category ? category.name : "";
-                  })
-                  .join(", ")}
+              {product.category?.name}
             </p>
           </div>
         </div>

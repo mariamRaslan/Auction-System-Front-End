@@ -18,7 +18,7 @@ const AddDetails = () => {
   const [selectedAuctionId, setSelectedAuctionId] = useState('');
   const [initialBidValue, setInitialBidValue] = useState('');
   const [minimumBidValue, setMinimumBidValue] = useState('');
-  const [endTime, setEndTime] = useState('');
+  const [duration, setDuration] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [items, setItems] = useState([]);
   const [auctions, setAuctions] = useState([]);
@@ -47,10 +47,10 @@ const AddDetails = () => {
         !!selectedAuctionId &&
         !!initialBidValue &&
         !!minimumBidValue &&
-        !!endTime &&
+        !!duration &&
         !!maxPrice
     );
-  }, [selectedItemId, selectedAuctionId, initialBidValue, minimumBidValue, endTime, maxPrice]);
+  }, [selectedItemId, selectedAuctionId, initialBidValue, minimumBidValue, duration, maxPrice]);
 
   const handleSelectedItemIdChange = (event) => {
     setSelectedItemId(event.target.value);
@@ -68,8 +68,8 @@ const AddDetails = () => {
     setMinimumBidValue(event.target.value);
   };
 
-  const handleEndTimeChange = (event) => {
-    setEndTime(event.target.value);
+  const handleDurationChange = (event) => {
+    setDuration(event.target.value);
   };
 
   const handleMaxPriceChange = (event) => {
@@ -83,7 +83,7 @@ const AddDetails = () => {
       auction_id: parseInt(selectedAuctionId),
       start_bidding: parseInt(initialBidValue),
       bidding_gap: parseInt(minimumBidValue),
-      end_time: endTime,
+      duration: duration,
       max_price: parseInt(maxPrice),
     };
     console.log(data);
@@ -172,20 +172,21 @@ const AddDetails = () => {
         )}
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="endTime">وقت الانتهاء</CFormLabel>
+        <CFormLabel htmlFor="duration">مده المنتج</CFormLabel>
         <CInputGroup>
           <CInputGroupText>
             <i className="cil-calendar"></i>
           </CInputGroupText>
           <CFormInput
-            type="time"
-            id="endTime"
-            value={endTime}
-            onChange={handleEndTimeChange}
+            type="number"
+            id="duration"
+            value={duration}
+            min={1}
+            onChange={handleDurationChange}
             required
           />
         </CInputGroup>
-        {!endTime && <CFormFeedback invalid>يرجى إدخال وقت الانتهاء</CFormFeedback>}
+        {!duration && <CFormFeedback invalid>يرجى إدخال وقت الانتهاء</CFormFeedback>}
       </CCol>
       <CCol md={6}>
         <CFormLabel htmlFor="maxPrice">الحد الأقصى للسعر</CFormLabel>

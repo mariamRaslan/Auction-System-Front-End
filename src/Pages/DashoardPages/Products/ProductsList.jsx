@@ -158,14 +158,7 @@ const Products = () => {
                   <CTableDataCell>{product.name}</CTableDataCell>
                   <CTableDataCell>{product.qty}</CTableDataCell>
                   <CTableDataCell>
-                    {product.category
-                      .map((categoryId) => {
-                        const category = categories.find(
-                          (category) => category._id === categoryId
-                        );
-                        return category ? category.name : "";
-                      })
-                      .join(", ")}
+                    {product.category?.name}
                   </CTableDataCell>
                   <CTableDataCell>{product.material}</CTableDataCell>
                   <CTableDataCell>{product.size}</CTableDataCell>
@@ -178,7 +171,7 @@ const Products = () => {
                       color="primary"
                       variant="outline"
                     >
-                      Details
+                      تفاصيل
                     </CButton>
                   </CTableHeaderCell>
                   {/* button for edit */}
@@ -189,7 +182,7 @@ const Products = () => {
                       color="warning"
                       variant="outline"
                     >
-                      Edit
+                      تعديل
                     </CButton>
                   </CTableHeaderCell>
                   {/* button for delete */}
@@ -203,7 +196,7 @@ const Products = () => {
                       color="danger"
                       variant="outline"
                     >
-                      Delete
+                      حذف
                     </CButton>
                   </CTableHeaderCell>
                 </CTableRow>
