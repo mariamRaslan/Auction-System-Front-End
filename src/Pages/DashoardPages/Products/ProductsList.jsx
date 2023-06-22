@@ -48,10 +48,7 @@ const Products = () => {
       console.error(error);
     }
   }
-  const handleDelete = (id) => {
-    setSelectedId(id);
-    setShowConfirmationModal(true);
-  };
+
   // function for delete product
   async function deleteProduct(id) {
     try {
@@ -207,7 +204,6 @@ const Products = () => {
       </CTable>
       {renderPagination()}
       <ConfirmationModal
-        title="تأكيد الحذف"
         message="هل انت متأكد من حذف هذا العنصر؟"
         confirmButtonText="حذف"
         cancelButtonText="الغاء"
