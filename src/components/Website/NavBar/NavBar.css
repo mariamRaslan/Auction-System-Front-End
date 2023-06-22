@@ -7,20 +7,20 @@
   color: white;
   font-size: 18px;
 }
-.drop-item{
+.drop-item {
   color: #484848 !important;
   font-size: 15px !important;
 }
-.search-submit{
+.search-submit {
   background-color: #95c2f4;
   color: #fff !important;
   border: none;
   border-radius: 0;
   margin: 0;
 }
-.search-input{
+.search-input {
   width: 100%;
-  border-radius: 0 ;
+  border-radius: 0;
   border: none;
   margin: 0 !important;
 }
@@ -28,33 +28,41 @@
   border-radius: 10px;
   color: white;
   width: fit-content;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin: 2px;
 }
 .nav-item:hover {
   background-color: white;
   border-radius: 10px;
 }
-.user-item{
+.user-item {
   justify-content: center;
   align-items: center;
-  display: flex;
+  /* display: flex; */
 }
-.user-item:hover{
+.user-item:hover {
   background-color: transparent;
 }
-.user-item:hover .nav-link{
+.user-item:hover .nav-link {
   color: #fff !important;
 }
-.user-item .nav-link{
+.user-item .nav-link {
   padding: 0 !important;
   margin: 0;
   font-size: 20px;
 }
-.user-img{
+.user-img {
   width: 40px;
   height: 40px;
   padding: 0;
   margin: 0;
   border-radius: 50%;
+}
+.form-control {
+  height: auto !important;
 }
 .nav-item:hover .nav-link {
   color: #4f89b0;
@@ -63,7 +71,7 @@
   width: 50px;
   height: 50px;
 }
-.user-item:hover{
+.user-item:hover {
   background-color: transparent;
 }
 .navbar-brand {
@@ -73,4 +81,16 @@
 .btn:hover {
   background-color: #484848;
 }
-
+input {
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  /* margin-right: 10px !important; */
+}
+button {
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}

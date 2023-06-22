@@ -18,7 +18,7 @@ import {
   CDropdownDivider,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import { cilAccountLogout } from "@coreui/icons";
+import { cilAccountLogout, cilHome } from "@coreui/icons";
 import "./NavBar.css";
 import logo from "../../../assets/images/logo2.png";
 import { Link } from "react-router-dom";
@@ -46,7 +46,8 @@ const NavBar = () => {
 
   // get id from token
   const id = decoded.id;
-
+  // get role from token
+  const role = decoded.role;
   //call api /users/:id
   axios.get(`/users/${id}`).then((res) => {
     setUserImage({
@@ -58,18 +59,17 @@ const NavBar = () => {
       <CNavbar expand="lg" colorScheme="light" className="nav mb-0">
         <CContainer fluid>
           <CNavbarBrand href="#" className="text-light">
-             
             <img className="logo-img" alt="logo" src={logo} />
             iBid
           </CNavbarBrand>
           <CNavbarToggler onClick={() => setVisible(!visible)} />
           <CCollapse
-            className="navbar-collapse row"
+            className="navbar-collapse row justify-content-center d-flex align-items-center"
             style={{ marginRight: "30px" }}
             visible={visible}
           >
-            <CNavbarNav className="col justify-content-md-right justify-content-sm-center">
-              <div className="col-md-6 col-sm-12 d-flex justify-content-around">
+            <CNavbarNav className="col justify-content-lg-right justify-content-sm-center">
+              <div className="col-md-7 col-sm-12 d-flex justify-content-around">
                 <CNavItem className="nav-item">
                   <CNavLink href="/home">الرئيسية</CNavLink>
                 </CNavItem>
@@ -92,7 +92,7 @@ const NavBar = () => {
                   <CNavLink href="/contact">تواصل معنا</CNavLink>
                 </CNavItem>
               </div>
-              <div className="col-md-6 col-sm-12 d-flex justify-content-around">
+              <div className="col-md-5 col-sm-12 d-flex justify-content-center">
                 <CForm className="d-flex col-5">
                   <CFormInput
                     type="search"
@@ -108,37 +108,40 @@ const NavBar = () => {
                     <p className=" d-inline">بحث</p>
                   </CButton>
                 </CForm>
-                <CNavItem className="user-item">
-                <CNavLink href="/profile" className="ms-3" title="حسابي">
-                    <img className="user-img" alt="صوره المستخدم" src={user.image} />
-                  </CNavLink>
-                  <CNavLink onClick={logout} href="#" title="تسجيل الخروج">
-                    {/**logout icon  */}
-                    <CIcon icon={cilAccountLogout} size="lg" />
-                  </CNavLink>
-                </CNavItem>
-
-                {/* <CDropdown variant="nav-item" className="col-1">
-                  <CDropdownToggle>المزيد</CDropdownToggle>
-                   <CDropdownMenu style={{ marginTop: "17px" }}>
-                    <CDropdownItem className="drop-item ">
-                      <Link
-                        to="/profile"
-                        className="text-dark text-decoration-none"
+                <div className="col-1 d-flex justify-content-between ms-3">
+                  {role === "user" && (
+                    <CNavItem className="user-item">
+                      <CNavLink href="/profile" title="حسابي">
+                        <img
+                          className="user-img"
+                          alt="صوره المستخدم"
+                          src={user.image}
+                        />
+                      </CNavLink>
+                    </CNavItem>
+                  )}
+                  {role === "admin" && (
+                    <CNavItem className="user-item ms-2">
+                      <CNavLink
+                        // className="ml-2"
+                        href="/dashboard"
+                        title="لوحه التحكم"
                       >
-                        حسابي
-                      </Link>
-                    </CDropdownItem>
-                    <CDropdownDivider />
-                    <CDropdownItem
-                      className="drop-item"
-                      href="#"
-                      onClick={logout}
-                    >
-                      تسجيل الخروج
-                    </CDropdownItem>
-                  </CDropdownMenu>
-                </CDropdown> */}
+                        <CIcon
+                          className="dashboard-icon"
+                          icon={cilHome}
+                          size="lg"
+                        />
+                      </CNavLink>
+                    </CNavItem>
+                  )}
+                  <CNavItem className="user-item ms-2">
+                    <CNavLink onClick={logout} href="#" title="تسجيل الخروج">
+                      {/**logout icon  */}
+                      <CIcon icon={cilAccountLogout} size="lg" />
+                    </CNavLink>
+                  </CNavItem>
+                </div>
               </div>
             </CNavbarNav>
           </CCollapse>
