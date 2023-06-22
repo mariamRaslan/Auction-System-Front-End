@@ -95,7 +95,7 @@ const UpdateProducts = () => {
         formDataWithImage
       );
       console.log(response.data);
-      // window.location.href = "http://localhost:3000/dashboard/products/list";
+      window.location.href = "/dashboard/dashboard/products/list";
     } catch (error) {
       console.error(error);
       setValidated(true);

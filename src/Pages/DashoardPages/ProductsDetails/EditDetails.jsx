@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   CButton,
   CCol,
@@ -10,19 +10,19 @@ import {
   CInputGroup,
   CInputGroupText,
   CFormSelect,
-} from '@coreui/react';
-import axiosInstance from '../../../Axios';
+} from "@coreui/react";
+import axiosInstance from "../../../Axios";
 
 function EditDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [itemDetails, setItemDetails] = useState(null);
-  const [selectedItemId, setSelectedItemId] = useState('');
-  const [selectedAuctionId, setSelectedAuctionId] = useState('');
-  const [initialBidValue, setInitialBidValue] = useState('');
-  const [minimumBidValue,setMinimumBidValue] = useState('');
-  const [duration, setDuration] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
+  const [selectedItemId, setSelectedItemId] = useState("");
+  const [selectedAuctionId, setSelectedAuctionId] = useState("");
+  const [initialBidValue, setInitialBidValue] = useState("");
+  const [minimumBidValue, setMinimumBidValue] = useState("");
+  const [duration, setDuration] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
   const [items, setItems] = useState([]);
   const [auctions, setAuctions] = useState([]);
   const [formValid, setFormValid] = useState(false);
@@ -48,7 +48,7 @@ function EditDetails() {
   useEffect(() => {
     async function fetchItems() {
       try {
-        const response = await axiosInstance.get('/items');
+        const response = await axiosInstance.get("/items");
         setItems(response.data);
       } catch (error) {
         console.log(error);
@@ -60,7 +60,9 @@ function EditDetails() {
   useEffect(() => {
     async function fetchAuctions() {
       try {
-        const response = await axiosInstance.get('/auctions?status=not%20started');
+        const response = await axiosInstance.get(
+          "/auctions?status=not%20started"
+        );
         setAuctions(response.data.data);
       } catch (error) {
         console.log(error);
@@ -71,24 +73,30 @@ function EditDetails() {
 
   useEffect(() => {
     setFormValid(
-      selectedItemId !== '' &&
-      selectedAuctionId !== '' &&
-      initialBidValue !== '' &&
-      minimumBidValue !== '' &&
-      duration !== '' &&
-      maxPrice !== ''
+      selectedItemId !== "" &&
+        selectedAuctionId !== "" &&
+        initialBidValue !== "" &&
+        minimumBidValue !== "" &&
+        duration !== "" &&
+        maxPrice !== ""
     );
-  }, [selectedItemId, selectedAuctionId, initialBidValue, minimumBidValue, duration, maxPrice]);
+  }, [
+    selectedItemId,
+    selectedAuctionId,
+    initialBidValue,
+    minimumBidValue,
+    duration,
+    maxPrice,
+  ]);
 
   function handleSelectedItemIdChange(event) {
     setSelectedItemId(event.target.value);
-    console.log(event.target.value)
+    console.log(event.target.value);
   }
 
   function handleSelectedAuctionIdChange(event) {
     setSelectedAuctionId(event.target.value);
-    console.log(event.target.value)
-
+    console.log(event.target.value);
   }
 
   function handleInitialBidValueChange(event) {
@@ -127,9 +135,9 @@ function EditDetails() {
         max_price: parseInt(maxPrice),
       };
       await axiosInstance.patch(`/itemDetails/${id}`, data);
-      navigate('/dashboard/dashboard/auctions');
+      navigate("/dashboard/dashboard/productsDetails/list");
     } catch (error) {
-      console.log('Error updating item details:', error);
+      console.log("Error updating item details:", error);
     }
   }
 
@@ -138,12 +146,12 @@ function EditDetails() {
   }
 
   return (
-    <CForm className="row g-3" onSubmit={handleSubmit} >
+    <CForm className="row g-3" onSubmit={handleSubmit}>
       <CCol md={6}>
         <CFormLabel htmlFor="itemSelect">المنتج</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>
-          <i className="cil-calendar"></i>
+            <i className="cil-calendar"></i>
           </CInputGroupText>
           <CFormSelect
             id="itemSelect"
@@ -163,7 +171,7 @@ function EditDetails() {
         <CFormLabel htmlFor="auctionSelect">المزاد</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>
-          <i className="cil-calendar"></i>
+            <i className="cil-calendar"></i>
           </CInputGroupText>
           <CFormSelect
             id="auctionSelect"
@@ -183,7 +191,7 @@ function EditDetails() {
         <CFormLabel htmlFor="initialBidValue">المبلغ المبدئي</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>
-          <i className="cil-money"></i>
+            <i className="cil-money"></i>
           </CInputGroupText>
           <CFormInput
             id="initialBidValue"
@@ -200,7 +208,7 @@ function EditDetails() {
         <CFormLabel htmlFor="minimumBidValue">الحد الأدنى للمزايدة</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>
-          <i className="cil-money"></i>
+            <i className="cil-money"></i>
           </CInputGroupText>
           <CFormInput
             id="minimumBidValue"
@@ -214,10 +222,10 @@ function EditDetails() {
         </CInputGroup>
       </CCol>
       <CCol md={6}>
-        <CFormLabel htmlFor="duration">وقت انتهاء المزاد</CFormLabel>
+        <CFormLabel htmlFor="duration">مده عرض المنتج</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>
-          <i className="cil-clock"></i>
+            <i className="cil-clock"></i>
           </CInputGroupText>
           <CFormInput
             id="duration"
@@ -227,14 +235,14 @@ function EditDetails() {
             onChange={handleDurationChange}
             required
           />
-          <CFormFeedback invalid>يرجى إدخال وقت انتهاء المزاد</CFormFeedback>
+          <CFormFeedback invalid>يرجى إدخال مده عرض المنتج</CFormFeedback>
         </CInputGroup>
       </CCol>
       <CCol md={6}>
         <CFormLabel htmlFor="maxPrice">الحد الأقصى للمزايدة</CFormLabel>
         <CInputGroup className="mb-3">
           <CInputGroupText>
-          <i className="cil-money"></i>
+            <i className="cil-money"></i>
           </CInputGroupText>
           <CFormInput
             id="maxPrice"

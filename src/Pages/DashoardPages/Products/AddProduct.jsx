@@ -74,7 +74,7 @@ const AddProduct = () => {
       console.log(formDataWithImage);
       const response = await axiosInstance.post("/items", formDataWithImage);
       console.log(response.data);
-      window.location.href = "#/products/list";
+      window.location.href = "/dashboard/dashboard/products/list";
     } catch (error) {
       console.error(error);
       setValidated(true);

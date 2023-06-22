@@ -70,9 +70,9 @@ const UserProfileEdit = () => {
             "Content-Type": "multipart/form-data",
           },
         });
-        // Handle successful update
+        console.log(response)
       } catch (error) {
-        // Handle error
+        console.log(error)
       }
     } else {
       setErrors(errors);
@@ -151,7 +151,7 @@ const UserProfileEdit = () => {
                         <input type="file" className="form-control" id="image" onChange={(event) => setImage(event.target.files[0])} />
                       </div>
                     </div>
-                    <button type="submit" className="btn btn-primary">تحديث البيانات</button>
+                    <button type="submit" className="btn text-light" style={{backgroundColor: "#4f89b0"}}>تحديث البيانات</button>
                   </form>
                 </div>
               </div>

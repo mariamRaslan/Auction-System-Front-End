@@ -48,10 +48,7 @@ const Products = () => {
       console.error(error);
     }
   }
-  const handleDelete = (id) => {
-    setSelectedId(id);
-    setShowConfirmationModal(true);
-  };
+
   // function for delete product
   async function deleteProduct(id) {
     try {
@@ -167,7 +164,7 @@ const Products = () => {
                   <CTableHeaderCell scope="col">
                     <CButton
                       onClick={() => handleDetailsButton(product._id)}
-                      className="btntext"
+                      className="btntext w-100"
                       color="primary"
                       variant="outline"
                     >
@@ -178,7 +175,7 @@ const Products = () => {
                   <CTableHeaderCell scope="col">
                     <CButton
                       onClick={() => handleEditButton(product._id)}
-                      className="btntext"
+                      className="btntext w-100"
                       color="warning"
                       variant="outline"
                     >
@@ -192,7 +189,7 @@ const Products = () => {
                         setShowConfirmationModal(true);
                         setSelectedId(product._id);
                       }}
-                      className="btntext"
+                      className="btntext w-100"
                       color="danger"
                       variant="outline"
                     >
@@ -207,7 +204,6 @@ const Products = () => {
       </CTable>
       {renderPagination()}
       <ConfirmationModal
-        title="تأكيد الحذف"
         message="هل انت متأكد من حذف هذا العنصر؟"
         confirmButtonText="حذف"
         cancelButtonText="الغاء"

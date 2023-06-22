@@ -55,7 +55,7 @@ const EditAuction = () => {
         status: form.elements.status.value,
       };
       await axiosInstance.patch(`/auctions/${auctionId}`, updatedAuction);
-      navigate('/dashboard/auctions');
+      navigate('/dashboard/dashboard/auctions');
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +63,7 @@ const EditAuction = () => {
 
   return (
     auction && (
-      <CForm 
+      <CForm
         className="row g-3 needs-validation"
         noValidate
         validated={validated}

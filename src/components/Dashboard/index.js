@@ -13,7 +13,7 @@ export {
   AppContent,
   AppFooter,
   AppHeader,
-  AppHeaderDropdown,
+  // AppHeaderDropdown,
   AppSidebar,
   DocsCallout,
   DocsLink,
