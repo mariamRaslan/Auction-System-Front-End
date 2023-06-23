@@ -12,6 +12,8 @@ const Bidding = () => {
   const [currentitem, setCurrentItem] = useState({});
   const [itemnotstarted, setItemNotStarted] = useState(false);
   const [itemstarted, setItemStarted] = useState(false);
+  const [itemended, setItemEnded] = useState(false);
+  
   const [timer, setTimer] = useState(0);
 
   const [auctionEnded, setAuctionEnded] = useState(false);
@@ -44,20 +46,35 @@ const Bidding = () => {
     }
   }, [auction]);
 
+
+
+
+
   useEffect(() => {
     const item = items.find((item) => item.is_open === true);
     console.log("first item =>", item);
     if (item) {
       setCurrentItem(item);
+
+      
+
       const itemStartDate = new Date(item.start_date);
+      itemStartDate.setHours(itemStartDate.getHours() - 3);
       console.log("itemStartDate =>", itemStartDate);
+
       const durationInMilliseconds = item.duration * 60 * 1000; // Convert duration to milliseconds
       setTimer(itemStartDate.getTime() + durationInMilliseconds - Date.now());
       console.log("timer=>", new Date(timer));
+    
 
-      if (itemStartDate < Date.now()) {
+
+      if (itemStartDate < Date.now()  ) {
         setItemNotStarted(true);
-      } else {
+        console.log("Date.now =>", new Date(Date.now()));
+      } else if (  Date.now() ){
+        currentitem.is_open==false
+        console.log(currentitem.is_open)
+      }else{
         setItemStarted(true);
       }
     } else {
@@ -180,11 +197,15 @@ const Bidding = () => {
                     </div>
                   </div>
                   <div className="bidding-button">
+                    
                     <form>
+                    <label htmlFor="">
+                      <span>أدخل مقدار الزيادة</span>
+                    </label>
                       <input
                         type="number"
                         name="price"
-                        placeholder="أدخل سعرك"
+                        placeholder="أدخل مقدار الزيادة"
                       />
                       <button className="btn btn-primary">إرسال</button>
                     </form>
@@ -225,3 +246,8 @@ const Bidding = () => {
 };
 
 export default Bidding;
+
+
+
+
+

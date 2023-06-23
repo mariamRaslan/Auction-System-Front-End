@@ -5,9 +5,10 @@
   border: 2px solid #4f89b0;
   border-radius: 10px;
   padding: 0 !important;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
   text-align: right;
+  
 }
 .info{
   display: flex;
