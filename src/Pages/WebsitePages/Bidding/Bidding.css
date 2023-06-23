@@ -5,9 +5,10 @@
   border: 2px solid #4f89b0;
   border-radius: 10px;
   padding: 0 !important;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
   text-align: right;
+  
 }
 .info{
   display: flex;
@@ -77,4 +78,16 @@ span{
   color: #4f89b0;
   font-size: 1rem;
   /* font-weight: bold; */
+}
+
+.auction-notfound-card{
+  height: 650px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bind-section{
+  margin-top: 50px;
+  height: 800px;
 }
