@@ -228,7 +228,7 @@ const AddDetails = () => {
           )}
         </CCol>{" "}
         <CCol md={6}>
-          <CFormLabel htmlFor="date">تاريخ المزاد</CFormLabel>
+          <CFormLabel htmlFor="date">تاريخ المنتج</CFormLabel>
           <CInputGroup>
             <CInputGroupText>
               <i className="cil-calendar"></i>
@@ -242,11 +242,11 @@ const AddDetails = () => {
             />
           </CInputGroup>
           {!date && (
-            <CFormFeedback invalid>يرجى إدخال تاريخ المزاد</CFormFeedback>
+            <CFormFeedback invalid>يرجى إدخال تاريخ المنتج</CFormFeedback>
           )}
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="time">وقت المزاد</CFormLabel>
+          <CFormLabel htmlFor="time">وقت المنتج</CFormLabel>
           <CInputGroup>
             <CInputGroupText>
               <i className="cil-calendar"></i>
@@ -260,7 +260,7 @@ const AddDetails = () => {
             />
           </CInputGroup>
           {!time && (
-            <CFormFeedback invalid>يرجى إدخال وقت المزاد</CFormFeedback>
+            <CFormFeedback invalid>يرجى إدخال وقت المنتج</CFormFeedback>
           )}
         </CCol>
         <CCol md={6}>

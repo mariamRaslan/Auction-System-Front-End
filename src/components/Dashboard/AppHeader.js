@@ -98,7 +98,7 @@ const AppHeader = () => {
           <CNavItem>
             <CNavLink href="/dashboard/dashboard/live-stream/list">
               {" "}
-              بثوث
+              بث مباشر
             </CNavLink>
           </CNavItem>
           <CNavItem>
@@ -111,6 +111,9 @@ const AppHeader = () => {
             <CNavLink href="/dashboard/dashboard/productsDetails/list">
               منتجات مزادات
             </CNavLink>
+          </CNavItem>
+          <CNavItem>
+            <CNavLink href="/dashboard/dashboard/winners">الفائزين</CNavLink>
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav>
