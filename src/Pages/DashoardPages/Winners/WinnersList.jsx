@@ -18,7 +18,7 @@ const BiddingsList = () => {
   // function to get diddings
   async function fetchBidding() {
     try {
-      const response = await axiosInstance.get("/biddings/");
+      const response = await axiosInstance.get("/winners/");
       console.log(response.data.data);
       setBidding(response.data.data);
     } catch (error) {
@@ -90,10 +90,10 @@ const BiddingsList = () => {
               return (
                 <CTableRow key={bid._id}>
                   <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
-                  <CTableDataCell>{bid.user_id?.name}</CTableDataCell>
-                  <CTableDataCell>{bid.item_id?.name}</CTableDataCell>
-                  <CTableDataCell>{bid.auction_id?.name}</CTableDataCell>
-                  <CTableDataCell>{bid.amount}</CTableDataCell>
+                  <CTableDataCell>{bid.users?.name}</CTableDataCell>
+                  <CTableDataCell>{bid.items?.name}</CTableDataCell>
+                  <CTableDataCell>{bid.auctions?.name}</CTableDataCell>
+                  <CTableDataCell>{bid.price}</CTableDataCell>
                 </CTableRow>
               );
             })
