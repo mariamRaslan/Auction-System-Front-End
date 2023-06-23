@@ -12,7 +12,7 @@ const Bidding = () => {
   const [currentitem, setCurrentItem] = useState({});
   const [itemnotstarted, setItemNotStarted] = useState(false);
   const [itemstarted, setItemStarted] = useState(false);
-  const [itemended, setItemEnded] = useState(false);
+  const [itemendedtime, setItemEndedTime] = useState(false);
   
   const [timer, setTimer] = useState(0);
 
@@ -55,26 +55,26 @@ const Bidding = () => {
     console.log("first item =>", item);
     if (item) {
       setCurrentItem(item);
-
-      
-
+    
       const itemStartDate = new Date(item.start_date);
       itemStartDate.setHours(itemStartDate.getHours() - 3);
       console.log("itemStartDate =>", itemStartDate);
-
       const durationInMilliseconds = item.duration * 60 * 1000; // Convert duration to milliseconds
       setTimer(itemStartDate.getTime() + durationInMilliseconds - Date.now());
       console.log("timer=>", new Date(timer));
-    
+      //set itemendedtime == start_date + duration
+      const itemEndDate = new Date(item.start_date);
+      itemEndDate.setHours(itemEndDate.getHours() - 3);
+      itemEndDate.setMinutes(itemEndDate.getMinutes() + item.duration);
+      console.log("itemEndDate =>", itemEndDate);
 
-
-      if (itemStartDate < Date.now()  ) {
+      
+     if (itemEndDate < Date.now() ){
+        setCurrentItem(null);
+        console.log(currentitem)
+      }else if (itemStartDate < Date.now()) {
         setItemNotStarted(true);
         console.log("Date.now =>", new Date(Date.now()));
-      } else if (  Date.now() ){
-        currentitem.is_open==false
-        console.log(currentitem.is_open)
-      }else{
         setItemStarted(true);
       }
     } else {
@@ -92,7 +92,7 @@ const Bidding = () => {
     };
   }, [timer]);
 
-  if (!auction) {
+  if (!auction || !currentitem) {
     return (
       <>
         <div className="container">
@@ -158,7 +158,7 @@ const Bidding = () => {
     );
   }
 
-  if (itemstarted === true) {
+  if ( itemstarted === true ) {
     return (
       <div className="bidding">
         <div className="container">
