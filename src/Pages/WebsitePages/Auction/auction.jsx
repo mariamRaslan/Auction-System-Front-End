@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "../../../SharedUi/Card/card";
 import Axios from "./../../../Axios";
+import auctionImg from "../../../assets/images/wooden-gavel3.jpg"
 
 const Auctions = () => {
   const [products, setProducts] = useState([]);
@@ -54,7 +55,7 @@ const Auctions = () => {
         className="text-center bg-image"
         style={{
           backgroundImage:
-            "url(https://mdbcdn.b-cdn.net/img/new/slides/041.webp)",
+            `url(${auctionImg})`,
           width: "100%",
           height: "50vh",
           backgroundSize: "cover",
@@ -62,12 +63,13 @@ const Auctions = () => {
       >
         <div className="d-flex justify-content-center align-items-center h-100">
           <div className="text-white">
-            <h1 className="mb-3">صفحة المزادات</h1>
+            <h1 className="mb-3" style={{color:"#4f89b0"}}> المزادات</h1>
+            <p style={{color:"#4f89b0"}}>زايد الأن لتربح أفضل المنتجات</p>
           </div>
         </div>
       </div>
 
-      <div className="container mt-5">
+      <div className="container mt-5 px-5 pb-5 bg-light rounded-3">
         <div className="row">
           {currentItems.length > 0 ? (
             currentItems.map((product) => (
@@ -128,14 +130,14 @@ const Auctions = () => {
                     className="page-link"
                     onClick={() => handlePageChange(currentPage + 1)}
                   >
-                    Next
+                    التالي
                   </button>
                 </li>
               )}
             </ul>
 
             <p className="text-center mt-2">
-              Showing {currentPage} of {Math.ceil(products.length/8)}
+              صفحة {currentPage} من {Math.ceil(products.length/8)}
             </p>
           </nav>
         )}
