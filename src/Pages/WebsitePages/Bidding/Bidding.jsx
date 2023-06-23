@@ -13,6 +13,8 @@ const Bidding = () => {
   const [itemnotstarted, setItemNotStarted] = useState(false);
   const [itemstarted, setItemStarted] = useState(false);
   const [itemendedtime, setItemEndedTime] = useState(false);
+  const [isloading, setIsLoading] = useState(true);
+
   
   const [timer, setTimer] = useState(0);
 
@@ -24,8 +26,10 @@ const Bidding = () => {
         const res = await axiosInstance.get("/auction/started");
         setAuction(res.data.data[0]);
         console.log("auction =>", res.data.data[0]);
+        setIsLoading(false)
       } catch (err) {
         setAuction(null);
+        setIsLoading(false)
       }
     };
     fetchData();
@@ -62,7 +66,8 @@ const Bidding = () => {
       const durationInMilliseconds = item.duration * 60 * 1000; // Convert duration to milliseconds
       setTimer(itemStartDate.getTime() + durationInMilliseconds - Date.now());
       console.log("timer=>", new Date(timer));
-      //set itemendedtime == start_date + duration
+
+
       const itemEndDate = new Date(item.start_date);
       itemEndDate.setHours(itemEndDate.getHours() - 3);
       itemEndDate.setMinutes(itemEndDate.getMinutes() + item.duration);
@@ -241,6 +246,27 @@ const Bidding = () => {
       </div>
     );
   }
+
+  if(isloading){
+    return(
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="auction-notfound-card">
+              <div className="loading">
+                <div className="d-flex justify-content-center items-align-center mb-5">
+                  <ClockLoader color="#4f89b0" size={200} /> 
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+
 
   return <></>;
 };
