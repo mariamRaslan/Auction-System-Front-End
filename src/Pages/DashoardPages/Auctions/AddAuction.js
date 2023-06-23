@@ -32,8 +32,7 @@ setEndDate('');
 const handleSubmit = async (event) => {
 event.preventDefault();
 
-vbnet
-Copy
+
 const form = event.currentTarget;
 if (form.checkValidity() === false) {
   event.stopPropagation();

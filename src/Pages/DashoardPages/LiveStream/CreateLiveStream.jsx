@@ -47,6 +47,7 @@ const CreateLiveStream = () => {
       setStreamDescription("");
       setSelectedAuctionId("");
       toast.done("تم انشاء بث مباشر بنجاح");
+      window.location.href = "/dashboard/dashboard/live-stream/list";
     } catch (error) {
       console.error(error);
       toast.error("عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى");

@@ -1,5 +1,8 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "../../../Axios";
+import { useNavigate } from "react-router-dom";
+import Alert from "../../../SharedUi/Alert/Alert";
+import ConfirmationModal from "../../../SharedUi/Modal/Modal";
 
 import {
   CTable,
@@ -18,18 +21,21 @@ import {
 } from "@coreui/react";
 //import fontaswome
 const UsersList = () => {
-
+  const Navigate = useNavigate();
+  const [selectedId, setSelectedId] = useState();
+  const [activePage, setActivePage] = useState(1);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const pageSize = 6;
   //get data from /user
   const [data, setData] = useState([]);
   //set error_message
   const [error_message, setError_message] = useState("");
-  
+
   useEffect(() => {
-    
     //get token from localstorag
     const fetchData = async () => {
-      
-      const result = await axios.get('/users');
+      const result = await axios.get("/users");
 
       setData(result.data.data);
       console.log(result.data.data);
@@ -37,22 +43,24 @@ const UsersList = () => {
     fetchData();
   }, []);
   //delete user
-  
+
   const deleteUser = (_id) => {
     //confirmation message
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      //delete data from /user/id
-    axios.delete(`/users/${_id}`)
-    .then((res) => {
-      const del = data.filter((item) => _id !== item._id);
-      setData(del);
-      console.log(res);
-    })
-    //catch error
-    .catch((error) => { 
-      setError_message(error.message);
-    });
-    }
+    // if (window.confirm("Are you sure you want to delete this user?")) {
+    //delete data from /user/id
+    axios
+      .delete(`/users/${_id}`)
+      .then((res) => {
+        const del = data.filter((item) => _id !== item._id);
+        setData(del);
+        console.log(res);
+      })
+      //catch error
+      .catch((error) => {
+        setError_message(error.message);
+        setAlertVisible(true);
+      });
+    // }
   };
 
   //viewUser
@@ -70,12 +78,42 @@ const UsersList = () => {
     //set permission
     window.location.href = `/dashboard/dashboard/users/set-permission/${_id}`;
   };
- 
+
+  // pagination
+  const getPageData = () => {
+    const startIndex = (activePage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    return data.slice(startIndex, endIndex);
+  };
+
+  const pageData = getPageData();
+
+  const handlePageChange = (page) => {
+    setActivePage(page);
+  };
+  const renderPagination = () => {
+    const pageCount = Math.ceil(data.length / pageSize);
+    const pages = [];
+    for (let i = 1; i <= pageCount; i++) {
+      pages.push(
+        <li key={i} className={`page-item ${activePage === i ? "active" : ""}`}>
+          <button className="page-link" onClick={() => handlePageChange(i)}>
+            {i}
+          </button>
+        </li>
+      );
+    }
+    return (
+      <nav aria-label="Page navigation">
+        <ul className="pagination justify-content-center">{pages}</ul>
+      </nav>
+    );
+  };
   return (
     <div>
       <h1>Users List</h1>
-       {/**error message */}
-       {error_message && (
+      {/**error message */}
+      {/* {error_message && (
         <CModal show={true} onClose={() => setError_message("")}>
           <CModalHeader closeButton>
             <CModalTitle>Error</CModalTitle>
@@ -87,28 +125,25 @@ const UsersList = () => {
             </CButton>
           </CModalFooter>
         </CModal>
-      )}
-      <CCardHeader>
-        <button className="btn btn-primary" 
-        onClick={() => addUser()}
-        >
-          Add User
-        </button>
-      </CCardHeader>
+      )} */}
+      {/* <CCardHeader> */}
+      {/* <button className="btn btn-primary" onClick={() => addUser()}> */}
+      {/* إضافة مستخدم */}
+      {/* </button> */}
+      {/* </CCardHeader> */}
       <CTable>
-        <CTableHead style={{ backgroundColor: '#4f5d73' , color:"#fff"}}>
+        <CTableHead style={{ backgroundColor: "#4f5d73", color: "#fff" }}>
           <CTableRow>
-            <CTableHeaderCell scope="col">image</CTableHeaderCell>
-            <CTableHeaderCell scope="col">ID</CTableHeaderCell>
-            <CTableHeaderCell scope="col">name</CTableHeaderCell>
-            <CTableHeaderCell scope="col">email</CTableHeaderCell>
-            <CTableHeaderCell scope="col">phone</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Address(city)</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Address(street)</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Delete</CTableHeaderCell>
-            <CTableHeaderCell scope="col">view</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Set Permission</CTableHeaderCell>
-            
+            <CTableHeaderCell scope="col">#</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الصورة</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الاسم</CTableHeaderCell>
+            <CTableHeaderCell scope="col">البريد الإالكتلروني</CTableHeaderCell>
+            <CTableHeaderCell scope="col">موبايل</CTableHeaderCell>
+            <CTableHeaderCell scope="col">المدينه</CTableHeaderCell>
+            <CTableHeaderCell scope="col">الشارع</CTableHeaderCell>
+            <CTableHeaderCell scope="col" colSpan={2}>
+              العمليات
+            </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>
@@ -120,46 +155,57 @@ const UsersList = () => {
               </div>
             </div>
           ) : (
-            data.map((item,index) => (
+            pageData.map((item, index) => (
               <CTableRow key={item._id}>
+                <CTableDataCell>{index + 1}</CTableDataCell>
                 <CTableDataCell>
                   <img
                     src={item.image}
                     alt="user"
-                    style={{ width: "50px", height: "50px" }}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      borderRadius: "50%",
+                    }}
                   />
                 </CTableDataCell>
-                <CTableDataCell>{index+1}</CTableDataCell>
-                <CTableDataCell>{item.name ? item.name:'--'}</CTableDataCell>
-                <CTableDataCell>{item.email ? item.email:'--'}</CTableDataCell>
+                <CTableDataCell>{item.name ? item.name : "--"}</CTableDataCell>
                 <CTableDataCell>
-                  {item.phone ? item.phone : '--'}
-                  </CTableDataCell>
-                <CTableDataCell>
-                  {item.address ? item.address.city : '--'}
+                  {item.email ? item.email : "--"}
                 </CTableDataCell>
                 <CTableDataCell>
-                  {item.address ? item.address.street : '--'}
+                  {item.phone ? item.phone : "--"}
                 </CTableDataCell>
                 <CTableDataCell>
-                  <CButton
-                    color="danger"
-                    variant="outline"
-                    onClick={() => deleteUser(item._id)}
-                  >
-                    Delete
-                  </CButton>
+                  {item.address ? item.address.city : "--"}
+                </CTableDataCell>
+                <CTableDataCell>
+                  {item.address ? item.address.street : "--"}
                 </CTableDataCell>
                 <CTableDataCell>
                   <CButton
                     color="primary"
                     variant="outline"
+                    className="btntext w-100"
                     onClick={() => viewUser(item._id)}
                   >
-                    view
+                    عرض
                   </CButton>
                 </CTableDataCell>
                 <CTableDataCell>
+                  <CButton
+                    color="danger"
+                    variant="outline"
+                    className="btntext w-100"
+                    onClick={() => {
+                      setSelectedId(item._id);
+                      setShowConfirmationModal(true);
+                    }}
+                  >
+                    حذف
+                  </CButton>
+                </CTableDataCell>
+                {/* <CTableDataCell>
                   <CButton
                     color="primary"
                     variant="outline"
@@ -167,14 +213,35 @@ const UsersList = () => {
                   >
                     Set Permission
                   </CButton>
-                </CTableDataCell>
+                </CTableDataCell> */}
               </CTableRow>
             ))
           )}
         </CTableBody>
       </CTable>
-     
+      {renderPagination()}
+      <ConfirmationModal
+        message="هل انت متأكد من حذف هذا العنصر؟"
+        confirmButtonText="حذف"
+        cancelButtonText="الغاء"
+        onConfirm={() => {
+          deleteUser(selectedId);
+          setShowConfirmationModal(false);
+        }}
+        onCancel={() => setShowConfirmationModal(false)}
+        visible={showConfirmationModal}
+        setVisible={setShowConfirmationModal}
+      />
+      <Alert
+        type="error-alert"
+        visible={alertVisible}
+        color="warning"
+        message={error_message}
+        dismissible
+        alignment="center"
+        setVisible={setAlertVisible}
+      />
     </div>
-  )
-}
-export default UsersList
+  );
+};
+export default UsersList;
