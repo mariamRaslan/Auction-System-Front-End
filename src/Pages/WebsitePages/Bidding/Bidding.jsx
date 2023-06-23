@@ -5,6 +5,7 @@ import "./Bidding.css";
 import axiosInstance from "../../../Axios";
 import Alert from "../../../SharedUi/Alert/Alert";
 import { ClockLoader, HashLoader } from "react-spinners";
+import Pusher from "pusher-js";
 
 const Bidding = () => {
   const [auction, setAuction] = useState([]);
@@ -14,10 +15,7 @@ const Bidding = () => {
   const [itemstarted, setItemStarted] = useState(false);
   const [itemendedtime, setItemEndedTime] = useState(false);
   const [isloading, setIsLoading] = useState(true);
-
-  
   const [timer, setTimer] = useState(0);
-
   const [auctionEnded, setAuctionEnded] = useState(false);
 
   useEffect(() => {
@@ -50,15 +48,37 @@ const Bidding = () => {
     }
   }, [auction]);
 
+  useEffect(() => {
+    // Initialize Pusher with your Pusher app credentials
+    const pusher = new Pusher("6674d9bc1d0e463c0241", {
+      cluster: "eu",
+    });
 
+    // Subscribe to the "Auction_id" channel
+    const channel = pusher.subscribe("Auction_id");
 
+    // Bind to the "itemDetails_id" event
+    channel.bind("itemDetails_id", (data) => {
+      // Update the current item's current price with the data received from Pusher
+      setCurrentItem((prevItem) => ({
+        ...prevItem,
+        current_price: data.current_price,
+      }));
+    });
 
+    return () => {
+      // Unsubscribe from the channel when the component unmounts
+      channel.unbind("itemDetails_id");
+      pusher.unsubscribe("Auction_id");
+    };
+  }, []);
 
   useEffect(() => {
     const item = items.find((item) => item.is_open === true);
     console.log("first item =>", item);
     if (item) {
       setCurrentItem(item);
+      console.log("current=>item",currentitem)
     
       const itemStartDate = new Date(item.start_date);
       itemStartDate.setHours(itemStartDate.getHours() - 3);
@@ -77,10 +97,13 @@ const Bidding = () => {
      if (itemEndDate < Date.now() ){
         setCurrentItem(null);
         console.log(currentitem)
-      }else if (itemStartDate < Date.now()) {
+      }else if (itemStartDate > Date.now()) {
         setItemNotStarted(true);
         console.log("Date.now =>", new Date(Date.now()));
+        
+      }else{
         setItemStarted(true);
+        console.log("Date.now =>", new Date(Date.now()));
       }
     } else {
       setAuctionEnded(true);
@@ -97,7 +120,7 @@ const Bidding = () => {
     };
   }, [timer]);
 
-  if (!auction || !currentitem) {
+  if (!auction || !currentitem || items.length === 0) {
     return (
       <>
         <div className="container">
@@ -163,7 +186,7 @@ const Bidding = () => {
     );
   }
 
-  if ( itemstarted === true ) {
+  if (itemstarted) {
     return (
       <div className="bidding">
         <div className="container">
@@ -185,9 +208,9 @@ const Bidding = () => {
                   <div className="bidding-time d-flex justify-content-around">
                     <h3>
                       <span>الوقت المتبقي </span>
-                      {
-                      timer<60?`${(Math.ceil(timer / 1000))} ثانية`:`${((Math.ceil((timer / 1000)/60)))} دقيقة`
-                      } 
+                      {timer < 60
+                        ? `${Math.ceil(timer / 1000)} ثانية`
+                        : `${Math.ceil(timer / 1000 / 60)} دقيقة`}
                     </h3>
                   </div>
                   <div className="bidding-price d-flex justify-content-around mx-3">
@@ -202,11 +225,10 @@ const Bidding = () => {
                     </div>
                   </div>
                   <div className="bidding-button">
-                    
                     <form>
-                    <label htmlFor="">
-                      <span>أدخل مقدار الزيادة</span>
-                    </label>
+                      <label htmlFor="">
+                        <span>أدخل مقدار الزيادة</span>
+                      </label>
                       <input
                         type="number"
                         name="price"
@@ -247,33 +269,25 @@ const Bidding = () => {
     );
   }
 
-  if(isloading){
-    return(
+  if (isloading) {
+    return (
       <div className="container">
         <div className="row">
           <div className="col-md-12">
             <div className="auction-notfound-card">
               <div className="loading">
                 <div className="d-flex justify-content-center items-align-center mb-5">
-                  <ClockLoader color="#4f89b0" size={200} /> 
+                  <ClockLoader color="#4f89b0" size={200} />
                 </div>
-                
               </div>
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
-
-
 
   return <></>;
 };
 
 export default Bidding;
-
-
-
-
-
