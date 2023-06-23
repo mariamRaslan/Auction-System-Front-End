@@ -8,6 +8,12 @@ import BlobButton from "../../../SharedUi/BlobButton/BlobButton";
 import Axios from "./../../../Axios";
 //usesate
 import { useState,useEffect } from "react";
+import homeImg from "../../../assets/images/background.png"
+import img1 from "../../../assets/images/img1.png"
+import img2 from "../../../assets/images/img2.png"
+import img3 from "../../../assets/images/img3.png"
+import img4 from "../../../assets/images/img4.png"
+import bid from "../../../assets/images/homebidding.png"
 //card
 
 //use home.css
@@ -19,6 +25,7 @@ const Home = () => {
   //get new arival
   const [newArrival, setNewArrival] = useState([]);
   const [newArrivalitems, setnewArrivalitems] = useState([]);
+  const date=Date.now();
 
   useEffect(() => {
     Axios.get("/newArrivalAuction")
@@ -26,6 +33,7 @@ const Home = () => {
         setNewArrival(res.data.data);
         //log   
         console.log(res.data.data);
+        console.log(date)
       })
       .catch((err) => {
         console.log(err);
@@ -96,26 +104,24 @@ const Home = () => {
 
   return (
 
-    <>
+    <div >
 
-      <div className="text-center bg-image" style={{backgroundColor:'#5492bb96', width: '100%' , height: '80vh', backgroundSize: 'cover'}}>
-        <div className="h-100">
-          <div className="row d-flex   justify-content-center align-items-center">
-            <div className="col-sm-12 col-md-7  d-flex  justify-content-center align-items-center ">
-             <div className="text-white ">
-              <h1 className="mb-3">اهلا بيك في موقعنا </h1>
-              <h4 className="mb-3">زايد واربح افضل المنتجات التي تحلم بها </h4>
-                {/* button */}
-                <BlobButton buttonText=" تعرف اكثر عن خدماتنا" href="/about" />
-             </div>
-            </div>
-            <div className="col-5 mt-5 text-center">
-              <img src="./home-img.png" className="home-bg" alt="" />
-            </div>
-          </div>
-         
-        </div>
+<div class=" text-center bg-image header">
+  <div class="col-md-6 order-md-1 align-self-center">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="mb-3 text-white">اهلا بيك في موقعنا</h1>
+        <h4 class="mb-3 text-white">زايد واربح افضل المنتجات التي تحلم بها</h4>
       </div>
+      <div class="col-md-12 mt-4">
+        <BlobButton buttonText=" تعرف اكثر عن خدماتنا" href="/about" />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 order-md-2">
+    <img src={homeImg} class="mt-5" alt="" />
+  </div>
+</div>
 
 
 
@@ -124,58 +130,59 @@ const Home = () => {
       {/* how it work section  */}
       <div className="section-bg-white" >
         <div className="container">
-          <div className="row mb-5">
+          <div className="row mb-3">
             <div className="col-md-12">
               <div className="d-flex justify-content-center align-items-center mt-4">
                 <h1 className="text-center"> خطوات الشراء</h1> 
               </div>
             </div>
           </div>
-          <div className="lg-hr"></div>
+          <div className="lg-hr mb-3"></div>
           <div className="row">
           
-                <div className="col-3 text-center">
+                <div className="col text-center">
                   <div className="circle" >
-                    <h1>01</h1>
+                    <img src={img2} />
                   </div>
-                  <h1>اشترك</h1>
+                  <h3>اشترك</h3>
                   <div className="sm-hr"></div>
                     <p>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. A molestias doloribus voluptates ea, perspiciatis quia ullam quam atque iste reiciendis corporis distinctio, assumenda eum illo! Provident a id reiciendis facilis?
+                    تريد التسجيل في موقعنا؟ اشترك الآن حتى تتمكن من الانضمام للمزاد.
                     </p>
                 </div>
                
-                <div className="col-3 text-center">
+                <div className="col text-center">
                   <div className="circle" >
-                    <h1>02</h1>
+                  <img src={img1} />
                   </div>
 
-                  <h1>انضم</h1>
+                  <h3>انضم</h3>
                   <div className="sm-hr"></div>
                     <p>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. A molestias doloribus voluptates ea, perspiciatis quia ullam quam atque iste reiciendis corporis distinctio, assumenda eum illo! Provident a id reiciendis facilis?
+                      
+انضم إلى المزادات التي ترغب في المشاركة فيها واحصل على فرصة للفوز بالمنتج المطروح للمزاد.
                     </p>
                 </div>
-                <div className="col-3 text-center">
+                <div className="col text-center">
                   <div className="circle" >
-                    <h1>03</h1>
+                  <img src={img4} />
                   </div>
 
-                  <h1>زايد</h1>
+                  <h3>زايد</h3>
                   <div className="sm-hr"></div>
                     <p>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. A molestias doloribus voluptates ea, perspiciatis quia ullam quam atque iste reiciendis corporis distinctio, assumenda eum illo! Provident a id reiciendis facilis?
+                    زد المبلغ الذي تقدمه في المزايدة واحصل على فرصة أكبر للفوز.
                     </p>
                 </div>
-                <div className="col-3 text-center">
+                <div className="col text-center">
                   <div className="circle" >
-                    <h1>04</h1>
+                    <img src={img3} />
                   </div>
 
-                  <h1>اكسب</h1>
+                  <h3>اكسب</h3>
                   <div className="sm-hr"></div>
                     <p>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. A molestias doloribus voluptates ea, perspiciatis quia ullam quam atque iste reiciendis corporis distinctio, assumenda eum illo! Provident a id reiciendis facilis?
+                    إذا كنت الأعلى مزايد في نهاية المزاد، فستكسب المنتج المطروح للمزاد وستفوز به.
                     </p>
                 </div>
               </div>
@@ -194,22 +201,20 @@ const Home = () => {
      
 
       {/** product section header  */}
-  <div className="section-bg-grey">
+   <div className="section-bg-grey py-5">
         <div className="container" >
-          <div className="row mb-5">
+          <div className="row ">
             <div className="col-md-12">
-              <div className="d-flex justify-content-center align-items-center mt-4 mb-5">
-                <h3 className="section-title"> احدث المذادات</h3>
+              <div className="d-flex justify-content-center align-items-center">
+                <h3 className="section-title"> أحدث المزادات</h3>
               </div>
             <div className="lg-hr"></div>
-
             </div>
           </div> 
         </div>
 
     <div className="container">
-
-      <div className="row mb-5">
+      <div className="row ">
       {newArrival.length > 0 ? (
             newArrival.map((product) => (
                 <div key={product.id} className="col-md-4">
@@ -237,8 +242,8 @@ const Home = () => {
     <div className="container" >
         <div className="row mt-5">
           <div className="col-md-12">
-            <div className="d-flex justify-content-center align-items-center mt-4 mb-5">
-              <h3 className="section-title "> احدث المنتجات</h3>
+            <div className="d-flex justify-content-center align-items-center mt-4 mb-3">
+              <h3 className="section-title "> أحدث المنتجات</h3>
               {/* hr */}
               
             </div>
@@ -248,7 +253,7 @@ const Home = () => {
         </div> 
       </div>
 
-    <div className="container mt-5 mb-5">
+    <div className="container  mb-5">
 
       <div className="row">
       {newArrivalitems.length > 0 ? (
@@ -279,27 +284,17 @@ const Home = () => {
 
     {/** about us   */}
     <div className="section-bg-grey">
-      
-    <div className="container" >
-        <div className="row"> 
-          <div className="col-md-12">
-            <div className="d-flex justify-content-center align-items-center mt-4">
-              <h3 className="section-title"> عن الموقع  </h3>
-            </div>
-          </div>
-        </div>
-    </div>
     
-    <div className="container mt-5">
+    <div className="container ">
       <div className="row">
         <div className="col-md-6">
           <div className="">
             <div className="image">
               <img
-                src="./aboutus.png"
+                src={bid}
                 className=""
                 alt="product"
-                width={'100%'}
+                width={'90%'}
                 
               />
             </div>
@@ -308,9 +303,9 @@ const Home = () => {
         </div>
         <div className="col-md-6 text-center d-flex align-items-center">
           
-          <p className="text-justify align-items-center lead">
+          <p className="text-justify align-items-center fs-5">
             {/* about Auction system description by arabic */}
-             نقوم ببيع السلع والخدمات القيمة لأعلى سعر معين، ويتم ذلك عن طريق المزايدة، وهي عملية تتم من خلال المزايدين الذين يقدمون عروضهم للحصول على السلعة أو الخدمة المطلوبة، ويتم البيع لأعلى سعر معين، ويتم ذلك عن طريق المزايدة، وهي عملية تتم من خلال المزايدين الذين يقدمون عروضهم للحصول على السلعة أو الخدمة المطلوبة، ويتم البيع لأعلى سعر معين، ويتم ذلك عن طريق المزايدة، وهي عملية تتم من خلال المزايدين الذين يقدمون عروضهم للحصول على السلعة أو الخدمة المطلوبة، ويتم البيع لأعلى سعر معين، ويتم ذلك عن طريق المزايدة، وهي عملية تتم من خلال المزايدين الذين يقدمون عروضهم للحصول على السلعة أو الخدمة المطلوبة، ويتم البيع لأعلى سعر معين، ويتم ذلك عن طريق المزايدة، وهي عملية تتم من خلال المزايدين 
+            هل ترغب في الحصول على منتجات عالية الجودة بأسعار مناسبة؟ جرب موقع المزادات عبر الإنترنت! يقوم المشترين بتقديم المزايدات للحصول على المنتجات المعروضة، ويتم بيعها لأعلى مزايد. الموقع يوفر آلية دفع آمنة وسهلة، وشحن موثوق به للمنتجات. كما يمكن تتبع المزايدات والإعلانات الخاصة بالمنتجات المفضلة لديك. جربه الآن!
 
           </p>
         </div>
@@ -337,17 +332,16 @@ const Home = () => {
       <div className="row">
         <div className="col-md-4">
           <div className="">
-            <div className="image">
+            <div className="image " >
               <img
                 src="./products.png"
                 className="service-img  thumbnail-image"
                 alt="product"
-                width={'100%'}
                 />
             </div>
             <div className="card-body">
               <h5 className="card-title text-center">افضل المنتجات</h5>
-              <p className="text-center text-center ">
+              <p className="text-center ">
                   نوفر لك افضل المنتجات حول العالم 
                </p>
             </div>
@@ -356,15 +350,15 @@ const Home = () => {
         </div>
         <div className="col-md-4">
           <div className="">
-            <div className="image">
+            <div className="">
               <img
                 src="./payment.png"
-                className="service-img  thumbnail-image"
+                className="service-img  "
                 alt="product"
                 width={'100%'}
                 />
             </div>
-            <div className="card-body">
+            <div className="card-body ">
               <h5 className="card-title text-center"> الدفع بامان </h5>
               <p className="text-justify text-center">
                 نوفر لك طرق سهله وامنة للدفع
@@ -382,7 +376,7 @@ const Home = () => {
                 width={'100%'}
                 />
             </div>
-            <div className="card-body">
+            <div className="card-body text-center">
               <h5 className="card-title text-center">الدعم </h5>
               <p className="text-justify text-center">
                   نوفر لك فريق مسئول عن الدعم لمساعدتك والرد علي استفساراتك
@@ -422,43 +416,40 @@ const Home = () => {
                           <div className="alert alert-success" role="alert">
                               {message}
                           </div>
-                      )}
-                      
+                      )}                      
                       <p>
                           يمكنك التواصل معنا عن طريق ملئ النموذج ادناه وسوف نقوم بالرد عليك في اقرب وقت ممكن
                       </p>
                       </div>
                       <div className="form-shadow">
-                      <form
-                          
-
-                          
+                      <form     
                           onSubmit={handleSubmit}
+                          className="m-5"
                       >
                           <div className="form-group">
                               <label htmlFor="exampleFormControlInput1">الاسم</label>
                               <input type="text" 
                               name="name"
-                              className="form-control" id="exampleFormControlInput1" placeholder="الاسم" />
+                              className="formcontrol " id="exampleFormControlInput1"  />
                           </div>
                           <div className="form-group">
                               <label htmlFor="exampleFormControlInput1">البريد الالكتروني</label>
                               <input type="email" 
                               name="email"
-                              className="form-control" id="exampleFormControlInput1" placeholder="البريد الالكتروني" />
+                              className="formcontrol" id="exampleFormControlInput1"  />
                           </div>
                           
                           <div className="form-group">
                               <label htmlFor="exampleFormControlInput1">رقم الهاتف</label>
                               <input type="text" 
                               name="phone"
-                              className="form-control" id="exampleFormControlInput1" placeholder="رقم الهاتف" />
+                              className="formcontrol" id="exampleFormControlInput1"/>
                           </div>
                           <div className="form-group">
                               <label htmlFor="exampleFormControlInput1">الموضوع</label>
                               <input type="text"
                               name="subject"
-                              className="form-control" id="exampleFormControlInput1" placeholder="الموضوع" />
+                              className="formcontrol" id="exampleFormControlInput1"  />
                           </div>
                           <div className="form-group">
                               <label htmlFor="exampleFormControlTextarea1">الرسالة</label>
@@ -479,7 +470,7 @@ const Home = () => {
   
          
 
-    </>
+    </div>
   );
 };
 
