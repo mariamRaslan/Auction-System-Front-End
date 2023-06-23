@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import backgroundImage from "../../../assets/images/ground.png";
+import backgroundImg from "../../../assets/images/wooden-gavel3.jpg"
 import aboutUsImage from "../../../assets/images/aboutUs.jpg";
 import "./About.css";
 
@@ -9,19 +9,15 @@ const About = () => {
       <div
         className="text-center bg-image"
         style={{
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "center",
+          backgroundImage: `url(${backgroundImg})`,
           backgroundSize: "cover",
           width: "100%",
           height: "50vh",
-          backgroundSize: "cover",
         }}
       >
         <div className="d-flex justify-content-center align-items-center h-100 mb-5">
-          <div className="text-white">
-            <h1 className="mb-3 head-title"> معلومات عنا </h1>
+          <div className="text-dark">
+            <h1 className="mb-3 "> معلومات عنا </h1>
           </div>
         </div>
       </div>

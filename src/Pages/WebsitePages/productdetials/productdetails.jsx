@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Axios from "./../../../Axios";
+import './productdetails.css'
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
@@ -40,26 +44,30 @@ const ProductDetails = () => {
   return (
     <>
       <div className="container">
-        <div className="row my-5">
-          <div className="col-md-6">
-            {/* اسم المنتج : {product.item_id.name} */}
-            {/*  تابع مزاد : {product.auction_id.name} */}
-            {/* سوف ينتخي الزاد اذا وصل لسعر : {product.max_price} */}
-            {/* سوف ينتهي امزاد اذ تعدي الوثت : {product.end_time} */}
-            {/* اقل مبلع للمزايده: {product.start_bidding} */}
-            <div style={{height:"500px"}}>
-            <h1 className="mt-3">اسم المتج :</h1> <span className="h3">{product.item_id.name}</span>
-            <h1 className="mt-3">تابع لمزاد :</h1><span className="h3 mt-5"> {product.auction_id.name}</span>
-            <h1 className="mt-3">سوف ينتهي المزاد اذا وصل لسعر :</h1><span className="h3"> {product.max_price}</span>
-            <h1 className="mt-3">سوف ينتهي المزاد اذ تعدي الوقت :</h1><span className="h3"> {product.end_time}</span>
-            <h1 className="mt-3">سوف يبدأ المزاد بمبلغ :</h1><span className="h3"> {product.start_bidding}</span>
-            <h1 className="mt-3">اقل مبلغ للمزايده:</h1><span className="h3"> {product.bidding_gap}</span>
-            </div>
+      <div className=" mt-5 item-name">
+      <Link className="text-dark d-flex align-items-center" to={`/auction/${product.auction_id._id}/items`} >
+      <FontAwesomeIcon icon={faArrowRight} />
+  <p className="d-block m-0 me-2">{product.auction_id.name}</p>
+  
+</Link>
             
+            <h3 className="d-block">{product.item_id.name}</h3>
+      </div>
+        <div className="row my-5">
+        <div className="col-md-6">
+            <img src={product.item_id.image} alt="product" className="img-fluid item-img" />
           </div>
-          <div className="col-md-6">
-            <img style={{height:'600px',width:'100%'}} src={product.item_id.image} alt="product" className="img-fluid" />
-          </div>
+          <div className="col-md-6 my-5 ">
+            <div className="bg-light rounded-2 d-flex justify-content-between align-items-center px-5 item-img">
+            <p className="mt-3"><span className="item-details">أقصى سعر: </span><span > {product.max_price} ج.م</span> </p>
+            <p className="mt-3"> <span className="item-details">مدة العرض:</span>   <span className=""> {product.duration}دقيقة</span></p>
+            </div>
+            <div className="mt-5 bg-light rounded-2 d-flex justify-content-between align-items-center px-5 item-img">
+            <p className="mt-3"><span className="item-details">سعر البداية:</span>   <span className=""> {product.start_bidding} ج.م</span></p>
+            <p className="mt-3"><span className="item-details">اقل مبلغ للمزايده:</span>   <span className=""> {product.bidding_gap} ج.م</span></p>
+            </div>
+          </div>  
+                 
         </div>
         <hr />
         {/* product detials */}

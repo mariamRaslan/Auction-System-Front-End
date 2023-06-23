@@ -14,7 +14,7 @@ const Auctions = () => {
 
   const getProducts = async () => {
     try {
-      const response = await Axios.get("/auctions");
+      const response = await Axios.get("/auction/not%20started");
       console.log(response.data.data);
       setProducts(response.data.data);
     } catch (error) {
@@ -63,8 +63,8 @@ const Auctions = () => {
       >
         <div className="d-flex justify-content-center align-items-center h-100">
           <div className="text-white">
-            <h1 className="mb-3" style={{color:"#4f89b0"}}> المزادات</h1>
-            <p style={{color:"#4f89b0"}}>زايد الأن لتربح أفضل المنتجات</p>
+            <h1 className="mb-3 text-dark"> المزادات</h1>
+            <p className="text-secondary">زايد الأن لتربح أفضل المنتجات</p>
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ const Auctions = () => {
                     className="page-link"
                     onClick={() => handlePageChange(currentPage - 1)}
                   >
-                    Previous
+                    السابق
                   </button>
                 </li>
               )}
