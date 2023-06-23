@@ -4,62 +4,78 @@ import jwt_decode from "jwt-decode";
 import "./Bidding.css";
 import axiosInstance from "../../../Axios";
 import Alert from "../../../SharedUi/Alert/Alert";
-import ClockLoader from "react-spinners/ClockLoader";
+import { ClockLoader, HashLoader } from "react-spinners";
 
 const Bidding = () => {
   const [auction, setAuction] = useState([]);
-  const [auctionStartDate, setAuctionStartDate] = useState();
-  const [auctionEndDate, setAuctionEndDate] = useState();
   const [items, setItems] = useState([]);
-  
+  const [currentitem, setCurrentItem] = useState({});
+  const [itemnotstarted, setItemNotStarted] = useState(false);
+  const [itemstarted, setItemStarted] = useState(false);
+  const [timer, setTimer] = useState(0);
+
+  const [auctionEnded, setAuctionEnded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axiosInstance.get("/auction/started");
         setAuction(res.data.data[0]);
-        console.log("Auction data =>", res.data.data[0]);
-        let auctionTime = res.data.data[0].time.split(":");
-        console.log("auctionTime =>", auctionTime);
-        const startDate = new Date(res.data.data[0].start_date);
-        startDate.setHours(auctionTime[0], auctionTime[1], 0, 0);
-        setAuctionStartDate(startDate);
-        //log 
-        console.log("startDate =>", startDate);
+        console.log("auction =>", res.data.data[0]);
       } catch (err) {
-        console.log(err);
+        setAuction(null);
       }
     };
-
     fetchData();
   }, []);
 
-  // get item form /auctions/${auction._id}/items
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axiosInstance.get(
-          `/auctions/${auction._id}/items` 
-        );
-        setItems(res.data);
-        console.log("items =>", res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    
-    fetchData();
+    if (auction) {
+      const fetchData = async () => {
+        try {
+          const res = await axiosInstance.get(`/auctions/${auction._id}/items`);
+          setItems(res.data);
+          console.log("items =>", res.data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchData();
+    }
   }, [auction]);
-  
 
+  useEffect(() => {
+    const item = items.find((item) => item.is_open === true);
+    console.log("first item =>", item);
+    if (item) {
+      setCurrentItem(item);
+      const itemStartDate = new Date(item.start_date);
+      console.log("itemStartDate =>", itemStartDate);
+      const durationInMilliseconds = item.duration * 60 * 1000; // Convert duration to milliseconds
+      setTimer(itemStartDate.getTime() + durationInMilliseconds - Date.now());
+      console.log("timer=>", new Date(timer));
 
+      if (itemStartDate < Date.now()) {
+        setItemNotStarted(true);
+      } else {
+        setItemStarted(true);
+      }
+    } else {
+      setAuctionEnded(true);
+    }
+  }, [items]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer((prevTimer) => prevTimer - 1000); // Decrease the timer value by 1000 milliseconds (1 second)
+    }, 1000);
 
+    return () => {
+      clearInterval(interval); // Clean up the interval when the component unmounts
+    };
+  }, [timer]);
 
-
-
-
-  if (auction.length === 0) {
+  if (!auction) {
     return (
       <>
         <div className="container">
@@ -67,8 +83,8 @@ const Bidding = () => {
             <div className="col-md-12">
               <div className="auction-notfound-card">
                 <div className="card-body">
-                  <div className="d-flex justify-content-center items-align-center">
-                    <ClockLoader color="#4f89b0" size={200} />
+                  <div className="d-flex justify-content-center items-align-center mb-5">
+                    <HashLoader color="#4f89b0" size={200} />
                   </div>
                   <h3 style={{ color: "black" }} className="text-center">
                     لا يوجد اي مزاد متاح الان
@@ -82,7 +98,19 @@ const Bidding = () => {
     );
   }
 
-  if (auctionStartDate < Date.now()) {
+  if (itemnotstarted) {
+    const dateStr = currentitem.start_date;
+    const date = new Date(dateStr);
+    const formattedDate = date.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+    const formattedTime = date.toLocaleTimeString(undefined, {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const formattedDateTime = ` ${formattedTime} -  ${formattedDate}   `;
     return (
       <>
         <div className="container">
@@ -90,11 +118,19 @@ const Bidding = () => {
             <div className="col-md-12">
               <div className="auction-notfound-card">
                 <div className="card-body">
-                  <div className="d-flex justify-content-center items-align-center">
+                  <div className="d-flex justify-content-center items-align-center mb-5">
                     <ClockLoader color="#4f89b0" size={200} />
                   </div>
                   <h3 style={{ color: "black" }} className="text-center">
-                    تم انتهاء المزاد السابق يرجي انتظار المزاد القادم
+                    ستتم المزايدة علي
+                    <span className="mx-1" style={{ color: "red" }}>
+                      {" "}
+                      {currentitem.item_id.name}{" "}
+                    </span>
+                    عند الساعه
+                  </h3>
+                  <h3 style={{ color: "black" }} className="text-center">
+                    {formattedDateTime}
                   </h3>
                 </div>
               </div>
@@ -105,10 +141,85 @@ const Bidding = () => {
     );
   }
 
+  if (itemstarted === true) {
+    return (
+      <div className="bidding">
+        <div className="container">
+          <>
+            <div className="bidding-card row d-flex" key={15}>
+              <div className="bidding-left col-md-6 col-sm-12">
+                <div className=" f-left">
+                  <img
+                    src={currentitem.item_id.image}
+                    className="bidding-image"
+                    alt="product"
+                  />
+                </div>
+              </div>
+              <div className="bidding-right col-md-6 col-sm-12">
+                <div className="bidding-content">
+                  <h1>{currentitem.item_id.name}</h1>
+                  <p>هذا العنصر مصنوع من {currentitem.item_id.material}</p>
+                  <div className="bidding-time d-flex justify-content-around">
+                    <h3>
+                      <span>الوقت المتبقي </span>
+                      {
+                      timer<60?`${(Math.ceil(timer / 1000))} ثانية`:`${((Math.ceil((timer / 1000)/60)))} دقيقة`
+                      } 
+                    </h3>
+                  </div>
+                  <div className="bidding-price d-flex justify-content-around mx-3">
+                    <div>
+                      <span>السعر الحالي</span> {currentitem.current_price}
+                    </div>
+                    <div>
+                      <span>مقدار الزيادة</span> {currentitem.bidding_gap}
+                    </div>
+                    <div>
+                      <span>سعر البدء</span> {currentitem.start_bidding}
+                    </div>
+                  </div>
+                  <div className="bidding-button">
+                    <form>
+                      <input
+                        type="number"
+                        name="price"
+                        placeholder="أدخل سعرك"
+                      />
+                      <button className="btn btn-primary">إرسال</button>
+                    </form>
+                    <form>
+                      <input
+                        type="number"
+                        name="price"
+                        hidden
+                        // value={
+                        //   currentitem.max_price - maxPrice
+                        // }
+                      />
+                      <button className="btn btn-success">
+                        اشترِ الآن بسعر {currentitem.max_price}
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-
-
-
+            {/* <Alert
+              type="error-alert"
+              visible={alertVisible}
+              color="warning"
+              message={error}
+              dismissible
+              alignment="center"
+              setVisible={setAlertVisible}
+            /> */}
+          </>
+        </div>
+      </div>
+    );
+  }
 
   return <></>;
 };
