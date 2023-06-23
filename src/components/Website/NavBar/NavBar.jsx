@@ -77,13 +77,10 @@ const NavBar = () => {
                   <CNavLink href="/auctions">المزادات</CNavLink>
                 </CNavItem>
                 <CNavItem className="nav-item">
-                  <CNavLink href="/products">المنتجات</CNavLink>
-                </CNavItem>
-                <CNavItem className="nav-item">
                   <CNavLink href="/bidding">المزايدات </CNavLink>
                 </CNavItem>
                 <CNavItem className="nav-item">
-                  <CNavLink href="/payment">الشراء</CNavLink>
+                  <CNavLink href="/payment">المشتريات</CNavLink>
                 </CNavItem>
                 <CNavItem className="nav-item">
                   <CNavLink href="/about">عن الموقع</CNavLink>

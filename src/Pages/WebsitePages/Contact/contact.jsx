@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Card from "../../../SharedUi/Card/card";
 import Axios from "./../../../Axios";
 import { CModal } from "@coreui/react";
 
@@ -59,45 +58,23 @@ const Contact = () => {
             
               <div className="text-dark">
                 <h1 className="mb-3">تواصل معنا </h1>
+                <p>
+                    استخدم الطريقة المناسبه لك للتواصل معنا وسنرد عليك في الحال
+                </p>
               
             </div>
+            <div className="lg-hr"></div>
            
           </div>
         </div>
       </div>
 
-    <div className="container">
-        <div className="row ">
-            <div className="col-md-12 text-center mt-5">
-            <h1 className="mb-3">تواصل معنا </h1>
-              <p>
-                    استخدم الطريقة المناسبه لك للتواصل معنا وسنرد عليك في الحال
-              </p>
-            </div>
-            </div>
-    </div>
-
-      <div className="contanier">
-        <div className="row">
-          <div className="col-md-12">
-            <div className="d-flex justify-content-center align-items-center">
-              <div className="text-white">
-                <h1 className="mb-3">تواصل معنا </h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-        {/* hr */}
-        <div className="lg-hr"></div>
-
-
       {/* phone , email , facebook  */}
-      <div className="container">
+      <div className="container mt-5">
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-4 ">
             <div className="contact-card">
-              <div className="card-body">
+              <div className="card-body ">
                 <h5 className="card-title">رقم الهاتف</h5>
                 <p className="card-text">+962 79 000 0000</p>
               </div>
@@ -126,9 +103,9 @@ const Contact = () => {
         </div>
       </div>
       {/* form name , email , phone , subject , message  */}
-      <div className="container">
+      <div className="container ">
         <div className="row mt-5">
-          <div className="col-md-12">
+          <div className="col-md-12 p-5">
             {/* show message */}
             <div className="text-center">
               {message && (
@@ -138,17 +115,18 @@ const Contact = () => {
               )}
              
             </div>
+
             <form
-                className="form-shadow"
-            onSubmit={handleSubmit}>
+                className="form-shadow mx-5"
+                onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="exampleFormControlInput1">الاسم</label>
                 <input
                   type="text"
                   name="name"
-                  className="form-control"
+                  className="formcontrol"
                   id="exampleFormControlInput1"
-                  placeholder="الاسم"
+                 
                 />
               </div>
               <div className="form-group">
@@ -158,9 +136,9 @@ const Contact = () => {
                 <input
                   type="email"
                   name="email"
-                  className="form-control"
+                  className="formcontrol"
                   id="exampleFormControlInput1"
-                  placeholder="البريد الالكتروني"
+                  
                 />
               </div>
               <div className="form-group">
@@ -168,9 +146,9 @@ const Contact = () => {
                 <input
                   type="text"
                   name="phone"
-                  className="form-control"
+                  className="formcontrol"
                   id="exampleFormControlInput1"
-                  placeholder="رقم الهاتف"
+                  
                 />
               </div>
               <div className="form-group">
@@ -178,9 +156,9 @@ const Contact = () => {
                 <input
                   type="text"
                   name="subject"
-                  className="form-control"
+                  className="formcontrol"
                   id="exampleFormControlInput1"
-                  placeholder="الموضوع"
+                  
                 />
               </div>
               <div className="form-group">
@@ -195,7 +173,7 @@ const Contact = () => {
               <div className="text-center">
                     <button
                         type="submit"
-                        className="btn btn-custom  mt-5 "
+                        className="btn btn-custom mt-5 "
                     >
                 ارسال
               </button>
