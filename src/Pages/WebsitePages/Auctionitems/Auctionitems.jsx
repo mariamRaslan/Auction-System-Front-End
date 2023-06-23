@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Card from "../../../SharedUi/Card/card";
 import Axios from "./../../../Axios";
+import auctionImg from "../../../assets/images/wooden-gavel3.jpg"
+import BlobButton from "../../../SharedUi/BlobButton/BlobButton";
 
 const AuctionItems = () => {
   const [products, setProducts] = useState([]);
+  const [auction, setAuction] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
+  const options = { year: 'numeric', month: 'long', day: 'numeric', numberingSystem: 'arab' };
+
 
   useEffect(() => {
     getProducts();
+    getAuction();
   }, [currentPage]);
 
   //get id from url
@@ -16,11 +22,24 @@ const AuctionItems = () => {
   //the url look like host/auction/id/items
     //so we split the url by / and get id 
     const id = url.split("/")[4];
+
+    const getAuction = async () => {
+      try {
+        const response = await Axios.get(`/auctions/${id}`);
+        console.log(response.data.data);
+        setAuction(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const startDate = new Date(auction.start_date).toLocaleDateString('ar-EG', options);
+    const endDate = new Date(auction.end_date).toLocaleDateString('ar-EG', options);
     
     const getProducts = async () => {
     try {
       const response = await Axios.get(`/auctions/${id}/items`);
-      console.log(response.data);
+      //console.log(response.data);
       setProducts(response.data);
     } catch (error) {
       console.log(error);
@@ -48,20 +67,31 @@ const AuctionItems = () => {
         className="text-center bg-image"
         style={{
           backgroundImage:
-            "url(https://mdbcdn.b-cdn.net/img/new/slides/041.webp)",
+          `url(${auctionImg})`,
           width: "100%",
           height: "50vh",
           backgroundSize: "cover",
         }}
       >
         <div className="d-flex justify-content-center align-items-center h-100">
-          <div className="text-white">
-            <h1 className="mb-3">items page</h1>
+          <div style={{color:"#4f89b0"}}>
+            <h1 className="mb-3 " >{auction.name}</h1>
+            <div  className="d-flex justify-content-between align-items-center text-dark">
+            <p className="ms-3">تاريخ البدء: {startDate}</p><p className="me-3">تاريخ النهاية:{endDate}</p>
           </div>
+          <div  className="text-dark">
+            <p className="ms-3 text-center "> قيمة التأمين: {auction.fees}</p>
+          </div>
+          <div  className="d-flex justify-content-between align-items-center px-4">
+          <BlobButton className="" buttonText=" انضم للمزاد" href="#" />
+          <BlobButton className="" buttonText="شاهد البث  " href={`/live-stream/show/${id}`} />
+          </div>
+          </div>
+          
         </div>
       </div>
-
-      <div className="container mt-5">
+       <div className="h2 mt-5 text-center">منتجات المزاد</div>
+      <div className="container mt-5 px-5 pb-5 bg-light rounded-3">
         <div className="row">
           {currentItems.length > 0 ? (
             currentItems.map((product) => (
@@ -77,7 +107,7 @@ const AuctionItems = () => {
             <div className="col-md-12">
               <div className="d-flex justify-content-center align-items-center">
                 <div className="spinner-border text-primary" role="status"></div>
-                <h2 className="mt-5 mb-5">No thing exist yet</h2>
+                <h2 className="mt-5 mb-5">لم يتم إضافة منتجات بعد</h2>
                 
                 
 
@@ -95,7 +125,7 @@ const AuctionItems = () => {
                     className="page-link"
                     onClick={() => handlePageChange(currentPage - 1)}
                   >
-                    Previous
+                    السابق
                   </button>
                 </li>
               )}
@@ -125,14 +155,14 @@ const AuctionItems = () => {
                     className="page-link"
                     onClick={() => handlePageChange(currentPage + 1)}
                   >
-                    Next
+                    التالي
                   </button>
                 </li>
               )}
             </ul>
 
             <p className="text-center mt-2">
-              Showing {currentPage} of {products.length}
+              صفحة {currentPage} من {products.length}
             </p>
           </nav>
         )}
