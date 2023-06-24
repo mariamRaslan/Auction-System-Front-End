@@ -28,7 +28,7 @@ const Home = () => {
   const date=Date.now();
 
   useEffect(() => {
-    Axios.get("/newArrivalAuction")
+    Axios.get("website/newArrivalAuction")
       .then((res) => {
         setNewArrival(res.data.data);
         //log   
@@ -42,7 +42,7 @@ const Home = () => {
 
   //get new arival items
   useEffect(() => {
-    Axios.get("/newArrivalItem")
+    Axios.get("website/newArrivalItem")
       .then((res) => {
         setnewArrivalitems(res.data);
         //log
@@ -122,9 +122,6 @@ const Home = () => {
     <img src={homeImg} class="mt-5" alt="" />
   </div>
 </div>
-
-
-
 
 
       {/* how it work section  */}
