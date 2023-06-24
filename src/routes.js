@@ -110,6 +110,11 @@ const Payment = React.lazy(() =>
   import("./Pages/WebsitePages/Payment/Payment")
 );
 
+const PaymentStatus = React.lazy(() =>
+  import("./Pages/WebsitePages/Payment/PaymentStatus")
+);
+
+
 // Website VerificationCode
 const VerificationCode = React.lazy(() =>
   import("./Pages/WebsitePages/VerificationCode/VerificationCode")
@@ -142,6 +147,7 @@ const CreateLiveStream = React.lazy(() =>
 );
 const LiveStreamList = React.lazy(() =>
   import("./Pages/DashoardPages/LiveStream/LiveStreamList")
+
 );
 //Routes
 const routes = [
@@ -304,6 +310,7 @@ const routes = [
 
   //Website Payment
   { path: "/payment", name: "Payment", element: Payment },
+  { path: "/payment-status/:status", name: "PaymentStatus", element: PaymentStatus },
 
   //Website VerificationCode
   {

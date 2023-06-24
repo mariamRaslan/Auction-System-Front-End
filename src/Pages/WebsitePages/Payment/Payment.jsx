@@ -15,7 +15,7 @@ const Payment = () => {
 
   const getWinnersItems = async () => {
     try {
-      const response = await axiosInstance.get("/winners/items");
+      const response = await axiosInstance.get("/getNotPayedItems");
       setWinnersItems(response.data.data);
     } catch (error) {
       console.log(error);
