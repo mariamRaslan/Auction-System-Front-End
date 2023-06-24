@@ -91,3 +91,10 @@ span{
   margin-top: 50px;
   height: 800px;
 }
+
+.loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 750px;
+}

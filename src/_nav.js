@@ -103,19 +103,19 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: "تفاصيل المنتجات",
+    name: "منتجات المزادات",
     to: "/",
     //description icon
     icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: " تفاصيل المنتجات",
+        name: "منتجات المزادات",
         to: "/dashboard/dashboard/productsDetails/list",
       },
       {
         component: CNavItem,
-        name: "اضافة تفاصيل منتج جديد ",
+        name: " اضافة منتج لمزاد",
         to: "/dashboard/dashboard/productsDetails/add-details",
       },
     ],
@@ -140,8 +140,8 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: "المزايدات",
-    to: "/dashboard/dashboard/biddings",
+    name: "الفائزين",
+    to: "/dashboard/dashboard/winners",
     icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
   },
 

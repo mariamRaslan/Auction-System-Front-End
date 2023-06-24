@@ -5,6 +5,7 @@ import "./Bidding.css";
 import axiosInstance from "../../../Axios";
 import Alert from "../../../SharedUi/Alert/Alert";
 import { ClockLoader, HashLoader } from "react-spinners";
+import Pusher from "pusher-js";
 
 const Bidding = () => {
   const [auction, setAuction] = useState([]);
@@ -12,11 +13,13 @@ const Bidding = () => {
   const [currentitem, setCurrentItem] = useState({});
   const [itemnotstarted, setItemNotStarted] = useState(false);
   const [itemstarted, setItemStarted] = useState(false);
-  const [itemended, setItemEnded] = useState(false);
-  
+  const [itemendedtime, setItemEndedTime] = useState(false);
+  const [isloading, setIsLoading] = useState(true);
   const [timer, setTimer] = useState(0);
-
   const [auctionEnded, setAuctionEnded] = useState(false);
+  const [error, setError] = useState("");
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,8 +27,10 @@ const Bidding = () => {
         const res = await axiosInstance.get("/auction/started");
         setAuction(res.data.data[0]);
         console.log("auction =>", res.data.data[0]);
+        setIsLoading(false);
       } catch (err) {
         setAuction(null);
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -36,6 +41,10 @@ const Bidding = () => {
       const fetchData = async () => {
         try {
           const res = await axiosInstance.get(`/auctions/${auction._id}/items`);
+          // sort res.data by start_date in descending order
+          res.data.sort((a, b) => {
+            return new Date(b.start_date) - new Date(a.start_date);
+          });
           setItems(res.data);
           console.log("items =>", res.data);
         } catch (err) {
@@ -46,53 +55,136 @@ const Bidding = () => {
     }
   }, [auction]);
 
+  useEffect(() => {
+    // Initialize Pusher with your Pusher app credentials
+    const pusher = new Pusher("6674d9bc1d0e463c0241", {
+      cluster: "eu",
+    });
 
+    // Subscribe to the "Auction_id" channel
+    const channel = pusher.subscribe("Auction_id");
 
+    // Bind to the "itemDetails_id" event
+    channel.bind("itemDetails_id", (data) => {
+      // Update the current item's current price with the data received from Pusher
+      setCurrentItem((prevItem) => ({
+        ...prevItem,
+        current_price: data.current_price,
+      }));
+    });
 
+    return () => {
+      // Unsubscribe from the channel when the component unmounts
+      channel.unbind("itemDetails_id");
+      pusher.unsubscribe("Auction_id");
+    };
+  }, []);
 
   useEffect(() => {
     const item = items.find((item) => item.is_open === true);
     console.log("first item =>", item);
     if (item) {
       setCurrentItem(item);
-
-      
-
+      console.log("current=>item", currentitem);
+      //setindex = current item index
+      setIndex(items.indexOf(item));
+      console.log("index=>", index);
       const itemStartDate = new Date(item.start_date);
       itemStartDate.setHours(itemStartDate.getHours() - 3);
       console.log("itemStartDate =>", itemStartDate);
-
       const durationInMilliseconds = item.duration * 60 * 1000; // Convert duration to milliseconds
       setTimer(itemStartDate.getTime() + durationInMilliseconds - Date.now());
       console.log("timer=>", new Date(timer));
-    
 
+      const itemEndDate = new Date(item.start_date);
+      itemEndDate.setHours(itemEndDate.getHours() - 3);
+      itemEndDate.setMinutes(itemEndDate.getMinutes() + item.duration);
+      console.log("itemEndDate =>", itemEndDate);
 
-      if (itemStartDate < Date.now()  ) {
+      if (itemEndDate < Date.now()) {
+        setCurrentItem(null);
+      } else if (itemStartDate > Date.now()) {
         setItemNotStarted(true);
         console.log("Date.now =>", new Date(Date.now()));
-      } else if (  Date.now() ){
-        currentitem.is_open==false
-        console.log(currentitem.is_open)
-      }else{
+      } else {
         setItemStarted(true);
+        console.log("Date.now =>", new Date(Date.now()));
       }
     } else {
       setAuctionEnded(true);
     }
-  }, [items]);
+
+    // Check if the current item has ended
+    if (currentitem && itemendedtime && new Date(itemendedtime) > Date.now()) {
+      // Find the next item that hasn't started yet
+      const nextItem = items.find(
+        (item) => new Date(item.start_date) > Date.now()
+      );
+      if (nextItem) {
+        setCurrentItem(nextItem);
+        setItemNotStarted(true);
+        setItemStarted(false);
+        setItemEndedTime(false);
+      }
+    }
+  }, [items, currentitem, itemendedtime, index]);
+
+  // function to get next item when current item ends and set timer if the next item exists
+  const getNextItem = () => {
+    // increment indexby 1 and set current item to the next item if exists
+    if (index + 1 < items.length) {
+      setIndex(index + 1);
+      setCurrentItem(items[index + 1]);
+      // setItemNotStarted(true);
+      // setItemStarted(false);
+      // setItemEndedTime(false);
+      const itemStartDate = new Date(items[index + 1].start_date);
+      itemStartDate.setHours(itemStartDate.getHours() - 3);
+      console.log("itemStartDate =>", itemStartDate);
+      const durationInMilliseconds = items[index + 1].duration * 60 * 1000; // Convert duration to milliseconds
+      setTimer(itemStartDate.getTime() + durationInMilliseconds - Date.now());
+      console.log("timer=>", new Date(timer));
+    } else {
+      setAuctionEnded(true);
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimer((prevTimer) => prevTimer - 1000); // Decrease the timer value by 1000 milliseconds (1 second)
+      if (timer >= 0) {
+        setTimer((prevTimer) => prevTimer - 1000);
+        //  const timerValue=  timerCounter();
+      } else {
+        getNextItem();
+      }
+      // Decrease the timer value by 1000 milliseconds (1 second)
     }, 1000);
-
     return () => {
       clearInterval(interval); // Clean up the interval when the component unmounts
     };
   }, [timer]);
 
-  if (!auction) {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const price = parseInt(e.target.price.value);
+    console.log(price);
+    const data = {
+      bide: price,
+      itemDetails_id: currentitem._id,
+    };
+    try {
+      const res = await axiosInstance.post("/biddings", data);
+      console.log(res.data.data);
+      console.log(res.data.data.amount);
+    } catch (err) {
+      console.log(err.response.data.error);
+      setAlertVisible(true);
+      setError(err.response.data.error);
+    }
+    e.target.price.value = "";
+  };
+
+  if (!auction || !currentitem || items.length === 0) {
     return (
       <>
         <div className="container">
@@ -116,18 +208,20 @@ const Bidding = () => {
   }
 
   if (itemnotstarted) {
-    const dateStr = currentitem.start_date;
-    const date = new Date(dateStr);
-    const formattedDate = date.toLocaleDateString(undefined, {
+    const datestr = currentitem.start_date;
+    const date = new Date(datestr);
+    const adjustedDate = new Date(date.getTime() - 3 * 60 * 60 * 1000);
+    const formattedDate = adjustedDate.toLocaleDateString(undefined, {
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
     });
-    const formattedTime = date.toLocaleTimeString(undefined, {
+    const formattedTime = adjustedDate.toLocaleTimeString(undefined, {
       hour: "2-digit",
       minute: "2-digit",
     });
     const formattedDateTime = ` ${formattedTime} -  ${formattedDate}   `;
+
     return (
       <>
         <div className="container">
@@ -158,7 +252,7 @@ const Bidding = () => {
     );
   }
 
-  if (itemstarted === true) {
+  if (itemstarted) {
     return (
       <div className="bidding">
         <div className="container">
@@ -180,9 +274,9 @@ const Bidding = () => {
                   <div className="bidding-time d-flex justify-content-around">
                     <h3>
                       <span>الوقت المتبقي </span>
-                      {
-                      timer<60?`${(Math.ceil(timer / 1000))} ثانية`:`${((Math.ceil((timer / 1000)/60)))} دقيقة`
-                      } 
+                      {timer < 60
+                        ? `${Math.ceil(timer / 1000)} ثانية`
+                        : `${Math.ceil(timer / 1000 / 60)} دقيقة`}
                     </h3>
                   </div>
                   <div className="bidding-price d-flex justify-content-around mx-3">
@@ -197,28 +291,29 @@ const Bidding = () => {
                     </div>
                   </div>
                   <div className="bidding-button">
-                    
-                    <form>
-                    <label htmlFor="">
-                      <span>أدخل مقدار الزيادة</span>
-                    </label>
+                    <form onSubmit={handleSubmit}>
+                      <label htmlFor="">
+                        <span>أدخل مقدار الزيادة</span>
+                      </label>
                       <input
                         type="number"
                         name="price"
                         placeholder="أدخل مقدار الزيادة"
                       />
-                      <button className="btn btn-primary">إرسال</button>
+                      <button type="submit" className="btn btn-primary">
+                        إرسال
+                      </button>
                     </form>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <input
                         type="number"
                         name="price"
                         hidden
-                        // value={
-                        //   currentitem.max_price - maxPrice
-                        // }
+                        value={
+                          currentitem.max_price - currentitem.current_price
+                        }
                       />
-                      <button className="btn btn-success">
+                      <button type="submit" className="btn btn-success">
                         اشترِ الآن بسعر {currentitem.max_price}
                       </button>
                     </form>
@@ -227,7 +322,7 @@ const Bidding = () => {
               </div>
             </div>
 
-            {/* <Alert
+            <Alert
               type="error-alert"
               visible={alertVisible}
               color="warning"
@@ -235,8 +330,26 @@ const Bidding = () => {
               dismissible
               alignment="center"
               setVisible={setAlertVisible}
-            /> */}
+            />
           </>
+        </div>
+      </div>
+    );
+  }
+
+  if (isloading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="auction-notfound-card">
+              <div className="loading">
+                <div className="d-flex justify-content-center items-align-center mb-5">
+                  <ClockLoader color="#4f89b0" size={200} />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -246,8 +359,3 @@ const Bidding = () => {
 };
 
 export default Bidding;
-
-
-
-
-
