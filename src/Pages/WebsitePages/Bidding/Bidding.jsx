@@ -77,15 +77,15 @@ useEffect(()=>{
 
 
   //-------------------------------------------------------
-  // 2   <  6  
+  // 2   <  6
   const getCurrentItem= ()=>{
     if(items){
-    //find items that is_open=true And his time not ended                                                                                
+    //find items that is_open=true And his time not ended
     const item = items.find(
-          (item) => item.is_open === true 
+          (item) => item.is_open === true
         )
 
-    console.log("item=>",item)  
+    console.log("item=>",item)
 
     
     if(item){      
@@ -133,7 +133,7 @@ useEffect(()=>{
       getCurrentItem()
     }
 
-  // don't put the currentitem in this hook  
+  // don't put the currentitem in this hook
   }, [items]);
 
 
@@ -185,7 +185,7 @@ useEffect(()=>{
   useEffect(() => {
     const interval = setInterval(() => {
       if(timer > 0){
-      setTimer((prevTimer) => prevTimer - 1000); 
+      setTimer((prevTimer) => prevTimer - 1000);
       }
       else{
         clearInterval(interval);
@@ -193,7 +193,7 @@ useEffect(()=>{
     }, 1000);
     if (timer <= 0 && currentitem) {
       setFlag(flag+1)
-      
+
     }
     return () => clearInterval(interval);
   }, [timer , currentitem]);
@@ -316,7 +316,8 @@ useEffect(()=>{
                       <span>الوقت المتبقي </span>
                       {timer < 60
                         ? `${Math.ceil(timer / 1000)} ثانية`
-                        : `${Math.ceil(timer / 1000 / 60)} دقيقة`}
+                        : `${Math.ceil(timer / 1000 / 60)} دقيقة`
+                        }
                     </h3>
                   </div>
                   <div className="bidding-price d-flex justify-content-around mx-3">

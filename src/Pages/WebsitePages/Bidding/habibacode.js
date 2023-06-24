@@ -5,6 +5,7 @@ import jwt_decode from "jwt-decode";
 import "./Bidding.css";
 import axiosInstance from "../../../Axios";
 import Alert from "../../../SharedUi/Alert/Alert";
+import Pusher from "pusher-js";
 
 const Bidding = () => {
   const [auction, setAuction] = useState({});
@@ -74,9 +75,32 @@ const Bidding = () => {
   useEffect(() => {
     getBiddingItems();
   }, [auction]);
+  useEffect(() => {
+    // Initialize Pusher with your Pusher app credentials
+    const pusher = new Pusher("6674d9bc1d0e463c0241", {
+      cluster: "eu",
+    });
 
+    // Subscribe to the "Auction_id" channel
+    const channel = pusher.subscribe("Auction_id");
+
+    // Bind to the "itemDetails_id" event
+    channel.bind("itemDetails_id", (data) => {
+      // Update the current item's current price with the data received from Pusher
+      setCurrentItem((prevItem) => ({
+        ...prevItem,
+        current_price: data.current_price,
+      }));
+    });
+
+    return () => {
+      // Unsubscribe from the channel when the component unmounts
+      channel.unbind("itemDetails_id");
+      pusher.unsubscribe("Auction_id");
+    };
+  }, []);
   const getCurrentItem = () => {
-    const currentItem = biddingItems[currentItemIndex];
+    const currentItem = biddingItems.find((item) => item.is_open === true);
     if (currentItem) {
       setMaxPrice(biddingItems[currentItemIndex].start_bidding);
       const endTimeString = currentItem.duration;

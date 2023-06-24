@@ -1,42 +1,76 @@
 import React, { useState, useEffect } from "react";
 import Card from "../../../SharedUi/Card/card";
 import Axios from "./../../../Axios";
-import auctionImg from "../../../assets/images/wooden-gavel3.jpg"
+import auctionImg from "../../../assets/images/wooden-gavel3.jpg";
 import BlobButton from "../../../SharedUi/BlobButton/BlobButton";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AuctionItems = () => {
   const [products, setProducts] = useState([]);
   const [auction, setAuction] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
-  const options = { year: 'numeric', month: 'long', day: 'numeric', numberingSystem: 'arab' };
 
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    numberingSystem: "arab",
+  };
 
+  const JoinAuction = async (e) => {
+    e.preventDefault();
+    console.log("auction", auction._id);
+    try {
+      const response = await Axios.post("/joinAuction", {
+        auction_id: auction._id,
+      });
+      console.log("data", response.data);
+      toast.success("تم الانضمام للمزاد بنجاح");
+    } catch (error) {
+      console.log(error);
+      console.log(error.response.data.message);
+      if (
+        error.response.data.message === "You already joined this auction..."
+      ) {
+        toast.error("لقد انضممت لهذا المزاد من قبل");
+      } else {
+        toast.error(error.response.data.message);
+      }
+    }
+  };
   useEffect(() => {
     getProducts();
     getAuction();
   }, [currentPage]);
 
   //get id from url
-    const url = window.location.href;
+  const url = window.location.href;
   //the url look like host/auction/id/items
-    //so we split the url by / and get id 
-    const id = url.split("/")[4];
+  //so we split the url by / and get id
+  const id = url.split("/")[4];
 
-    const getAuction = async () => {
-      try {
-        const response = await Axios.get(`website/auctions/${id}`);
-        console.log(response.data.data);
-        setAuction(response.data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const getAuction = async () => {
+    try {
+      const response = await Axios.get(`website/auctions/${id}`);
+      console.log(response.data.data);
+      setAuction(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    const startDate = new Date(auction.start_date).toLocaleDateString('ar-EG', options);
-    const endDate = new Date(auction.end_date).toLocaleDateString('ar-EG', options);
-    
-    const getProducts = async () => {
+  const startDate = new Date(auction.start_date).toLocaleDateString(
+    "ar-EG",
+    options
+  );
+  const endDate = new Date(auction.end_date).toLocaleDateString(
+    "ar-EG",
+    options
+  );
+
+  const getProducts = async () => {
     try {
       const response = await Axios.get(`website/auction/${id}/items`);
       //console.log(response.data);
@@ -59,38 +93,42 @@ const AuctionItems = () => {
   // Calculate page numbers to display
   const maxPageNumbers = 5;
   const startPageNumber = Math.max(1, currentPage - maxPageNumbers + 1);
-  const endPageNumber = Math.min(startPageNumber + maxPageNumbers - 1, totalPages);
+  const endPageNumber = Math.min(
+    startPageNumber + maxPageNumbers - 1,
+    totalPages
+  );
 
   return (
     <>
+      <ToastContainer />
       <div
         className="text-center bg-image"
         style={{
-          backgroundImage:
-          `url(${auctionImg})`,
+          backgroundImage: `url(${auctionImg})`,
           width: "100%",
           height: "50vh",
           backgroundSize: "cover",
         }}
       >
         <div className="d-flex justify-content-center align-items-center h-100">
-          <div style={{color:"#4f89b0"}}>
-            <h1 className="mb-3 " >{auction.name}</h1>
-            <div  className="d-flex justify-content-between align-items-center text-dark">
-            <p className="ms-3">تاريخ البدء: {startDate}</p><p className="me-3">تاريخ النهاية:{endDate}</p>
+          <div style={{ color: "#4f89b0" }}>
+            <h1 className="mb-3 ">{auction.name}</h1>
+            <div className="d-flex justify-content-between align-items-center text-dark">
+              <p className="ms-3">تاريخ البدء: {startDate}</p>
+              <p className="me-3">تاريخ النهاية:{endDate}</p>
+            </div>
+            <div className="text-dark">
+              <p className="ms-3 text-center "> قيمة التأمين: {auction.fees}</p>
+            </div>
+            <div className="d-flex justify-content-center align-items-center px-4">
+              <form onSubmit={JoinAuction}>
+                <button type="submit">انضم للمزاد</button>
+              </form>
+            </div>
           </div>
-          <div  className="text-dark">
-            <p className="ms-3 text-center "> قيمة التأمين: {auction.fees}</p>
-          </div>
-          <div  className="d-flex justify-content-between align-items-center px-4">
-          <BlobButton className="" buttonText=" انضم للمزاد" href="#" />
-          <BlobButton className="" buttonText="شاهد البث  " href={`/live-stream/show/${id}`} />
-          </div>
-          </div>
-          
         </div>
       </div>
-       <div className="h2 mt-5 text-center">منتجات المزاد</div>
+      <div className="h2 mt-5 text-center">منتجات المزاد</div>
       <div className="container mt-5 px-5 pb-5 bg-light rounded-3">
         <div className="row">
           {currentItems.length > 0 ? (
@@ -106,11 +144,11 @@ const AuctionItems = () => {
           ) : (
             <div className="col-md-12">
               <div className="d-flex justify-content-center align-items-center">
-                <div className="spinner-border text-primary" role="status"></div>
+                <div
+                  className="spinner-border text-primary"
+                  role="status"
+                ></div>
                 <h2 className="mt-5 mb-5">لم يتم إضافة منتجات بعد</h2>
-                
-                
-
               </div>
             </div>
           )}
@@ -130,24 +168,27 @@ const AuctionItems = () => {
                 </li>
               )}
 
-              {Array.from({ length: endPageNumber - startPageNumber + 1 }, (_, index) => {
-                const pageNumber = startPageNumber + index;
-                return (
-                  <li
-                    key={pageNumber}
-                    className={`page-item ${
-                      currentPage === pageNumber ? "active" : ""
-                    }`}
-                  >
-                    <button
-                      className="page-link"
-                      onClick={() => handlePageChange(pageNumber)}
+              {Array.from(
+                { length: endPageNumber - startPageNumber + 1 },
+                (_, index) => {
+                  const pageNumber = startPageNumber + index;
+                  return (
+                    <li
+                      key={pageNumber}
+                      className={`page-item ${
+                        currentPage === pageNumber ? "active" : ""
+                      }`}
                     >
-                      {pageNumber}
-                    </button>
-                  </li>
-                );
-              })}
+                      <button
+                        className="page-link"
+                        onClick={() => handlePageChange(pageNumber)}
+                      >
+                        {pageNumber}
+                      </button>
+                    </li>
+                  );
+                }
+              )}
 
               {currentPage < totalPages && (
                 <li className="page-item">
