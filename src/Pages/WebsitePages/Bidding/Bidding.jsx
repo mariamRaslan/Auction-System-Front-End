@@ -41,9 +41,9 @@ const Bidding = () => {
       const fetchData = async () => {
         try {
           const res = await axiosInstance.get(`/auctions/${auction._id}/items`);
-          // sort res.data by start_date in descending order
+          // sort res.data by start_date in ascending order
           res.data.sort((a, b) => {
-            return new Date(b.start_date) - new Date(a.start_date);
+            return new Date(a.start_date) - new Date(b.start_date);
           });
           setItems(res.data);
           console.log("items =>", res.data);
@@ -81,80 +81,47 @@ const Bidding = () => {
   }, []);
 
   useEffect(() => {
+    getNextItem();
+  }, [items, currentitem, itemendedtime]);
+
+  // function to get next item when current item ends and set timer if the next item exists
+  const getNextItem = () => {
     const item = items.find((item) => item.is_open === true);
-    console.log("first item =>", item);
     if (item) {
       setCurrentItem(item);
-      console.log("current=>item", currentitem);
-      //setindex = current item index
-      setIndex(items.indexOf(item));
-      console.log("index=>", index);
+
       const itemStartDate = new Date(item.start_date);
       itemStartDate.setHours(itemStartDate.getHours() - 3);
-      console.log("itemStartDate =>", itemStartDate);
+
       const durationInMilliseconds = item.duration * 60 * 1000; // Convert duration to milliseconds
       setTimer(itemStartDate.getTime() + durationInMilliseconds - Date.now());
-      console.log("timer=>", new Date(timer));
 
       const itemEndDate = new Date(item.start_date);
       itemEndDate.setHours(itemEndDate.getHours() - 3);
       itemEndDate.setMinutes(itemEndDate.getMinutes() + item.duration);
-      console.log("itemEndDate =>", itemEndDate);
 
       if (itemEndDate < Date.now()) {
         setCurrentItem(null);
       } else if (itemStartDate > Date.now()) {
         setItemNotStarted(true);
-        console.log("Date.now =>", new Date(Date.now()));
+        const timebetween = itemStartDate.getTime() - Date.now();
+        setTimer(timebetween);
       } else {
         setItemStarted(true);
-        console.log("Date.now =>", new Date(Date.now()));
       }
-    } else {
-      setAuctionEnded(true);
-    }
-
-    // Check if the current item has ended
-    if (currentitem && itemendedtime && new Date(itemendedtime) > Date.now()) {
-      // Find the next item that hasn't started yet
-      const nextItem = items.find(
-        (item) => new Date(item.start_date) > Date.now()
-      );
-      if (nextItem) {
-        setCurrentItem(nextItem);
-        setItemNotStarted(true);
-        setItemStarted(false);
-        setItemEndedTime(false);
-      }
-    }
-  }, [items, currentitem, itemendedtime, index]);
-
-  // function to get next item when current item ends and set timer if the next item exists
-  const getNextItem = () => {
-    // increment indexby 1 and set current item to the next item if exists
-    if (index + 1 < items.length) {
-      setIndex(index + 1);
-      setCurrentItem(items[index + 1]);
-      // setItemNotStarted(true);
-      // setItemStarted(false);
-      // setItemEndedTime(false);
-      const itemStartDate = new Date(items[index + 1].start_date);
-      itemStartDate.setHours(itemStartDate.getHours() - 3);
-      console.log("itemStartDate =>", itemStartDate);
-      const durationInMilliseconds = items[index + 1].duration * 60 * 1000; // Convert duration to milliseconds
-      setTimer(itemStartDate.getTime() + durationInMilliseconds - Date.now());
-      console.log("timer=>", new Date(timer));
     } else {
       setAuctionEnded(true);
     }
   };
 
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (timer >= 0) {
         setTimer((prevTimer) => prevTimer - 1000);
-        //  const timerValue=  timerCounter();
+      //  const timerValue=  timerCounter();
       } else {
+        //get next item
         getNextItem();
       }
       // Decrease the timer value by 1000 milliseconds (1 second)
@@ -276,7 +243,8 @@ const Bidding = () => {
                       <span>الوقت المتبقي </span>
                       {timer < 60
                         ? `${Math.ceil(timer / 1000)} ثانية`
-                        : `${Math.ceil(timer / 1000 / 60)} دقيقة`}
+                        : `${Math.ceil(timer / 1000 / 60)} دقيقة`
+                        }
                     </h3>
                   </div>
                   <div className="bidding-price d-flex justify-content-around mx-3">
