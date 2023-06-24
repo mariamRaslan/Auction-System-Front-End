@@ -38,6 +38,10 @@ const Bidding = () => {
     fetchData();
   }, []);
 
+  // on mount set isload == true
+  useEffect(()=>{
+    setIsLoading(true)
+  },[])
 
   //-------------------------------------------------------
 
@@ -59,32 +63,66 @@ const Bidding = () => {
   }, [auction ,flag]);
 
 
+useEffect(()=>{
+  if(currentitem){
+    const itemStartDate = new Date(currentitem.start_date);
+    itemStartDate.setHours(itemStartDate.getHours() - 3);
+    if( itemStartDate.getTime() >  Date.now()){
+      console.log('true or false =>',itemStartDate.getTime()>Date.now())
+      // flag++
+      setFlag(flag+1)
+    }
+  }
+},[timer])
+
+
   //-------------------------------------------------------
-  // 2   <  6  
+  // 2   <  6
   const getCurrentItem= ()=>{
     if(items){
-    //find items that is_open=true And his time not ended                                                                                
+    //find items that is_open=true And his time not ended
     const item = items.find(
-          (item) => item.is_open === true 
+          (item) => item.is_open === true
         )
 
-    console.log("item=>",item)  
+    console.log("item=>",item)
 
     
     if(item){      
-      setCurrentItem(item)       
-                  //          7.5                              7.6                   
-                if(new Date(item.start_date).getTime() >  Date.now()){
+      setCurrentItem(item)    
+
+      // set new Date(item.start_date) - 3 hour
+      const itemStartDate = new Date(item.start_date);
+      itemStartDate.setHours(itemStartDate.getHours() - 3);
+                  //          12.40               12.35                 
+                if( itemStartDate.getTime() <=  Date.now()){
+                  console.log('true or false =>',itemStartDate.getTime()>Date.now())
                   setItemStarted(true)
+                  console.log("biding  started ")
                 }else{
                   setItemStarted(false)
+                  console.log("biding not started yet")
                 }
           }else{
             setCurrentItem(null)
+            endAuction
           }
     }else{
       setCurrentItem(null)
     }
+  }
+
+
+  const endAuction=()=>{
+    axiosInstance
+    .patch(`/endAuction/${auction._id}`)
+    .then((res) => {
+      console.log("res =>", res.data);
+      setAuctionEnded(true);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
 
@@ -95,7 +133,7 @@ const Bidding = () => {
       getCurrentItem()
     }
 
-  // don't put the currentitem in this hook  
+  // don't put the currentitem in this hook
   }, [items]);
 
 
@@ -147,7 +185,7 @@ const Bidding = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if(timer > 0){
-      setTimer((prevTimer) => prevTimer - 1000); 
+      setTimer((prevTimer) => prevTimer - 1000);
       }
       else{
         clearInterval(interval);
@@ -155,7 +193,7 @@ const Bidding = () => {
     }, 1000);
     if (timer <= 0 && currentitem) {
       setFlag(flag+1)
-      
+
     }
     return () => clearInterval(interval);
   }, [timer , currentitem]);
@@ -173,6 +211,8 @@ const Bidding = () => {
       const res = await axiosInstance.post("/biddings", data);
       console.log(res.data.data);
       console.log(res.data.data.amount);
+      //set flag ++
+      setFlag(flag+1)
       
     } catch (err) {
       console.log(err.response.data.error);
@@ -184,7 +224,7 @@ const Bidding = () => {
 
 
 
-  if (!auction || !currentitem || items.length === 0) {
+  if (auctionEnded || !auction || !currentitem || items.length === 0) {
     return (
       <>
         <div className="container">
@@ -276,7 +316,8 @@ const Bidding = () => {
                       <span>الوقت المتبقي </span>
                       {timer < 60
                         ? `${Math.ceil(timer / 1000)} ثانية`
-                        : `${Math.ceil(timer / 1000 / 60)} دقيقة`}
+                        : `${Math.ceil(timer / 1000 / 60)} دقيقة`
+                        }
                     </h3>
                   </div>
                   <div className="bidding-price d-flex justify-content-around mx-3">
