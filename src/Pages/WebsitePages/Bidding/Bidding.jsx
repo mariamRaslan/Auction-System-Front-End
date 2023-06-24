@@ -41,9 +41,9 @@ const Bidding = () => {
       const fetchData = async () => {
         try {
           const res = await axiosInstance.get(`/auctions/${auction._id}/items`);
-          // sort res.data by start_date
+          // sort res.data by start_date in descending order
           res.data.sort((a, b) => {
-            return new Date(a.start_date) - new Date(b.start_date);
+            return new Date(b.start_date) - new Date(a.start_date);
           });
           setItems(res.data);
           console.log("items =>", res.data);
@@ -127,27 +127,38 @@ const Bidding = () => {
         setItemEndedTime(false);
       }
     }
-  }, [items, currentitem, itemendedtime]);
+  }, [items, currentitem, itemendedtime, index]);
+
+  // function to get next item when current item ends and set timer if the next item exists
+  const getNextItem = () => {
+    // increment indexby 1 and set current item to the next item if exists
+    if (index + 1 < items.length) {
+      setIndex(index + 1);
+      setCurrentItem(items[index + 1]);
+      // setItemNotStarted(true);
+      // setItemStarted(false);
+      // setItemEndedTime(false);
+      const itemStartDate = new Date(items[index + 1].start_date);
+      itemStartDate.setHours(itemStartDate.getHours() - 3);
+      console.log("itemStartDate =>", itemStartDate);
+      const durationInMilliseconds = items[index + 1].duration * 60 * 1000; // Convert duration to milliseconds
+      setTimer(itemStartDate.getTime() + durationInMilliseconds - Date.now());
+      console.log("timer=>", new Date(timer));
+    } else {
+      setAuctionEnded(true);
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if(timer > 0){
-      setTimer((prevTimer) => prevTimer - 1000); 
-      }// Decrease the timer value by 1000 milliseconds (1 second)
-    }, 1000);
-    if (timer === 0) {
-      clearInterval(interval);
-      // increment indexby 1 and set current item to the next item if exists
-      if (index + 1 < items.length) {
-        setIndex(index + 1);
-        setCurrentItem(items[index + 1]);
-        setItemNotStarted(true);
-        setItemStarted(false);
-        setItemEndedTime(false);
+      if (timer >= 0) {
+        setTimer((prevTimer) => prevTimer - 1000);
+        //  const timerValue=  timerCounter();
+      } else {
+        getNextItem();
       }
-
-    }
-
+      // Decrease the timer value by 1000 milliseconds (1 second)
+    }, 1000);
     return () => {
       clearInterval(interval); // Clean up the interval when the component unmounts
     };
