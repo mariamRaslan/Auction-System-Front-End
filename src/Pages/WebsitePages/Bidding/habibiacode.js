@@ -83,9 +83,14 @@ const Bidding = () => {
       const timeLeftMs = parseInt(endTimeString) * 60 * 1000;
       setTimeLeft(timeLeftMs);
       changeFlag();
+
+      
       setTimeout(() => {
         setCurrentItemIndex((prevIndex) => prevIndex + 1);
       }, timeLeftMs);
+
+
+
       if (currentItemIndex == biddingItems.length) {
         // setCurrentItemIndex(0);
         closeAuction();
