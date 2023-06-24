@@ -329,7 +329,7 @@ const routes = [
 
   //website live stream
   {
-    path: "/live-stream/show/:auctionId",
+    path: "/live-stream/show",
     exact: true,
     name: "ShowLiveStream",
     element: ShowLiveStream,

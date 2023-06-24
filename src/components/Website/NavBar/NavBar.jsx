@@ -79,6 +79,9 @@ const NavBar = () => {
                   <CNavLink href="/bidding">المزايدات </CNavLink>
                 </CNavItem>
                 <CNavItem className="nav-item">
+                  <CNavLink href="/live-stream/show">البث المباشر</CNavLink>
+                </CNavItem>
+                <CNavItem className="nav-item">
                   <CNavLink href="/payment">المشتريات</CNavLink>
                 </CNavItem>
                 <CNavItem className="nav-item">
@@ -88,8 +91,8 @@ const NavBar = () => {
                   <CNavLink href="/contact">تواصل معنا</CNavLink>
                 </CNavItem>
               </div>
-              <div className="col-md-5 col-sm-12 d-flex justify-content-center">
-                <CForm className="d-flex col-5">
+              <div className="col-md-5 col-sm-12 d-flex justify-content-end pe-5">
+                {/* <CForm className="d-flex col-5">
                   <CFormInput
                     type="search"
                     className="search-input mx-2"
@@ -103,8 +106,8 @@ const NavBar = () => {
                   >
                     <p className=" d-inline">بحث</p>
                   </CButton>
-                </CForm>
-                <div className="col-1 d-flex justify-content-between ms-3">
+                </CForm> */}
+                <div className="col-1 d-flex justify-content-between ms-3 ">
                   {loggedIn && (
                     <>
                       {user.image && role === "user" && (
