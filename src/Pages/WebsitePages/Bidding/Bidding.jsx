@@ -20,6 +20,8 @@ const Bidding = () => {
   const [error, setError] = useState("");
   const [alertVisible, setAlertVisible] = useState(false);
   const [index, setIndex] = useState(0);
+  const [flag, setFlag] = useState(0);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,16 +38,17 @@ const Bidding = () => {
     fetchData();
   }, []);
 
+
+  //-------------------------------------------------------
+
   useEffect(() => {
     if (auction) {
       const fetchData = async () => {
         try {
           const res = await axiosInstance.get(`/auctions/${auction._id}/items`);
-          // sort res.data by start_date in ascending order
-          res.data.sort((a, b) => {
-            return new Date(a.start_date) - new Date(b.start_date);
-          });
-          setItems(res.data);
+          //sort items depend on the start_date
+          const sortedItems = [...res.data].sort((a, b) => new Date(a.start_date) - new Date(b.start_date));
+          setItems(sortedItems);
           console.log("items =>", res.data);
         } catch (err) {
           console.log(err);
@@ -53,7 +56,51 @@ const Bidding = () => {
       };
       fetchData();
     }
-  }, [auction]);
+  }, [auction ,flag]);
+
+
+  //-------------------------------------------------------
+  // 2   <  6
+  const getCurrentItem= ()=>{
+    if(items){
+    //find items that is_open=true And his time not ended
+    const item = items.find(
+          (item) => item.is_open === true
+        )
+
+    console.log("item=>",item)
+
+
+    if(item){
+      setCurrentItem(item)
+                  //          7.5                              7.6
+                if(new Date(item.start_date).getTime() >  Date.now()){
+                  setItemStarted(true)
+                }else{
+                  setItemStarted(false)
+                }
+          }else{
+            setCurrentItem(null)
+          }
+    }else{
+      setCurrentItem(null)
+    }
+  }
+
+
+  //-------------------------------------------------------
+
+  useEffect(() => {
+    if (items) {
+      getCurrentItem()
+    }
+
+  // don't put the currentitem in this hook
+  }, [items]);
+
+
+
+  //-------------------------page end ------------------------------
 
   useEffect(() => {
     // Initialize Pusher with your Pusher app credentials
@@ -81,55 +128,38 @@ const Bidding = () => {
   }, []);
 
   useEffect(() => {
-    getNextItem();
-  }, [items, currentitem, itemendedtime]);
+    if (currentitem) {
 
-  // function to get next item when current item ends and set timer if the next item exists
-  const getNextItem = () => {
-    const item = items.find((item) => item.is_open === true);
-    if (item) {
-      setCurrentItem(item);
-
-      const itemStartDate = new Date(item.start_date);
+      const itemStartDate = new Date(currentitem.start_date);
       itemStartDate.setHours(itemStartDate.getHours() - 3);
-
-      const durationInMilliseconds = item.duration * 60 * 1000; // Convert duration to milliseconds
+      console.log("itemStartDate =>", itemStartDate);
+      const durationInMilliseconds = currentitem.duration * 60 * 1000; // Convert duration to milliseconds
       setTimer(itemStartDate.getTime() + durationInMilliseconds - Date.now());
-
-      const itemEndDate = new Date(item.start_date);
+      console.log("timer=>", new Date(timer));
+      const itemEndDate = new Date(currentitem.start_date);
       itemEndDate.setHours(itemEndDate.getHours() - 3);
-      itemEndDate.setMinutes(itemEndDate.getMinutes() + item.duration);
-
-      if (itemEndDate < Date.now()) {
-        setCurrentItem(null);
-      } else if (itemStartDate > Date.now()) {
-        setItemNotStarted(true);
-        const timebetween = itemStartDate.getTime() - Date.now();
-        setTimer(timebetween);
-      } else {
-        setItemStarted(true);
-      }
+      itemEndDate.setMinutes(itemEndDate.getMinutes() + currentitem.duration);
     } else {
       setAuctionEnded(true);
     }
-  };
-
+  }, [currentitem]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (timer >= 0) {
-        setTimer((prevTimer) => prevTimer - 1000);
-      //  const timerValue=  timerCounter();
-      } else {
-        //get next item
-        getNextItem();
+      if(timer > 0){
+      setTimer((prevTimer) => prevTimer - 1000);
       }
-      // Decrease the timer value by 1000 milliseconds (1 second)
+      else{
+        clearInterval(interval);
+      }
     }, 1000);
-    return () => {
-      clearInterval(interval); // Clean up the interval when the component unmounts
-    };
-  }, [timer]);
+    if (timer <= 0 && currentitem) {
+      setFlag(flag+1)
+
+    }
+    return () => clearInterval(interval);
+  }, [timer , currentitem]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -143,6 +173,7 @@ const Bidding = () => {
       const res = await axiosInstance.post("/biddings", data);
       console.log(res.data.data);
       console.log(res.data.data.amount);
+
     } catch (err) {
       console.log(err.response.data.error);
       setAlertVisible(true);
@@ -150,6 +181,8 @@ const Bidding = () => {
     }
     e.target.price.value = "";
   };
+
+
 
   if (!auction || !currentitem || items.length === 0) {
     return (
@@ -174,7 +207,7 @@ const Bidding = () => {
     );
   }
 
-  if (itemnotstarted) {
+  if (!itemstarted) {
     const datestr = currentitem.start_date;
     const date = new Date(datestr);
     const adjustedDate = new Date(date.getTime() - 3 * 60 * 60 * 1000);

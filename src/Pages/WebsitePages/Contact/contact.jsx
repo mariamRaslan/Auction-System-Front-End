@@ -34,7 +34,7 @@ const Contact = () => {
       message: e.target.message.value,
     };
     //post data to /contact
-    Axios.post("/contact", data)
+    Axios.post("website/contact", data)
       .then((res) => {
         setmessage("تم الارسال بنجاح");
         e.target.name.value = "";
@@ -76,7 +76,7 @@ const Contact = () => {
             <div className="contact-card">
               <div className="card-body ">
                 <h5 className="card-title">رقم الهاتف</h5>
-                <p className="card-text">+962 79 000 0000</p>
+                <p className="card-text">+962 79 000 000</p>
               </div>
             </div>
           </div>

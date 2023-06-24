@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../../Axios";
 import "./UserProfile.css";
+import Auth from '../../../components/IsLogin';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfileEdit = () => {
   const id = useParams().id;
@@ -13,6 +15,7 @@ const UserProfileEdit = () => {
   const [buildingNumber, setBuildingNumber] = useState("");
   const [image, setImage] = useState(null);
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosInstance.get(`/users/${id}`).then((response) => {
@@ -65,14 +68,12 @@ const UserProfileEdit = () => {
         formData.append("image", image);
       }
       try {
-        await axiosInstance.patch(`/users/${id}`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-        console.log(response)
+      const response= await axiosInstance.patch(`/users/${id}`, formData);
+      console.log(response)
+        navigate('/profile')
+
       } catch (error) {
-        console.log(error)
+        console.log(error.response)
       }
     } else {
       setErrors(errors);
@@ -88,13 +89,13 @@ const UserProfileEdit = () => {
             <div className="col m-4">
               <div className="card">
                 <div className="card-body">
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleSubmit} className="form-shadow">
                     <div className="row mb-3">
                       <div className="col-sm-3">
                         <label htmlFor="name" className="form-label">الاسم</label>
                       </div>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" id="name" value={name} onChange={(event) => setName(event.target.value)} />
+                        <input type="text" className="formcontrol" id="name" value={name} onChange={(event) => setName(event.target.value)} />
                         {errors.name && <p className="text-danger">{errors.name}</p>}
                       </div>
                     </div>
@@ -103,7 +104,7 @@ const UserProfileEdit = () => {
                         <label htmlFor="email" className="form-label">البريد الالكتروني</label>
                       </div>
                       <div className="col-sm-9">
-                        <input type="email" className="form-control" id="email" value={email} onChange={(event) => setEmail(event.target.value)} />
+                        <input type="email" className="formcontrol" id="email" value={email} onChange={(event) => setEmail(event.target.value)} />
                         {errors.email && <p className="text-danger">{errors.email}</p>}
                       </div>
                    </div>
@@ -112,7 +113,7 @@ const UserProfileEdit = () => {
                         <label htmlFor="phone" className="form-label">رقم الهاتف</label>
                       </div>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" id="phone" value={phone} onChange={(event) => setPhone(event.target.value)} />
+                        <input type="text" className="formcontrol" id="phone" value={phone} onChange={(event) => setPhone(event.target.value)} />
                         {errors.phone && <p className="text-danger">{errors.phone}</p>}
                       </div>
                     </div>
@@ -121,7 +122,7 @@ const UserProfileEdit = () => {
                         <label htmlFor="city" className="form-label">المدينة</label>
                       </div>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" id="city" value={city} onChange={(event) => setCity(event.target.value)} />
+                        <input type="text" className="formcontrol" id="city" value={city} onChange={(event) => setCity(event.target.value)} />
                         {errors.city && <p className="text-danger">{errors.city}</p>}
                       </div>
                     </div>
@@ -130,7 +131,7 @@ const UserProfileEdit = () => {
                         <label htmlFor="street" className="form-label">الشارع</label>
                       </div>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" id="street" value={street} onChange={(event) => setStreet(event.target.value)} />
+                        <input type="text" className="formcontrol" id="street" value={street} onChange={(event) => setStreet(event.target.value)} />
                         {errors.street && <p className="text-danger">{errors.street}</p>}
                       </div>
                     </div>
@@ -139,7 +140,7 @@ const UserProfileEdit = () => {
                         <label htmlFor="buildingNumber" className="form-label">رقم المبنى</label>
                       </div>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" id="buildingNumber" value={buildingNumber} onChange={(event) => setBuildingNumber(event.target.value)} />
+                        <input type="text" className="formcontrol" id="buildingNumber" value={buildingNumber} onChange={(event) => setBuildingNumber(event.target.value)} />
                         {errors.buildingNumber && <p className="text-danger">{errors.buildingNumber}</p>}
                       </div>
                     </div>
@@ -148,10 +149,10 @@ const UserProfileEdit = () => {
                         <label htmlFor="image" className="form-label">الصورة الشخصية</label>
                       </div>
                       <div className="col-sm-9">
-                        <input type="file" className="form-control" id="image" onChange={(event) => setImage(event.target.files[0])} />
+                        <input type="file" className="formcontrol" id="image" onChange={(event) => setImage(event.target.files[0])} />
                       </div>
                     </div>
-                    <button type="submit" className="btn text-light" style={{backgroundColor: "#4f89b0"}}>تحديث البيانات</button>
+                    <button type="submit" className=" btn-custom" style={{backgroundColor: "#4f89b0"}}>تحديث البيانات</button>
                   </form>
                 </div>
               </div>
@@ -163,4 +164,4 @@ const UserProfileEdit = () => {
   );
 };
 
-export default UserProfileEdit;
+export default Auth(UserProfileEdit);

@@ -25,7 +25,7 @@ const AuctionItems = () => {
 
     const getAuction = async () => {
       try {
-        const response = await Axios.get(`/auctions/${id}`);
+        const response = await Axios.get(`website/auctions/${id}`);
         console.log(response.data.data);
         setAuction(response.data.data);
       } catch (error) {
@@ -38,7 +38,7 @@ const AuctionItems = () => {
     
     const getProducts = async () => {
     try {
-      const response = await Axios.get(`/auctions/${id}/items`);
+      const response = await Axios.get(`website/auction/${id}/items`);
       //console.log(response.data);
       setProducts(response.data);
     } catch (error) {

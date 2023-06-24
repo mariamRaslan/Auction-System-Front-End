@@ -3,6 +3,7 @@ import "./Payment.css";
 import axiosInstance from "../../../Axios";
 import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe("pk_test_51NJxO3AiIlGBZDTmQuU9P2yICAMtBfzYAZd5gQKmyliiYvt8S5mAbwcr1LBaR4R9NYmX9LYD8dhx0nbVkFAbS23G00EAECX6j9");
+import Auth from '../../../components/IsLogin';
 
 const Payment = () => {
   const [winnersItems, setWinnersItems] = useState([]);
@@ -80,4 +81,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default Auth(Payment);

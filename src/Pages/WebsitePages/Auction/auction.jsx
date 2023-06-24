@@ -14,7 +14,7 @@ const Auctions = () => {
 
   const getProducts = async () => {
     try {
-      const response = await Axios.get("/auction/not%20started");
+      const response = await Axios.get("website/auctions");
       console.log(response.data.data);
       setProducts(response.data.data);
     } catch (error) {
