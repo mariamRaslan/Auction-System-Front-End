@@ -236,21 +236,21 @@ const Home = () => {
     </div>
 
     {/** product section header  */}
-    <div className="container" >
+    {/* <div className="container" >
         <div className="row mt-5">
           <div className="col-md-12">
             <div className="d-flex justify-content-center align-items-center mt-4 mb-3">
               <h3 className="section-title "> أحدث المنتجات</h3>
-              {/* hr */}
+              
               
             </div>
             <div className="lg-hr"></div>
 
           </div>
         </div> 
-      </div>
+      </div> */}
 
-    <div className="container  mb-5">
+    {/* <div className="container  mb-5">
 
       <div className="row">
       {newArrivalitems.length > 0 ? (
@@ -274,13 +274,13 @@ const Home = () => {
             </div>
         )}
       </div>
-    </div>  
+    </div>   */}
 
           
     
 
     {/** about us   */}
-    <div className="section-bg-grey">
+    <div className="">
     
     <div className="container ">
       <div className="row">
@@ -309,7 +309,12 @@ const Home = () => {
       </div>
     </div>
   </div>
-    <div className="mt-5">
+
+    {/* hr */}
+      
+    {/** services section  */}
+    <div className="section-bg-grey mt-5">
+    <div className="">
       <div className="container">
         <div className="row">
           <div className="col-md-12">
@@ -322,11 +327,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-    {/* hr */}
-      
-    {/** services section  */}
-    <div className="container mt-5">
-      <div className="row">
+      <div className="row mt-5">
         <div className="col-md-4">
           <div className="">
             <div className="image " >
@@ -388,8 +389,8 @@ const Home = () => {
                   
             
     {/** contact us   */}
-    <div className="section-bg-grey">
-          <div className="container" >
+    <div className="mt-5">
+          <div className="container " >
               <div className="row">
                 <div className="col-md-12">
                   <div className="d-flex justify-content-center align-items-center mt-4">
@@ -404,7 +405,7 @@ const Home = () => {
           </div>
           
         {/* form name , email , phone , subject , message  */}
-        <div className="container">
+        <div className="container ">
               <div className="row mt-5">
                   <div className="col-md-12">
                       {/* show message */}
@@ -418,41 +419,41 @@ const Home = () => {
                           يمكنك التواصل معنا عن طريق ملئ النموذج ادناه وسوف نقوم بالرد عليك في اقرب وقت ممكن
                       </p>
                       </div>
-                      <div className="form-shadow">
+                      <div className="form-shadow section-bg-grey">
                       <form     
                           onSubmit={handleSubmit}
                           className="m-5"
                       >
-                          <div className="form-group">
+                          <div className="form-group ">
                               <label htmlFor="exampleFormControlInput1">الاسم</label>
                               <input type="text" 
                               name="name"
-                              className="formcontrol " id="exampleFormControlInput1"  />
+                              className="formcontrol section-bg-grey" id="exampleFormControlInput1"  />
                           </div>
                           <div className="form-group">
                               <label htmlFor="exampleFormControlInput1">البريد الالكتروني</label>
                               <input type="email" 
                               name="email"
-                              className="formcontrol" id="exampleFormControlInput1"  />
+                              className="formcontrol section-bg-grey" id="exampleFormControlInput1"  />
                           </div>
                           
                           <div className="form-group">
                               <label htmlFor="exampleFormControlInput1">رقم الهاتف</label>
                               <input type="text" 
                               name="phone"
-                              className="formcontrol" id="exampleFormControlInput1"/>
+                              className="formcontrol section-bg-grey" id="exampleFormControlInput1"/>
                           </div>
                           <div className="form-group">
                               <label htmlFor="exampleFormControlInput1">الموضوع</label>
                               <input type="text"
                               name="subject"
-                              className="formcontrol" id="exampleFormControlInput1"  />
+                              className="formcontrol section-bg-grey" id="exampleFormControlInput1"  />
                           </div>
                           <div className="form-group">
                               <label htmlFor="exampleFormControlTextarea1">الرسالة</label>
                               <textarea 
                               name="message"
-                              className="form-control-text-area" id="exampleFormControlTextarea1" rows="10"></textarea>
+                              className="form-control-text-area section-bg-grey" id="exampleFormControlTextarea1" rows="10"></textarea>
                           </div>
                           <div className="text-center">
                           <button type="submit" className="btn btn-custom btn-lg mt-5 align-self-center">ارسال</button>
