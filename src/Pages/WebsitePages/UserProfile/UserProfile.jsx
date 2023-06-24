@@ -4,10 +4,12 @@ import jwt_decode from "jwt-decode";
 import { Link } from "react-router-dom";
 import "./UserProfile.css";
 import Card from "../../../SharedUi/Card/card";
+import Auth from '../../../components/IsLogin';
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [auctions, setAuctions] = useState([]);
+  const [boughtItems, setBoughtItems] = useState([]);
   const decoded = jwt_decode(localStorage.getItem("token"));
   const id = decoded.id;
 
@@ -37,6 +39,20 @@ const UserProfile = () => {
       }
     };
     fetchAuctions();
+
+    const fetchBoughtItems = async () => {
+      try {
+        const response = await axiosInstance.get("/getPayedItems");
+        if (response.data.success) {
+          setBoughtItems(response.data.data);
+        } else {
+          console.log(response.data.message);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchBoughtItems();
   }, [id]);
 
   const formatStartDate = (dateString) => {
@@ -56,8 +72,8 @@ const UserProfile = () => {
         <section className="mt-3">
           <div className="container mt-5">
             <div
-              className="row d-flex align-items-center p-5 "
-              style={{ backgroundColor: "#eee" }}
+              className="row d-flex align-items-center p-5 div-container"
+              
             >
               <div className="col-lg-4">
                 <div className="card mb-4">
@@ -74,7 +90,7 @@ const UserProfile = () => {
                       to={`/edit-profile/${id}`}
                       className="btn btn-dark submit-button"
                     >
-                      Edit
+                      تعديل
                     </Link>
                   </div>
                 </div>
@@ -125,12 +141,14 @@ const UserProfile = () => {
                 </div>
               </div>
             </div>
+            
             <div className="row my-5 text-center">
-              <div className="col-lg-12 ">
+              <div className="col-lg-12 text-shadow text-light">
                 <h3>المزادات التي شاركت بها </h3>
+                <div className="lg-hr mb-3"></div>
               </div>
             </div>
-            <div className="row p-5 mt-5" style={{ backgroundColor: "#eee" }}>
+            <div className="row p-5 mt-5 div-container" >
               {auctions.length > 0 ? (
                 auctions.map((auction) => (
                   <div className="col-lg-4 mb-4" key={auction._id}>
@@ -144,10 +162,35 @@ const UserProfile = () => {
                 ))
               ) : (
                 <div className="col-lg-12">
-                  <h5>لم تشارك في أي مزاد حتى الآن.</h5>
+                  <h5 className="text-center">لم تشارك في أي مزاد حتى الآن.</h5>
                 </div>
               )}
             </div>
+
+            <div className="row my-5 text-center">
+  <div className="col-lg-12 text-shadow text-light">
+    <h3>المنتجات التي  تم شرائها </h3>
+    <div className="lg-hr mb-3"></div>
+  </div>
+</div>
+<div className="row p-5 mt-5 div-container" >
+  {boughtItems.length > 0 ? (
+    boughtItems.map((item) => (
+      <div className="col-lg-4 mb-4" key={item._id}>
+        <Card
+          image={item.images[0]}
+          title={item.name}
+          startdate={formatStartDate(item.auction.start_date)}
+          href={`/auction/${item.auction._id}/items`}
+        />
+      </div>
+    ))
+  ) : (
+    <div className="col-lg-12">
+      <h5 className="text-center">لم تشتري أي منتج حتى الآن.</h5>
+    </div>
+  )}
+</div>
           </div>
         </section>
       )}
@@ -155,4 +198,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default Auth(UserProfile);

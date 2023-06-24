@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   CButton,
   CCollapse,
@@ -18,42 +18,41 @@ import {
   CDropdownDivider,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import { cilAccountLogout, cilHome } from "@coreui/icons";
+import { cilAccountLogout,cilLockLocked    , cilHome } from "@coreui/icons";
 import "./NavBar.css";
 import logo from "../../../assets/images/logo2.png";
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import axios from "../../../Axios";
+
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
+  const [user, setUserImage] = useState({ image: "" });
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [role, setRole] = useState('')
 
-  //logout remove token & redirct to login
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decoded = jwt_decode(token);
+      const id = decoded.id;
+      setRole(decoded.role);
+
+      axios.get(`/users/${id}`).then((res) => {
+        setUserImage({ image: res.data.data.image });
+      });
+
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
+
   const logout = () => {
     localStorage.removeItem("token");
     window.location.href = "/login";
   };
 
-  //get user image
-  const [user, setUserImage] = useState({
-    image: "",
-  });
-
-  //get token
-  const token = localStorage.getItem("token");
-
-  //decode token
-  const decoded = jwt_decode(token);
-
-  // get id from token
-  const id = decoded.id;
-  // get role from token
-  const role = decoded.role;
-  //call api /users/:id
-  axios.get(`/users/${id}`).then((res) => {
-    setUserImage({
-      image: res.data.data.image,
-    });
-  });
   return (
     <>
       <CNavbar expand="lg" colorScheme="light" className="nav mb-0">
@@ -106,38 +105,49 @@ const NavBar = () => {
                   </CButton>
                 </CForm>
                 <div className="col-1 d-flex justify-content-between ms-3">
-                  {role === "user" && (
-                    <CNavItem className="user-item">
-                      <CNavLink href="/profile" title="حسابي">
-                        <img
-                          className="user-img"
-                          alt="صوره المستخدم"
-                          src={user.image}
-                        />
-                      </CNavLink>
-                    </CNavItem>
+                  {loggedIn && (
+                    <>
+                      {user.image && role === "user" && (
+                        <CNavItem className="user-item">
+                          <CNavLink href="/profile" title="حسابي">
+                            <img
+                              className="user-img"
+                              alt="صوره المستخدم"
+                              src={user.image}
+                            />
+                          </CNavLink>
+                        </CNavItem>
+                      )}
+                      {role === "admin" && (
+                        <CNavItem className="user-item ms-2">
+                          <CNavLink
+                            href="/dashboard"
+                            title="لوحه التحكم"
+                          >
+                            <CIcon
+                              className="dashboard-icon"
+                              icon={cilHome}
+                              size="lg"
+                            />
+                          </CNavLink>
+                        </CNavItem>
+                      )}
+                     </>
                   )}
-                  {role === "admin" && (
+                  {!loggedIn && (
                     <CNavItem className="user-item ms-2">
-                      <CNavLink
-                        // className="ml-2"
-                        href="/dashboard"
-                        title="لوحه التحكم"
-                      >
-                        <CIcon
-                          className="dashboard-icon"
-                          icon={cilHome}
-                          size="lg"
-                        />
+                      <CNavLink href="/login" title="تسجيل الدخول">
+                        <CIcon icon={cilLockLocked   } size="lg" />
                       </CNavLink>
                     </CNavItem>
                   )}
-                  <CNavItem className="user-item ms-2">
-                    <CNavLink onClick={logout} href="#" title="تسجيل الخروج">
-                      {/**logout icon  */}
-                      <CIcon icon={cilAccountLogout} size="lg" />
-                    </CNavLink>
-                  </CNavItem>
+                  {loggedIn && (
+                    <CNavItem className="user-item ms-2">
+                      <CNavLink onClick={logout} href="#" title="تسجيل الخروج">
+                        <CIcon icon={cilAccountLogout} size="lg" />
+                      </CNavLink>
+                    </CNavItem>
+                  )}
                 </div>
               </div>
             </CNavbarNav>
@@ -147,4 +157,5 @@ const NavBar = () => {
     </>
   );
 };
+
 export default NavBar;

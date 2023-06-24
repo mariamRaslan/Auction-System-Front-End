@@ -13,7 +13,7 @@ const ProductDetails = () => {
       try {
         const url = window.location.href;
         const id = url.split("/")[4];
-        const response = await Axios.get(`/itemDetails/${id}`);
+        const response = await Axios.get(`website/itemDetails/${id}`);
         setProduct(response.data);
         console.log(response.data);
       } catch (error) {

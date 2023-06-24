@@ -23,22 +23,13 @@ const NewPasswordForm = React.lazy(() => import('./Pages/UserAccount/NewPassword
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const token = localStorage.getItem('token');
   const [isLoggedIn, setIsLoggedIn] = useState(!!token);
-
-  useEffect(() => {
-    // Set the timeout for 1 hour (3600000 milliseconds)
-    const timeout = setTimeout(() => {
-      // Remove the token from local storage
-      localStorage.removeItem('token');
-      // Update the isLoggedIn state to false
-      setIsLoggedIn(false);
-      window.location.href = '/login';
-    }, 3600000);
-
-    // Clean up the timeout when the component unmounts or when isLoggedIn changes to false
-    return () => clearTimeout(timeout);
-  }, []);
-
   return isLoggedIn ? <Component {...rest} /> : <Navigate to="/login" />;
+};
+
+const PublicRoute = ({ component: Component, ...rest }) => {
+  const token = localStorage.getItem('token');
+  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+  return !isLoggedIn ? <Component {...rest} /> : <Navigate to="/" />;
 };
 
 const App = () => {
@@ -52,7 +43,7 @@ const App = () => {
             <Route path="/reset-password/code/:token/:verifycode" element={<CodeForm />} />
             <Route path="/new-password/:token" element={<NewPasswordForm />} />
             <Route path="/dashboard/*" element={<PrivateRoute component={withAdminAuth(DefaultLayout)} />} />
-            <Route path="/*" element={<PrivateRoute component={WebsiteLayout} />} />
+            <Route path="/*" element={< WebsiteLayout />} />
           </Routes>
       </Suspense>
     </Router>
