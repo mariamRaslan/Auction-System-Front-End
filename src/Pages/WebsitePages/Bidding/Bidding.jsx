@@ -20,6 +20,8 @@ const Bidding = () => {
   const [error, setError] = useState("");
   const [alertVisible, setAlertVisible] = useState(false);
   const [index, setIndex] = useState(0);
+  const [flag, setFlag] = useState(0);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,16 +38,17 @@ const Bidding = () => {
     fetchData();
   }, []);
 
+
+  //-------------------------------------------------------
+
   useEffect(() => {
     if (auction) {
       const fetchData = async () => {
         try {
           const res = await axiosInstance.get(`/auctions/${auction._id}/items`);
-          // sort res.data by start_date in descending order
-          res.data.sort((a, b) => {
-            return new Date(b.start_date) - new Date(a.start_date);
-          });
-          setItems(res.data);
+          //sort items depend on the start_date
+          const sortedItems = [...res.data].sort((a, b) => new Date(a.start_date) - new Date(b.start_date));
+          setItems(sortedItems);
           console.log("items =>", res.data);
         } catch (err) {
           console.log(err);
@@ -53,7 +56,51 @@ const Bidding = () => {
       };
       fetchData();
     }
-  }, [auction]);
+  }, [auction ,flag]);
+
+
+  //-------------------------------------------------------
+  // 2   <  6  
+  const getCurrentItem= ()=>{
+    if(items){
+    //find items that is_open=true And his time not ended                                                                                
+    const item = items.find(
+          (item) => item.is_open === true 
+        )
+
+    console.log("item=>",item)  
+
+    
+    if(item){      
+      setCurrentItem(item)       
+                  //          7.5                              7.6                   
+                if(new Date(item.start_date).getTime() >  Date.now()){
+                  setItemStarted(true)
+                }else{
+                  setItemStarted(false)
+                }
+          }else{
+            setCurrentItem(null)
+          }
+    }else{
+      setCurrentItem(null)
+    }
+  }
+
+
+  //-------------------------------------------------------
+
+  useEffect(() => {
+    if (items) {
+      getCurrentItem()
+    }
+
+  // don't put the currentitem in this hook  
+  }, [items]);
+
+
+
+  //-------------------------page end ------------------------------
 
   useEffect(() => {
     // Initialize Pusher with your Pusher app credentials
@@ -81,88 +128,38 @@ const Bidding = () => {
   }, []);
 
   useEffect(() => {
-    const item = items.find((item) => item.is_open === true);
-    console.log("first item =>", item);
-    if (item) {
-      setCurrentItem(item);
-      console.log("current=>item", currentitem);
-      //setindex = current item index
-      setIndex(items.indexOf(item));
-      console.log("index=>", index);
-      const itemStartDate = new Date(item.start_date);
+    if (currentitem) {
+
+      const itemStartDate = new Date(currentitem.start_date);
       itemStartDate.setHours(itemStartDate.getHours() - 3);
       console.log("itemStartDate =>", itemStartDate);
-      const durationInMilliseconds = item.duration * 60 * 1000; // Convert duration to milliseconds
+      const durationInMilliseconds = currentitem.duration * 60 * 1000; // Convert duration to milliseconds
       setTimer(itemStartDate.getTime() + durationInMilliseconds - Date.now());
       console.log("timer=>", new Date(timer));
-
-      const itemEndDate = new Date(item.start_date);
+      const itemEndDate = new Date(currentitem.start_date);
       itemEndDate.setHours(itemEndDate.getHours() - 3);
-      itemEndDate.setMinutes(itemEndDate.getMinutes() + item.duration);
-      console.log("itemEndDate =>", itemEndDate);
-
-      if (itemEndDate < Date.now()) {
-        setCurrentItem(null);
-      } else if (itemStartDate > Date.now()) {
-        setItemNotStarted(true);
-        console.log("Date.now =>", new Date(Date.now()));
-      } else {
-        setItemStarted(true);
-        console.log("Date.now =>", new Date(Date.now()));
-      }
+      itemEndDate.setMinutes(itemEndDate.getMinutes() + currentitem.duration);
     } else {
       setAuctionEnded(true);
     }
-
-    // Check if the current item has ended
-    if (currentitem && itemendedtime && new Date(itemendedtime) > Date.now()) {
-      // Find the next item that hasn't started yet
-      const nextItem = items.find(
-        (item) => new Date(item.start_date) > Date.now()
-      );
-      if (nextItem) {
-        setCurrentItem(nextItem);
-        setItemNotStarted(true);
-        setItemStarted(false);
-        setItemEndedTime(false);
-      }
-    }
-  }, [items, currentitem, itemendedtime, index]);
-
-  // function to get next item when current item ends and set timer if the next item exists
-  const getNextItem = () => {
-    // increment indexby 1 and set current item to the next item if exists
-    if (index + 1 < items.length) {
-      setIndex(index + 1);
-      setCurrentItem(items[index + 1]);
-      // setItemNotStarted(true);
-      // setItemStarted(false);
-      // setItemEndedTime(false);
-      const itemStartDate = new Date(items[index + 1].start_date);
-      itemStartDate.setHours(itemStartDate.getHours() - 3);
-      console.log("itemStartDate =>", itemStartDate);
-      const durationInMilliseconds = items[index + 1].duration * 60 * 1000; // Convert duration to milliseconds
-      setTimer(itemStartDate.getTime() + durationInMilliseconds - Date.now());
-      console.log("timer=>", new Date(timer));
-    } else {
-      setAuctionEnded(true);
-    }
-  };
+  }, [currentitem]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (timer >= 0) {
-        setTimer((prevTimer) => prevTimer - 1000);
-        //  const timerValue=  timerCounter();
-      } else {
-        getNextItem();
+      if(timer > 0){
+      setTimer((prevTimer) => prevTimer - 1000); 
       }
-      // Decrease the timer value by 1000 milliseconds (1 second)
+      else{
+        clearInterval(interval);
+      }
     }, 1000);
-    return () => {
-      clearInterval(interval); // Clean up the interval when the component unmounts
-    };
-  }, [timer]);
+    if (timer <= 0 && currentitem) {
+      setFlag(flag+1)
+      
+    }
+    return () => clearInterval(interval);
+  }, [timer , currentitem]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -176,6 +173,7 @@ const Bidding = () => {
       const res = await axiosInstance.post("/biddings", data);
       console.log(res.data.data);
       console.log(res.data.data.amount);
+      
     } catch (err) {
       console.log(err.response.data.error);
       setAlertVisible(true);
@@ -183,6 +181,8 @@ const Bidding = () => {
     }
     e.target.price.value = "";
   };
+
+
 
   if (!auction || !currentitem || items.length === 0) {
     return (
@@ -207,7 +207,7 @@ const Bidding = () => {
     );
   }
 
-  if (itemnotstarted) {
+  if (!itemstarted) {
     const datestr = currentitem.start_date;
     const date = new Date(datestr);
     const adjustedDate = new Date(date.getTime() - 3 * 60 * 60 * 1000);
