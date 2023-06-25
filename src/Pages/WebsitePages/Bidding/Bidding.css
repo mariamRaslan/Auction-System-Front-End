@@ -8,7 +8,7 @@
   margin-top: 10rem;
   margin-bottom: 10rem;
   text-align: right;
-  
+
 }
 .info{
   display: flex;
@@ -52,26 +52,31 @@ form {
 }
 form input {
   width: 30%;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid #4f89b0;
-  border-radius: 10px;
+  border-radius: 10px !important;
   margin: 10px;
 }
+form input:focus {
+  outline: none;
+}
+
 form button {
-  padding: 10px;
-  border-radius: 10px;
+  padding: 8px !important;
+  border-radius: 10px !important;
   margin: 10px;
   color: white !important;
+  border: 2px solid transparent !important;
   font-weight: bold !important;
 }
 .btn-primary:hover {
   background-color: transparent !important;
-  border: 1px solid #321fdb !important;
+  border: 2px solid #321fdb !important;
   color: #321fdb !important;
 }
 .btn-success:hover {
   background-color: transparent !important;
-  border: 1px solid #2eb85c !important;
+  border: 2px solid #2eb85c !important;
   color: #2eb85c !important;
 }
 span{

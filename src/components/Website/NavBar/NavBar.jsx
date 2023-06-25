@@ -18,7 +18,7 @@ import {
   CDropdownDivider,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import { cilAccountLogout,cilLockLocked    , cilHome } from "@coreui/icons";
+import { cilAccountLogout, cilLockLocked, cilHome } from "@coreui/icons";
 import "./NavBar.css";
 import logo from "../../../assets/images/logo2.png";
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ const NavBar = () => {
   const [visible, setVisible] = useState(false);
   const [user, setUserImage] = useState({ image: "" });
   const [loggedIn, setLoggedIn] = useState(false);
-  const [role, setRole] = useState('')
+  const [role, setRole] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -89,7 +89,7 @@ const NavBar = () => {
                 </CNavItem>
               </div>
               <div className="col-md-5 col-sm-12 d-flex justify-content-center">
-                <CForm className="d-flex col-5">
+                {/* <CForm className="d-flex col-5">
                   <CFormInput
                     type="search"
                     className="search-input mx-2"
@@ -103,7 +103,7 @@ const NavBar = () => {
                   >
                     <p className=" d-inline">بحث</p>
                   </CButton>
-                </CForm>
+                </CForm> */}
                 <div className="col-1 d-flex justify-content-between ms-3">
                   {loggedIn && (
                     <>
@@ -120,10 +120,7 @@ const NavBar = () => {
                       )}
                       {role === "admin" && (
                         <CNavItem className="user-item ms-2">
-                          <CNavLink
-                            href="/dashboard"
-                            title="لوحه التحكم"
-                          >
+                          <CNavLink href="/dashboard" title="لوحه التحكم">
                             <CIcon
                               className="dashboard-icon"
                               icon={cilHome}
@@ -132,12 +129,12 @@ const NavBar = () => {
                           </CNavLink>
                         </CNavItem>
                       )}
-                     </>
+                    </>
                   )}
                   {!loggedIn && (
                     <CNavItem className="user-item ms-2">
                       <CNavLink href="/login" title="تسجيل الدخول">
-                        <CIcon icon={cilLockLocked   } size="lg" />
+                        <CIcon icon={cilLockLocked} size="lg" />
                       </CNavLink>
                     </CNavItem>
                   )}

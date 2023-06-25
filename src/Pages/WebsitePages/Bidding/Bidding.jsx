@@ -299,7 +299,8 @@ const Bidding = () => {
                       <input
                         type="number"
                         name="price"
-                        placeholder="أدخل مقدار الزيادة"
+                        placeholder="مقدار الزيادة"
+                        dir="rtl"
                       />
                       <button type="submit" className="btn btn-primary">
                         إرسال
