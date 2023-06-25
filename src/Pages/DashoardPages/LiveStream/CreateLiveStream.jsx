@@ -8,7 +8,6 @@ const CreateLiveStream = () => {
   const [streamTitle, setStreamTitle] = useState("");
   const [streamDescription, setStreamDescription] = useState("");
   const [auctions, setAuctions] = useState([]);
-  const [selectedAuctionId, setSelectedAuctionId] = useState("");
 
   useEffect(() => {
     const fetchAuctions = async () => {
@@ -27,12 +26,11 @@ const CreateLiveStream = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Validate form data
-    if (!streamLink || !streamTitle || !streamDescription || !selectedAuctionId) {
+    if (!streamLink || !streamTitle || !streamDescription) {
       toast.error("يرجى ملء جميع الخانات");
       return;
     }
     const streamData = {
-      auction_id: selectedAuctionId,
       title: streamTitle,
       description: streamDescription,
       link: streamLink
@@ -45,7 +43,6 @@ const CreateLiveStream = () => {
       setStreamLink("");
       setStreamTitle("");
       setStreamDescription("");
-      setSelectedAuctionId("");
       toast.done("تم انشاء بث مباشر بنجاح");
       window.location.href = "/dashboard/dashboard/live-stream/list";
     } catch (error) {
@@ -59,26 +56,6 @@ const CreateLiveStream = () => {
       <ToastContainer />
       <h1>إنشاء بث مباشر</h1>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="auctionID" className="form-label">
-            اختر المزاد
-          </label>
-          <select
-            className="form-select"
-            id="auctionID"
-            value={selectedAuctionId}
-            onChange={(event) => setSelectedAuctionId(event.target.value)}
-          >
-            <option value="">اختر المزاد</option>
-            {auctions.map((auction) => (
-              <option key={auction._id} value={auction._id}>
-                {auction.name}
-              </option>
-            ))}
-          </select>
-          <div className="form-text">اختر المزاد الذي تريد بثه.</div>
-        </div>
-
         <div className="mb-3">
           <label htmlFor="streamLink" className="form-label">
             رابط البث المباشر

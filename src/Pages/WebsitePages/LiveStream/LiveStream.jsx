@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./LiveStream.css";
 import axiosInstance from "../../../Axios";
-import { useParams } from "react-router-dom";
 
 const LiveStream = () => {
   const [streamData, setStreamData] = useState({});
-  const { auctionId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchStreamData = async () => {
       try {
-        const response = await axiosInstance.get(`/auctionstream/${auctionId}`);
+        const response = await axiosInstance.get(`/activestream`);
         setStreamData(response.data.data[0]);
         setIsLoading(false);
         console.log(response.data.data);
@@ -21,23 +19,23 @@ const LiveStream = () => {
       }
     };
     fetchStreamData();
-  }, [auctionId]);
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="container mt-5" dir="rtl">
+    <div className="container mt-5 main_container" dir="rtl">
       {streamData && Object.keys(streamData).length > 0 ? (
         <>
           <div id="header">
             <h1 className="ms-3">{streamData.title}</h1>
           </div>
 
-          <div id="stream-container">
+          <div id="stream-container" >
             {/* stream */}
-            <div id="stream-embed-wrapper" style={{ display: "flex", justifyContent: "center" }}>
+            <div className="pb-5" id="stream-embed-wrapper" style={{ display: "flex", justifyContent: "center" }}>
               <iframe
                 id="stream-embed-iframe"
                 width="820"
@@ -52,12 +50,12 @@ const LiveStream = () => {
             <div className="clear_both"></div>
           </div>
 
-          <div id="footer">
+          {/* <div id="footer">
             <div className="text-end ms-3 me-3 mb-3 text-dark">{streamData.description}</div>
             <a className="" href={streamData.link} target="_blank" rel="noopener noreferrer">
               شاهد البث على YouTube
             </a>
-          </div>
+          </div> */}
         </>
       ) : (
         <h3 className="text-center " style={{marginBottom:"10%",marginTop:"10%"}}>لم يتم بدء بث مباشر بعد</h3>

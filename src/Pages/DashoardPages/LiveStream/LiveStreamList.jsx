@@ -16,6 +16,8 @@ import {
 } from '@coreui/react';
 import { useNavigate } from 'react-router-dom';
 import ConfirmationModal from "../../../SharedUi/Modal/Modal";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LiveStreamList = () => {
   const [streams, setStreams] = useState([]);
@@ -46,6 +48,25 @@ const LiveStreamList = () => {
     } catch (error) {
       console.error(error);
       setAlertVisible(true);
+    }
+  }
+
+  // function for toggling stream status
+  async function toggleStreamStatus(id, status) {
+    try {
+      console.log(id, status);
+      if (status === 'activate') {
+        const response = await axiosInstance.get(`/activatestream/${id}`);
+        toast.error(response.data)
+       // console.log(response.data);
+      } else {
+        const response = await axiosInstance.get(`/deactivatestream/${id}`);
+        toast.error(response.data)
+      }
+      const newStreams = await axiosInstance.get('/streams');
+      setStreams(newStreams.data.data);
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -85,6 +106,7 @@ const LiveStreamList = () => {
       <CCardHeader>
         <h2>البث المباشر</h2>
       </CCardHeader>
+      <ToastContainer />
       <CTable>
         <CTableHead style={{ backgroundColor: '#4f5d73', color: '#fff' }}>
           <CTableRow>
@@ -98,7 +120,7 @@ const LiveStreamList = () => {
           </CTableRow>
         </CTableHead>
         <CTableBody>
-          {streams.map((stream, index) => (
+          {pageData.map((stream, index) => (
             <CTableRow key={stream._id}>
               <CTableDataCell>{index + 1}</CTableDataCell>
               <CTableDataCell>{stream.title}</CTableDataCell>
@@ -117,8 +139,28 @@ const LiveStreamList = () => {
                   حذف
                 </CButton>
               </CTableHeaderCell>
+              <CTableHeaderCell scope="col">
+                {stream.status === 'active' ? (
+                  <CButton
+                    className="btntext w-100"
+                    color="warning"
+                    variant="outline"
+                    onClick={() => toggleStreamStatus(stream._id, 'deactivate')}
+                  >
+                    إيقاف التشغيل
+                  </CButton>
+                ) : (
+                  <CButton
+                    className="btntext w-100"
+                    color="success"
+                    variant="outline"
+                    onClick={() => toggleStreamStatus(stream._id, 'activate')}
+                  >
+                    تشغيل البث المباشر
+                  </CButton>
+                )}
+              </CTableHeaderCell>
             </CTableRow>
-
           ))}
         </CTableBody>
       </CTable>
