@@ -30,8 +30,9 @@ const Login = () => {
         setErrorMessage('البريد الإلكتروني أو كلمة المرور التي أدخلتها غير صحيحة. حاول مرة اخرى');
       }
     } catch (err) {
-      setErrorMessage('عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى');
-      toast.error('عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى');
+      setErrorMessage(err.response.data.message);
+      toast.error(err.response.data.message);
+     // console.log(err);
     }
   };
 
@@ -123,7 +124,7 @@ const Login = () => {
                     </p>
                   </div>
 
-                  <div className="text-center mt-3 ">
+                  {/* <div className="text-center mt-3 ">
                     <p>أو قم بتسجيل الدخول باستخدام:</p>
                     <div className="d-flex justify-content-center text-white">
                       <button className="btn btn-outline-light mx-2" onClick={handleGoogleLogin}>
@@ -133,7 +134,7 @@ const Login = () => {
                         <FaFacebook size={24} />
                       </button>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="text-center mt-3">
                     <Link to="/reset-password/email" className="text-white">

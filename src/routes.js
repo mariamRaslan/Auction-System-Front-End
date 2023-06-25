@@ -317,7 +317,7 @@ const routes = [
 
   //Website Payment
   { path: "/payment", name: "Payment", element: Payment },
-  { path: "/payment-status/:status", name: "PaymentStatus", element: PaymentStatus },
+  { path: "/payment-status/:status/:id", name: "PaymentStatus", element: PaymentStatus },
 
   //Website VerificationCode
   {

@@ -151,7 +151,7 @@ return (
     <CCol md={6}>
       <CFormLabel htmlFor="fees">التأمين</CFormLabel>
       <CInputGroup className="has-validation">
-        <CInputGroupText>$</CInputGroupText>
+        <CInputGroupText>ج.م</CInputGroupText>
         <CFormInput
           type="number"
           id="fees"

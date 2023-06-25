@@ -117,7 +117,7 @@ const EditAuction = () => {
         <CCol md={6}>
           <CFormLabel htmlFor="fees">قيمة التأمين</CFormLabel>
           <CInputGroup className="has-validation">
-            <CInputGroupText>$</CInputGroupText>
+            <CInputGroupText>ج.م</CInputGroupText>
             <CFormInput
               type="number"
               id="fees"
