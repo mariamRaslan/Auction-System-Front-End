@@ -6,6 +6,8 @@ import { CButton } from "@coreui/react";
 //viewuser
 const ViewUser = () => {
   //get id from url
+
+  const [userbloked , setUserBlocked]=useState(0)
   const { id } = useParams();
 
   //userdata
@@ -14,6 +16,8 @@ const ViewUser = () => {
   async function fetchUser() {
     try {
       const response = await axiosInstance.get(`/users/${id}`);
+      //log
+      console.log(response.data.data);
       setUser(response.data.data);
     } catch (error) {
       console.error(error);
@@ -22,13 +26,24 @@ const ViewUser = () => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [userbloked]);
 
   //set permission
   // const setPermission = (_id) => {
   //   //set permission
   //   window.location.href = `/dashboard/users/set-permission/${_id}`;
   // };
+
+  // block
+  const block = async () => {
+    try {
+      const response = await axiosInstance.patch(`/users/${id}/block`);   
+      setUserBlocked(userbloked+1)   
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
 
   return (
     <>
@@ -55,11 +70,12 @@ const ViewUser = () => {
 
                     <div className="d-flex justify-content-center mb-2">
                       {/**check  if blocked */}
-                      {user.blocked === 0 ? (
+                      {user.block ? (
                         <CButton
                           color="primary"
                           variant="outline"
                           className=" btn-lg mr-2 btntext"
+                          onClick={block}
                         >
                           Unblocked
                         </CButton>
@@ -68,6 +84,7 @@ const ViewUser = () => {
                           color="danger"
                           variant="outline"
                           className=" btn-lg mr-2 btntext"
+                          onClick={block}
                         >
                           Blocked
                         </CButton>
