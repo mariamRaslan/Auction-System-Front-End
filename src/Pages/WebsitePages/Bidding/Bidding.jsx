@@ -224,7 +224,7 @@ useEffect(()=>{
 
 
 
-  if (auctionEnded || !auction || !currentitem || items.length === 0) {
+  if (  !auction || !currentitem || items.length === 0) {
     return (
       <>
         <div className="container">
