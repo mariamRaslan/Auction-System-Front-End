@@ -13,6 +13,7 @@ import {
   CModalHeader,
   CModalBody,
   CModalFooter,
+  CFormCheck,
 } from "@coreui/react";
 import { useNavigate } from "react-router-dom";
 import Alert from "src/SharedUi/Alert/Alert";
@@ -109,6 +110,30 @@ const AuctionsList = () => {
       <CCardHeader>
         <h2>المزادات</h2>
       </CCardHeader>
+      {/* <CFormCheck
+        inline
+        type="radio"
+        name="inlineRadioOptions"
+        id="inlineCheckbox1"
+        value="option1"
+        label="لم يبدأ"
+      />
+      <CFormCheck
+        inline
+        type="radio"
+        name="inlineRadioOptions"
+        id="inlineCheckbox2"
+        value="option2"
+        label="بدأ"
+      />
+      <CFormCheck
+        inline
+        type="radio"
+        name="inlineRadioOptions"
+        id="inlineCheckbox3"
+        value="option3"
+        label="أنتهى"
+      /> */}
       <CTable>
         <CTableHead style={{ backgroundColor: "#4f5d73", color: "#fff" }}>
           <CTableRow>
@@ -175,7 +200,13 @@ const AuctionsList = () => {
         <CModalHeader closeButton>Confirm</CModalHeader>
         <CModalBody>Are you sure you want to delete this item?</CModalBody>
         <CModalFooter>
-          <CButton color="danger" onClick={()=>{handleDelete(); setDeleteModal(false)}}>
+          <CButton
+            color="danger"
+            onClick={() => {
+              handleDelete();
+              setDeleteModal(false);
+            }}
+          >
             Delete
           </CButton>
           <CButton color="secondary" onClick={() => setDeleteModal(false)}>

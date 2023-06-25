@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "./../../../Axios";
 import { CModal } from "@coreui/react";
-
+import { FaGoogle, FaFacebook ,FaPhone ,FaEnvelope} from 'react-icons/fa';
 import "./contact.css";
 
 const Contact = () => {
@@ -55,16 +55,11 @@ const Contact = () => {
       <div className="text-center bg-image">
         <div className="d-flex justify-content-center align-items-center h-100">
           <div className="row text-center">
-            
-              <div className="text-dark">
-                <h1 className="mb-3">تواصل معنا </h1>
-                <p>
-                    استخدم الطريقة المناسبه لك للتواصل معنا وسنرد عليك في الحال
-                </p>
-              
+            <div className="text-dark">
+              <h1 className="mb-3">تواصل معنا </h1>
+              <p>استخدم الطريقة المناسبه لك للتواصل معنا وسنرد عليك في الحال</p>
             </div>
             <div className="lg-hr"></div>
-           
           </div>
         </div>
       </div>
@@ -76,7 +71,7 @@ const Contact = () => {
             <div className="contact-card">
               <div className="card-body ">
                 <h5 className="card-title">رقم الهاتف</h5>
-                <p className="card-text">+962 79 000 000</p>
+                <a className="card-text" href="tel:+1234567890"><FaPhone size={40} /></a>
               </div>
             </div>
           </div>
@@ -85,7 +80,7 @@ const Contact = () => {
               <div className="card-body">
                 <h5 className="card-title">البريد الالكتروني</h5>
                 <p className="card-text">
-                  <a href="mailto:suport@gmail.com">support@gmail.com</a>
+                  <a href="mailto:suport@gmail.com"><FaEnvelope size={40} /></a>
                 </p>
               </div>
             </div>
@@ -95,7 +90,7 @@ const Contact = () => {
               <div className="card-body">
                 <h5 className="card-title">فيسبوك</h5>
                 <p className="card-text">
-                  <a href="https://www.facebook.com/">facebook.com</a>
+                  <a href="https://www.facebook.com/"><FaFacebook size={40} /></a>
                 </p>
               </div>
             </div>
@@ -113,12 +108,9 @@ const Contact = () => {
                   {message}
                 </div>
               )}
-             
             </div>
 
-            <form
-                className="form-shadow mx-5"
-                onSubmit={handleSubmit}>
+            <form className="form-shadow mx-5" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="exampleFormControlInput1">الاسم</label>
                 <input
@@ -126,7 +118,6 @@ const Contact = () => {
                   name="name"
                   className="formcontrol"
                   id="exampleFormControlInput1"
-                 
                 />
               </div>
               <div className="form-group">
@@ -138,7 +129,6 @@ const Contact = () => {
                   name="email"
                   className="formcontrol"
                   id="exampleFormControlInput1"
-                  
                 />
               </div>
               <div className="form-group">
@@ -148,7 +138,6 @@ const Contact = () => {
                   name="phone"
                   className="formcontrol"
                   id="exampleFormControlInput1"
-                  
                 />
               </div>
               <div className="form-group">
@@ -158,7 +147,6 @@ const Contact = () => {
                   name="subject"
                   className="formcontrol"
                   id="exampleFormControlInput1"
-                  
                 />
               </div>
               <div className="form-group">
@@ -171,12 +159,9 @@ const Contact = () => {
                 ></textarea>
               </div>
               <div className="text-center">
-                    <button
-                        type="submit"
-                        className="btn btn-custom mt-5 "
-                    >
-                ارسال
-              </button>
+                <button type="submit" className="btn btn-custom mt-5 ">
+                  ارسال
+                </button>
               </div>
             </form>
           </div>
