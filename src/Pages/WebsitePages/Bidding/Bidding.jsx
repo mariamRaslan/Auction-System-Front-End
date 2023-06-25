@@ -20,15 +20,17 @@ const Bidding = () => {
   const [error, setError] = useState("");
   const [alertVisible, setAlertVisible] = useState(false);
   const [index, setIndex] = useState(0);
+  const [auctionname, setAuctionName] = useState("");
   const [flag, setFlag] = useState(0);
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axiosInstance.get("/auction/started");
-        setAuction(res.data.data[0]);
-        console.log("auction =>", res.data.data[0]);
+        const res = await axiosInstance.get("/userAuctions");
+        console.log("auction =>", res);
+        setAuction(res.data.startedAuction[0]);
+        setAuctionName(res.data.startedAuction[0].name);
         setIsLoading(false);
       } catch (err) {
         setAuction(null);
@@ -105,10 +107,11 @@ useEffect(()=>{
                 }
           }else{
             setCurrentItem(null)
-            endAuction
+            endAuction()
           }
     }else{
       setCurrentItem(null)
+      endAuction()
     }
   }
 
@@ -236,7 +239,7 @@ useEffect(()=>{
                     <HashLoader color="#4f89b0" size={200} />
                   </div>
                   <h3 style={{ color: "black" }} className="text-center">
-                    لا يوجد اي مزاد متاح الان
+                    لا يوجد اي مزاد الان انت مشترك فيه 
                   </h3>
                 </div>
               </div>
@@ -266,19 +269,37 @@ useEffect(()=>{
       <>
         <div className="container">
           <div className="row">
-            <div className="col-md-12">
+          {/* header */}
+            <div className="col-md-12 mt-5">
+                  <h1 style={{ color: "black"  }} className="text-center">
+                  {auctionname}
+                  </h1>
+            </div>
+            <div className="cardtimer">
+            <div className="col-md-6 d-flex justify-content-center align-items-center">
+              <div className="d-flex justify-content-center align-items-center">
+                <ClockLoader color="#4f89b0" size={500} />
+              </div>
+            </div>
+            <div className="col-md-6">
               <div className="auction-notfound-card">
                 <div className="card-body">
+                  {/* img */}
                   <div className="d-flex justify-content-center items-align-center mb-5">
-                    <ClockLoader color="#4f89b0" size={200} />
-                  </div>
+                    <img
+                      src={currentitem.item_id.image}
+                      alt="item"
+                      className="image-card-timer"
+                      />
+                    </div>  
                   <h3 style={{ color: "black" }} className="text-center">
-                    ستتم المزايدة علي
+                    ستتم المزايدة على
                     <span className="mx-1" style={{ color: "red" }}>
                       {" "}
                       {currentitem.item_id.name}{" "}
                     </span>
-                    عند الساعه
+                  
+                    عند الساعة
                   </h3>
                   <h3 style={{ color: "black" }} className="text-center">
                     {formattedDateTime}
@@ -287,9 +308,12 @@ useEffect(()=>{
               </div>
             </div>
           </div>
+
+          </div>
         </div>
       </>
     );
+    
   }
 
   if (itemstarted) {
@@ -298,16 +322,14 @@ useEffect(()=>{
         <div className="container">
           <>
             <div className="bidding-card row d-flex" key={15}>
-              <div className="bidding-left col-md-6 col-sm-12">
-                <div className=" f-left">
+              <div className="bidding-container-area col-md-6 col-sm-12">
+                <div className="f-left">
                   <img
                     src={currentitem.item_id.image}
                     className="bidding-image"
                     alt="product"
                   />
                 </div>
-              </div>
-              <div className="bidding-right col-md-6 col-sm-12">
                 <div className="bidding-content">
                   <h1>{currentitem.item_id.name}</h1>
                   <p>هذا العنصر مصنوع من {currentitem.item_id.material}</p>
@@ -316,8 +338,7 @@ useEffect(()=>{
                       <span>الوقت المتبقي </span>
                       {timer < 60
                         ? `${Math.ceil(timer / 1000)} ثانية`
-                        : `${Math.ceil(timer / 1000 / 60)} دقيقة`
-                        }
+                        : `${Math.ceil(timer / 1000 / 60)} دقيقة`}
                     </h3>
                   </div>
                   <div className="bidding-price d-flex justify-content-around mx-3">
@@ -351,19 +372,29 @@ useEffect(()=>{
                         type="number"
                         name="price"
                         hidden
-                        value={
-                          currentitem.max_price - currentitem.current_price
-                        }
+                        value={currentitem.max_price - currentitem.current_price}
                       />
-                      <button type="submit" className="btn btn-success">
-                        اشترِ الآن بسعر {currentitem.max_price}
-                      </button>
+                      {/* <button type="submit" className="btn btn-success">
+                          اشترِ الآن بسعر {currentitem.max_price}
+                        </button> */}
                     </form>
                   </div>
                 </div>
               </div>
+              <div className="video-container col-md-6 col-sm-12">
+                <div className="">
+                  <iframe
+                    src="https://www.youtube.com/embed/your-video-id"
+                    title="video"
+                    frameBorder="0"
+                    allowFullScreen
+                    width={"600px"}
+                    height={"600px"}
+                  ></iframe>
+                </div>
+              </div>
             </div>
-
+  
             <Alert
               type="error-alert"
               visible={alertVisible}
@@ -378,6 +409,7 @@ useEffect(()=>{
       </div>
     );
   }
+  
 
   if (isloading) {
     return (

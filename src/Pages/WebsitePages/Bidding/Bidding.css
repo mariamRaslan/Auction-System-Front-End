@@ -1,13 +1,15 @@
 .bidding-card {
   display: flex;
   align-items: center;
-  background-color: #f2f2f2;
   border: 2px solid #4f89b0;
+  background-color: white;
   border-radius: 10px;
-  padding: 0 !important;
+  padding: 20px  !important;
   margin-top: 10rem;
   margin-bottom: 10rem;
   text-align: right;
+  /* shadow */
+  box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.25);
 
 }
 .info{
@@ -38,13 +40,19 @@
 .bidding-price div {
   font-size: 1.5rem;
   padding: 5px;
-  border: 1px solid #4f89b0;
 }
 
 .bidding-image {
-  width: 80%;
-  height: 30%;
+  width: 70%;
+  height: 25%;
   border-radius: 10px;
+  transition: 1s;
+  transform: scale(0.9);
+
+}
+.bidding-image:hover {
+  /* scale */
+  transform: scale(1);
 }
 .bidding-image img {
   width: 100px;
@@ -59,7 +67,7 @@ form {
 form input {
   width: 30%;
   padding: 8px;
-  border: 1px solid #4f89b0;
+  border: 1px solid #4f89b0 !important;
   border-radius: 10px !important;
   margin: 10px;
 }
@@ -108,4 +116,37 @@ span{
   justify-content: center;
   align-items: center;
   height: 750px;
+}
+
+.cardtimer{
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px;
+  /* shadow */
+  box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.image-card-timer{
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  transition: 1s;
+}
+
+.image-card-timer:hover{
+  transform: scale(1.2);
+}
+
+.video-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 600px;
+  width: 600px;
+}
+.bidding-container-area{
+  text-align: center;
 }
