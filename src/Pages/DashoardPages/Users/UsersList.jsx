@@ -155,57 +155,60 @@ const UsersList = () => {
               </div>
             </div>
           ) : (
-            pageData.map((item, index) => (
-              <CTableRow key={item._id}>
-                <CTableDataCell>{index + 1}</CTableDataCell>
-                <CTableDataCell>
-                  <img
-                    src={item.image}
-                    alt="user"
-                    style={{
-                      width: "50px",
-                      height: "50px",
-                      borderRadius: "50%",
-                    }}
-                  />
-                </CTableDataCell>
-                <CTableDataCell>{item.name ? item.name : "--"}</CTableDataCell>
-                <CTableDataCell>
-                  {item.email ? item.email : "--"}
-                </CTableDataCell>
-                <CTableDataCell>
-                  {item.phone ? item.phone : "--"}
-                </CTableDataCell>
-                <CTableDataCell>
-                  {item.address ? item.address.city : "--"}
-                </CTableDataCell>
-                <CTableDataCell>
-                  {item.address ? item.address.street : "--"}
-                </CTableDataCell>
-                <CTableDataCell>
-                  <CButton
-                    color="primary"
-                    variant="outline"
-                    className="btntext w-100"
-                    onClick={() => viewUser(item._id)}
-                  >
-                    عرض
-                  </CButton>
-                </CTableDataCell>
-                <CTableDataCell>
-                  <CButton
-                    color="danger"
-                    variant="outline"
-                    className="btntext w-100"
-                    onClick={() => {
-                      setSelectedId(item._id);
-                      setShowConfirmationModal(true);
-                    }}
-                  >
-                    حذف
-                  </CButton>
-                </CTableDataCell>
-                {/* <CTableDataCell>
+            pageData.map((item, index) =>
+              item.role === "admin" ? null : (
+                <CTableRow key={item._id}>
+                  <CTableDataCell>{index }</CTableDataCell>
+                  <CTableDataCell>
+                    <img
+                      src={item.image}
+                      alt="user"
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  </CTableDataCell>
+                  <CTableDataCell>
+                    {item.name ? item.name : "--"}
+                  </CTableDataCell>
+                  <CTableDataCell>
+                    {item.email ? item.email : "--"}
+                  </CTableDataCell>
+                  <CTableDataCell>
+                    {item.phone ? item.phone : "--"}
+                  </CTableDataCell>
+                  <CTableDataCell>
+                    {item.address ? item.address.city : "--"}
+                  </CTableDataCell>
+                  <CTableDataCell>
+                    {item.address ? item.address.street : "--"}
+                  </CTableDataCell>
+                  <CTableDataCell>
+                    <CButton
+                      color="primary"
+                      variant="outline"
+                      className="btntext w-100"
+                      onClick={() => viewUser(item._id)}
+                    >
+                      عرض
+                    </CButton>
+                  </CTableDataCell>
+                  <CTableDataCell>
+                    <CButton
+                      color="danger"
+                      variant="outline"
+                      className="btntext w-100"
+                      onClick={() => {
+                        setSelectedId(item._id);
+                        setShowConfirmationModal(true);
+                      }}
+                    >
+                      حذف
+                    </CButton>
+                  </CTableDataCell>
+                  {/* <CTableDataCell>
                   <CButton
                     color="primary"
                     variant="outline"
@@ -214,11 +217,13 @@ const UsersList = () => {
                     Set Permission
                   </CButton>
                 </CTableDataCell> */}
-              </CTableRow>
-            ))
+                </CTableRow>
+              )
+            )
           )}
         </CTableBody>
       </CTable>
+
       {renderPagination()}
       <ConfirmationModal
         message="هل انت متأكد من حذف هذا العنصر؟"

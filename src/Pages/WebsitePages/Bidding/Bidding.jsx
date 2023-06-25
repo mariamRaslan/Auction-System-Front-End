@@ -87,14 +87,14 @@ useEffect(()=>{
 
     console.log("item=>",item)
 
-    
-    if(item){      
-      setCurrentItem(item)    
+
+    if(item){
+      setCurrentItem(item)
 
       // set new Date(item.start_date) - 3 hour
       const itemStartDate = new Date(item.start_date);
       itemStartDate.setHours(itemStartDate.getHours() - 3);
-                  //          12.40               12.35                 
+                  //          12.40               12.35
                 if( itemStartDate.getTime() <=  Date.now()){
                   console.log('true or false =>',itemStartDate.getTime()>Date.now())
                   setItemStarted(true)
@@ -213,7 +213,7 @@ useEffect(()=>{
       console.log(res.data.data.amount);
       //set flag ++
       setFlag(flag+1)
-      
+
     } catch (err) {
       console.log(err.response.data.error);
       setAlertVisible(true);
@@ -224,7 +224,7 @@ useEffect(()=>{
 
 
 
-  if (auctionEnded || !auction || !currentitem || items.length === 0) {
+  if (  !auction || !currentitem || items.length === 0) {
     return (
       <>
         <div className="container">

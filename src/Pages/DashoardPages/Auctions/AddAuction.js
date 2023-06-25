@@ -40,15 +40,15 @@ if (form.checkValidity() === false) {
   const today = new Date();
   const startDateObj = new Date(startDate);
 
-  if (startDateObj < today) {
-    // Check if the start date is before today's date
-    setStartDate('');
-    toast.error("يجب أن يكون تاريخ البدء بعد تاريخ اليوم");
-  } else if (startDateObj > new Date(endDate)) {
-    // Check if the end date is before the start date
-    setEndDate('');
-    toast.error('يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء');
-  } else {
+  // if (startDateObj < today) {
+  //   // Check if the start date is before today's date
+  //   setStartDate('');
+  //   toast.error("يجب أن يكون تاريخ البدء بعد تاريخ اليوم");
+  // } else if (startDateObj > new Date(endDate)) {
+  //   // Check if the end date is before the start date
+  //   setEndDate('');
+  //   toast.error('يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء');
+  // } else {
     try {
       const auctionData = {
         name,
@@ -69,7 +69,7 @@ if (form.checkValidity() === false) {
       toast.error('عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى');
     }
   }
-}
+
 
 setValidated(true);
 };
