@@ -62,12 +62,12 @@ const AuctionProductDetails = () => {
               {productDetails.max_price}
             </p>
           </div>
-          <div className="details col-8">
+          {/* <div className="details col-8">
             <p>
               <span>وقت انتهاء المزاد</span> <br></br>
               {productDetails.end_time}
             </p>
-          </div>
+          </div> */}
         </div>
       </CCol>
     </CRow>

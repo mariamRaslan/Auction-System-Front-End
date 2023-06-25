@@ -7,7 +7,7 @@ const Footer = () => {
     <>
       <div className="footer container-fluid w-100">
         <div className="w-100 d-flex row footer-top">
-          <div className="col-lg-3 col-md-6 col-sm-12 justify-content-lg-start">
+          <div className="col-lg-4 col-md-6 col-sm-12 justify-content-lg-start">
             <div className="footer-logo widget-title">
               <img src={logo} alt="logo" className="logo-img" />
               .iBid
@@ -20,7 +20,7 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <div className="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-lg-center">
+          <div className="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-lg-center">
             <div className="footer-item">
               <div id="nav_menu-3" className="footer-widget widget_nav_menu">
                 <div className="widget-title">
@@ -45,7 +45,7 @@ const Footer = () => {
               </div>{" "}
             </div>
           </div>
-          <div className="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-lg-center">
+          <div className="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-lg-center">
             <div className="footer-item">
               <div id="nav_menu-3" className="footer-widget widget_nav_menu">
                 <div className="widget-title">
@@ -73,7 +73,7 @@ const Footer = () => {
               </div>{" "}
             </div>
           </div>
-          <div className="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-lg-center">
+          {/* <div className="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-lg-center">
             <div className="footer-item">
               <div className="widget-title">
                 <h5>أحدث المقالات</h5>
@@ -122,7 +122,7 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <hr className="m-0" />
         <div className="footer-bottom row w-100 d-flex align-items-center p-3 pb-0">
@@ -138,7 +138,7 @@ const Footer = () => {
                   alt="pay-icons"
                 />
               </li>
-              <li>
+              {/* <li>
                 <img
                   src="https://bidout-wp.b-cdn.net/wp-content/uploads/2022/11/payment-4.svg"
                   alt="pay-icons"
@@ -155,7 +155,7 @@ const Footer = () => {
                   src="https://bidout-wp.b-cdn.net/wp-content/uploads/2022/11/payment-2.svg"
                   alt="pay-icons"
                 />
-              </li>
+              </li> */}
               <li>
                 <img
                   src="https://bidout-wp.b-cdn.net/wp-content/uploads/2022/11/payment-1.svg"

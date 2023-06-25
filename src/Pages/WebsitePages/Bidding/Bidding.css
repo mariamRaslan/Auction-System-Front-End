@@ -42,7 +42,13 @@
 }
 
 .bidding-image {
-  width: 100%;
+  width: 80%;
+  height: 30%;
+  border-radius: 10px;
+}
+.bidding-image img {
+  width: 100px;
+  height: 100px;
   border-radius: 10px;
 }
 form {
