@@ -110,13 +110,13 @@ const NavBar = () => {
                 </CNavItem>
               </div>
               <div className="col-md-5 col-sm-12 d-flex justify-content-end pe-5">
-                {/* <form 
+                <form 
                 onSubmit={search}
                 className="d-flex col-5">
                   <input
                     type="text"
                     className="search-input mx-2"
-                    placeholder="البحث عن المنتجات"
+                    placeholder="البحث عن مزادات"
                     name="search"
                     required="true"
                   />
@@ -128,7 +128,7 @@ const NavBar = () => {
                   >
                     <p className=" d-inline">بحث</p>
                   </button>
-                </form> */}
+                </form>
                 <div className="col-1 d-flex justify-content-between ms-3 ">
                   {loggedIn && (
                     <>

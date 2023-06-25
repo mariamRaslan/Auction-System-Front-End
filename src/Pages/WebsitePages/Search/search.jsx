@@ -8,15 +8,20 @@ const Search = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
-// get search from parameter
-const { search } = useParams();
+  const [search, setSearch] = useState("");
+
+  const { search: urlSearch } = useParams();
+
+  useEffect(() => {
+    setSearch(urlSearch);
+  }, [urlSearch]);
   useEffect(() => {
     getProducts();
-  }, [currentPage]);
+  }, [currentPage,search]);
 
   const getProducts = async () => {
     try {    
-      const response = await Axios.get(`auctions/:${search}`);
+      const response = await Axios.get(`auction/search/${search}`);
       console.log(response.data.data);
       setProducts(response.data.data);
     } catch (error) {
