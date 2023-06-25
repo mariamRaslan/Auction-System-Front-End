@@ -5,6 +5,7 @@ import auctionImg from "../../../assets/images/wooden-gavel3.jpg";
 import BlobButton from "../../../SharedUi/BlobButton/BlobButton";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CButton } from "@coreui/react";
 
 const AuctionItems = () => {
   const [products, setProducts] = useState([]);
@@ -35,6 +36,8 @@ const AuctionItems = () => {
         error.response.data.message === "You already joined this auction..."
       ) {
         toast.error("لقد انضممت لهذا المزاد من قبل");
+      } else if (error.response.data.message === "NOT authenticated") {
+        toast.error("يجب عليك تسجيل الدخول اولا");
       } else {
         toast.error(error.response.data.message);
       }
@@ -122,7 +125,14 @@ const AuctionItems = () => {
             </div>
             <div className="d-flex justify-content-center align-items-center px-4">
               <form onSubmit={JoinAuction}>
-                <button type="submit">انضم للمزاد</button>
+                <CButton
+                  color="info"
+                  variant="outline"
+                  className="auction-btn btn-lg mr-2 btntext"
+                  type="submit"
+                >
+                  انضم للمزاد
+                </CButton>
               </form>
             </div>
           </div>

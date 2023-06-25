@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import axiosInstance from "../../../Axios";
+import successImg from '../../../assets/images/animation_640_ljalizxx.gif'
+import failImg from '../../../assets/images/fail.gif'
 
 const PaymentStatus = () => {
   const [success, setSuccess] = useState(false);
@@ -31,13 +33,13 @@ const PaymentStatus = () => {
         <div className="col-md-6 text-center">
           {success ? (
             <>
-              <img src="" alt="Success" />
+              <img src={successImg} alt="Success" style={{width:"300px",height:"auto"}} />
               <h2>تمت العملية بنجاح</h2>
               <p>سوف يصلك المنتج خلال أسبوع</p>
             </>
           ) : (
             <>
-              <img src="" alt="Failure" />
+              <img   src={failImg} alt="Failure" style={{width:"400px",height:"auto"}}  />
               <h2>عذراً، حدث خطأ أثناء الدفع</h2>
               <p>يرجى المحاولة مرة أخرى</p>
             </>
