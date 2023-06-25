@@ -46,28 +46,18 @@ const UpdateProducts = () => {
 
   function handleInputChange(event) {
     const { name, value } = event.target;
-    // let categoryIds = [];
-    // if (name === "category") {
-    //   categoryIds = Array.from(
-    //     event.target.selectedOptions,
-    //     (option) => option.value
-    //   );
-    // } else {
+    if (name === "category") {
       setProduct((prevFormData) => ({
-        // ...prevFormData,
+        ...prevFormData,
+        category: value,
+      }));
+    } else {
+      setProduct((prevFormData) => ({
+        ...prevFormData,
         [name]: value,
-      }
-      ));
+      }));
     }
-    // setProduct((prevFormData) => ({
-    //   ...prevFormData,
-    //   category: categoryIds,
-    // }
-    // ));
-    // console.log(product);
-    // console.log(categoryIds);
-    // console.log(typeof categoryIds);
-  // }
+  }
   function handleImageChange(event) {
     const file = event.target.files[0];
     setProduct((prevFormData) => ({
@@ -179,16 +169,12 @@ const UpdateProducts = () => {
           <CFormFeedback invalid>من فضلك ادخل اللون للمنتج</CFormFeedback>
         </CCol>
         <CCol md={6}>
-          <CFormLabel htmlFor="validationCustom01">
-            الفئات المتاحة للمنتج
-          </CFormLabel>
+          <CFormLabel htmlFor="validationCustom01">فئه المنتج</CFormLabel>
           <CFormSelect
-            // multiple
             onChange={handleInputChange}
             name="category"
             id="category"
-            // required
-            defaultValue={product.category?._id}
+            required
           >
             {categories.map((category) => (
               <option

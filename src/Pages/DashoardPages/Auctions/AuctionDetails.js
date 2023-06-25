@@ -78,16 +78,16 @@ const AuctionDetails = () => {
                 {" "}
                 <strong>تاريخ البدء: </strong> {auctionDetails.start_date}
               </p>
-              <p>
+              {/* <p>
                 {" "}
                 <strong>الوقت: </strong> {auctionDetails.time}
-              </p>
+              </p> */}
             </div>
             <div>
-              <p>
+              {/* <p>
                 {" "}
                 <strong>رقم المرجع: </strong> {auctionDetails.reference_number}
-              </p>
+              </p> */}
               <p>
                 <strong>قيمة التأمين: </strong> {auctionDetails.fees} ج.م
               </p>
@@ -111,7 +111,7 @@ const AuctionDetails = () => {
           )}
         </div>
       </div>
-    
+
       <div className="row mt-4 border-top">
         <h3 className="text-center mb-4 mt-4"> المنتجات</h3>
         {auctionItems.length > 0 ? (
