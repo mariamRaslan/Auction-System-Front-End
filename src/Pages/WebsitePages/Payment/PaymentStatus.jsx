@@ -7,6 +7,7 @@ import failImg from '../../../assets/images/fail.gif'
 const PaymentStatus = () => {
   const [success, setSuccess] = useState(false);
   const successParam = useParams().status;
+  const id = useParams().id;
   // const [checkPayment, setCheckPayment] = useState([]);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ const PaymentStatus = () => {
  
     const getCheckPayment = async () => {
       try {
-        const response = await axiosInstance.get("/checkPayment");
+        const response = await axiosInstance.patch(`/checkPayment/${successParam}/${id}`);
         console.log(response);
       } catch (error) {
         console.log(error);
