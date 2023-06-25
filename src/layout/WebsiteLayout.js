@@ -7,7 +7,7 @@ const DefaultLayout = () => {
   return (
     <div>
       <NavBar />
-      <div>
+      <div style={{minHeight:"700px"}}>
         <AppContent />
       </div>
       <Footer />

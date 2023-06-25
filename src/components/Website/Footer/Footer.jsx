@@ -5,7 +5,7 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <>
-      <div className="footer container-fluid w-100">
+      <div className="footer container-fluid w-100" >
         <div className="w-100 d-flex row footer-top">
           <div className="col-lg-4 col-md-6 col-sm-12 justify-content-lg-start">
             <div className="footer-logo widget-title">

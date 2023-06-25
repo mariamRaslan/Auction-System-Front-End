@@ -253,3 +253,94 @@ const Bidding = () => {
 };
 
 export default Bidding;
+
+
+
+// card with out stream 
+
+// if (itemstarted) {
+//   return (
+//     <div className="bidding">
+//       <div className="container">
+//         <>
+//           <div className="bidding-card row d-flex" key={15}>
+//             <div className="bidding-left col-md-6 col-sm-12">
+//               <div className=" f-left">
+//                 <img
+//                   src={currentitem.item_id.image}
+//                   className="bidding-image"
+//                   alt="product"
+//                 />
+//               </div>
+//             </div>
+//             <div className="bidding-right col-md-6 col-sm-12">
+//               <div className="bidding-content">
+//                 <h1>{currentitem.item_id.name}</h1>
+//                 <p>هذا العنصر مصنوع من {currentitem.item_id.material}</p>
+//                 <div className="bidding-time d-flex justify-content-around">
+//                   <h3>
+//                     <span>الوقت المتبقي </span>
+//                     {timer < 60
+//                       ? `${Math.ceil(timer / 1000)} ثانية`
+//                       : `${Math.ceil(timer / 1000 / 60)} دقيقة`
+//                       }
+//                   </h3>
+//                 </div>
+//                 <div className="bidding-price d-flex justify-content-around mx-3">
+//                   <div>
+//                     <span>السعر الحالي</span> {currentitem.current_price}
+//                   </div>
+//                   <div>
+//                     <span>مقدار الزيادة</span> {currentitem.bidding_gap}
+//                   </div>
+//                   <div>
+//                     <span>سعر البدء</span> {currentitem.start_bidding}
+//                   </div>
+//                 </div>
+//                 <div className="bidding-button">
+//                   <form onSubmit={handleSubmit}>
+//                     <label htmlFor="">
+//                       <span>أدخل مقدار الزيادة</span>
+//                     </label>
+//                     <input
+//                       type="number"
+//                       name="price"
+//                       placeholder="مقدار الزيادة"
+//                       dir="rtl"
+//                     />
+//                     <button type="submit" className="btn btn-primary">
+//                       إرسال
+//                     </button>
+//                   </form>
+//                   <form onSubmit={handleSubmit}>
+//                     <input
+//                       type="number"
+//                       name="price"
+//                       hidden
+//                       value={
+//                         currentitem.max_price - currentitem.current_price
+//                       }
+//                     />
+//                     {/* <button type="submit" className="btn btn-success">
+//                       اشترِ الآن بسعر {currentitem.max_price}
+//                     </button> */}
+//                   </form>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           <Alert
+//             type="error-alert"
+//             visible={alertVisible}
+//             color="warning"
+//             message={error}
+//             dismissible
+//             alignment="center"
+//             setVisible={setAlertVisible}
+//           />
+//         </>
+//       </div>
+//     </div>
+//   );
+// }
