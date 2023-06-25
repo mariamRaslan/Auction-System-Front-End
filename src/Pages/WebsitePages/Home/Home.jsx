@@ -313,7 +313,7 @@ const Home = () => {
     {/* hr */}
       
     {/** services section  */}
-    <div className="section-bg-grey mt-5">
+    <div className="section-bg-grey px-5 mt-5">
     <div className="">
       <div className="container">
         <div className="row">

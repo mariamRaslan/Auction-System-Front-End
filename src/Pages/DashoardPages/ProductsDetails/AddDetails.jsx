@@ -179,7 +179,7 @@ const AddDetails = () => {
         <CCol md={6}>
           <CFormLabel htmlFor="initialBidValue">قيمة العرض الأولي</CFormLabel>
           <CInputGroup>
-            <CInputGroupText>$</CInputGroupText>
+            <CInputGroupText>ج.م</CInputGroupText>
             <CFormInput
               type="number"
               id="initialBidValue"
@@ -195,7 +195,7 @@ const AddDetails = () => {
         <CCol md={6}>
           <CFormLabel htmlFor="minimumBidValue">أدنى قيمة للعرض</CFormLabel>
           <CInputGroup>
-            <CInputGroupText>$</CInputGroupText>
+            <CInputGroupText>ج.م</CInputGroupText>
             <CFormInput
               type="number"
               id="minimumBidValue"
@@ -266,7 +266,7 @@ const AddDetails = () => {
         <CCol md={6}>
           <CFormLabel htmlFor="maxPrice">الحد الأقصى للسعر</CFormLabel>
           <CInputGroup>
-            <CInputGroupText>$</CInputGroupText>
+            <CInputGroupText>ج.م</CInputGroupText>
             <CFormInput
               type="number"
               id="maxPrice"

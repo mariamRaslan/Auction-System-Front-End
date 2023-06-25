@@ -24,12 +24,16 @@ import logo from "../../../assets/images/logo2.png";
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import axios from "../../../Axios";
+//import navigate
+import { useNavigate } from "react-router-dom";
+
 
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
   const [user, setUserImage] = useState({ image: "" });
   const [loggedIn, setLoggedIn] = useState(false);
   const [role, setRole] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -52,6 +56,20 @@ const NavBar = () => {
     localStorage.removeItem("token");
     window.location.href = "/login";
   };
+
+
+  const search = (e) => {
+    //prevent defualt 
+    e.preventDefault()
+    //get search value
+    const searchValue = e.target[0].value
+    // search value is required
+    if (searchValue === "") {
+      return
+    }
+    
+    navigate(`/search/${searchValue}`)
+  }
 
   return (
     <>
@@ -92,21 +110,25 @@ const NavBar = () => {
                 </CNavItem>
               </div>
               <div className="col-md-5 col-sm-12 d-flex justify-content-end pe-5">
-                {/* <CForm className="d-flex col-5">
-                  <CFormInput
-                    type="search"
+                {/* <form 
+                onSubmit={search}
+                className="d-flex col-5">
+                  <input
+                    type="text"
                     className="search-input mx-2"
                     placeholder="البحث عن المنتجات"
+                    name="search"
+                    required="true"
                   />
-                  <CButton
+                  <button
                     type="submit"
                     className="search-submit"
                     color="secondary"
                     variant="outline"
                   >
                     <p className=" d-inline">بحث</p>
-                  </CButton>
-                </CForm> */}
+                  </button>
+                </form> */}
                 <div className="col-1 d-flex justify-content-between ms-3 ">
                   {loggedIn && (
                     <>

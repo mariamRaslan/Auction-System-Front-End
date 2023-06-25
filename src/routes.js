@@ -100,6 +100,11 @@ const Bidding = React.lazy(() =>
   import("./Pages/WebsitePages/Bidding/Bidding")
 );
 
+// Search
+const Search = React.lazy(() =>
+  import("./Pages/WebsitePages/Search/search")
+);
+
 // Website AddCredit
 const CreditCardForm = React.lazy(() =>
   import("./Pages/WebsitePages/CreditCardForm/CreditCardForm")
@@ -289,6 +294,8 @@ const routes = [
   { path: "/contact", name: "Contact", element: Contact },
   //about
   { path: "/about", name: "About", element: About },
+  //search 
+  { path: "/search/:search", name: "Search", element: Search },
 
   //User Profile
   { path: "/profile", name: "UserProfile", element: UserProfile },
@@ -310,7 +317,7 @@ const routes = [
 
   //Website Payment
   { path: "/payment", name: "Payment", element: Payment },
-  { path: "/payment-status/:status", name: "PaymentStatus", element: PaymentStatus },
+  { path: "/payment-status/:status/:id", name: "PaymentStatus", element: PaymentStatus },
 
   //Website VerificationCode
   {
