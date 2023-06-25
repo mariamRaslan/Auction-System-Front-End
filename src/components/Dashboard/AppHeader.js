@@ -78,7 +78,7 @@ const AppHeader = () => {
         <CHeaderBrand className="mx-auto d-md-none" to="/">
           <CIcon icon={logo} height={48} alt="Logo" />
         </CHeaderBrand>
-        <CHeaderNav className="d-none d-md-flex me-auto">
+        {/* <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <CNavLink href="/dashboard/dashboard/Reports/Calender">
               تقويم
@@ -115,7 +115,7 @@ const AppHeader = () => {
           <CNavItem>
             <CNavLink href="/dashboard/dashboard/winners">الفائزين</CNavLink>
           </CNavItem>
-        </CHeaderNav>
+        </CHeaderNav> */}
         <CHeaderNav>
           <CNavItem>
             <CNavLink onClick={viewWebsite} href="#">
