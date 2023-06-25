@@ -18,7 +18,7 @@ const UserProfile = () => {
       try {
         const response = await axiosInstance.get(`/users/${id}`);
         setUser(response.data.data);
-        //console.log(response.data.data);
+        console.log(response.data.data.name);
       } catch (error) {
         console.error(error);
       }
@@ -30,7 +30,7 @@ const UserProfile = () => {
         const response = await axiosInstance.get("/joinAuction");
         if (response.data.success) {
           setAuctions(response.data.data);
-         // console.log(response.data.data)
+          console.log(response.data.data)
         } else {
           console.log(response.data.message);
         }
@@ -45,6 +45,7 @@ const UserProfile = () => {
         const response = await axiosInstance.get("/getPayedItems");
         if (response.data.success) {
           setBoughtItems(response.data.data);
+          console.log(response.data.data)
         } else {
           console.log(response.data.message);
         }
@@ -82,10 +83,10 @@ const UserProfile = () => {
                       className="rounded-circle mb-3"
                       width="160"
                       height="160"
-                      src={user.image}
+                      src={user?.image}
                       alt="avatar"
                     />
-                    <h5 className="my-3">{user.name}</h5>
+                    <h5 className="my-3">{user?.name}</h5>
                     <Link
                       to={`/edit-profile/${id}`}
                       className="btn btn-dark submit-button"
@@ -103,7 +104,7 @@ const UserProfile = () => {
                         <p className="mb-0">الاسم</p>
                       </div>
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{user.name}</p>
+                        <p className="text-muted mb-0">{user?.name}</p>
                       </div>
                     </div>
                     <hr />
@@ -112,7 +113,7 @@ const UserProfile = () => {
                         <p className="mb-0">البريد الالكتروني</p>
                       </div>
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{user.email}</p>
+                        <p className="text-muted mb-0">{user?.email}</p>
                       </div>
                     </div>
                     <hr />
@@ -121,7 +122,7 @@ const UserProfile = () => {
                         <p className="mb-0">رقم الهاتف</p>
                       </div>
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{user.phone}</p>
+                        <p className="text-muted mb-0">{user?.phone}</p>
                       </div>
                     </div>
                     <hr />
@@ -131,9 +132,9 @@ const UserProfile = () => {
                       </div>
                       <div className="col-sm-9">
                         <p className="text-muted mb-0">
-                          <span>{user.address.city}</span>,
-                          <span>{user.address.street}</span>,
-                          <span>{user.address.building_number}</span>
+                          <span>{user?.address.city}</span>,
+                          <span>{user?.address.street}</span>,
+                          <span>{user?.address.building_number}</span>
                         </p>
                       </div>
                     </div>
@@ -154,9 +155,9 @@ const UserProfile = () => {
                   <div className="col-lg-4 mb-4" key={auction._id}>
                     <Card
                       image={null}
-                      title={auction.auction_id.name}
-                      startdate={formatStartDate(auction.auction_id.start_date)}
-                      href={`/auction/${auction.auction_id._id}/items`}
+                      title={auction?.auction_id?.name}
+                      startdate={formatStartDate(auction?.auction_id?.start_date)}
+                      href={`/auction/${auction?.auction_id?._id}/items`}
                     />
                   </div>
                 ))
@@ -178,10 +179,10 @@ const UserProfile = () => {
     boughtItems.map((item) => (
       <div className="col-lg-4 mb-4" key={item._id}>
         <Card
-          image={item.images[0]}
-          title={item.name}
-          startdate={formatStartDate(item.auction.start_date)}
-          href={`/auction/${item.auction._id}/items`}
+          image={item?.images[0]}
+          title={item?.name}
+          startdate={formatStartDate(item?.auction?.start_date)}
+          href={`/auction/${item?.auction?._id}/items`}
         />
       </div>
     ))
