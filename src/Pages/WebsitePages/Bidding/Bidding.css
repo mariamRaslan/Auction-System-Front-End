@@ -59,23 +59,23 @@
   height: 100px;
   border-radius: 10px;
 }
-form {
+.form-bidding {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-form input {
+.form-bidding input {
   width: 30%;
   padding: 8px;
   border: 1px solid #4f89b0 !important;
   border-radius: 10px !important;
   margin: 10px;
 }
-form input:focus {
+.form-bidding input:focus {
   outline: none;
 }
 
-form button {
+.form-bidding button {
   padding: 8px !important;
   border-radius: 10px !important;
   margin: 10px;

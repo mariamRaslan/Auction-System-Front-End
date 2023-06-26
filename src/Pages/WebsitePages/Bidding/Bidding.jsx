@@ -6,6 +6,7 @@ import axiosInstance from "../../../Axios";
 import Alert from "../../../SharedUi/Alert/Alert";
 import { ClockLoader, HashLoader } from "react-spinners";
 import Pusher from "pusher-js";
+import Auth from '../../../components/IsLogin';
 
 const Bidding = () => {
   const [auction, setAuction] = useState([]);
@@ -353,7 +354,9 @@ useEffect(()=>{
                     </div>
                   </div>
                   <div className="bidding-button">
-                    <form onSubmit={handleSubmit}>
+                    <form className="form-bidding"
+                    
+                    onSubmit={handleSubmit}>
                       <label htmlFor="">
                         <span>أدخل مقدار الزيادة</span>
                       </label>
@@ -367,7 +370,7 @@ useEffect(()=>{
                         إرسال
                       </button>
                     </form>
-                    <form onSubmit={handleSubmit}>
+                    <form className="form-bidding" onSubmit={handleSubmit}>
                       <input
                         type="number"
                         name="price"
@@ -432,4 +435,4 @@ useEffect(()=>{
   return <></>;
 };
 
-export default Bidding;
+export default Auth(Bidding);
