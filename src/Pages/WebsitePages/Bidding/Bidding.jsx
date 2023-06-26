@@ -23,7 +23,22 @@ const Bidding = () => {
   const [index, setIndex] = useState(0);
   const [auctionname, setAuctionName] = useState("");
   const [flag, setFlag] = useState(0);
+  const [streamData, setStreamData] = useState({});
 
+  useEffect(() => {
+    const fetchStreamData = async () => {
+      try {
+        const response = await axiosInstance.get(`/activestream`);
+        setStreamData(response.data.data[0]);
+        setIsLoading(false);
+        console.log(response.data.data);
+      } catch (error) {
+        setIsLoading(false);
+        console.error(error);
+      }
+    };
+    fetchStreamData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -322,16 +337,16 @@ useEffect(()=>{
       <div className="bidding">
         <div className="container">
           <>
-            <div className="bidding-card row d-flex" key={15}>
-              <div className="bidding-container-area col-md-6 col-sm-12">
-                <div className="f-left">
+            <div className="bidding-card row mt-5" key={15} style={{height:"500px",paddingBottom:"40px"}}>
+              <div className="bidding-container-area col-12 col-md-6 " >
+                <div className="row w-100 ms-5">
                   <img
                     src={currentitem.item_id.image}
-                    className="bidding-image"
+                    className="bidding-image ms-5"
                     alt="product"
                   />
                 </div>
-                <div className="bidding-content">
+                <div className="row bidding-content">
                   <h1>{currentitem.item_id.name}</h1>
                   <p>هذا العنصر مصنوع من {currentitem.item_id.material}</p>
                   <div className="bidding-time d-flex justify-content-around">
@@ -366,7 +381,7 @@ useEffect(()=>{
                         placeholder="مقدار الزيادة"
                         dir="rtl"
                       />
-                      <button type="submit" className="btn btn-primary">
+                      <button type="submit" className="btn btn-primary w-25" style={{backgroundColor:"#4f89b0"}}>
                         إرسال
                       </button>
                     </form>
@@ -384,15 +399,15 @@ useEffect(()=>{
                   </div>
                 </div>
               </div>
-              <div className="video-container col-md-6 col-sm-12">
-                <div className="">
+              <div className="video-container col-12 col-md-6 h-100">
+                <div className=" h-100 w-100 pb-3">
                   <iframe
-                    src="https://www.youtube.com/embed/your-video-id"
+                    src={streamData.link}
                     title="video"
                     frameBorder="0"
                     allowFullScreen
-                    width={"600px"}
-                    height={"600px"}
+                    width={"100%"}
+                    height={"100%"}
                   ></iframe>
                 </div>
               </div>
