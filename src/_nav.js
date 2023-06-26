@@ -29,24 +29,24 @@ const _nav = [
     to: "/dashboard/dashboard/Reports/Calender",
     icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
   },
-  {
-    component: CNavGroup,
-    name: "تقارير",
-    to: "/",
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: "شهري",
-        to: "/dashboard/dashboard/reports/monthly-reports",
-      },
-      {
-        component: CNavItem,
-        name: "سنوي",
-        to: "/dashboard/dashboard/reports/yearly-reports",
-      },
-    ],
-  },
+  // {
+  //   component: CNavGroup,
+  //   name: "تقارير",
+  //   to: "/",
+  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  //   items: [
+  //     {
+  //       component: CNavItem,
+  //       name: "شهري",
+  //       to: "/dashboard/dashboard/reports/monthly-reports",
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: "سنوي",
+  //       to: "/dashboard/dashboard/reports/yearly-reports",
+  //     },
+  //   ],
+  // },
   {
     component: CNavGroup,
     name: "مزادات",

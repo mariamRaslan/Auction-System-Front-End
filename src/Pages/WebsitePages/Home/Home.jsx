@@ -32,7 +32,7 @@ const Home = () => {
       .then((res) => {
         setNewArrival(res.data.data);
         //log   
-        console.log(res.data.data);
+        console.log("new arrival=>",res.data.data);
         console.log(date)
       })
       .catch((err) => {
@@ -217,7 +217,7 @@ const Home = () => {
                 <div key={product.id} className="col-md-4">
                   <Card
                     title={product.name}
-                    startdate={product.startdate}
+                    startdate={product.start_date}
                     //href = /product/:id
                     href={`/auction/${product._id}/items`}
                   />

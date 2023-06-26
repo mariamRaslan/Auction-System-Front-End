@@ -7,6 +7,11 @@
   color: white;
   font-size: 18px;
 }
+
+.nav-item a:hover{
+  color: #4f89b0;
+  padding: 5px;
+}
 .drop-item {
   color: #484848 !important;
   font-size: 15px !important;

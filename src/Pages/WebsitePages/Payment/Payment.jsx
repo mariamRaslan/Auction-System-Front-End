@@ -44,7 +44,7 @@ const Payment = () => {
   return (
     <div className="App ">
       <div className="">
-        <div className="container mt-5 mb-5 p-5 flex display-content-center ">
+        <div className="container container-table mt-5 mb-5 p-5 flex display-content-center ">
           <table className="table">
             <thead>
               <tr>
@@ -65,7 +65,7 @@ const Payment = () => {
                   <td>
                     <button
                       type="button"
-                      className="btn btn-primary"
+                      className="btn btn-custom"
                       onClick={() => handleCheckout(item.itemDetails_id)}
                     >
                       تأكيد عملية الشراء

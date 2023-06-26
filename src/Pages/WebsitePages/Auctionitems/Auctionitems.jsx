@@ -181,6 +181,7 @@ const AuctionItems = () => {
                 <Card
                   image={product.item_id.image}
                   title={product.item_id.name}
+                  startdate={product.start_date}
                   href={`/itemdetails/${product._id}`}
                 />
               </div>

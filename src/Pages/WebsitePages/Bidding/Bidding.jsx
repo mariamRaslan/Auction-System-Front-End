@@ -237,6 +237,8 @@ useEffect(()=>{
       console.log(err.response.data.error);
       setAlertVisible(true);
       setError(err.response.data.error);
+      //set flag +1 
+      setFlag(flag+1)
     }
     e.target.price.value = "";
   };
@@ -334,10 +336,10 @@ useEffect(()=>{
 
   if (itemstarted) {
     return (
-      <div className="bidding">
+      <div className="bidding bidding-section">
         <div className="container">
           <>
-            <div className="bidding-card row mt-5" key={15} style={{height:"500px",paddingBottom:"40px"}}>
+            <div className="bidding-card row mt-5" key={15} style={{paddingBottom:"40px"}}>
               <div className="bidding-container-area col-12 col-md-6 " >
                 <div className="row w-100 ms-5">
                   <img
@@ -407,7 +409,7 @@ useEffect(()=>{
                     frameBorder="0"
                     allowFullScreen
                     width={"100%"}
-                    height={"100%"}
+                    height={"500px"}
                   ></iframe>
                 </div>
               </div>

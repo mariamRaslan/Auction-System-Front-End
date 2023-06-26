@@ -88,25 +88,25 @@ const NavBar = () => {
             <CNavbarNav className="col justify-content-lg-right justify-content-sm-center">
               <div className="col-md-7 col-sm-12 d-flex justify-content-around">
                 <CNavItem className="nav-item">
-                  <CNavLink href="/home">الرئيسية</CNavLink>
+                  <Link to="/home" style={{ textDecoration: "none" }}>الرئيسية</Link>
                 </CNavItem>
                 <CNavItem className="nav-item">
-                  <CNavLink href="/auctions">المزادات</CNavLink>
+                  <Link to="/auctions" style={{ textDecoration: "none" }}>المزادات</Link>
                 </CNavItem>
                 <CNavItem className="nav-item">
-                  <CNavLink href="/bidding">المزايدات </CNavLink>
+                  <Link to="/bidding" style={{ textDecoration: "none" }}>المزايدات </Link>
                 </CNavItem>
                 <CNavItem className="nav-item">
-                  <CNavLink href="/live-stream/show">البث المباشر</CNavLink>
+                  <Link to="/live-stream/show" style={{ textDecoration: "none" }}>البث المباشر</Link>
                 </CNavItem>
                 <CNavItem className="nav-item">
-                  <CNavLink href="/payment">المشتريات</CNavLink>
+                  <Link to="/payment" style={{ textDecoration: "none" }}>المشتريات</Link>
                 </CNavItem>
                 <CNavItem className="nav-item">
-                  <CNavLink href="/about">عن الموقع</CNavLink>
+                  <Link to="/about" style={{ textDecoration: "none" }}>عن الموقع</Link>
                 </CNavItem>
                 <CNavItem className="nav-item">
-                  <CNavLink href="/contact">تواصل معنا</CNavLink>
+                  <Link to="/contact" style={{ textDecoration: "none" }}>تواصل معنا</Link>
                 </CNavItem>
               </div>
               <div className="col-md-5 col-sm-12 d-flex justify-content-end pe-5">

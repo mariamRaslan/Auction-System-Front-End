@@ -5,7 +5,7 @@ import AppContent from "../components/Website/WebsiteAppContent";
 
 const DefaultLayout = () => {
   return (
-    <div>
+    <div >
       <NavBar />
       <div style={{minHeight:"700px"}}>
         <AppContent />

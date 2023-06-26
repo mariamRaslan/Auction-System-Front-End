@@ -42,13 +42,11 @@ const UserProfile = () => {
 
     const fetchBoughtItems = async () => {
       try {
-        const response = await axiosInstance.get("/getPayedItems");
-        if (response.data.success) {
+        const response = await axiosInstance.get("/getPayedItems");        
           setBoughtItems(response.data.data);
-          console.log(response.data.data)
-        } else {
-          console.log(response.data.message);
-        }
+          //log
+          console.log("BoughtItems=>",boughtItems)
+          console.log("item=>",response)
       } catch (error) {
         console.error(error);
       }
@@ -179,10 +177,10 @@ const UserProfile = () => {
     boughtItems.map((item) => (
       <div className="col-lg-4 mb-4" key={item._id}>
         <Card
-          image={item?.images[0]}
-          title={item?.name}
-          startdate={formatStartDate(item?.auction?.start_date)}
-          href={`/auction/${item?.auction?._id}/items`}
+          image={item?.items?.images}
+          title={item?.items?.name}
+          startdate={formatStartDate(item?.auctions?.start_date)}
+          href={`/itemdetails/${item?.itemDetails_id}`}
         />
       </div>
     ))

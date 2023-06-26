@@ -1,16 +1,27 @@
-body{
-  background-color:rgb(237, 237, 250);
-  
-}
 
 
 
-.container{
-  background-color: white;
+.container-table{
+  background-color: #f1f4f5;
 }
 .table tbody tr {
   
   border-bottom: 1px solid #dee2e6;
+}
+
+.btn-custom {
+  width: 50%;
+  height: 50px;
+  border-radius: 10px !important;
+  background-color: #4f89b0;
+  color: rgb(255, 255, 255);
+  transition: 0.5s;
+  border: none;
+}
+
+.btn-custom:hover {
+  background-color: rgb(1, 24, 59);
+  color: #fff !important;
 }
 
 .table tbody tr:last-child {
