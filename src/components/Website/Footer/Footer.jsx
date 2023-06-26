@@ -5,8 +5,8 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <>
-      <div className="footer container-fluid w-100" >
-        <div className="w-100 d-flex row footer-top">
+      <div className="footer container-fluid w-100">
+        <div className="w-100 d-flex justify-content-center row footer-top">
           <div className="col-lg-4 col-md-6 col-sm-12 justify-content-lg-start">
             <div className="footer-logo widget-title">
               <img src={logo} alt="logo" className="logo-img" />
@@ -15,8 +15,11 @@ const Footer = () => {
             <br></br>
             <div className="footer-left-text d-block">
               <p>
-                لوريم إيبسوم دولور سيت أميت، كونسيكتيور أدفيبايسينغ إليت، سيد دو
-                إيوسمود تيمبور إنكيديدونت أوت لابوري.
+                حن في موقع المزادات نحرص على توفير منصة موثوقة وآمنة لجميع
+                المستخدمين، حيث نتأكد من جودة المنتجات وصحة المعلومات الواردة
+                عنها، ونوفر خدمة عملاء متميزة وسريعة الاستجابة لتلبية احتياجات
+                المستخدمين، ونحرص على الالتزام بالمعايير الأخلاقية والقوانين
+                المحلية والدولية.
               </p>
             </div>
           </div>
@@ -28,24 +31,24 @@ const Footer = () => {
                 </div>
                 <div className="menu-navigation-container">
                   <ul id="menu-navigation" className="menu">
-                    <li id="menu-item" className="menu-item">
-                      <a href="#">جميع المنتجات</a>
-                    </li>
                     <li id="menu-item" className="menu-item ">
-                      <a href="#">كيف يعمل الموقع</a>
+                      <a href="/home">الرئيسية</a>
+                    </li>
+                    <li id="menu-item" className="menu-item">
+                      <a href="/auctions">جميع المزادات</a>
                     </li>
                     <li id="menu-item-" className="menu-item">
-                      <a href="#">عن الشركة</a>
+                      <a href="/about">عن الشركة</a>
                     </li>
                     <li id="menu-item" className="menu-item">
-                      <a href="#">أخبارنا</a>
+                      <a href="/contact">تواصل معنا</a>
                     </li>
                   </ul>
                 </div>
               </div>{" "}
             </div>
           </div>
-          <div className="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-lg-center">
+          <div className="col-lg-4 col-md-12 col-sm-12 d-flex justify-content-center">
             <div className="footer-item">
               <div id="nav_menu-3" className="footer-widget widget_nav_menu">
                 <div className="widget-title">
