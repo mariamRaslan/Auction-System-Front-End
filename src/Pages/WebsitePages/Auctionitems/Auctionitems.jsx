@@ -2,16 +2,45 @@ import React, { useState, useEffect } from "react";
 import Card from "../../../SharedUi/Card/card";
 import Axios from "./../../../Axios";
 import auctionImg from "../../../assets/images/wooden-gavel3.jpg";
-import BlobButton from "../../../SharedUi/BlobButton/BlobButton";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { CButton } from "@coreui/react";
+import './Auctionitems.css'
+import {
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
+  CButton,
+} from "@coreui/react";
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe(
+  "pk_test_51NJxO3AiIlGBZDTmQuU9P2yICAMtBfzYAZd5gQKmyliiYvt8S5mAbwcr1LBaR4R9NYmX9LYD8dhx0nbVkFAbS23G00EAECX6j9"
+);
 
+console.log(stripePromise);
 const AuctionItems = () => {
   const [products, setProducts] = useState([]);
   const [auction, setAuction] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleCheckout = async () => {
+    try {
+      const response = await Axios.post(`/fees-session/${auction._id}`);
+      const sessionId = response.data.session.id;
+      console.log(sessionId);
+      // Redirect the user to the Stripe checkout page
+      const stripe = await stripePromise;
+      const result = await stripe.redirectToCheckout({
+        sessionId: sessionId,
+      });
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const options = {
     year: "numeric",
@@ -38,6 +67,11 @@ const AuctionItems = () => {
         toast.error("لقد انضممت لهذا المزاد من قبل");
       } else if (error.response.data.message === "NOT authenticated") {
         toast.error("يجب عليك تسجيل الدخول اولا");
+      } else if (
+        error.response.data.message ===
+        "لا يمكنك الانضمام للمزاد لانه يحتاج تامين"
+      ) {
+        setModalVisible(true);
       } else {
         toast.error(error.response.data.message);
       }
@@ -217,6 +251,30 @@ const AuctionItems = () => {
             </p>
           </nav>
         )}
+        <CModal
+        //
+          className=" middle-modal"
+          // backdrop={false}
+          keyboard={false}
+          portal={false}
+          alignment="center"
+          visible={modalVisible}
+          onDismiss={() => setModalVisible(false)}
+          dir="rtl"
+        >
+          <CModalHeader>
+            {/* <CModalTitle>تأمين المزاد {auction.fees} ج.م</CModalTitle> */}
+          </CModalHeader>
+          <CModalBody>
+            يجب دفع التأمين قبل الانضمام تأمين المزاد {auction.fees} ج.م{" "}
+          </CModalBody>
+          <CModalFooter>
+            <CButton color="secondary"  className="btn-modal-primary btntext" onClick={()=>setModalVisible(false)}>إلغاء</CButton>
+            <CButton color="success" className="btn-modal-success btntext" onClick={handleCheckout}>
+              دفع{" "}
+            </CButton>
+          </CModalFooter>
+        </CModal>
       </div>
     </>
   );

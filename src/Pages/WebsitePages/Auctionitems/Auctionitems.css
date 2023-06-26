@@ -1,0 +1,30 @@
+.middle-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.btn-modal-primary {
+  background-color: #81868d !important;
+  border: 2px solid #fff !important;
+  color: #fff !important;
+  padding:  5px 12px !important;
+  border-radius: 5px !important;
+}
+.btn-modal-primary:hover {
+  background-color: transparent !important;
+  border: 2px solid #81868d !important;
+  color: #81868d !important;
+}
+.btn-modal-success {
+  background-color: #2eb85c !important;
+  border: 2px solid #fff !important;
+  color: #fff !important;
+  border-radius: 5px !important;
+  padding:  5px 12px !important;
+}
+.btn-modal-success:hover {
+  background-color: transparent !important;
+  border: 2px solid #2eb85c !important;
+  color: #2eb85c !important;
+}

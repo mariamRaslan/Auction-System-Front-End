@@ -58,9 +58,7 @@ const AuctionProductDetails = React.lazy(() =>
   import("./Pages/DashoardPages/ProductsDetails/AuctionProductDetails")
 );
 // Dashboard
-const Dashboard = React.lazy(() =>
-  import("./Pages/Reports/Calender/Calender")
-);
+const Dashboard = React.lazy(() => import("./Pages/Reports/Calender/Calender"));
 
 //Reports pages
 const MonthlyReports = React.lazy(() =>
@@ -101,9 +99,7 @@ const Bidding = React.lazy(() =>
 );
 
 // Search
-const Search = React.lazy(() =>
-  import("./Pages/WebsitePages/Search/search")
-);
+const Search = React.lazy(() => import("./Pages/WebsitePages/Search/search"));
 
 // Website AddCredit
 const CreditCardForm = React.lazy(() =>
@@ -118,7 +114,9 @@ const Payment = React.lazy(() =>
 const PaymentStatus = React.lazy(() =>
   import("./Pages/WebsitePages/Payment/PaymentStatus")
 );
-
+const JoinStatus = React.lazy(() =>
+  import("./Pages/WebsitePages/Auctionitems/JoinStatus")
+);
 
 // Website VerificationCode
 const VerificationCode = React.lazy(() =>
@@ -152,7 +150,6 @@ const CreateLiveStream = React.lazy(() =>
 );
 const LiveStreamList = React.lazy(() =>
   import("./Pages/DashoardPages/LiveStream/LiveStreamList")
-
 );
 //Routes
 const routes = [
@@ -294,7 +291,7 @@ const routes = [
   { path: "/contact", name: "Contact", element: Contact },
   //about
   { path: "/about", name: "About", element: About },
-  //search 
+  //search
   { path: "/search/:search", name: "Search", element: Search },
 
   //User Profile
@@ -317,7 +314,13 @@ const routes = [
 
   //Website Payment
   { path: "/payment", name: "Payment", element: Payment },
-  { path: "/payment-status/:status/:id", name: "PaymentStatus", element: PaymentStatus },
+  {
+    path: "/payment-status/:status/:id",
+    name: "PaymentStatus",
+    element: PaymentStatus,
+  },
+  //website Join
+  { path: "/Join-status/:status/:id", name: "JoinStatus", element: JoinStatus },
 
   //Website VerificationCode
   {
